@@ -1,0 +1,154 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(readxl)
+library(dplyr)
+library(ieugwasr)
+library(tidyr)
+library(TwoSampleMR)
+library(ggplot2)
+```
+
+Get pQTLs from Sun et al 2022 "Genetic regulation of the human plasma proteome in 54,306 UK Biobank participants" https://www.biorxiv.org/content/10.1101/2022.06.17.496443v1
+
+```{r}
+setwd("~/sandpit/ukbb_prot_prs/")
+download.file("https://www.biorxiv.org/content/biorxiv/early/2022/06/18/2022.06.17.496443/DC2/embed/media-2.xlsx?download=true", "media-2.xlsx")
+a <- read_xlsx("media-2.xlsx", sheet="ST6", skip=2)
+a
+```
+
+```{r}
+b <- read_xlsx("~/Downloads/supplementary_tables.xlsx", sheet=1, skip=1)
+b
+```
+
+Organise instruments
+
+```{r}
+inst <- a %>% 
+  filter(`Assay Target` %in% b$Assay.Target, rsID != "-") %>%
+  dplyr::select(
+    exposure="Assay Target",
+    id.exposure="Assay Target",
+    SNP="rsID", 
+    beta.exposure="BETA (discovery, wrt. A1)", 
+    se.exposure="SE (discovery)", 
+    pval.exposure="log10(p) (discovery)", 
+    eaf.exposure="A1FREQ (discovery)", 
+    snpid="Variant ID (CHROM:GENPOS (hg37):A0:A1:imp:v1)",
+    cistrans.exposure=`cis/trans`) %>% 
+  mutate(pval.exposure = 10^-pval.exposure) %>%
+  tidyr::separate(snpid, sep=":", into=c("chr.exposure","pos.exposure","other_allele.exposure", "effect_allele.exposure", "imp", "v"))
+inst
+```
+
+Organise PRS pairs
+
+```{r}
+prs_pairs <- b %>%
+  dplyr::select(Assay.Target, id, beta=Estimate, se=Std_Error, pval=P, gene_start2, gene_end2, CHR) %>%
+  filter(!duplicated(paste(Assay.Target, id)))
+prs_pairs
+```
+
+Lookup instrument-outcome assocs, harmonise, perform MR
+
+```{r}
+lookups <- inner_join(inst, prs_pairs, by=c("exposure" = "Assay.Target"))
+outcome_dat <- lapply(1:nrow(prs_pairs), function(i)
+{
+  x <- subset(lookups, exposure == prs_pairs$Assay.Target[i] & id == prs_pairs$id[i])
+  extract_outcome_data(x$SNP, x$id)
+})
+
+o <- bind_rows(outcome_dat)
+dim(o)
+
+dat <- harmonise_data(inst, o)
+str(dat)
+length(unique(dat$exposure))
+eo_pairs <- unique(paste(prs_pairs$Assay.Target, prs_pairs$id))
+length(eo_pairs)
+dat <- subset(dat, paste(id.exposure, id.outcome) %in% eo_pairs)
+dim(dat)
+length(unique(paste(dat$id.exposure, dat$id.outcome)))
+dat <- subset(dat, !duplicated(paste(dat$SNP, dat$id.exposure, dat$id.outcome)))
+dim(dat)
+res <- mr(dat)
+```
+
+Does anything surpass multiple testing correction?
+
+```{r}
+res %>% group_by(method) %>%
+  summarise(n=n(), nsig = sum(pval < 0.05/nrow(prs_pairs)))
+```
+
+Have a look at just the pairs that are IVW significant first
+
+```{r}
+prs_pairs2 <- subset(prs_pairs, id != "ebi-a-GCST006464")
+ivw_sig_pairs <- subset(res, method == "Inverse variance weighted" & pval < 0.05/nrow(prs_pairs2))
+table(ivw_sig_pairs$id.outcome)
+
+```
+
+Compare PRS association with MR association
+
+```{r}
+temp <- inner_join(subset(res, method %in% c("Inverse variance weighted", "Wald ratio")), prs_pairs, by=c("id.exposure"="Assay.Target", "id.outcome"="id"))
+temp$endo <- "Others"
+temp$endo[temp$id.outcome %in% "ebi-a-GCST006464"] <- "Endometrial cancer"
+temp$mr_sig <- temp$pval.x < 0.05/nrow(prs_pairs2)
+ggplot(temp, aes(beta, b)) +
+  geom_hline(yintercept=0, linetype="dotted") +
+  geom_vline(xintercept=0, linetype="dotted") +
+  geom_errorbar(aes(ymin=b-se.x*1.96, ymax=b+se.x*1.96), colour="grey") +
+  geom_point(aes(colour=mr_sig)) +
+  geom_smooth(method="lm") +
+  labs(x="PRS disease -> protein", y="MR protein -> disease") +
+  facet_grid(. ~ endo)
+```
+
+Excluding endometrial cancer, the MR results appear to predict the PRS results quite well
+
+```{r}
+summary(lm(b ~ beta, subset(temp, endo=="Others")))
+```
+
+Not so much for the endometrial cancer MR -> PRS
+
+```{r}
+summary(lm(b ~ beta, subset(temp, endo!="Others")))
+```
+
+Sensitivity analysis of the significant MR results
+
+```{r}
+  ivw_sig_pairs
+res_ss <- mr_singlesnp(dat)
+res_loo <- mr_leaveoneout(dat)
+mr_forest_plot(subset(res_ss, paste(res_ss$id.exposure, res_ss$id.outcome) %in% paste(ivw_sig_pairs$id.exposure, ivw_sig_pairs$id.outcome)))
+```
+
+```{r}
+mr_leaveoneout_plot(subset(res_loo, paste(id.exposure, id.outcome) %in% paste(ivw_sig_pairs$id.exposure, ivw_sig_pairs$id.outcome)))
+
+```
+
+
+```{r}
+hetres <- mr_heterogeneity(dat)
+subset(hetres, paste(id.exposure, id.outcome) %in% paste(ivw_sig_pairs$id.exposure, ivw_sig_pairs$id.outcome))
+```
+No heterogeneity
+
+## Summary
+
+- CST6 -> breast cancer seems to be a fairly reliable MR assoc suggesting causal effect
+- IVW MR estimates for non-Endometrial cancer are quite strongly correlated with PRS estimates
+
