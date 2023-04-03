@@ -1,0 +1,180 @@
+---
+title: "MR of protein on disease following PRS-protein assocs"
+author: "Gibran Hemani"
+---
+
+```{r}
+library(dplyr)
+library(ieugwasr)
+library(tidyr)
+library(TwoSampleMR)
+library(ggplot2)
+library(here)
+library(metafor)
+```
+
+```{r}
+load(here("data", "all.rdata"))
+```
+
+Show MR results that have IVW / Wald ratio P val bonferroni corrected significant
+
+```{r}
+res %>% group_by(method) %>%
+  summarise(n=n(), nsig = sum(pval < 0.05/nrow(prs_pairs), na.rm=T))
+```
+
+```{r}
+ressig <- subset(res, pval < 0.05/nrow(prs_pairs))
+dim(ressig)
+```
+
+Compare forward MR against reverse PRS results
+
+```{r}
+temp <- inner_join(subset(res, method %in% c("Inverse variance weighted", "Wald ratio")), prs_pairs, by=c("id.exposure"="HGNC.symbol", "id.outcome"="opengwasid"))
+temp$mr_sig <- temp$pval.x < 0.05/nrow(prs_pairs)
+ggplot(temp, aes(beta, b)) +
+  geom_hline(yintercept=0, linetype="dotted") +
+  geom_vline(xintercept=0, linetype="dotted") +
+  geom_point(aes(colour=mr_sig)) +
+  geom_smooth(method="lm") +
+  labs(x="PRS disease -> protein", y="MR protein -> disease") +
+  facet_grid(mr_sig ~ .)
+```
+
+Perform instrument heterogeneity analysis
+
+```{r}
+het2 <- dat %>%
+    subset(., paste(id.exposure, id.outcome) %in% paste(ressig$id.exposure, ressig$id.outcome)) %>%
+    mr_heterogeneity()
+het2
+```
+
+For multi-instrument exposures do the MR using other methods, then test if the different methods are heterogeneous
+
+```{r}
+res2 <- dat %>%
+    subset(., paste(id.exposure, id.outcome) %in% paste(ressig$id.exposure, ressig$id.outcome)) %>%
+    mr()
+fn <- function(b, se)
+{
+    rma.uni(b, sei=se, method="FE")$QEp
+}
+het_method <- res2 %>% filter(nsnp >= 3) %>% group_by(id.exposure, id.outcome) %>%
+    do({
+        x <- .
+        tibble(method_Q_pval=fn(x$b, x$se))
+    })
+```
+
+Plot comparison across different methods
+
+```{r}
+res2 %>% filter(nsnp > 2) %>%
+ggplot(., aes(x=method, y=b)) +
+geom_point(aes(colour=method)) +
+geom_errorbar(aes(ymin=b-se*1.96, ymax=b+se*1.96, colour=method), width=0) +
+facet_wrap(~ id.exposure+id.outcome, scale="free_y") 
+```
+
+For multi-instrument exposures do leave-one-out analysis to see if any are driven by a single SNP
+
+```{r}
+mr_leaveoneout2 <- function (dat, parameters = default_parameters(), method = mr_ivw) 
+{
+    if (!"samplesize.outcome" %in% names(dat)) {
+        dat$samplesize.outcome <- NA
+    }
+    stopifnot("outcome" %in% names(dat))
+    stopifnot("exposure" %in% names(dat))
+    stopifnot("beta.exposure" %in% names(dat))
+    stopifnot("beta.outcome" %in% names(dat))
+    stopifnot("se.exposure" %in% names(dat))
+    stopifnot("se.outcome" %in% names(dat))
+    res <- plyr::ddply(dat, c("id.exposure", "id.outcome"), function(X) {
+        x <- subset(X, mr_keep)
+        nsnp <- nrow(x)
+        if (nsnp == 0) {
+            x <- X[1, ]
+            d <- data.frame(SNP = "All", b = NA, se = NA, p = NA, 
+                samplesize = NA, outcome = x$outcome[1], exposure = x$exposure[1])
+            return(d)
+        }
+        if (nsnp > 2) {
+            l <- lapply(1:nsnp, function(i) {
+                with(x, method(beta.exposure[-i], beta.outcome[-i], 
+                  se.exposure[-i], se.outcome[-i], parameters))
+            })
+            l[[nsnp + 1]] <- with(x, method(beta.exposure, beta.outcome, 
+                se.exposure, se.outcome, parameters))
+            d <- data.frame(SNP = c(as.character(x$SNP), "All"), 
+                b = sapply(l, function(y) y$b), se = sapply(l, 
+                  function(y) y$se), p = sapply(l, function(y) y$pval), 
+                samplesize = x$samplesize.outcome[1])
+            d$outcome <- x$outcome[1]
+            d$exposure <- x$exposure[1]
+        } else if(nsnp == 2) {
+            l <- lapply(1:nsnp, function(i) {
+                with(x, mr_wald_ratio(beta.exposure[-i], beta.outcome[-i], 
+                  se.exposure[-i], se.outcome[-i], parameters))
+            })
+            l[[nsnp + 1]] <- with(x, method(beta.exposure, beta.outcome, 
+                se.exposure, se.outcome, parameters))
+            d <- data.frame(SNP = c(as.character(x$SNP), "All"), 
+                b = sapply(l, function(y) y$b), se = sapply(l, 
+                  function(y) y$se), p = sapply(l, function(y) y$pval), 
+                samplesize = x$samplesize.outcome[1])
+            d$outcome <- x$outcome[1]
+            d$exposure <- x$exposure[1]
+
+        }
+        else {
+            a <- with(x, method(beta.exposure, beta.outcome, 
+                se.exposure, se.outcome, parameters))
+            d <- data.frame(SNP = "All", b = a$b, se = a$se, 
+                p = a$pval, samplesize = x$samplesize.outcome[1])
+            d$outcome <- x$outcome[1]
+            d$exposure <- x$exposure[1]
+        }
+        return(d)
+    })
+    res <- subset(res, select = c(exposure, outcome, id.exposure, 
+        id.outcome, samplesize, SNP, b, se, p))
+    return(res)
+}
+loo <- dat %>%
+    subset(., paste(id.exposure, id.outcome) %in% paste(ressig$id.exposure, ressig$id.outcome)) %>%
+    mr_leaveoneout2(.)
+loo_passing <- loo %>% group_by(id.exposure, id.outcome) %>%
+    filter(SNP != "All") %>%
+    summarise(maxp=max(p, na.rm=T)) %>%
+    filter(!is.na(maxp)) %>% 
+    mutate(fdr=p.adjust(maxp, "fdr"))
+```
+
+Arrange all results
+
+```{r}
+allres <- left_join(
+    ressig %>% select(id.exposure, id.outcome, nsnp, b, se, pval), 
+    loo_passing %>% select(id.exposure, id.outcome, loo_maxp=maxp, loo_fdr=fdr)) %>% 
+left_join(., het2 %>% select(id.exposure, id.outcome, inst_Q_pval=Q_pval)) %>%
+left_join(., het_method) %>%
+arrange(loo_maxp,  desc(inst_Q_pval)) %>% filter(!duplicated(paste(id.exposure, id.outcome)))
+# subset(ressig, nsnp %in% 2:3) %>% 
+#     select(id.exposure, id.outcome, nsnp, b, se, pval) %>% 
+#     inner_join(., het2 %>% filter(method=="Inverse variance weighted") %>% select(id.exposure, id.outcome, inst_Q_pval=Q_pval)) %>% 
+#     left_join(., loo_passing %>% select(id.exposure, id.outcome, loo_maxp=maxp)) %>%
+#     arrange(loo_maxp, desc(inst_Q_pval))
+# subset(ressig, nsnp==1) %>% arrange(pval)
+traits <- read_xlsx(here("data", "Supplementary_Table5.xlsx")) %>% select(id.outcome=opengwasid, outcome=code)
+m <- match(allres$id.outcome, traits$id.outcome)
+all(traits$id.outcome[m] == allres$id.outcome)
+allres$id.outcome <- traits$outcome[m]
+allres
+write.csv(allres, "forward_mr.csv")
+```
+
+
