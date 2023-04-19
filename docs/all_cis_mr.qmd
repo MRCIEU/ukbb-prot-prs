@@ -3,6 +3,18 @@ title: "MR of protein on disease following PRS-protein assocs"
 author: "Gibran Hemani"
 ---
 
+Narrative
+
+- Proteome-wide forward MR finds more assocs than restricting forward MR to those found from PRS
+- There is very little agreement between cis and trans instruments
+- Slightly more likely to find evidence from trans if there is evidence from cis
+- significant cis MR agrees with PRS, no relationship between PRS and non-sig cis MR
+- trans MR much stronger relationship with PRS, which is slightly attenuated after steiger filtering
+- most instruments pass steiger filtering but all those that don't are trans
+- 11 examples of bi-directional effects
+- todo: coloc for cis-MR
+
+
 ```{r}
 library(dplyr)
 library(ieugwasr)
@@ -11,6 +23,8 @@ library(TwoSampleMR)
 library(ggplot2)
 library(here)
 library(metafor)
+library(GenomicRanges)
+library(readxl)
 ```
 
 ```{r}
@@ -32,8 +46,8 @@ dim(ressig)
 Compare forward MR against reverse PRS results
 
 ```{r}
-temp <- inner_join(subset(res, method %in% c("Inverse variance weighted", "Wald ratio")), prs_pairs, by=c("id.exposure"="HGNC.symbol", "id.outcome"="opengwasid"))
-temp$mr_sig <- temp$pval.x < 0.05/nrow(prs_pairs)
+temp <- inner_join(subset(res, method %in% c("Inverse variance weighted", "Wald ratio")), prs_pairs, by=c("id.exposure"="prot", "id.outcome"="opengwasid"))
+temp$mr_sig <- p.adjust(temp$pval.x, "fdr") < 0.05
 ggplot(temp, aes(beta, b)) +
   geom_hline(yintercept=0, linetype="dotted") +
   geom_vline(xintercept=0, linetype="dotted") +
@@ -42,6 +56,122 @@ ggplot(temp, aes(beta, b)) +
   labs(x="PRS disease -> protein", y="MR protein -> disease") +
   facet_grid(mr_sig ~ .)
 ```
+
+
+Cis vs trans
+
+```{r}
+table(p.adjust(res_cis$p, "fdr") < 0.05)
+table(p.adjust(res_trans$p, "fdr") < 0.05)
+inner_join(res_cis, res_trans, by=c("id.exposure", "id.outcome")) %>%
+{table(.$pval.x < 0.05, .$pval.y < 0.05)}
+
+summary(lm(I(pval.x < 0.05) ~ I(pval.y < 0.05), data=inner_join(res_cis, res_trans, by=c("id.exposure", "id.outcome"))))
+```
+
+
+```{r}
+nperm <- 10000
+perm_res <- lapply(c(0.05, 0.01, 0.001, 0.05/nrow(temp)), function(thresh){
+    temp <- inner_join(res_cis, res_trans, by=c("id.exposure", "id.outcome"))
+    ncis <- sum(temp$pval.x < thresh)
+    ntrans <- sum(temp$pval.y < thresh, na.rm=T)
+    perms <- sapply(1:nperm, function(x) sum(sample(1:nrow(temp), ncis, replace=FALSE) %in% sample(1:nrow(temp), ntrans, replace=FALSE))) %>% sort()
+    real <- inner_join(res_cis, res_trans, by=c("id.exposure", "id.outcome")) %>%
+    {sum(.$pval.x < thresh & .$pval.y < thresh, na.rm=T)}
+    tibble(thresh=thresh, nsig=real, maxperm=max(perms), medperm=median(perms), p_perm=sum(real < perms)/nperm)
+}) %>% bind_rows()
+perm_res
+```
+
+
+```{r}
+inner_join(res_cis, res_trans, by=c("id.exposure", "id.outcome")) %>%
+    filter(pval.x < 0.05) %>%
+    ggplot(., aes(x=b.x, y=b.y)) +
+    geom_point() +
+    geom_smooth(method="lm") + 
+    labs(x="cis-MR estimate", y="trans-MR estimate")
+```
+
+No concordance between cis and trans
+
+```{r}
+bind_rows(res_cis %>% mutate(what="cis"), res_trans %>% mutate(what="trans")) %>%
+    filter(!is.na(pval)) %>%
+    inner_join(., prs_pairs, by=c("id.exposure"="prot", "id.outcome"="opengwasid")) %>%
+    mutate(mr_sig = p.adjust(pval.x, "fdr") < 0.05) %>%
+    ggplot(., aes(beta, b)) +
+        geom_hline(yintercept=0, linetype="dotted") +
+        geom_vline(xintercept=0, linetype="dotted") +
+        geom_point(aes(colour=mr_sig)) +
+        geom_smooth(method="lm") +
+        labs(x="PRS disease -> protein", y="MR protein -> disease") +
+        facet_grid(mr_sig ~ what)
+```
+
+Perform steiger filtering
+
+First check units
+
+```{r}
+gi <- gwasinfo(unique(dat$id.outcome))
+gi %>% select(trait, unit, sd, id)
+ex <- ieugwasr::tophits("ieu-a-300")
+ex <- ex %>% mutate(rsq1 = get_r_from_pn(p, n)^2)
+ex <- ex %>% mutate(rsq2 = get_r_from_bsen(beta, se, n)^2)
+plot(rsq1 ~ rsq2, ex)
+```
+
+Get rsq values
+
+```{r}
+sd_ids <- c("ieu-b-38", "ieu-b-39", "ieu-a-299", "ieu-a-300", "ieu-a-301", "ieu-a-302")
+logor_ids <- traits$opengwasid[! traits$opengwasid %in% sd_ids]
+dat$unit.exposure <- "SD"
+dat$samplesize.exposure <- 35571
+dat$unit.outcome <- "SD"
+dat$unit.outcome[dat$id %in% logor_ids] <- "logOR"
+dat <- add_rsq(dat)
+dat$rsq.exposure <- get_r_from_bsen(dat$beta.exposure, dat$se.exposure, dat$samplesize.exposure)^2
+dat$effective_n.outcome <- dat$samplesize.outcome
+dat$effective_n.outcome[dat$unit == "logOR"] <- effective_n(dat$ncase.outcome[dat$unit == "logOR"], dat$ncontrol.outcome[dat$unit == "logOR"])
+dat$effective_n.exposure <- dat$samplesize.exposure
+
+st <- psych::r.test(n = dat$effective_n.exposure, n2 = dat$effective_n.outcome, 
+        r12 = sqrt(dat$rsq.exposure), r34 = sqrt(dat$rsq.outcome))
+dat$steiger_dir <- dat$rsq.exposure > dat$rsq.outcome
+dat$steiger_pval <- pnorm(-abs(st$z)) * 2
+table(is.na(dat$rsq.exposure))
+table(is.na(dat$rsq.outcome))
+table(dat$rsq.exposure > dat$rsq.outcome, dat$cistrans.exposure)
+table(dat$steiger_pval < 0.05, dat$cistrans.exposure)
+```
+
+All reverse instruments are trans!
+
+```{r}
+bind_rows(res_cis %>% mutate(what="cis"), res_trans %>% mutate(what="trans"), res_trans_sf %>% mutate(what="trans sf")) %>%
+    filter(!is.na(pval)) %>%
+    inner_join(., prs_pairs, by=c("id.exposure"="prot", "id.outcome"="opengwasid")) %>%
+    mutate(mr_sig = p.adjust(pval.x, "fdr") < 0.05) %>%
+    ggplot(., aes(beta, b)) +
+        geom_hline(yintercept=0, linetype="dotted") +
+        geom_vline(xintercept=0, linetype="dotted") +
+        geom_point(aes(colour=mr_sig)) +
+        geom_smooth(method="lm") +
+        labs(x="PRS disease -> protein", y="MR protein -> disease") +
+        facet_grid(mr_sig ~ what)
+```
+
+Bidirectional effects?
+
+```{r}
+rev_ids <- paste(dat$id.exposure[!dat$steiger_dir], dat$id.outcome[!dat$steiger_dir])
+cis_mr_ids <- paste(res_cis$id.exposure[p.adjust(res_cis$pval, "fdr") < 0.05], res_cis$id.outcome[p.adjust(res_cis$pval, "fdr") < 0.05])
+table(rev_ids %in% cis_mr_ids)
+```
+
 
 Perform instrument heterogeneity analysis
 
@@ -169,7 +299,7 @@ arrange(loo_maxp,  desc(inst_Q_pval)) %>% filter(!duplicated(paste(id.exposure, 
 #     left_join(., loo_passing %>% select(id.exposure, id.outcome, loo_maxp=maxp)) %>%
 #     arrange(loo_maxp, desc(inst_Q_pval))
 # subset(ressig, nsnp==1) %>% arrange(pval)
-traits <- read_xlsx(here("data", "Supplementary_Table5.xlsx")) %>% select(id.outcome=opengwasid, outcome=code)
+traits <- readxl::read_xlsx(here("data", "Supplementary_Table5.xlsx")) %>% select(id.outcome=opengwasid, outcome=code)
 m <- match(allres$id.outcome, traits$id.outcome)
 all(traits$id.outcome[m] == allres$id.outcome)
 allres$id.outcome <- traits$outcome[m]
@@ -177,4 +307,18 @@ allres
 write.csv(allres, "forward_mr.csv")
 ```
 
+
+Are trans instruments more pleiotropic?
+
+```{r}
+dat$fdr.outcome <- p.adjust(dat$pval.outcome, "fdr")
+table(dat$fdr < 0.05)
+
+dat %>%
+    group_by(SNP, cistrans.exposure) %>%
+    filter(!duplicated(id.outcome)) %>%
+    summarise(n=sum(fdr.outcome < 0.05)) %>%
+    group_by(cistrans.exposure) %>%
+    summarise(m=mean(n), sd=sd(n), med=median(n), min=min(n), max=max(n))
+```
 
