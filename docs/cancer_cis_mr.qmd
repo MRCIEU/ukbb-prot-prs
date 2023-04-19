@@ -1,5 +1,5 @@
 ---
-title: "R Notebook"
+title: "MR of protein on cancer following PRS-protein assocs"
 output: html_notebook
 ---
 
@@ -15,14 +15,12 @@ library(ggplot2)
 Get pQTLs from Sun et al 2022 "Genetic regulation of the human plasma proteome in 54,306 UK Biobank participants" https://www.biorxiv.org/content/10.1101/2022.06.17.496443v1
 
 ```{r}
-setwd("~/sandpit/ukbb_prot_prs/")
-download.file("https://www.biorxiv.org/content/biorxiv/early/2022/06/18/2022.06.17.496443/DC2/embed/media-2.xlsx?download=true", "media-2.xlsx")
-a <- read_xlsx("media-2.xlsx", sheet="ST6", skip=2)
-a
+download.file("https://www.biorxiv.org/content/biorxiv/early/2022/06/18/2022.06.17.496443/DC2/embed/media-2.xlsx?download=true", here("data", "media-2.xlsx"))
+a <- read_xlsx(here("data", "media-2.xlsx"), sheet="ST6", skip=2)
 ```
 
 ```{r}
-b <- read_xlsx("~/Downloads/supplementary_tables.xlsx", sheet=1, skip=1)
+b <- read_xlsx(here("data", "supplementary_tables.xlsx", sheet=1, skip=1)
 b
 ```
 
@@ -145,6 +143,7 @@ mr_leaveoneout_plot(subset(res_loo, paste(id.exposure, id.outcome) %in% paste(iv
 hetres <- mr_heterogeneity(dat)
 subset(hetres, paste(id.exposure, id.outcome) %in% paste(ivw_sig_pairs$id.exposure, ivw_sig_pairs$id.outcome))
 ```
+
 No heterogeneity
 
 ## Summary
