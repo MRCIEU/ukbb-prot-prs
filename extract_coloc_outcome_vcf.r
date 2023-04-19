@@ -5,6 +5,7 @@ library(dplyr)
 library(here)
 library(coloc)
 library(GenomicRanges)
+library(ggplot2)
 set_bcftools()
 
 # set dir
@@ -112,7 +113,6 @@ do_coloc <- function(harmonise_list, row, exposure_dat, outcome_dat, radius = 50
     return(out)
 }
 
-
 plot_res <- function(d, m="split")
 {
     p1 <- d %>% 
@@ -133,7 +133,6 @@ plot_res <- function(d, m="split")
     }
     p1
 }
-
 
 # missing eaf values
 harmonise_list$pos.exposure <- as.numeric(harmonise_list$pos.exposure)
@@ -159,7 +158,7 @@ for(i in 1:nrow(harmonise_list_r))
     ggsave(p, file=here("images", paste0(harmonise_list_r$id.exposure[i], "_", harmonise_list_r$id.outcome[i], ".pdf")))
 }
 
-lapply(colocres, function(x) x$colocres) %>% bind_rows
+lapply(colocres, function(x) x$colocres) %>% bind_rows %>% saveRDS(., file=here("data", "colocres.rds"))
 
 ####
 
