@@ -1,0 +1,105 @@
+---
+title: "Causal networks combining MR and PRS results"
+author: "Gibran Hemani"
+date: "`r Sys.Date()`"
+---
+
+Using cis coloc SNPs - are any of them also trans?
+
+Load MR results 
+
+```{r}
+library(dplyr)
+library(here)
+library(ggplot2)
+library(tidyr)
+library(readxl)
+```
+
+```{r}
+load(here("data", "all.rdata"))
+coloc_res <- readRDS(here("data", "cis_coloc_res.rds"))
+```
+
+```{r}
+head(prs_pairs)
+```
+
+cis trans MR overlap
+
+```{r}
+coloc_res <- subset(coloc_res, PP.H4.abf >= 0.8)
+coloc_res
+```
+
+```{r}
+inst <- read_xlsx(here("data", "media-2.xlsx"), sheet="ST6", skip=2) %>% 
+  filter(`Assay Target` %in% coloc_res$exposure, rsID != "-") %>%
+  dplyr::select(
+    exposure="Assay Target",
+    id.exposure="Assay Target",
+    SNP="rsID", 
+    beta.exposure="BETA (discovery, wrt. A1)", 
+    se.exposure="SE (discovery)", 
+    pval.exposure="log10(p) (discovery)", 
+    eaf.exposure="A1FREQ (discovery)", 
+    snpid="Variant ID (CHROM:GENPOS (hg37):A0:A1:imp:v1)",
+    cistrans.exposure=`cis/trans`) %>% 
+  mutate(pval.exposure = 10^-pval.exposure) %>%
+  tidyr::separate(snpid, sep=":", into=c("chr.exposure","pos.exposure","other_allele.exposure", "effect_allele.exposure", "imp", "v"))
+inst
+table(inst$cistrans.exposure)
+length(unique(inst$exposure))
+inst_cis <- subset(inst, cistrans.exposure == "cis", select=c(exposure, SNP))
+coloc_res <- left_join(coloc_res, inst_cis)
+str(coloc_res)
+```
+
+
+```{r}
+dat_coloc <- subset(dat, SNP %in% coloc_res$SNP) %>%
+  mutate(fdr=p.adjust(pval.outcome, "fdr")) %>%
+  filter(fdr < 0.05)
+dim(dat_coloc)
+table(dat_coloc$cistrans.exposure)
+
+table(paste(coloc_res$id.exposure, coloc_res$id.outcome) %in% paste(dat_coloc$id.exposure, dat_coloc$originalname.outcome))
+str(dat_coloc)
+```
+
+```{r}
+head(paste(coloc_res$id.exposure, coloc_res$id.outcome))
+head(paste(dat_coloc$id.exposure, dat_coloc$outcome))
+```
+
+
+remove rows where it's cis but coloc has rejected it
+
+```{r}
+dat_coloc <- subset(dat_coloc, cistrans.exposure == "trans" | (cistrans.exposure == "cis" & paste(exposure, originalname.outcome) %in% paste(coloc_res$id.exposure, coloc_res$id.outcome)))
+dim(dat_coloc)
+table(dat_coloc$cistrans.exposure)
+```
+
+
+```{r}
+str(dat_coloc)
+```
+
+
+To do:
+
+prot -> trait (coloc)
+trait -> prot (prs)
+SNP -> prot (cis)
+SNP -> prot (trans)
+
+
+- Add trans SNPs that are high LD with the known cis SNPs
+- Take PRS pairs that agree with coloc
+- Do those 
+
+
+
+
+
