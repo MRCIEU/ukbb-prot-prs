@@ -6,14 +6,42 @@ library(TwoSampleMR)
 library(ggplot2)
 library(here)
 
+# Trait list
+traits <- read_xlsx(here("data", "Supplementary_Table5.xlsx"))
+
+# Instruments
 download.file("https://www.biorxiv.org/content/biorxiv/early/2022/06/18/2022.06.17.496443/DC2/embed/media-2.xlsx?download=true", here("data", "media-2.xlsx"))
 a <- read_xlsx(here("data", "media-2.xlsx"), sheet="ST6", skip=2)
 
+# PRS estimates
+
+# From Danai - non-cancer
 b <- excel_sheets(here("data", "Supplementary_Table1.xlsx")) %>% lapply(., function(s) read_xlsx(here("data", "Supplementary_Table1.xlsx"), sheet=s) %>% mutate(trait=s, P_value=as.numeric(P_value))) %>% bind_rows()
 
+organise_lc <- function(csv, trait) {
+  a <- read.csv(csv) %>% 
+    filter(FDR_P_value < 0.05) %>%
+    arrange(P_value) %>%
+    select(Analyte, Estimate, P_value) %>%
+    filter(!duplicated(Analyte)) %>%
+    tidyr::separate(Analyte, sep=":", into=c("HGNC.symbol", "v1", "v2", "v3")) %>%
+    select(-c(v1, v2, v3)) %>%
+    mutate(trait=trait)
+}
+
+# From Phil - Lung cancer
+temp <- tibble(
+  opengwasid = c("ieu-a-984", "ieu-a-985", "ieu-a-987", "ieu-a-989"),
+  csv = paste0("data/Pathways_PRScs_Olink_Associaton_Bristol_", opengwasid, "_merged.csv"),
+) %>% left_join(., traits %>% select(opengwasid, code))
+
+b_lc <- lapply(1:nrow(temp), \(x) organise_lc(temp$csv[x], temp$code[x])) %>% bind_rows()
+b <- bind_rows(b, b_lc)
+
+# From Phil - Other cancers
 b1 <- read_xlsx(here("data", "supplementary_tables.xlsx"), sheet=1, skip=1)
 
-
+# Get pQTLs
 inst <- a %>% 
   filter(`Assay Target` %in% b$HGNC.symbol, rsID != "-") %>%
   dplyr::select(
@@ -29,7 +57,7 @@ inst <- a %>%
   mutate(pval.exposure = 10^-pval.exposure) %>%
   tidyr::separate(snpid, sep=":", into=c("chr.exposure","pos.exposure","other_allele.exposure", "effect_allele.exposure", "imp", "v"))
 
-traits <- read_xlsx(here("data", "Supplementary_Table5.xlsx"))
+# Organise PRS pairs
 b <- left_join(b, traits, by=c("trait"="code"))
 b1 <- left_join(b1, traits, by=c("cancer"="code"))
 prs_pairs <- bind_rows(
@@ -41,24 +69,24 @@ prs_pairs <- bind_rows(
         filter(!duplicated(paste(prot, opengwasid)))
 )
 prs_pairs
+rm(b, b1, b_lc, a, temp)
 
+
+## Extract instruments from GWASs
 
 lookups <- inner_join(inst, prs_pairs, by=c("exposure" = "prot"))
 
-newids <- c("ieu-a-1121", "ieu-a-1127", "ieu-a-1128", "ieu-a-1228", "ieu-a-822", "ukb-a-60", "ukb-b-1316", "ukb-b-8837")
-
-outcome_dat_all <- lapply(unique(traits$opengwasid), function(id)
+l <- list()
+for(id in traits$opengwasid)
 {
-    extract_outcome_data(unique(inst$SNP), id)
-})
-
-o <- bind_rows(outcome_dat_all)
+  l[[id]] <- extract_outcome_data(unique(inst$SNP), id)
+}
+o <- bind_rows(l)
 dim(o)
 
 dat <- harmonise_data(inst, o, action=1)
 str(dat)
 length(unique(dat$exposure))
-
 
 eo_pairs <- unique(paste(prs_pairs$prot, prs_pairs$opengwasid))
 length(eo_pairs)
@@ -66,7 +94,7 @@ dat_prs <- subset(dat, paste(id.exposure, id.outcome) %in% eo_pairs)
 dim(dat_prs)
 length(unique(paste(dat$id.exposure, dat$id.outcome)))
 dat <- subset(dat, !duplicated(paste(dat$SNP, dat$id.exposure, dat$id.outcome)))
-
+dim(dat)
 
 # Steiger filtering
 sd_ids <- c("ieu-b-38", "ieu-b-39", "ieu-a-299", "ieu-a-300", "ieu-a-301", "ieu-a-302")
@@ -103,8 +131,7 @@ table(res_prs$pval < 0.05/nrow(res_prs))
 res_cis <- subset(dat, cistrans.exposure == "cis") %>% mr()
 res_trans <- subset(dat, cistrans.exposure == "trans") %>% mr(method_list=c("mr_wald_ratio", "mr_ivw"))
 res_trans_sf <- subset(dat, cistrans.exposure == "trans" & steiger_dir & steiger_pval < 0.05) %>% mr(method_list=c("mr_wald_ratio", "mr_ivw"))
+res_trans_sf_relaxed <- subset(dat, cistrans.exposure == "trans" & steiger_dir) %>% mr(method_list=c("mr_wald_ratio", "mr_ivw"))
 
-save(dat, traits, res, res_cis, res_trans, res_trans_sf, res_prs, prs_pairs, file=here("data", "all.rdata"))
-
-
+save(dat, traits, res, res_cis, res_trans, res_trans_sf, res_trans_sf_relaxed, res_prs, prs_pairs, file=here("data", "all.rdata"))
 

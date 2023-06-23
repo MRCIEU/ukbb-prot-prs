@@ -94,12 +94,63 @@ trait -> prot (prs)
 SNP -> prot (cis)
 SNP -> prot (trans)
 
-
 - Add trans SNPs that are high LD with the known cis SNPs
 - Take PRS pairs that agree with coloc
-- Do those 
+
+what = snp, trait, protein
+method = coloc, gassoc, mr, prs
+b = beta
+bsign = sign(beta)
+x = exposure
+y = outcome
+
+# SNP - protein
+# 
+
+```{r}
+
+```
 
 
+$$
+\begin{aligned}
+\beta_{IV} &= \beta_{gy} / \beta_{gx} \\
+&= \beta_{gx}
+
+\end{aligned}
+$$
 
 
+```{r}
+n <- 1000000
+g <- rbinom(n, 2, 0.4)
+u <- g + rnorm(n, sd=sqrt(1-var(g)))
+x <- 0.1 * u + rnorm(n, sd=sqrt(1-0.1^2))
+var(x)
+y <- 0.1 * u + rnorm(n, sd=sqrt(1-0.1^2))
+var(y)
+```
 
+```{r}
+summary(lm(y ~ x))$coef
+```
+
+```{r}
+library(systemfit)
+systemfit(y ~ x, inst=~g, method="2SLS")
+```
+
+
+```{r}
+x1 <- x * 10
+y1 <- y * 10
+summary(lm(y1 ~ x1))$coef
+
+
+```
+
+
+```{r}
+
+systemfit(y1 ~ x1, inst=~g, method="2SLS")
+```
