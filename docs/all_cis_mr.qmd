@@ -23,23 +23,54 @@ library(TwoSampleMR)
 library(ggplot2)
 library(here)
 library(metafor)
-library(GenomicRanges)
 library(readxl)
 ```
 
 ```{r}
+traits <- read_xlsx(here("data", "Supplementary_Table5.xlsx"))
+gi <- ieugwasr::gwasinfo(traits$opengwasid)
 load(here("data", "all.rdata"))
+coloc_res <- readRDS(here("data", "cis_coloc_res.rds"))
+coloc_res <- coloc_res %>%
+    select(-c(id.outcome)) %>%
+    left_join(., gi %>% select(trait, id.outcome = id), by=c("outcome"="trait")) %>%
+    select(-c(outcome)) %>%
+    left_join(., traits %>% select(outcome=code, id.outcome=opengwasid), by="id.outcome")
+
+res <- res %>% select(-c(outcome)) %>%
+    left_join(., traits %>% select(outcome=code, id.outcome=opengwasid), by="id.outcome")
+
+res_cis <- res_cis %>% select(-c(outcome)) %>%
+    left_join(., traits %>% select(outcome=code, id.outcome=opengwasid), by="id.outcome")
+
+res_trans <- res_trans %>% select(-c(outcome)) %>%
+    left_join(., traits %>% select(outcome=code, id.outcome=opengwasid), by="id.outcome")
+
+res_trans_sf <- res_trans_sf %>% select(-c(outcome)) %>%
+    left_join(., traits %>% select(outcome=code, id.outcome=opengwasid), by="id.outcome")
+
+res_trans_sf_relaxed <- res_trans_sf_relaxed %>% select(-c(outcome)) %>%
+    left_join(., traits %>% select(outcome=code, id.outcome=opengwasid), by="id.outcome")
+
+table(coloc_res$outcome %in% traits$code)
+table(coloc_res$outcome %in% res_cis$outcome)
+table(coloc_res$outcome %in% res$outcome)
+table(coloc_res$id.outcome %in% res$id.outcome)
+
+coloc_res_s <- subset(coloc_res, PP.H4.abf >= 0.8)
+
+res_cis_coloc <- subset(res_cis, paste(id.exposure, id.outcome) %in% paste(coloc_res_s$id.exposure, coloc_res_s$id.outcome))
 ```
 
 Show MR results that have IVW / Wald ratio P val bonferroni corrected significant
 
 ```{r}
 res %>% group_by(method) %>%
-  summarise(n=n(), nsig = sum(pval < 0.05/nrow(prs_pairs), na.rm=T))
+  summarise(n=n(), nsig = sum(fdr < 0.05, na.rm=T))
 ```
 
 ```{r}
-ressig <- subset(res, pval < 0.05/nrow(prs_pairs))
+ressig <- subset(res, fdr < 0.05)
 dim(ressig)
 ```
 
@@ -61,14 +92,15 @@ ggplot(temp, aes(beta, b)) +
 Cis vs trans
 
 ```{r}
-table(p.adjust(res_cis$p, "fdr") < 0.05)
+table(p.adjust(res_cis_coloc$p, "fdr") < 0.05)
 table(p.adjust(res_trans$p, "fdr") < 0.05)
-inner_join(res_cis, res_trans, by=c("id.exposure", "id.outcome")) %>%
+inner_join(res_cis_coloc, res_trans, by=c("id.exposure", "id.outcome")) %>%
 {table(.$pval.x < 0.05, .$pval.y < 0.05)}
 
-summary(lm(I(pval.x < 0.05) ~ I(pval.y < 0.05), data=inner_join(res_cis, res_trans, by=c("id.exposure", "id.outcome"))))
+summary(lm(I(pval.x < 0.05) ~ I(pval.y < 0.05), data=inner_join(res_cis_coloc, res_trans, by=c("id.exposure", "id.outcome"))))
 ```
 
+Are cis and trans MR results occurring more than expected by chance? For cis and trans MRs across protein pairs identify how many have p-values < alpha, then scramble cis and trans protein pairs 10000 times and determine if the observed number is larger than the distribution of null counts.
 
 ```{r}
 nperm <- 10000
@@ -84,6 +116,9 @@ perm_res <- lapply(c(0.05, 0.01, 0.001, 0.05/nrow(temp)), function(thresh){
 perm_res
 ```
 
+Cis and trans MR results co-occur more than expected by chance.
+
+Do effect sizes correspond?
 
 ```{r}
 inner_join(res_cis, res_trans, by=c("id.exposure", "id.outcome")) %>%
@@ -94,7 +129,22 @@ inner_join(res_cis, res_trans, by=c("id.exposure", "id.outcome")) %>%
     labs(x="cis-MR estimate", y="trans-MR estimate")
 ```
 
-No concordance between cis and trans
+No concordance between cis and trans - just like in GoDMC! Restrict to cis coloc
+
+
+```{r}
+inner_join(res_cis_coloc, res_trans, by=c("id.exposure", "id.outcome")) %>%
+    filter(pval.x < 0.05) %>%
+    ggplot(., aes(x=b.x, y=b.y)) +
+    geom_point() +
+    geom_smooth(method="lm") + 
+    labs(x="cis-MR estimate", y="trans-MR estimate")
+```
+
+
+## Forward vs reverse MR
+
+Do forward and reverse MR results agree?
 
 ```{r}
 bind_rows(res_cis %>% mutate(what="cis"), res_trans %>% mutate(what="trans")) %>%
@@ -110,40 +160,9 @@ bind_rows(res_cis %>% mutate(what="cis"), res_trans %>% mutate(what="trans")) %>
         facet_grid(mr_sig ~ what)
 ```
 
-Perform steiger filtering
-
-First check units
+Use steiger filtering. Note only trans instruments had any evidence of being reverse causal.
 
 ```{r}
-gi <- gwasinfo(unique(dat$id.outcome))
-gi %>% select(trait, unit, sd, id)
-ex <- ieugwasr::tophits("ieu-a-300")
-ex <- ex %>% mutate(rsq1 = get_r_from_pn(p, n)^2)
-ex <- ex %>% mutate(rsq2 = get_r_from_bsen(beta, se, n)^2)
-plot(rsq1 ~ rsq2, ex)
-```
-
-Get rsq values
-
-```{r}
-sd_ids <- c("ieu-b-38", "ieu-b-39", "ieu-a-299", "ieu-a-300", "ieu-a-301", "ieu-a-302")
-logor_ids <- traits$opengwasid[! traits$opengwasid %in% sd_ids]
-dat$unit.exposure <- "SD"
-dat$samplesize.exposure <- 35571
-dat$unit.outcome <- "SD"
-dat$unit.outcome[dat$id %in% logor_ids] <- "logOR"
-dat <- add_rsq(dat)
-dat$rsq.exposure <- get_r_from_bsen(dat$beta.exposure, dat$se.exposure, dat$samplesize.exposure)^2
-dat$effective_n.outcome <- dat$samplesize.outcome
-dat$effective_n.outcome[dat$unit == "logOR"] <- effective_n(dat$ncase.outcome[dat$unit == "logOR"], dat$ncontrol.outcome[dat$unit == "logOR"])
-dat$effective_n.exposure <- dat$samplesize.exposure
-
-st <- psych::r.test(n = dat$effective_n.exposure, n2 = dat$effective_n.outcome, 
-        r12 = sqrt(dat$rsq.exposure), r34 = sqrt(dat$rsq.outcome))
-dat$steiger_dir <- dat$rsq.exposure > dat$rsq.outcome
-dat$steiger_pval <- pnorm(-abs(st$z)) * 2
-table(is.na(dat$rsq.exposure))
-table(is.na(dat$rsq.outcome))
 table(dat$rsq.exposure > dat$rsq.outcome, dat$cistrans.exposure)
 table(dat$steiger_pval < 0.05, dat$cistrans.exposure)
 ```
@@ -151,7 +170,12 @@ table(dat$steiger_pval < 0.05, dat$cistrans.exposure)
 All reverse instruments are trans!
 
 ```{r}
-bind_rows(res_cis %>% mutate(what="cis"), res_trans %>% mutate(what="trans"), res_trans_sf %>% mutate(what="trans sf")) %>%
+bind_rows(
+    res_cis %>% mutate(what="cis"), 
+    res_cis_coloc %>% mutate(what="cis+coloc"), 
+    res_trans %>% mutate(what="trans"), 
+    res_trans_sf %>% mutate(what="trans sf"),
+    res_trans_sf_relaxed %>% mutate(what="trans sf strict")) %>%
     filter(!is.na(pval)) %>%
     inner_join(., prs_pairs, by=c("id.exposure"="prot", "id.outcome"="opengwasid")) %>%
     mutate(mr_sig = p.adjust(pval.x, "fdr") < 0.05) %>%
@@ -164,21 +188,72 @@ bind_rows(res_cis %>% mutate(what="cis"), res_trans %>% mutate(what="trans"), re
         facet_grid(mr_sig ~ what)
 ```
 
-Bidirectional effects?
+
+## PRS discovers forward MR?
+
+```{r}
+cis_prs <- subset(res_cis, paste(id.exposure, id.outcome) %in% paste(prs_pairs$prot, prs_pairs$opengwasid))
+cis_prs$fdr <- p.adjust(cis_prs$pval, "fdr")
+a <- subset(cis_prs, fdr < 0.05) %>% mutate(code = paste(id.exposure, id.outcome))
+res_cis$fdr <- p.adjust(res_cis$pval, "fdr")
+b <- subset(res_cis, fdr < 0.05) %>% mutate(code = paste(id.exposure, id.outcome))
+sum(a$code %in% b$code)
+
+tribble(~what, ~count,
+    "Total tested - forward MR", nrow(res_cis),
+    "Total discovered - forward MR", sum(res_cis$fdr < 0.05),
+    "Total tested - reverse MR filter", nrow(cis_prs),
+    "Total discovered - reverse MR filter", sum(cis_prs$fdr < 0.05),
+    "Discovery overlap", sum(a$code %in% b$code)
+)
+```
+
+Cis MR is substantially better powered than PRS for identifying forward MR assocs. But `r ((sum(cis_prs$fdr < 0.05) - sum(a$code %in% b$code)) / sum(res_cis$fdr < 0.05)) %>% {round(.*100, 1)}`% extra forward MR assocs discovered that wouldn't have been found by cis MR.
+
+## Bidirectional effects?
+
+Using cis for forward and any with !steiger for reverse
 
 ```{r}
 rev_ids <- paste(dat$id.exposure[!dat$steiger_dir], dat$id.outcome[!dat$steiger_dir])
-cis_mr_ids <- paste(res_cis$id.exposure[p.adjust(res_cis$pval, "fdr") < 0.05], res_cis$id.outcome[p.adjust(res_cis$pval, "fdr") < 0.05])
+cis_mr_ids <- paste(res_cis_coloc$id.exposure, res_cis_coloc$id.outcome)
 table(rev_ids %in% cis_mr_ids)
 ```
 
+```{r}
+bid <- subset(res_cis_coloc, cis_mr_ids %in% rev_ids)
+bid
+```
 
-Perform instrument heterogeneity analysis
+
+```{r}
+rev_ids_prs <- paste(prs_pairs$prot, prs_pairs$opengwasid)
+cis_mr_ids <- paste(res_cis_coloc$id.exposure, res_cis_coloc$id.outcome)
+table(rev_ids_prs %in% cis_mr_ids)
+```
+
+```{r}
+bidprs <- subset(res_cis_coloc, cis_mr_ids %in% rev_ids_prs)
+bidprs
+```
+
+
+Some of these PRS results could just be driven by strong cis signals e.g. PCSK9.
+
+```{r}
+bidprs$ids <- paste(bidprs$id.exposure, bidprs$id.outcome)
+bid_trans <- subset(res_trans, paste(id.exposure, id.outcome) %in% bidprs$ids) %>% mutate(fdr = p.adjust(pval, "fdr"))
+bid_trans %>% subset(fdr < 0.05)
+```
+
+**Are these plausible bi-directional associations?**
+
+## Perform instrument heterogeneity analysis
 
 ```{r}
 het2 <- dat %>%
     subset(., paste(id.exposure, id.outcome) %in% paste(ressig$id.exposure, ressig$id.outcome)) %>%
-    mr_heterogeneity()
+    mr_heterogeneity(method_list="mr_ivw")
 het2
 ```
 
@@ -202,7 +277,11 @@ het_method <- res2 %>% filter(nsnp >= 3) %>% group_by(id.exposure, id.outcome) %
 Plot comparison across different methods
 
 ```{r}
-res2 %>% filter(nsnp > 2) %>%
+p <- res %>% 
+    filter(nsnp > 2) %>% 
+    filter(p.adjust(pval, "fdr") < 0.05) %>%
+    mutate(code = paste(id.exposure, id.outcome)) %>% {.$code}
+res2 %>% filter(paste(id.exposure, id.outcome) %in% p) %>%
 ggplot(., aes(x=method, y=b)) +
 geom_point(aes(colour=method)) +
 geom_errorbar(aes(ymin=b-se*1.96, ymax=b+se*1.96, colour=method), width=0) +
@@ -212,8 +291,7 @@ facet_wrap(~ id.exposure+id.outcome, scale="free_y")
 For multi-instrument exposures do leave-one-out analysis to see if any are driven by a single SNP
 
 ```{r}
-mr_leaveoneout2 <- function (dat, parameters = default_parameters(), method = mr_ivw) 
-{
+mr_leaveoneout2 <- function (dat, parameters = default_parameters(), method = mr_ivw) {
     if (!"samplesize.outcome" %in% names(dat)) {
         dat$samplesize.outcome <- NA
     }
@@ -308,7 +386,7 @@ write.csv(allres, "forward_mr.csv")
 ```
 
 
-Are trans instruments more pleiotropic?
+## Are trans instruments more pleiotropic?
 
 ```{r}
 dat$fdr.outcome <- p.adjust(dat$pval.outcome, "fdr")

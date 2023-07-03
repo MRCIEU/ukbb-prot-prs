@@ -89,10 +89,10 @@ fn <- function(f)
         filter(A1FREQ > 0.01 & A1FREQ < 0.99) %>%
         tidyr::separate(ID, sep=":", into=c("chr.exposure","pos.exposure","other_allele.exposure", "effect_allele.exposure", "imp", "v")) %>%
         tidyr::separate(UKBPPP_ProteinID, sep=":", into=c("exposure", "code1", "code2", "v")) %>%
-        mutate(pval=10^-LOG10P, SNP=paste0(chr, ":", pos)) %>%
-        select(chr.exposure, pos.exposure, other_allele.exposure, effect_allele.exposure, eaf.exposure=A1FREQ, beta.exposure=BETA, se.exposure=SE, pval.exposure=pval, exposure, id.exposure=exposure)
+        mutate(pval=10^-LOG10P, SNP=paste0(chr.exposure, ":", pos.exposure)) %>%
+        select(SNP, chr.exposure, pos.exposure, other_allele.exposure, effect_allele.exposure, eaf.exposure=A1FREQ, beta.exposure=BETA, se.exposure=SE, pval.exposure=pval, exposure=exposure, id.exposure=exposure)
     a
-}
+c}
 
 e <- lapply(filelist, function(f) {message(f); fn(f)}) %>% bind_rows()
 
@@ -109,6 +109,20 @@ e$code <- paste(e$id.exposure, e$SNP)
 ind <- code %in% e$code
 table(ind)
 table(code %in% pas)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## harmonise
