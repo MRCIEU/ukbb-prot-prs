@@ -30,10 +30,16 @@ Analysis of forward MR
 quarto render docs/all_cis_mr.qmd
 ```
 
-Analysis of reverse MR
+Analysis of reverse MR. First extact data from pQTL summary stats
 
 ```
 Rscript extract_reverse_mr.r
+```
+
+Note that I used singularity to run it:
+
+```
+singularity shell --bind /projects/MRC-IEU/research/projects/icep2/wp1/028/working/data/ukbb_pqtl ~/verse_latest.sif 
 ```
 
 

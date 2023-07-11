@@ -4,6 +4,9 @@ library(readxl)
 library(here)
 library(tidyr)
 library(data.table)
+library(R.utils)
+library(furrr)
+library(glue)
 
 load(here("data", "all.rdata"))
 
@@ -24,6 +27,7 @@ lookups <- left_join(
 lookups
 saveRDS(lookups, file=here("data", "reverse_mr_lookups.rds"))
 
+lookups <- readRDS(here("data", "reverse_mr_lookups.rds"))
 prots <- unique(lookups$prot)
 prot_dir <- "/projects/MRC-IEU/research/projects/icep2/wp1/028/working/data/ukbb_pqtl"
 
@@ -45,13 +49,46 @@ paths$prot[paths$prot == "EBI3"] <- "EBI3_IL27"
 
 table(prots %in% paths$prot)
 
-prots[!prots %in% paths$prot]
+dim(paths)
+paths <- subset(paths, paths$prot %in% prots)
+dim(paths)
+
+paths$output <- here("data", "pqtl_extract", paste0(paths$prot, ".rds"))
+dim(paths)
+paths <- subset(paths, !file.exists(output))
+dim(paths)
+
+stopifnot(all(file.exists(file.path(prot_dir, paths$pdirst))))
+
+a <- subset(lookups, !duplicated(rsid))
+a <- paste0("chr", a$chr, ":", a$position)
+write.table(a, file="lookups_b37.txt", row=F, qu=F)
+
+hg38 <- read.table(here("data", "hglft_genome_30ad4_c311e0.bed"), he=F)
+hg38 <- tidyr::separate(hg38, V4, sep=":", into=c("chr", "pos1"))
+hg38 <- tidyr::separate(hg38, pos1, sep="-", into=c("pos1", "pos2"))
+hg38$chr <- gsub("chr", "", hg38$chr)
+hg38 <- hg38 %>% select(chr, pos38=V2, position=pos2)
+hg38$position <- as.numeric(hg38$position)
+hg38$pos38 <- as.numeric(hg38$pos38)
+lookups <- inner_join(lookups, hg38, by=c("chr", "position"))
+dim(lookups)
+head(lookups)
+
+lookup_txt <- function(fn, pos) {
+    tf <- tempfile()
+    tf2 <- tempfile()
+    write.table(unique(pos), file=tf, row=F, col=F, qu=F)
+    cmd <- glue("zgrep -wf {tf} {fn} > {tf2}")
+    system(cmd)
+    fread(tf2)
+}
 
 
-l <- list()
-i <- 1
-for(p in prots)
+plan(multisession, workers = 32)
+furrr::future_map(1:nrow(paths), \(i)
 {
+    p <- paths$prot[i]
     message("Iteration ", i)
     x <- subset(lookups, prot == p)
     fnt <- file.path(prot_dir, subset(paths, prot==p)$pdirst)
@@ -61,6 +98,7 @@ for(p in prots)
     }
     cmd <- paste0("tar xvf ", fnt)
     system(cmd)
+    l <- list()
     for(ch in unique(x$chr))
     {
         message(p, " ", ch)
@@ -71,24 +109,25 @@ for(p in prots)
         {
             next
         }
-        d <- fread(fn) %>% 
-            tidyr::separate(ID, sep=":", into=c("chr", "pos", "a1", "a2", "imp", "v1")) %>% mutate(prot=p)
-        d <- subset(d, pos %in% subset(x, x$chr == ch)$position)
-        l[[i]] <- d
-        i <- i + 1
+        # d <- fread(fn) %>% mutate(prot=p)
+        # %>% 
+        #     tidyr::separate(ID, sep=":", into=c("chr", "pos", "a1", "a2", "imp", "v1")) 
+        # d <- subset(d, GENPOS %in% subset(x, x$chr == ch)$pos38) %>% mutate(prot=p)
+        d <- lookup_txt(fn, subset(x, x$chr == ch)$pos38)
+        l[[ch]] <- d
     }
+    l <- bind_rows(l)
+    con <- gzfile(fn)
+    names(l) <- scan(con, nlines=1, what=character())
+    close(con)
+    l$prot <- p
+    saveRDS(l, file=paths$output[i])
     system(paste0("rm -r ", subset(paths, prot==p)$pdirs))
-}
+})
 
-length(unique(paste(lookups$prot, lookups$chr)))
-table(table(paste(lookups$prot, lookups$chr)))
+fn <- list.files(here("data", "pqtl_extract"))
 
-
-for(i in 1:10)
-{
-    if(i > 5)
-    {
-        next
-    }
-    print(i)
-}
+pqtl_extract <- lapply(fn, \(x){
+    readRDS(here("data", "pqtl_extract", x))
+}) %>% bind_rows()
+saveRDS(pqtl_extract, file=here("data", "pqtl_extract.rds"))
