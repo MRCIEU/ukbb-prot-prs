@@ -131,3 +131,54 @@ pqtl_extract <- lapply(fn, \(x){
     readRDS(here("data", "pqtl_extract", x))
 }) %>% bind_rows()
 saveRDS(pqtl_extract, file=here("data", "pqtl_extract.rds"))
+
+
+# Harmonise exposure / outcome
+
+library(dplyr)
+library(here)
+library(ieugwasr)
+library(TwoSampleMR)
+library(tidyr)
+
+load(here("data", "all.rdata"))
+pqtl_extract <- readRDS(here("data", "pqtl_extract.rds"))
+lookups <- readRDS(here("data", "reverse_mr_lookups.rds"))
+
+head(pqtl_extract)
+head(lookups)
+
+inst <- ieugwasr::tophits(unique(prs_pairs$opengwasid))
+expdat <- format_data(
+    inst, "exposure", snp_col="rsid", phenotype="id", effect_allele="ea", other_allele="nea", pval="p"
+)
+
+head(pqtl_extract)
+pqtl_extract <- pqtl_extract %>% tidyr::separate(ID, sep=":", into=c("chr", "pos", "nea", "ea", "imp", "v1"))
+pqtl_extract$pos <- as.numeric(pqtl_extract$pos)
+rsid <- subset(inst, !duplicated(rsid), select=c(rsid, chr, position))
+
+pqtl_extract <- left_join(pqtl_extract, rsid, by=c("chr", "pos"="position"))
+dim(pqtl_extract)
+table(is.na(pqtl_extract$rsid))
+pqtl_extract <- subset(pqtl_extract, !is.na(rsid))
+
+outdat <- format_data(
+    pqtl_extract, "outcome", snp_col="rsid", effect_allele="ea", other_allele="nea", beta="BETA", se="SE", eaf="A1FREQ", phenotype="prot"
+)
+
+prs_pairs
+dat <- lapply(1:nrow(prs_pairs), \(i)
+{
+    harmonise_data(
+        subset(expdat, exposure == prs_pairs$opengwasid[i]),
+        subset(outdat, outcome == prs_pairs$prot[i]),
+        action=1
+    )
+})
+dat <- bind_rows(dat)
+dat$id.outcome <- dat$outcome
+dat$id.exposure <- dat$exposure
+dat$exposure <- traits$code[match(dat$id.exposure, traits$opengwasid)]
+dim(dat)
+saveRDS(dat, file=here("data", "reverse_mr_dat.rds"))
