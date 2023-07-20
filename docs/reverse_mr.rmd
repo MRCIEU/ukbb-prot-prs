@@ -1,0 +1,334 @@
+---
+title: Reverse MR analysis of PRS results
+author: Gibran Hemani
+execute:
+  cache: true
+---
+
+```{r}
+library(dplyr)
+library(here)
+library(TwoSampleMR)
+library(tidyr)
+library(ggplot2)
+
+load(here("data", "all.rdata"))
+dat <- readRDS(here("data", "reverse_mr_dat.rds"))
+```
+
+Perform MR
+
+```{r}
+rres <- suppressMessages(mr(dat, method=c("mr_ivw", "mr_wald_ratio")))
+rres$fdr <- p.adjust(rres$pval, "fdr")
+saveRDS(rres, file=here("data", "reverse_mr.rds"))
+table(rres$fdr < 0.05)
+```
+
+Compare against PRS
+
+```{r}
+temp <- inner_join(prs_pairs, rres, by=c("prot"="outcome", "opengwasid"="id.exposure"))
+dim(temp)
+ggplot(temp, aes(x=beta, y=b)) +
+geom_point() +
+geom_smooth(method="lm") +
+labs(x="PRS estimate", y="MR estimate")
+```
+
+Good agreement between PRS and IVW results
+
+Heterogeneity
+
+```{r}
+het <- mr_heterogeneity(dat, method=c("mr_ivw"))
+het$fdr <- p.adjust(het$Q_pval, "fdr")
+table(het$fdr < 0.05)
+```
+
+Some SNPs have no heterogeneity
+
+```{r}
+nohet <- subset(het, fdr > 0.05)
+head(nohet)
+```
+
+Select SNPs that have no heterogeneity and a significant IVW assoc
+
+```{r}
+resnohet <- subset(rres, (paste(exposure, outcome) %in% paste(nohet$exposure, nohet$outcome) | nsnp == 1) & fdr < 0.05)
+table(resnohet$exposure) %>% as.data.frame
+dim(resnohet)
+```
+
+These assocs seem to be most consistent with being reverse causal
+
+```{r}
+resnohet <- left_join(resnohet, nohet %>% select(id.exposure, id.outcome, Q_pval), by=c("id.exposure", "id.outcome"))
+head(resnohet)
+write.csv(resnohet, file=here("results", "resnohet.csv"))
+```
+
+Analyse the ones with large heterogeneity
+
+1. Find outliers
+2. Re-estimate with outliers removed
+
+
+```{r}
+est_qj <- function(d) {
+    if(nrow(d) < 2) return(NULL)
+    r <- suppressMessages(mr(d, method="mr_ivw") %>% mutate(what="All"))
+    bhat <- r$b
+    ss <- suppressMessages(mr_singlesnp(d)) %>% filter(!grepl("All", SNP)) %>%
+    mutate(w = 1/(se^2), qj = w * (bhat - b)^2, qj_pval = pchisq(qj, df=1, low=F), qj_fdr = p.adjust(qj_pval, "fdr"))
+
+    d_noout <- d %>% filter(!SNP %in% subset(ss, p.adjust(qj_pval, "fdr") < 0.05)$SNP)
+
+    r2 <- suppressMessages(mr(d_noout, method="mr_ivw")) %>% mutate(what="Outliers removed")
+    return(list(qj=ss, r=bind_rows(r, r2)))
+}
+
+qj <- group_by(dat, paste(id.exposure, id.outcome)) %>% 
+group_map(~ est_qj(.))
+
+qjs <- lapply(qj, \(x) x$qj) %>% bind_rows()
+res_out <- lapply(qj, \(x) x$r) %>% bind_rows() %>% select(names(.)[1:10])
+head(res_out)
+saveRDS(qjs, file=here("data", "reverse_mr_qj.rds"))
+saveRDS(res_out, file=here("data", "reverse_mr_outliers.rds"))
+```
+
+
+Example where there is no heterogeneity
+
+```{r}
+dr <- subset(dat, id.exposure==resnohet$id.exposure[1] & id.outcome==resnohet$id.outcome[1])
+drr <- suppressMessages(mr(dr))
+mr_scatter_plot(drr, dr)
+```
+
+Example where PRS result is driven by heterogeneity
+
+```{r}
+temp <- arrange(het, fdr)
+dr2 <- subset(dat, id.exposure==temp$id.exposure[1] & id.outcome==temp$id.outcome[1])
+drr2 <- suppressMessages(mr(dr2))
+mr_scatter_plot(drr2, dr2)
+```
+
+Outlier analysis. How many have outliers but after removing them the original assoc still remains
+
+```{r}
+thresh <- subset(rres, fdr < 0.05) %>% arrange(desc(pval)) %>% {max(.$pval)}
+res_out_sum <- res_out %>% group_by(id.exposure, id.outcome) %>%
+    summarise(
+        nsnp_orig = nsnp[1],
+        noutliers = nsnp[1] - nsnp[2],
+        fdr_orig = pval[1] < thresh,
+        fdr_out = pval[2] < thresh
+    ) %>% filter(fdr_orig)
+
+sum(res_out_sum$fdr_orig & res_out_sum$fdr_out)
+```
+
+Reverse MR summary
+
+```{r}
+tribble(
+    ~what, ~n,
+    "Number of PRS results", nrow(prs_pairs),
+    "Number of reverse MR assocs", nrow(rres),
+    "Reverse MR FDR < 0.05", sum(rres$fdr < 0.05),
+    "Reverse MR FDR < 0.05 and no heterogeneity", nrow(resnohet),
+    "Reverse MR FDR < 0.05 after outlier removal", sum(res_out_sum$fdr_orig & res_out_sum$fdr_out),
+    "Mean number of instruments", mean(res_out_sum$nsnp_orig),
+    "Mean number of outliers", mean(res_out_sum$noutliers)
+)
+
+```
+
+
+```{r}
+revmrpairs <- subset(res_out_sum, fdr_orig & fdr_out)
+dim(revmrpairs)
+rmp <- subset(res_out, what=="Outliers removed" & paste(id.exposure, id.outcome) %in% paste(revmrpairs$id.exposure, revmrpairs$id.outcome))
+head(rmp)
+
+temp <- inner_join(prs_pairs, rres, by=c("prot"="outcome", "opengwasid"="id.exposure"))
+temp$repl <- paste(temp$prot, temp$opengwasid) %in% paste(rmp$id.outcome, rmp$id.exposure)
+head(temp)
+table(temp$repl)
+ggplot(temp, aes(x=beta, y=b)) +
+geom_point(aes(colour=repl)) +
+geom_smooth(method="lm", aes(colour=repl)) +
+labs(x="PRS estimate", y="MR estimate", colour="MR FDR < 0.05")
+ggsave(here("images", "mr_prs_comparison.pdf"))
+```
+
+```{r}
+rownames(rmp) <- NULL
+write.csv(rmp, file=here("results", "resnohet.csv"))
+```
+
+Other Summary
+
+```{r}
+cis_prs <- subset(res_cis, paste(id.exposure, id.outcome) %in% paste(prs_pairs$prot, prs_pairs$opengwasid))
+cis_prs$fdr <- p.adjust(cis_prs$pval, "fdr")
+a <- subset(cis_prs, fdr < 0.05) %>% mutate(code = paste(id.exposure, id.outcome))
+res_cis$fdr <- p.adjust(res_cis$pval, "fdr")
+b <- subset(res_cis, fdr < 0.05) %>% mutate(code = paste(id.exposure, id.outcome))
+sum(a$code %in% b$code)
+
+colocres <- readRDS(here("data", "cis_coloc_res.rds"))
+res_cis$fdr <- p.adjust(res_cis$pval, "fdr")
+tribble(
+    ~what, ~n,
+    "Forward MR tests", nrow(res),
+    "Forward MR tests using cis-only instruments", nrow(res_cis),
+    "Forward MR tests using trans-only instruments", nrow(res_trans),
+    "Cis MR with FDR < 0.05", sum(res_cis$fdr < 0.05),
+    "Total tested - reverse MR filter", nrow(cis_prs),
+    "Total discovered - reverse MR filter", sum(cis_prs$fdr < 0.05),
+    "Discovery overlap", sum(a$code %in% b$code),
+    "Cis Colocalisation with H4 > 0.8", sum(colocres$PP.H4.abf > 0.8),
+)
+```
+
+How many prs_pairs per trait
+
+```{r}
+table(prs_pairs$opengwasid) %>% as.data.frame() %>% arrange(Freq) %>% left_join(., traits %>% select(code, opengwasid), by=c("Var1"="opengwasid"))
+```
+
+Examine CKD - it has a lot of assocs
+
+```{r}
+ckd <- subset(dat, exposure == "CKD")
+ckd %>% group_by(id.outcome) %>%
+    arrange(pval.outcome) %>%
+    slice_head(n=1) %>%
+    {table(.$SNP)}
+```
+
+Most of the time the best SNP is a single SNP. Heterogeneity?
+
+```{r}
+qjs %>% filter(exposure == "CKD") %>%
+    group_by(SNP) %>%
+    summarise(mean(qj))
+```
+
+Only 4 exposure SNPs.. 
+
+```{r}
+subset(ckd, outcome == outcome[1]) %>% select(SNP, pval.exposure)
+```
+
+Plot an example
+
+```{r}
+ckd_top <- subset(ckd, outcome %in% subset(prs_pairs, opengwasid == id.exposure[1])$prot[1:28])
+
+ggplot(ckd_top, aes(x=beta.exposure, y=beta.outcome)) +
+geom_point() +
+facet_wrap(~id.outcome) +
+geom_smooth(method="lm")
+```
+
+The pattern of association is identical across all these proteins. I don't know what to make of this. The 4 SNPs for CKD have a consistent effect on loads of blood protein levels?
+
+Look at lung cancer too?
+
+```{r}
+sclc <- subset(dat, id.exposure == "ieu-a-989" & id.outcome %in% subset(res_out_sum, id.exposure=="ieu-a-989")$id.outcome)
+
+sclc_top <- subset(dat, id.exposure == "ieu-a-989" & id.outcome %in% subset(prs_pairs, opengwasid=="ieu-a-989")$prot[1:28])
+
+ggplot(sclc, aes(x=beta.exposure, y=beta.outcome)) +
+geom_point() +
+facet_wrap(~id.outcome) +
+geom_smooth(method="lm")
+```
+
+Plot MR against PRS
+
+```{r}
+qjs %>% filter(id.exposure=="ieu-a-989") %>%
+    group_by(SNP) %>%
+    summarise(mean(qj))
+```
+
+```{r}
+res_out_sum %>%
+    group_by(id.exposure) %>%
+    summarise(fdr_out=sum(fdr_out), fdr_orig=sum(fdr_orig)) %>%
+    left_join(., traits %>% select(id.exposure=opengwasid, code)) %>% 
+    left_join(., prs_pairs %>% group_by(id.exposure=opengwasid) %>% summarise(nprs=n())) %>%
+    arrange(desc(nprs)) %>%
+    select(code, id.exposure, n_prs=nprs, n_mr=fdr_orig, n_mr_out=fdr_out)
+```
+
+Triglycerides
+
+```{r}
+trig_top <- subset(dat, id.exposure == "ieu-a-302" & id.outcome %in% unique(subset(prs_pairs, opengwasid=="ieu-a-302"))$prot[1:56])
+
+ggplot(trig_top, aes(x=beta.exposure, y=beta.outcome)) +
+geom_point() +
+facet_wrap(~id.outcome) +
+geom_smooth(method="lm")
+```
+
+T2D
+
+```{r}
+t2d_top <- subset(dat, id.exposure == "ebi-a-GCST005047" & id.outcome %in% unique(subset(prs_pairs, opengwasid=="ebi-a-GCST005047"))$prot[1:56])
+
+ggplot(t2d_top, aes(x=beta.exposure, y=beta.outcome)) +
+geom_point() +
+facet_wrap(~id.outcome) +
+geom_smooth(method="lm")
+```
+
+MS
+
+```{r}
+ms_top <- subset(dat, id.exposure == "ieu-a-1024" & id.outcome %in% unique(subset(prs_pairs, opengwasid=="ieu-a-1024"))$prot[1:56])
+
+ggplot(ms_top, aes(x=beta.exposure, y=beta.outcome)) +
+geom_point() +
+facet_wrap(~id.outcome, scale="free_y") +
+geom_smooth(method="lm") +
+theme(axis.text.x=element_blank(), axis.text.y=element_blank())
+```
+
+
+```{r}
+plot_rev_mr <- function(id, nplot) {
+    ms_top <- subset(dat, id.exposure == id & id.outcome %in% unique(subset(prs_pairs, opengwasid==id))$prot[1:nplot])
+    ind <- sign(ms_top$beta.exposure) == -1
+    ms_top$beta.exposure <- abs(ms_top$beta.exposure)
+    ms_top$beta.outcome[ind] <- ms_top$beta.outcome[ind] * -1
+    ms_top <- subset(ms_top, ! (chr.outcome == 6 & pos.outcome > 28000000 & pos.outcome < 33000000))
+
+    ggplot(ms_top, aes(x=beta.exposure, y=beta.outcome)) +
+    geom_point() +
+    facet_wrap(~id.outcome, scale="free_y") +
+    geom_smooth(method="lm") +
+    theme(axis.text.x=element_blank(), axis.text.y=element_blank())
+}
+
+plot_rev_mr("ebi-a-GCST003374", 56)
+```
+
+MS
+
+```{r}
+plot_rev_mr("ieu-a-1024", 56)
+```
+
+```{r}
+subset(dat, exposure == "MS") %>% filter(outcome == outcome[1])
+```
