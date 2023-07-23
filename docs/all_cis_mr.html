@@ -141,7 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>11 examples of bi-directional effects</li>
 <li>todo: coloc for cis-MR</li>
 </ul>
-<div class="cell">
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-1_8e340af49e725eb1f09c885ad93d9724">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
@@ -209,33 +209,34 @@ introduction to the package please type: help(metafor)</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-2_a8afd0dae186c5b58f488c9791e6a991">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>traits <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"Supplementary_Table5.xlsx"</span>))</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>gi <span class="ot">&lt;-</span> ieugwasr<span class="sc">::</span><span class="fu">gwasinfo</span>(traits<span class="sc">$</span>opengwasid)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"all.rdata"</span>))</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>coloc_res <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"cis_coloc_res.rds"</span>))</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>coloc_res <span class="ot">&lt;-</span> coloc_res <span class="sc">%&gt;%</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(id.outcome)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., gi <span class="sc">%&gt;%</span> <span class="fu">select</span>(trait, <span class="at">id.outcome =</span> id), <span class="at">by=</span><span class="fu">c</span>(<span class="st">"outcome"</span><span class="ot">=</span><span class="st">"trait"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(outcome)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">outcome=</span>code, <span class="at">id.outcome=</span>opengwasid), <span class="at">by=</span><span class="st">"id.outcome"</span>)</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> res <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(outcome)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">outcome=</span>code, <span class="at">id.outcome=</span>opengwasid), <span class="at">by=</span><span class="st">"id.outcome"</span>)</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>res_cis <span class="ot">&lt;-</span> res_cis <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(outcome)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">outcome=</span>code, <span class="at">id.outcome=</span>opengwasid), <span class="at">by=</span><span class="st">"id.outcome"</span>)</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>res_trans <span class="ot">&lt;-</span> res_trans <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(outcome)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">outcome=</span>code, <span class="at">id.outcome=</span>opengwasid), <span class="at">by=</span><span class="st">"id.outcome"</span>)</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>res_trans_sf <span class="ot">&lt;-</span> res_trans_sf <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(outcome)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">outcome=</span>code, <span class="at">id.outcome=</span>opengwasid), <span class="at">by=</span><span class="st">"id.outcome"</span>)</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>res_trans_sf_relaxed <span class="ot">&lt;-</span> res_trans_sf_relaxed <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(outcome)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">outcome=</span>code, <span class="at">id.outcome=</span>opengwasid), <span class="at">by=</span><span class="st">"id.outcome"</span>)</span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(coloc_res<span class="sc">$</span>outcome <span class="sc">%in%</span> traits<span class="sc">$</span>code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># gi &lt;- ieugwasr::gwasinfo(traits$opengwasid)</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>gi <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"gi.rds"</span>))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"all.rdata"</span>))</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>coloc_res <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"cis_coloc_res.rds"</span>))</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>coloc_res <span class="ot">&lt;-</span> coloc_res <span class="sc">%&gt;%</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(id.outcome)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., gi <span class="sc">%&gt;%</span> <span class="fu">select</span>(trait, <span class="at">id.outcome =</span> id), <span class="at">by=</span><span class="fu">c</span>(<span class="st">"outcome"</span><span class="ot">=</span><span class="st">"trait"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(outcome)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">outcome=</span>code, <span class="at">id.outcome=</span>opengwasid), <span class="at">by=</span><span class="st">"id.outcome"</span>)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> res <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(outcome)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">outcome=</span>code, <span class="at">id.outcome=</span>opengwasid), <span class="at">by=</span><span class="st">"id.outcome"</span>)</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>res_cis <span class="ot">&lt;-</span> res_cis <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(outcome)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">outcome=</span>code, <span class="at">id.outcome=</span>opengwasid), <span class="at">by=</span><span class="st">"id.outcome"</span>)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>res_trans <span class="ot">&lt;-</span> res_trans <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(outcome)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">outcome=</span>code, <span class="at">id.outcome=</span>opengwasid), <span class="at">by=</span><span class="st">"id.outcome"</span>)</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>res_trans_sf <span class="ot">&lt;-</span> res_trans_sf <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(outcome)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">outcome=</span>code, <span class="at">id.outcome=</span>opengwasid), <span class="at">by=</span><span class="st">"id.outcome"</span>)</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>res_trans_sf_relaxed <span class="ot">&lt;-</span> res_trans_sf_relaxed <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(outcome)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">outcome=</span>code, <span class="at">id.outcome=</span>opengwasid), <span class="at">by=</span><span class="st">"id.outcome"</span>)</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(coloc_res<span class="sc">$</span>outcome <span class="sc">%in%</span> traits<span class="sc">$</span>code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 TRUE 
@@ -264,7 +265,7 @@ TRUE
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>res_cis_coloc <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_cis, <span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> <span class="fu">paste</span>(coloc_res_s<span class="sc">$</span>id.exposure, coloc_res_s<span class="sc">$</span>id.outcome))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Show MR results that have IVW / Wald ratio P val bonferroni corrected significant</p>
-<div class="cell">
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-3_c917e3401a73537da0ad3bc504c27c7a">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(method) <span class="sc">%&gt;%</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>(), <span class="at">nsig =</span> <span class="fu">sum</span>(fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm=</span>T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -275,7 +276,7 @@ TRUE
 2 Wald ratio                 4187   152</code></pre>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-4_016781b8ea4b732f5a1adb102066e8da">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>ressig <span class="ot">&lt;-</span> <span class="fu">subset</span>(res, fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(ressig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -283,7 +284,7 @@ TRUE
 </div>
 </div>
 <p>Compare forward MR against reverse PRS results</p>
-<div class="cell">
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-5_397c34759656e588225a7abc582698a8">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="fu">subset</span>(res, method <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Inverse variance weighted"</span>, <span class="st">"Wald ratio"</span>)), prs_pairs, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id.exposure"</span><span class="ot">=</span><span class="st">"prot"</span>, <span class="st">"id.outcome"</span><span class="ot">=</span><span class="st">"opengwasid"</span>))</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>temp<span class="sc">$</span>mr_sig <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(temp<span class="sc">$</span>pval.x, <span class="st">"fdr"</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(temp, <span class="fu">aes</span>(beta, b)) <span class="sc">+</span></span>
@@ -301,7 +302,7 @@ TRUE
 </div>
 </div>
 <p>Cis vs trans</p>
-<div class="cell">
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-6_0a7d15bd09c75c6a9ff844626b06908a">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">p.adjust</span>(res_cis_coloc<span class="sc">$</span>p, <span class="st">"fdr"</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -349,7 +350,7 @@ F-statistic: 80.17 on 1 and 82 DF,  p-value: 8.902e-14</code></pre>
 </div>
 </div>
 <p>Are cis and trans MR results occurring more than expected by chance? For cis and trans MRs across protein pairs identify how many have p-values &lt; alpha, then scramble cis and trans protein pairs 10000 times and determine if the observed number is larger than the distribution of null counts.</p>
-<div class="cell">
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-7_9af3e7b0307bdfcd02ca32d98bebf3e4">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>nperm <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>perm_res <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.01</span>, <span class="fl">0.001</span>, <span class="fl">0.05</span><span class="sc">/</span><span class="fu">nrow</span>(temp)), <span class="cf">function</span>(thresh){</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    temp <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(res_cis, res_trans, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id.exposure"</span>, <span class="st">"id.outcome"</span>))</span>
@@ -365,15 +366,15 @@ F-statistic: 80.17 on 1 and 82 DF,  p-value: 8.902e-14</code></pre>
 <pre><code># A tibble: 4 × 5
      thresh  nsig maxperm medperm p_perm
       &lt;dbl&gt; &lt;int&gt;   &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;
-1 0.05        256     259     209 0.0002
-2 0.01         60      61      37 0.0001
-3 0.001        17      18       6 0.0001
-4 0.0000145     4       7       1 0.0091</code></pre>
+1 0.05        256     262     209 0.0003
+2 0.01         60      62      37 0.0001
+3 0.001        17      18       6 0.0002
+4 0.0000145     4       8       1 0.0121</code></pre>
 </div>
 </div>
 <p>Cis and trans MR results co-occur more than expected by chance.</p>
 <p>Do effect sizes correspond?</p>
-<div class="cell">
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-8_f6249b05aa6c76c9dad85d1f5afa1b4b">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(res_cis, res_trans, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id.exposure"</span>, <span class="st">"id.outcome"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(pval.x <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x=</span>b.x, <span class="at">y=</span>b.y)) <span class="sc">+</span></span>
@@ -388,7 +389,7 @@ F-statistic: 80.17 on 1 and 82 DF,  p-value: 8.902e-14</code></pre>
 </div>
 </div>
 <p>No concordance between cis and trans - just like in GoDMC! Restrict to cis coloc</p>
-<div class="cell">
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-9_af4a5d8deb977e1cdb7a0e9823fa609c">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(res_cis_coloc, res_trans, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id.exposure"</span>, <span class="st">"id.outcome"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(pval.x <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x=</span>b.x, <span class="at">y=</span>b.y)) <span class="sc">+</span></span>
@@ -402,38 +403,112 @@ F-statistic: 80.17 on 1 and 82 DF,  p-value: 8.902e-14</code></pre>
 <p><img src="all_cis_mr_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-10_194d02386285accfe65c8f81e3107248">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(res_cis_coloc, res_trans, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id.exposure"</span>, <span class="st">"id.outcome"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(pval.x <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    {<span class="fu">summary</span>(<span class="fu">lm</span>(b.y <span class="sc">~</span> b.x, .))}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = b.y ~ b.x, data = .)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.2571 -0.3721 -0.2231  0.0918  5.3197 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)  0.22073    0.10896   2.026    0.046 *
+b.x         -0.09288    0.12967  -0.716    0.476  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.9986 on 82 degrees of freedom
+Multiple R-squared:  0.006218,  Adjusted R-squared:  -0.005902 
+F-statistic: 0.513 on 1 and 82 DF,  p-value: 0.4759</code></pre>
+</div>
+</div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-11_8e2cdfd3391546d608d0508d3cad8289">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(res_cis, res_trans, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id.exposure"</span>, <span class="st">"id.outcome"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>    {<span class="fu">summary</span>(<span class="fu">lm</span>(b.y <span class="sc">~</span> b.x, .))}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = b.y ~ b.x, data = .)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-13.4524  -0.0946  -0.0091   0.0633  10.2457 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)  0.008697   0.002746   3.167  0.00154 **
+b.x         -0.002631   0.015915  -0.165  0.86871   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4036 on 21606 degrees of freedom
+Multiple R-squared:  1.265e-06, Adjusted R-squared:  -4.502e-05 
+F-statistic: 0.02732 on 1 and 21606 DF,  p-value: 0.8687</code></pre>
+</div>
+</div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-12_c7f893527c1cf1408ac56aecfae3a580">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(res_cis, res_trans, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id.exposure"</span>, <span class="st">"id.outcome"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(pval.x <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>    {<span class="fu">summary</span>(<span class="fu">lm</span>(b.y <span class="sc">~</span> b.x, .))}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = b.y ~ b.x, data = .)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.6511 -0.1398 -0.0517  0.0389  6.8466 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.052513   0.012319   4.263 2.11e-05 ***
+b.x         -0.001852   0.029765  -0.062     0.95    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.561 on 2077 degrees of freedom
+Multiple R-squared:  1.863e-06, Adjusted R-squared:  -0.0004796 
+F-statistic: 0.00387 on 1 and 2077 DF,  p-value: 0.9504</code></pre>
+</div>
+</div>
 <section id="forward-vs-reverse-mr" class="level2">
 <h2 class="anchored" data-anchor-id="forward-vs-reverse-mr">Forward vs reverse MR</h2>
 <p>Do forward and reverse MR results agree?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(res_cis <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"cis"</span>), res_trans <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"trans"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pval)) <span class="sc">%&gt;%</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">inner_join</span>(., prs_pairs, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id.exposure"</span><span class="ot">=</span><span class="st">"prot"</span>, <span class="st">"id.outcome"</span><span class="ot">=</span><span class="st">"opengwasid"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mr_sig =</span> <span class="fu">p.adjust</span>(pval.x, <span class="st">"fdr"</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(beta, b)) <span class="sc">+</span></span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>, <span class="at">linetype=</span><span class="st">"dotted"</span>) <span class="sc">+</span></span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">0</span>, <span class="at">linetype=</span><span class="st">"dotted"</span>) <span class="sc">+</span></span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>mr_sig)) <span class="sc">+</span></span>
-<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"PRS disease -&gt; protein"</span>, <span class="at">y=</span><span class="st">"MR protein -&gt; disease"</span>) <span class="sc">+</span></span>
-<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_grid</span>(mr_sig <span class="sc">~</span> what)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-13_3822fb467074ed00f997107101e13b1f">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(res_cis <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"cis"</span>), res_trans <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"trans"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pval)) <span class="sc">%&gt;%</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">inner_join</span>(., prs_pairs, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id.exposure"</span><span class="ot">=</span><span class="st">"prot"</span>, <span class="st">"id.outcome"</span><span class="ot">=</span><span class="st">"opengwasid"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mr_sig =</span> <span class="fu">p.adjust</span>(pval.x, <span class="st">"fdr"</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(beta, b)) <span class="sc">+</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>, <span class="at">linetype=</span><span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">0</span>, <span class="at">linetype=</span><span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>mr_sig)) <span class="sc">+</span></span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"PRS disease -&gt; protein"</span>, <span class="at">y=</span><span class="st">"MR protein -&gt; disease"</span>) <span class="sc">+</span></span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_grid</span>(mr_sig <span class="sc">~</span> what)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="all_cis_mr_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="all_cis_mr_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Use steiger filtering. Note only trans instruments had any evidence of being reverse causal.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>rsq.exposure <span class="sc">&gt;</span> dat<span class="sc">$</span>rsq.outcome, dat<span class="sc">$</span>cistrans.exposure)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-14_cf8964f4b6d4d196efe429ff96528c86">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>rsq.exposure <span class="sc">&gt;</span> dat<span class="sc">$</span>rsq.outcome, dat<span class="sc">$</span>cistrans.exposure)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       
            cis  trans
   FALSE      0    590
   TRUE   23609 188059</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>steiger_pval <span class="sc">&lt;</span> <span class="fl">0.05</span>, dat<span class="sc">$</span>cistrans.exposure)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>steiger_pval <span class="sc">&lt;</span> <span class="fl">0.05</span>, dat<span class="sc">$</span>cistrans.exposure)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       
            cis  trans
@@ -442,50 +517,50 @@ F-statistic: 80.17 on 1 and 82 DF,  p-value: 8.902e-14</code></pre>
 </div>
 </div>
 <p>All reverse instruments are trans!</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    res_cis <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"cis"</span>), </span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>    res_cis_coloc <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"cis+coloc"</span>), </span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>    res_trans <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"trans"</span>), </span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>    res_trans_sf <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"trans sf"</span>),</span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>    res_trans_sf_relaxed <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"trans sf strict"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pval)) <span class="sc">%&gt;%</span></span>
-<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">inner_join</span>(., prs_pairs, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id.exposure"</span><span class="ot">=</span><span class="st">"prot"</span>, <span class="st">"id.outcome"</span><span class="ot">=</span><span class="st">"opengwasid"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mr_sig =</span> <span class="fu">p.adjust</span>(pval.x, <span class="st">"fdr"</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(beta, b)) <span class="sc">+</span></span>
-<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>, <span class="at">linetype=</span><span class="st">"dotted"</span>) <span class="sc">+</span></span>
-<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">0</span>, <span class="at">linetype=</span><span class="st">"dotted"</span>) <span class="sc">+</span></span>
-<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>mr_sig)) <span class="sc">+</span></span>
-<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"PRS disease -&gt; protein"</span>, <span class="at">y=</span><span class="st">"MR protein -&gt; disease"</span>) <span class="sc">+</span></span>
-<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_grid</span>(mr_sig <span class="sc">~</span> what)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-15_072ba1f29ff8599d778145236cb790ec">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>    res_cis <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"cis"</span>), </span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>    res_cis_coloc <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"cis+coloc"</span>), </span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>    res_trans <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"trans"</span>), </span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>    res_trans_sf <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"trans sf"</span>),</span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>    res_trans_sf_relaxed <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"trans sf strict"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pval)) <span class="sc">%&gt;%</span></span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">inner_join</span>(., prs_pairs, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id.exposure"</span><span class="ot">=</span><span class="st">"prot"</span>, <span class="st">"id.outcome"</span><span class="ot">=</span><span class="st">"opengwasid"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mr_sig =</span> <span class="fu">p.adjust</span>(pval.x, <span class="st">"fdr"</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(beta, b)) <span class="sc">+</span></span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>, <span class="at">linetype=</span><span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">0</span>, <span class="at">linetype=</span><span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>mr_sig)) <span class="sc">+</span></span>
+<span id="cb63-14"><a href="#cb63-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb63-15"><a href="#cb63-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"PRS disease -&gt; protein"</span>, <span class="at">y=</span><span class="st">"MR protein -&gt; disease"</span>) <span class="sc">+</span></span>
+<span id="cb63-16"><a href="#cb63-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_grid</span>(mr_sig <span class="sc">~</span> what)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="all_cis_mr_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="all_cis_mr_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 <section id="prs-discovers-forward-mr" class="level2">
 <h2 class="anchored" data-anchor-id="prs-discovers-forward-mr">PRS discovers forward MR?</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>cis_prs <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_cis, <span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> <span class="fu">paste</span>(prs_pairs<span class="sc">$</span>prot, prs_pairs<span class="sc">$</span>opengwasid))</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>cis_prs<span class="sc">$</span>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(cis_prs<span class="sc">$</span>pval, <span class="st">"fdr"</span>)</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">subset</span>(cis_prs, fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">code =</span> <span class="fu">paste</span>(id.exposure, id.outcome))</span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>res_cis<span class="sc">$</span>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(res_cis<span class="sc">$</span>pval, <span class="st">"fdr"</span>)</span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_cis, fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">code =</span> <span class="fu">paste</span>(id.exposure, id.outcome))</span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(a<span class="sc">$</span>code <span class="sc">%in%</span> b<span class="sc">$</span>code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-16_c16956cb004dc66112c1bb3b6e5713dd">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>cis_prs <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_cis, <span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> <span class="fu">paste</span>(prs_pairs<span class="sc">$</span>prot, prs_pairs<span class="sc">$</span>opengwasid))</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>cis_prs<span class="sc">$</span>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(cis_prs<span class="sc">$</span>pval, <span class="st">"fdr"</span>)</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">subset</span>(cis_prs, fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">code =</span> <span class="fu">paste</span>(id.exposure, id.outcome))</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>res_cis<span class="sc">$</span>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(res_cis<span class="sc">$</span>pval, <span class="st">"fdr"</span>)</span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_cis, fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">code =</span> <span class="fu">paste</span>(id.exposure, id.outcome))</span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(a<span class="sc">$</span>code <span class="sc">%in%</span> b<span class="sc">$</span>code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 77</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>what, <span class="sc">~</span>count,</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Total tested - forward MR"</span>, <span class="fu">nrow</span>(res_cis),</span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Total discovered - forward MR"</span>, <span class="fu">sum</span>(res_cis<span class="sc">$</span>fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>),</span>
-<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Total tested - reverse MR filter"</span>, <span class="fu">nrow</span>(cis_prs),</span>
-<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Total discovered - reverse MR filter"</span>, <span class="fu">sum</span>(cis_prs<span class="sc">$</span>fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>),</span>
-<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Discovery overlap"</span>, <span class="fu">sum</span>(a<span class="sc">$</span>code <span class="sc">%in%</span> b<span class="sc">$</span>code)</span>
-<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(<span class="sc">~</span>what, <span class="sc">~</span>count,</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Total tested - forward MR"</span>, <span class="fu">nrow</span>(res_cis),</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Total discovered - forward MR"</span>, <span class="fu">sum</span>(res_cis<span class="sc">$</span>fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>),</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Total tested - reverse MR filter"</span>, <span class="fu">nrow</span>(cis_prs),</span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Total discovered - reverse MR filter"</span>, <span class="fu">sum</span>(cis_prs<span class="sc">$</span>fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>),</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Discovery overlap"</span>, <span class="fu">sum</span>(a<span class="sc">$</span>code <span class="sc">%in%</span> b<span class="sc">$</span>code)</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
   what                                 count
@@ -502,19 +577,19 @@ F-statistic: 80.17 on 1 and 82 DF,  p-value: 8.902e-14</code></pre>
 <section id="bidirectional-effects" class="level2">
 <h2 class="anchored" data-anchor-id="bidirectional-effects">Bidirectional effects?</h2>
 <p>Using cis for forward and any with !steiger for reverse</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>rev_ids <span class="ot">&lt;-</span> <span class="fu">paste</span>(dat<span class="sc">$</span>id.exposure[<span class="sc">!</span>dat<span class="sc">$</span>steiger_dir], dat<span class="sc">$</span>id.outcome[<span class="sc">!</span>dat<span class="sc">$</span>steiger_dir])</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>cis_mr_ids <span class="ot">&lt;-</span> <span class="fu">paste</span>(res_cis_coloc<span class="sc">$</span>id.exposure, res_cis_coloc<span class="sc">$</span>id.outcome)</span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(rev_ids <span class="sc">%in%</span> cis_mr_ids)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-17_3f737f951867dc8304d3a6dc128c9f09">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>rev_ids <span class="ot">&lt;-</span> <span class="fu">paste</span>(dat<span class="sc">$</span>id.exposure[<span class="sc">!</span>dat<span class="sc">$</span>steiger_dir], dat<span class="sc">$</span>id.outcome[<span class="sc">!</span>dat<span class="sc">$</span>steiger_dir])</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>cis_mr_ids <span class="ot">&lt;-</span> <span class="fu">paste</span>(res_cis_coloc<span class="sc">$</span>id.exposure, res_cis_coloc<span class="sc">$</span>id.outcome)</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(rev_ids <span class="sc">%in%</span> cis_mr_ids)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 FALSE  TRUE 
   583     7 </code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>bid <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_cis_coloc, cis_mr_ids <span class="sc">%in%</span> rev_ids)</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>bid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-18_0098ea1bda28fa3d92ea73a830bc80e5">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>bid <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_cis_coloc, cis_mr_ids <span class="sc">%in%</span> rev_ids)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>bid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      id.exposure id.outcome exposure     method nsnp           b          se
 12126       INHBC  ieu-a-302    INHBC Wald ratio    1  0.04275044 0.005954526
@@ -530,19 +605,19 @@ FALSE  TRUE
 17014  2.071428e-35     Triglycerides</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>rev_ids_prs <span class="ot">&lt;-</span> <span class="fu">paste</span>(prs_pairs<span class="sc">$</span>prot, prs_pairs<span class="sc">$</span>opengwasid)</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>cis_mr_ids <span class="ot">&lt;-</span> <span class="fu">paste</span>(res_cis_coloc<span class="sc">$</span>id.exposure, res_cis_coloc<span class="sc">$</span>id.outcome)</span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(rev_ids_prs <span class="sc">%in%</span> cis_mr_ids)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-19_402cb6eba0db5357d4de013c2e28978e">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>rev_ids_prs <span class="ot">&lt;-</span> <span class="fu">paste</span>(prs_pairs<span class="sc">$</span>prot, prs_pairs<span class="sc">$</span>opengwasid)</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>cis_mr_ids <span class="ot">&lt;-</span> <span class="fu">paste</span>(res_cis_coloc<span class="sc">$</span>id.exposure, res_cis_coloc<span class="sc">$</span>id.outcome)</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(rev_ids_prs <span class="sc">%in%</span> cis_mr_ids)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 FALSE  TRUE 
  3621    29 </code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>bidprs <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_cis_coloc, cis_mr_ids <span class="sc">%in%</span> rev_ids_prs)</span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>bidprs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-20_b25fba1ed95c0b1f516e45d8e0f2ef5a">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>bidprs <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_cis_coloc, cis_mr_ids <span class="sc">%in%</span> rev_ids_prs)</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>bidprs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      id.exposure       id.outcome exposure     method nsnp           b
 1965       BTN2A1       ieu-a-1126   BTN2A1 Wald ratio    1 -0.15303021
@@ -607,10 +682,10 @@ FALSE  TRUE
 </div>
 </div>
 <p>Some of these PRS results could just be driven by strong cis signals e.g.&nbsp;PCSK9.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>bidprs<span class="sc">$</span>ids <span class="ot">&lt;-</span> <span class="fu">paste</span>(bidprs<span class="sc">$</span>id.exposure, bidprs<span class="sc">$</span>id.outcome)</span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>bid_trans <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_trans, <span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> bidprs<span class="sc">$</span>ids) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fdr =</span> <span class="fu">p.adjust</span>(pval, <span class="st">"fdr"</span>))</span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>bid_trans <span class="sc">%&gt;%</span> <span class="fu">subset</span>(fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-21_4b289e55c729d53dd8187493616fea2e">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>bidprs<span class="sc">$</span>ids <span class="ot">&lt;-</span> <span class="fu">paste</span>(bidprs<span class="sc">$</span>id.exposure, bidprs<span class="sc">$</span>id.outcome)</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>bid_trans <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_trans, <span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> bidprs<span class="sc">$</span>ids) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fdr =</span> <span class="fu">p.adjust</span>(pval, <span class="st">"fdr"</span>))</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>bid_trans <span class="sc">%&gt;%</span> <span class="fu">subset</span>(fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      id.exposure id.outcome exposure                    method nsnp          b
 13568        FGF5   ieu-b-38     FGF5                Wald ratio    1 -2.1505761
@@ -630,10 +705,10 @@ FALSE  TRUE
 </section>
 <section id="perform-instrument-heterogeneity-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="perform-instrument-heterogeneity-analysis">Perform instrument heterogeneity analysis</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>het2 <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">subset</span>(., <span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> <span class="fu">paste</span>(ressig<span class="sc">$</span>id.exposure, ressig<span class="sc">$</span>id.outcome)) <span class="sc">%&gt;%</span></span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mr_heterogeneity</span>(<span class="at">method_list=</span><span class="st">"mr_ivw"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-22_ace18a4d325db32076fdfed55a7ec482">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>het2 <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">subset</span>(., <span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> <span class="fu">paste</span>(ressig<span class="sc">$</span>id.exposure, ressig<span class="sc">$</span>id.outcome)) <span class="sc">%&gt;%</span></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mr_heterogeneity</span>(<span class="at">method_list=</span><span class="st">"mr_ivw"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Not enough SNPs available for Heterogeneity analysis of 'ACOX1' on 'ieu-b-38'</code></pre>
 </div>
@@ -1090,7 +1165,7 @@ FALSE  TRUE
 <div class="cell-output cell-output-stderr">
 <pre><code>Not enough SNPs available for Heterogeneity analysis of 'XG' on 'ebi-a-GCST005047'</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb226"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb226-1"><a href="#cb226-1" aria-hidden="true" tabindex="-1"></a>het2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb232"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb232-1"><a href="#cb232-1" aria-hidden="true" tabindex="-1"></a>het2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    id.exposure       id.outcome
 1          ACY1         ieu-b-39
@@ -1779,10 +1854,10 @@ FALSE  TRUE
 </div>
 </div>
 <p>For multi-instrument exposures do the MR using other methods, then test if the different methods are heterogeneous</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb228"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb228-1"><a href="#cb228-1" aria-hidden="true" tabindex="-1"></a>res2 <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
-<span id="cb228-2"><a href="#cb228-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">subset</span>(., <span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> <span class="fu">paste</span>(ressig<span class="sc">$</span>id.exposure, ressig<span class="sc">$</span>id.outcome)) <span class="sc">%&gt;%</span></span>
-<span id="cb228-3"><a href="#cb228-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mr</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-23_61e64c9e010721cfabadfa6127798850">
+<div class="sourceCode cell-code" id="cb234"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb234-1"><a href="#cb234-1" aria-hidden="true" tabindex="-1"></a>res2 <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb234-2"><a href="#cb234-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">subset</span>(., <span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> <span class="fu">paste</span>(ressig<span class="sc">$</span>id.exposure, ressig<span class="sc">$</span>id.outcome)) <span class="sc">%&gt;%</span></span>
+<span id="cb234-3"><a href="#cb234-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mr</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Analysing 'ACOX1' on 'ieu-b-38'</code></pre>
 </div>
@@ -2920,134 +2995,134 @@ FALSE  TRUE
 <div class="cell-output cell-output-stderr">
 <pre><code>Analysing 'XG' on 'ebi-a-GCST005047'</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb608"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb608-1"><a href="#cb608-1" aria-hidden="true" tabindex="-1"></a>fn <span class="ot">&lt;-</span> <span class="cf">function</span>(b, se)</span>
-<span id="cb608-2"><a href="#cb608-2" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb608-3"><a href="#cb608-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rma.uni</span>(b, <span class="at">sei=</span>se, <span class="at">method=</span><span class="st">"FE"</span>)<span class="sc">$</span>QEp</span>
-<span id="cb608-4"><a href="#cb608-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb608-5"><a href="#cb608-5" aria-hidden="true" tabindex="-1"></a>het_method <span class="ot">&lt;-</span> res2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(nsnp <span class="sc">&gt;=</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(id.exposure, id.outcome) <span class="sc">%&gt;%</span></span>
-<span id="cb608-6"><a href="#cb608-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">do</span>({</span>
-<span id="cb608-7"><a href="#cb608-7" aria-hidden="true" tabindex="-1"></a>        x <span class="ot">&lt;-</span> .</span>
-<span id="cb608-8"><a href="#cb608-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tibble</span>(<span class="at">method_Q_pval=</span><span class="fu">fn</span>(x<span class="sc">$</span>b, x<span class="sc">$</span>se))</span>
-<span id="cb608-9"><a href="#cb608-9" aria-hidden="true" tabindex="-1"></a>    })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb614"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb614-1"><a href="#cb614-1" aria-hidden="true" tabindex="-1"></a>fn <span class="ot">&lt;-</span> <span class="cf">function</span>(b, se)</span>
+<span id="cb614-2"><a href="#cb614-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb614-3"><a href="#cb614-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rma.uni</span>(b, <span class="at">sei=</span>se, <span class="at">method=</span><span class="st">"FE"</span>)<span class="sc">$</span>QEp</span>
+<span id="cb614-4"><a href="#cb614-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb614-5"><a href="#cb614-5" aria-hidden="true" tabindex="-1"></a>het_method <span class="ot">&lt;-</span> res2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(nsnp <span class="sc">&gt;=</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(id.exposure, id.outcome) <span class="sc">%&gt;%</span></span>
+<span id="cb614-6"><a href="#cb614-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">do</span>({</span>
+<span id="cb614-7"><a href="#cb614-7" aria-hidden="true" tabindex="-1"></a>        x <span class="ot">&lt;-</span> .</span>
+<span id="cb614-8"><a href="#cb614-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tibble</span>(<span class="at">method_Q_pval=</span><span class="fu">fn</span>(x<span class="sc">$</span>b, x<span class="sc">$</span>se))</span>
+<span id="cb614-9"><a href="#cb614-9" aria-hidden="true" tabindex="-1"></a>    })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Plot comparison across different methods</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb609"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb609-1"><a href="#cb609-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> res <span class="sc">%&gt;%</span> </span>
-<span id="cb609-2"><a href="#cb609-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(nsnp <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb609-3"><a href="#cb609-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">p.adjust</span>(pval, <span class="st">"fdr"</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb609-4"><a href="#cb609-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">code =</span> <span class="fu">paste</span>(id.exposure, id.outcome)) <span class="sc">%&gt;%</span> {.<span class="sc">$</span>code}</span>
-<span id="cb609-5"><a href="#cb609-5" aria-hidden="true" tabindex="-1"></a>res2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> p) <span class="sc">%&gt;%</span></span>
-<span id="cb609-6"><a href="#cb609-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x=</span>method, <span class="at">y=</span>b)) <span class="sc">+</span></span>
-<span id="cb609-7"><a href="#cb609-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>method)) <span class="sc">+</span></span>
-<span id="cb609-8"><a href="#cb609-8" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>b<span class="sc">-</span>se<span class="sc">*</span><span class="fl">1.96</span>, <span class="at">ymax=</span>b<span class="sc">+</span>se<span class="sc">*</span><span class="fl">1.96</span>, <span class="at">colour=</span>method), <span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb609-9"><a href="#cb609-9" aria-hidden="true" tabindex="-1"></a><span class="fu">facet_wrap</span>(<span class="sc">~</span> id.exposure<span class="sc">+</span>id.outcome, <span class="at">scale=</span><span class="st">"free_y"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-24_ab210071c2f10934311222ae732815ed">
+<div class="sourceCode cell-code" id="cb615"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb615-1"><a href="#cb615-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> res <span class="sc">%&gt;%</span> </span>
+<span id="cb615-2"><a href="#cb615-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(nsnp <span class="sc">&gt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb615-3"><a href="#cb615-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">p.adjust</span>(pval, <span class="st">"fdr"</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb615-4"><a href="#cb615-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">code =</span> <span class="fu">paste</span>(id.exposure, id.outcome)) <span class="sc">%&gt;%</span> {.<span class="sc">$</span>code}</span>
+<span id="cb615-5"><a href="#cb615-5" aria-hidden="true" tabindex="-1"></a>res2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> p) <span class="sc">%&gt;%</span></span>
+<span id="cb615-6"><a href="#cb615-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x=</span>method, <span class="at">y=</span>b)) <span class="sc">+</span></span>
+<span id="cb615-7"><a href="#cb615-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>method)) <span class="sc">+</span></span>
+<span id="cb615-8"><a href="#cb615-8" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>b<span class="sc">-</span>se<span class="sc">*</span><span class="fl">1.96</span>, <span class="at">ymax=</span>b<span class="sc">+</span>se<span class="sc">*</span><span class="fl">1.96</span>, <span class="at">colour=</span>method), <span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb615-9"><a href="#cb615-9" aria-hidden="true" tabindex="-1"></a><span class="fu">facet_wrap</span>(<span class="sc">~</span> id.exposure<span class="sc">+</span>id.outcome, <span class="at">scale=</span><span class="st">"free_y"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="all_cis_mr_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+<p><img src="all_cis_mr_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>For multi-instrument exposures do leave-one-out analysis to see if any are driven by a single SNP</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb610"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb610-1"><a href="#cb610-1" aria-hidden="true" tabindex="-1"></a>mr_leaveoneout2 <span class="ot">&lt;-</span> <span class="cf">function</span> (dat, <span class="at">parameters =</span> <span class="fu">default_parameters</span>(), <span class="at">method =</span> mr_ivw) {</span>
-<span id="cb610-2"><a href="#cb610-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="st">"samplesize.outcome"</span> <span class="sc">%in%</span> <span class="fu">names</span>(dat)) {</span>
-<span id="cb610-3"><a href="#cb610-3" aria-hidden="true" tabindex="-1"></a>        dat<span class="sc">$</span>samplesize.outcome <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb610-4"><a href="#cb610-4" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb610-5"><a href="#cb610-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stopifnot</span>(<span class="st">"outcome"</span> <span class="sc">%in%</span> <span class="fu">names</span>(dat))</span>
-<span id="cb610-6"><a href="#cb610-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stopifnot</span>(<span class="st">"exposure"</span> <span class="sc">%in%</span> <span class="fu">names</span>(dat))</span>
-<span id="cb610-7"><a href="#cb610-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stopifnot</span>(<span class="st">"beta.exposure"</span> <span class="sc">%in%</span> <span class="fu">names</span>(dat))</span>
-<span id="cb610-8"><a href="#cb610-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stopifnot</span>(<span class="st">"beta.outcome"</span> <span class="sc">%in%</span> <span class="fu">names</span>(dat))</span>
-<span id="cb610-9"><a href="#cb610-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stopifnot</span>(<span class="st">"se.exposure"</span> <span class="sc">%in%</span> <span class="fu">names</span>(dat))</span>
-<span id="cb610-10"><a href="#cb610-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stopifnot</span>(<span class="st">"se.outcome"</span> <span class="sc">%in%</span> <span class="fu">names</span>(dat))</span>
-<span id="cb610-11"><a href="#cb610-11" aria-hidden="true" tabindex="-1"></a>    res <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ddply</span>(dat, <span class="fu">c</span>(<span class="st">"id.exposure"</span>, <span class="st">"id.outcome"</span>), <span class="cf">function</span>(X) {</span>
-<span id="cb610-12"><a href="#cb610-12" aria-hidden="true" tabindex="-1"></a>        x <span class="ot">&lt;-</span> <span class="fu">subset</span>(X, mr_keep)</span>
-<span id="cb610-13"><a href="#cb610-13" aria-hidden="true" tabindex="-1"></a>        nsnp <span class="ot">&lt;-</span> <span class="fu">nrow</span>(x)</span>
-<span id="cb610-14"><a href="#cb610-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (nsnp <span class="sc">==</span> <span class="dv">0</span>) {</span>
-<span id="cb610-15"><a href="#cb610-15" aria-hidden="true" tabindex="-1"></a>            x <span class="ot">&lt;-</span> X[<span class="dv">1</span>, ]</span>
-<span id="cb610-16"><a href="#cb610-16" aria-hidden="true" tabindex="-1"></a>            d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">SNP =</span> <span class="st">"All"</span>, <span class="at">b =</span> <span class="cn">NA</span>, <span class="at">se =</span> <span class="cn">NA</span>, <span class="at">p =</span> <span class="cn">NA</span>, </span>
-<span id="cb610-17"><a href="#cb610-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">samplesize =</span> <span class="cn">NA</span>, <span class="at">outcome =</span> x<span class="sc">$</span>outcome[<span class="dv">1</span>], <span class="at">exposure =</span> x<span class="sc">$</span>exposure[<span class="dv">1</span>])</span>
-<span id="cb610-18"><a href="#cb610-18" aria-hidden="true" tabindex="-1"></a>            <span class="fu">return</span>(d)</span>
-<span id="cb610-19"><a href="#cb610-19" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb610-20"><a href="#cb610-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (nsnp <span class="sc">&gt;</span> <span class="dv">2</span>) {</span>
-<span id="cb610-21"><a href="#cb610-21" aria-hidden="true" tabindex="-1"></a>            l <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span>nsnp, <span class="cf">function</span>(i) {</span>
-<span id="cb610-22"><a href="#cb610-22" aria-hidden="true" tabindex="-1"></a>                <span class="fu">with</span>(x, <span class="fu">method</span>(beta.exposure[<span class="sc">-</span>i], beta.outcome[<span class="sc">-</span>i], </span>
-<span id="cb610-23"><a href="#cb610-23" aria-hidden="true" tabindex="-1"></a>                  se.exposure[<span class="sc">-</span>i], se.outcome[<span class="sc">-</span>i], parameters))</span>
-<span id="cb610-24"><a href="#cb610-24" aria-hidden="true" tabindex="-1"></a>            })</span>
-<span id="cb610-25"><a href="#cb610-25" aria-hidden="true" tabindex="-1"></a>            l[[nsnp <span class="sc">+</span> <span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">with</span>(x, <span class="fu">method</span>(beta.exposure, beta.outcome, </span>
-<span id="cb610-26"><a href="#cb610-26" aria-hidden="true" tabindex="-1"></a>                se.exposure, se.outcome, parameters))</span>
-<span id="cb610-27"><a href="#cb610-27" aria-hidden="true" tabindex="-1"></a>            d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">SNP =</span> <span class="fu">c</span>(<span class="fu">as.character</span>(x<span class="sc">$</span>SNP), <span class="st">"All"</span>), </span>
-<span id="cb610-28"><a href="#cb610-28" aria-hidden="true" tabindex="-1"></a>                <span class="at">b =</span> <span class="fu">sapply</span>(l, <span class="cf">function</span>(y) y<span class="sc">$</span>b), <span class="at">se =</span> <span class="fu">sapply</span>(l, </span>
-<span id="cb610-29"><a href="#cb610-29" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">function</span>(y) y<span class="sc">$</span>se), <span class="at">p =</span> <span class="fu">sapply</span>(l, <span class="cf">function</span>(y) y<span class="sc">$</span>pval), </span>
-<span id="cb610-30"><a href="#cb610-30" aria-hidden="true" tabindex="-1"></a>                <span class="at">samplesize =</span> x<span class="sc">$</span>samplesize.outcome[<span class="dv">1</span>])</span>
-<span id="cb610-31"><a href="#cb610-31" aria-hidden="true" tabindex="-1"></a>            d<span class="sc">$</span>outcome <span class="ot">&lt;-</span> x<span class="sc">$</span>outcome[<span class="dv">1</span>]</span>
-<span id="cb610-32"><a href="#cb610-32" aria-hidden="true" tabindex="-1"></a>            d<span class="sc">$</span>exposure <span class="ot">&lt;-</span> x<span class="sc">$</span>exposure[<span class="dv">1</span>]</span>
-<span id="cb610-33"><a href="#cb610-33" aria-hidden="true" tabindex="-1"></a>        } <span class="cf">else</span> <span class="cf">if</span>(nsnp <span class="sc">==</span> <span class="dv">2</span>) {</span>
-<span id="cb610-34"><a href="#cb610-34" aria-hidden="true" tabindex="-1"></a>            l <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span>nsnp, <span class="cf">function</span>(i) {</span>
-<span id="cb610-35"><a href="#cb610-35" aria-hidden="true" tabindex="-1"></a>                <span class="fu">with</span>(x, <span class="fu">mr_wald_ratio</span>(beta.exposure[<span class="sc">-</span>i], beta.outcome[<span class="sc">-</span>i], </span>
-<span id="cb610-36"><a href="#cb610-36" aria-hidden="true" tabindex="-1"></a>                  se.exposure[<span class="sc">-</span>i], se.outcome[<span class="sc">-</span>i], parameters))</span>
-<span id="cb610-37"><a href="#cb610-37" aria-hidden="true" tabindex="-1"></a>            })</span>
-<span id="cb610-38"><a href="#cb610-38" aria-hidden="true" tabindex="-1"></a>            l[[nsnp <span class="sc">+</span> <span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">with</span>(x, <span class="fu">method</span>(beta.exposure, beta.outcome, </span>
-<span id="cb610-39"><a href="#cb610-39" aria-hidden="true" tabindex="-1"></a>                se.exposure, se.outcome, parameters))</span>
-<span id="cb610-40"><a href="#cb610-40" aria-hidden="true" tabindex="-1"></a>            d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">SNP =</span> <span class="fu">c</span>(<span class="fu">as.character</span>(x<span class="sc">$</span>SNP), <span class="st">"All"</span>), </span>
-<span id="cb610-41"><a href="#cb610-41" aria-hidden="true" tabindex="-1"></a>                <span class="at">b =</span> <span class="fu">sapply</span>(l, <span class="cf">function</span>(y) y<span class="sc">$</span>b), <span class="at">se =</span> <span class="fu">sapply</span>(l, </span>
-<span id="cb610-42"><a href="#cb610-42" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">function</span>(y) y<span class="sc">$</span>se), <span class="at">p =</span> <span class="fu">sapply</span>(l, <span class="cf">function</span>(y) y<span class="sc">$</span>pval), </span>
-<span id="cb610-43"><a href="#cb610-43" aria-hidden="true" tabindex="-1"></a>                <span class="at">samplesize =</span> x<span class="sc">$</span>samplesize.outcome[<span class="dv">1</span>])</span>
-<span id="cb610-44"><a href="#cb610-44" aria-hidden="true" tabindex="-1"></a>            d<span class="sc">$</span>outcome <span class="ot">&lt;-</span> x<span class="sc">$</span>outcome[<span class="dv">1</span>]</span>
-<span id="cb610-45"><a href="#cb610-45" aria-hidden="true" tabindex="-1"></a>            d<span class="sc">$</span>exposure <span class="ot">&lt;-</span> x<span class="sc">$</span>exposure[<span class="dv">1</span>]</span>
-<span id="cb610-46"><a href="#cb610-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb610-47"><a href="#cb610-47" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb610-48"><a href="#cb610-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> {</span>
-<span id="cb610-49"><a href="#cb610-49" aria-hidden="true" tabindex="-1"></a>            a <span class="ot">&lt;-</span> <span class="fu">with</span>(x, <span class="fu">method</span>(beta.exposure, beta.outcome, </span>
-<span id="cb610-50"><a href="#cb610-50" aria-hidden="true" tabindex="-1"></a>                se.exposure, se.outcome, parameters))</span>
-<span id="cb610-51"><a href="#cb610-51" aria-hidden="true" tabindex="-1"></a>            d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">SNP =</span> <span class="st">"All"</span>, <span class="at">b =</span> a<span class="sc">$</span>b, <span class="at">se =</span> a<span class="sc">$</span>se, </span>
-<span id="cb610-52"><a href="#cb610-52" aria-hidden="true" tabindex="-1"></a>                <span class="at">p =</span> a<span class="sc">$</span>pval, <span class="at">samplesize =</span> x<span class="sc">$</span>samplesize.outcome[<span class="dv">1</span>])</span>
-<span id="cb610-53"><a href="#cb610-53" aria-hidden="true" tabindex="-1"></a>            d<span class="sc">$</span>outcome <span class="ot">&lt;-</span> x<span class="sc">$</span>outcome[<span class="dv">1</span>]</span>
-<span id="cb610-54"><a href="#cb610-54" aria-hidden="true" tabindex="-1"></a>            d<span class="sc">$</span>exposure <span class="ot">&lt;-</span> x<span class="sc">$</span>exposure[<span class="dv">1</span>]</span>
-<span id="cb610-55"><a href="#cb610-55" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb610-56"><a href="#cb610-56" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(d)</span>
-<span id="cb610-57"><a href="#cb610-57" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb610-58"><a href="#cb610-58" aria-hidden="true" tabindex="-1"></a>    res <span class="ot">&lt;-</span> <span class="fu">subset</span>(res, <span class="at">select =</span> <span class="fu">c</span>(exposure, outcome, id.exposure, </span>
-<span id="cb610-59"><a href="#cb610-59" aria-hidden="true" tabindex="-1"></a>        id.outcome, samplesize, SNP, b, se, p))</span>
-<span id="cb610-60"><a href="#cb610-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(res)</span>
-<span id="cb610-61"><a href="#cb610-61" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb610-62"><a href="#cb610-62" aria-hidden="true" tabindex="-1"></a>loo <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
-<span id="cb610-63"><a href="#cb610-63" aria-hidden="true" tabindex="-1"></a>    <span class="fu">subset</span>(., <span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> <span class="fu">paste</span>(ressig<span class="sc">$</span>id.exposure, ressig<span class="sc">$</span>id.outcome)) <span class="sc">%&gt;%</span></span>
-<span id="cb610-64"><a href="#cb610-64" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mr_leaveoneout2</span>(.)</span>
-<span id="cb610-65"><a href="#cb610-65" aria-hidden="true" tabindex="-1"></a>loo_passing <span class="ot">&lt;-</span> loo <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(id.exposure, id.outcome) <span class="sc">%&gt;%</span></span>
-<span id="cb610-66"><a href="#cb610-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(SNP <span class="sc">!=</span> <span class="st">"All"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb610-67"><a href="#cb610-67" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">maxp=</span><span class="fu">max</span>(p, <span class="at">na.rm=</span>T)) <span class="sc">%&gt;%</span></span>
-<span id="cb610-68"><a href="#cb610-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(maxp)) <span class="sc">%&gt;%</span> </span>
-<span id="cb610-69"><a href="#cb610-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fdr=</span><span class="fu">p.adjust</span>(maxp, <span class="st">"fdr"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-25_a6393437df9381d7cefb4668f51da705">
+<div class="sourceCode cell-code" id="cb616"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb616-1"><a href="#cb616-1" aria-hidden="true" tabindex="-1"></a>mr_leaveoneout2 <span class="ot">&lt;-</span> <span class="cf">function</span> (dat, <span class="at">parameters =</span> <span class="fu">default_parameters</span>(), <span class="at">method =</span> mr_ivw) {</span>
+<span id="cb616-2"><a href="#cb616-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="st">"samplesize.outcome"</span> <span class="sc">%in%</span> <span class="fu">names</span>(dat)) {</span>
+<span id="cb616-3"><a href="#cb616-3" aria-hidden="true" tabindex="-1"></a>        dat<span class="sc">$</span>samplesize.outcome <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb616-4"><a href="#cb616-4" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb616-5"><a href="#cb616-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stopifnot</span>(<span class="st">"outcome"</span> <span class="sc">%in%</span> <span class="fu">names</span>(dat))</span>
+<span id="cb616-6"><a href="#cb616-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stopifnot</span>(<span class="st">"exposure"</span> <span class="sc">%in%</span> <span class="fu">names</span>(dat))</span>
+<span id="cb616-7"><a href="#cb616-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stopifnot</span>(<span class="st">"beta.exposure"</span> <span class="sc">%in%</span> <span class="fu">names</span>(dat))</span>
+<span id="cb616-8"><a href="#cb616-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stopifnot</span>(<span class="st">"beta.outcome"</span> <span class="sc">%in%</span> <span class="fu">names</span>(dat))</span>
+<span id="cb616-9"><a href="#cb616-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stopifnot</span>(<span class="st">"se.exposure"</span> <span class="sc">%in%</span> <span class="fu">names</span>(dat))</span>
+<span id="cb616-10"><a href="#cb616-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stopifnot</span>(<span class="st">"se.outcome"</span> <span class="sc">%in%</span> <span class="fu">names</span>(dat))</span>
+<span id="cb616-11"><a href="#cb616-11" aria-hidden="true" tabindex="-1"></a>    res <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ddply</span>(dat, <span class="fu">c</span>(<span class="st">"id.exposure"</span>, <span class="st">"id.outcome"</span>), <span class="cf">function</span>(X) {</span>
+<span id="cb616-12"><a href="#cb616-12" aria-hidden="true" tabindex="-1"></a>        x <span class="ot">&lt;-</span> <span class="fu">subset</span>(X, mr_keep)</span>
+<span id="cb616-13"><a href="#cb616-13" aria-hidden="true" tabindex="-1"></a>        nsnp <span class="ot">&lt;-</span> <span class="fu">nrow</span>(x)</span>
+<span id="cb616-14"><a href="#cb616-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (nsnp <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb616-15"><a href="#cb616-15" aria-hidden="true" tabindex="-1"></a>            x <span class="ot">&lt;-</span> X[<span class="dv">1</span>, ]</span>
+<span id="cb616-16"><a href="#cb616-16" aria-hidden="true" tabindex="-1"></a>            d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">SNP =</span> <span class="st">"All"</span>, <span class="at">b =</span> <span class="cn">NA</span>, <span class="at">se =</span> <span class="cn">NA</span>, <span class="at">p =</span> <span class="cn">NA</span>, </span>
+<span id="cb616-17"><a href="#cb616-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">samplesize =</span> <span class="cn">NA</span>, <span class="at">outcome =</span> x<span class="sc">$</span>outcome[<span class="dv">1</span>], <span class="at">exposure =</span> x<span class="sc">$</span>exposure[<span class="dv">1</span>])</span>
+<span id="cb616-18"><a href="#cb616-18" aria-hidden="true" tabindex="-1"></a>            <span class="fu">return</span>(d)</span>
+<span id="cb616-19"><a href="#cb616-19" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb616-20"><a href="#cb616-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (nsnp <span class="sc">&gt;</span> <span class="dv">2</span>) {</span>
+<span id="cb616-21"><a href="#cb616-21" aria-hidden="true" tabindex="-1"></a>            l <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span>nsnp, <span class="cf">function</span>(i) {</span>
+<span id="cb616-22"><a href="#cb616-22" aria-hidden="true" tabindex="-1"></a>                <span class="fu">with</span>(x, <span class="fu">method</span>(beta.exposure[<span class="sc">-</span>i], beta.outcome[<span class="sc">-</span>i], </span>
+<span id="cb616-23"><a href="#cb616-23" aria-hidden="true" tabindex="-1"></a>                  se.exposure[<span class="sc">-</span>i], se.outcome[<span class="sc">-</span>i], parameters))</span>
+<span id="cb616-24"><a href="#cb616-24" aria-hidden="true" tabindex="-1"></a>            })</span>
+<span id="cb616-25"><a href="#cb616-25" aria-hidden="true" tabindex="-1"></a>            l[[nsnp <span class="sc">+</span> <span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">with</span>(x, <span class="fu">method</span>(beta.exposure, beta.outcome, </span>
+<span id="cb616-26"><a href="#cb616-26" aria-hidden="true" tabindex="-1"></a>                se.exposure, se.outcome, parameters))</span>
+<span id="cb616-27"><a href="#cb616-27" aria-hidden="true" tabindex="-1"></a>            d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">SNP =</span> <span class="fu">c</span>(<span class="fu">as.character</span>(x<span class="sc">$</span>SNP), <span class="st">"All"</span>), </span>
+<span id="cb616-28"><a href="#cb616-28" aria-hidden="true" tabindex="-1"></a>                <span class="at">b =</span> <span class="fu">sapply</span>(l, <span class="cf">function</span>(y) y<span class="sc">$</span>b), <span class="at">se =</span> <span class="fu">sapply</span>(l, </span>
+<span id="cb616-29"><a href="#cb616-29" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">function</span>(y) y<span class="sc">$</span>se), <span class="at">p =</span> <span class="fu">sapply</span>(l, <span class="cf">function</span>(y) y<span class="sc">$</span>pval), </span>
+<span id="cb616-30"><a href="#cb616-30" aria-hidden="true" tabindex="-1"></a>                <span class="at">samplesize =</span> x<span class="sc">$</span>samplesize.outcome[<span class="dv">1</span>])</span>
+<span id="cb616-31"><a href="#cb616-31" aria-hidden="true" tabindex="-1"></a>            d<span class="sc">$</span>outcome <span class="ot">&lt;-</span> x<span class="sc">$</span>outcome[<span class="dv">1</span>]</span>
+<span id="cb616-32"><a href="#cb616-32" aria-hidden="true" tabindex="-1"></a>            d<span class="sc">$</span>exposure <span class="ot">&lt;-</span> x<span class="sc">$</span>exposure[<span class="dv">1</span>]</span>
+<span id="cb616-33"><a href="#cb616-33" aria-hidden="true" tabindex="-1"></a>        } <span class="cf">else</span> <span class="cf">if</span>(nsnp <span class="sc">==</span> <span class="dv">2</span>) {</span>
+<span id="cb616-34"><a href="#cb616-34" aria-hidden="true" tabindex="-1"></a>            l <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span>nsnp, <span class="cf">function</span>(i) {</span>
+<span id="cb616-35"><a href="#cb616-35" aria-hidden="true" tabindex="-1"></a>                <span class="fu">with</span>(x, <span class="fu">mr_wald_ratio</span>(beta.exposure[<span class="sc">-</span>i], beta.outcome[<span class="sc">-</span>i], </span>
+<span id="cb616-36"><a href="#cb616-36" aria-hidden="true" tabindex="-1"></a>                  se.exposure[<span class="sc">-</span>i], se.outcome[<span class="sc">-</span>i], parameters))</span>
+<span id="cb616-37"><a href="#cb616-37" aria-hidden="true" tabindex="-1"></a>            })</span>
+<span id="cb616-38"><a href="#cb616-38" aria-hidden="true" tabindex="-1"></a>            l[[nsnp <span class="sc">+</span> <span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">with</span>(x, <span class="fu">method</span>(beta.exposure, beta.outcome, </span>
+<span id="cb616-39"><a href="#cb616-39" aria-hidden="true" tabindex="-1"></a>                se.exposure, se.outcome, parameters))</span>
+<span id="cb616-40"><a href="#cb616-40" aria-hidden="true" tabindex="-1"></a>            d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">SNP =</span> <span class="fu">c</span>(<span class="fu">as.character</span>(x<span class="sc">$</span>SNP), <span class="st">"All"</span>), </span>
+<span id="cb616-41"><a href="#cb616-41" aria-hidden="true" tabindex="-1"></a>                <span class="at">b =</span> <span class="fu">sapply</span>(l, <span class="cf">function</span>(y) y<span class="sc">$</span>b), <span class="at">se =</span> <span class="fu">sapply</span>(l, </span>
+<span id="cb616-42"><a href="#cb616-42" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">function</span>(y) y<span class="sc">$</span>se), <span class="at">p =</span> <span class="fu">sapply</span>(l, <span class="cf">function</span>(y) y<span class="sc">$</span>pval), </span>
+<span id="cb616-43"><a href="#cb616-43" aria-hidden="true" tabindex="-1"></a>                <span class="at">samplesize =</span> x<span class="sc">$</span>samplesize.outcome[<span class="dv">1</span>])</span>
+<span id="cb616-44"><a href="#cb616-44" aria-hidden="true" tabindex="-1"></a>            d<span class="sc">$</span>outcome <span class="ot">&lt;-</span> x<span class="sc">$</span>outcome[<span class="dv">1</span>]</span>
+<span id="cb616-45"><a href="#cb616-45" aria-hidden="true" tabindex="-1"></a>            d<span class="sc">$</span>exposure <span class="ot">&lt;-</span> x<span class="sc">$</span>exposure[<span class="dv">1</span>]</span>
+<span id="cb616-46"><a href="#cb616-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb616-47"><a href="#cb616-47" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb616-48"><a href="#cb616-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> {</span>
+<span id="cb616-49"><a href="#cb616-49" aria-hidden="true" tabindex="-1"></a>            a <span class="ot">&lt;-</span> <span class="fu">with</span>(x, <span class="fu">method</span>(beta.exposure, beta.outcome, </span>
+<span id="cb616-50"><a href="#cb616-50" aria-hidden="true" tabindex="-1"></a>                se.exposure, se.outcome, parameters))</span>
+<span id="cb616-51"><a href="#cb616-51" aria-hidden="true" tabindex="-1"></a>            d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">SNP =</span> <span class="st">"All"</span>, <span class="at">b =</span> a<span class="sc">$</span>b, <span class="at">se =</span> a<span class="sc">$</span>se, </span>
+<span id="cb616-52"><a href="#cb616-52" aria-hidden="true" tabindex="-1"></a>                <span class="at">p =</span> a<span class="sc">$</span>pval, <span class="at">samplesize =</span> x<span class="sc">$</span>samplesize.outcome[<span class="dv">1</span>])</span>
+<span id="cb616-53"><a href="#cb616-53" aria-hidden="true" tabindex="-1"></a>            d<span class="sc">$</span>outcome <span class="ot">&lt;-</span> x<span class="sc">$</span>outcome[<span class="dv">1</span>]</span>
+<span id="cb616-54"><a href="#cb616-54" aria-hidden="true" tabindex="-1"></a>            d<span class="sc">$</span>exposure <span class="ot">&lt;-</span> x<span class="sc">$</span>exposure[<span class="dv">1</span>]</span>
+<span id="cb616-55"><a href="#cb616-55" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb616-56"><a href="#cb616-56" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(d)</span>
+<span id="cb616-57"><a href="#cb616-57" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb616-58"><a href="#cb616-58" aria-hidden="true" tabindex="-1"></a>    res <span class="ot">&lt;-</span> <span class="fu">subset</span>(res, <span class="at">select =</span> <span class="fu">c</span>(exposure, outcome, id.exposure, </span>
+<span id="cb616-59"><a href="#cb616-59" aria-hidden="true" tabindex="-1"></a>        id.outcome, samplesize, SNP, b, se, p))</span>
+<span id="cb616-60"><a href="#cb616-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(res)</span>
+<span id="cb616-61"><a href="#cb616-61" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb616-62"><a href="#cb616-62" aria-hidden="true" tabindex="-1"></a>loo <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb616-63"><a href="#cb616-63" aria-hidden="true" tabindex="-1"></a>    <span class="fu">subset</span>(., <span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> <span class="fu">paste</span>(ressig<span class="sc">$</span>id.exposure, ressig<span class="sc">$</span>id.outcome)) <span class="sc">%&gt;%</span></span>
+<span id="cb616-64"><a href="#cb616-64" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mr_leaveoneout2</span>(.)</span>
+<span id="cb616-65"><a href="#cb616-65" aria-hidden="true" tabindex="-1"></a>loo_passing <span class="ot">&lt;-</span> loo <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(id.exposure, id.outcome) <span class="sc">%&gt;%</span></span>
+<span id="cb616-66"><a href="#cb616-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(SNP <span class="sc">!=</span> <span class="st">"All"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb616-67"><a href="#cb616-67" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">maxp=</span><span class="fu">max</span>(p, <span class="at">na.rm=</span>T)) <span class="sc">%&gt;%</span></span>
+<span id="cb616-68"><a href="#cb616-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(maxp)) <span class="sc">%&gt;%</span> </span>
+<span id="cb616-69"><a href="#cb616-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fdr=</span><span class="fu">p.adjust</span>(maxp, <span class="st">"fdr"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'id.exposure'. You can override using the
 `.groups` argument.</code></pre>
 </div>
 </div>
 <p>Arrange all results</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb612"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb612-1"><a href="#cb612-1" aria-hidden="true" tabindex="-1"></a>allres <span class="ot">&lt;-</span> <span class="fu">left_join</span>(</span>
-<span id="cb612-2"><a href="#cb612-2" aria-hidden="true" tabindex="-1"></a>    ressig <span class="sc">%&gt;%</span> <span class="fu">select</span>(id.exposure, id.outcome, nsnp, b, se, pval), </span>
-<span id="cb612-3"><a href="#cb612-3" aria-hidden="true" tabindex="-1"></a>    loo_passing <span class="sc">%&gt;%</span> <span class="fu">select</span>(id.exposure, id.outcome, <span class="at">loo_maxp=</span>maxp, <span class="at">loo_fdr=</span>fdr)) <span class="sc">%&gt;%</span> </span>
-<span id="cb612-4"><a href="#cb612-4" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(., het2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(id.exposure, id.outcome, <span class="at">inst_Q_pval=</span>Q_pval)) <span class="sc">%&gt;%</span></span>
-<span id="cb612-5"><a href="#cb612-5" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(., het_method) <span class="sc">%&gt;%</span></span>
-<span id="cb612-6"><a href="#cb612-6" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(loo_maxp,  <span class="fu">desc</span>(inst_Q_pval)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">paste</span>(id.exposure, id.outcome)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-26_240e0033dac551ee37d747d26d070d3f">
+<div class="sourceCode cell-code" id="cb618"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb618-1"><a href="#cb618-1" aria-hidden="true" tabindex="-1"></a>allres <span class="ot">&lt;-</span> <span class="fu">left_join</span>(</span>
+<span id="cb618-2"><a href="#cb618-2" aria-hidden="true" tabindex="-1"></a>    ressig <span class="sc">%&gt;%</span> <span class="fu">select</span>(id.exposure, id.outcome, nsnp, b, se, pval), </span>
+<span id="cb618-3"><a href="#cb618-3" aria-hidden="true" tabindex="-1"></a>    loo_passing <span class="sc">%&gt;%</span> <span class="fu">select</span>(id.exposure, id.outcome, <span class="at">loo_maxp=</span>maxp, <span class="at">loo_fdr=</span>fdr)) <span class="sc">%&gt;%</span> </span>
+<span id="cb618-4"><a href="#cb618-4" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(., het2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(id.exposure, id.outcome, <span class="at">inst_Q_pval=</span>Q_pval)) <span class="sc">%&gt;%</span></span>
+<span id="cb618-5"><a href="#cb618-5" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(., het_method) <span class="sc">%&gt;%</span></span>
+<span id="cb618-6"><a href="#cb618-6" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(loo_maxp,  <span class="fu">desc</span>(inst_Q_pval)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">paste</span>(id.exposure, id.outcome)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Joining with `by = join_by(id.exposure, id.outcome)`
 Joining with `by = join_by(id.exposure, id.outcome)`
 Joining with `by = join_by(id.exposure, id.outcome)`</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb614"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb614-1"><a href="#cb614-1" aria-hidden="true" tabindex="-1"></a><span class="co"># subset(ressig, nsnp %in% 2:3) %&gt;% </span></span>
-<span id="cb614-2"><a href="#cb614-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     select(id.exposure, id.outcome, nsnp, b, se, pval) %&gt;% </span></span>
-<span id="cb614-3"><a href="#cb614-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     inner_join(., het2 %&gt;% filter(method=="Inverse variance weighted") %&gt;% select(id.exposure, id.outcome, inst_Q_pval=Q_pval)) %&gt;% </span></span>
-<span id="cb614-4"><a href="#cb614-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     left_join(., loo_passing %&gt;% select(id.exposure, id.outcome, loo_maxp=maxp)) %&gt;%</span></span>
-<span id="cb614-5"><a href="#cb614-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     arrange(loo_maxp, desc(inst_Q_pval))</span></span>
-<span id="cb614-6"><a href="#cb614-6" aria-hidden="true" tabindex="-1"></a><span class="co"># subset(ressig, nsnp==1) %&gt;% arrange(pval)</span></span>
-<span id="cb614-7"><a href="#cb614-7" aria-hidden="true" tabindex="-1"></a>traits <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"Supplementary_Table5.xlsx"</span>)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">id.outcome=</span>opengwasid, <span class="at">outcome=</span>code)</span>
-<span id="cb614-8"><a href="#cb614-8" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">match</span>(allres<span class="sc">$</span>id.outcome, traits<span class="sc">$</span>id.outcome)</span>
-<span id="cb614-9"><a href="#cb614-9" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(traits<span class="sc">$</span>id.outcome[m] <span class="sc">==</span> allres<span class="sc">$</span>id.outcome)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb620"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb620-1"><a href="#cb620-1" aria-hidden="true" tabindex="-1"></a><span class="co"># subset(ressig, nsnp %in% 2:3) %&gt;% </span></span>
+<span id="cb620-2"><a href="#cb620-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     select(id.exposure, id.outcome, nsnp, b, se, pval) %&gt;% </span></span>
+<span id="cb620-3"><a href="#cb620-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     inner_join(., het2 %&gt;% filter(method=="Inverse variance weighted") %&gt;% select(id.exposure, id.outcome, inst_Q_pval=Q_pval)) %&gt;% </span></span>
+<span id="cb620-4"><a href="#cb620-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     left_join(., loo_passing %&gt;% select(id.exposure, id.outcome, loo_maxp=maxp)) %&gt;%</span></span>
+<span id="cb620-5"><a href="#cb620-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     arrange(loo_maxp, desc(inst_Q_pval))</span></span>
+<span id="cb620-6"><a href="#cb620-6" aria-hidden="true" tabindex="-1"></a><span class="co"># subset(ressig, nsnp==1) %&gt;% arrange(pval)</span></span>
+<span id="cb620-7"><a href="#cb620-7" aria-hidden="true" tabindex="-1"></a>traits <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"Supplementary_Table5.xlsx"</span>)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">id.outcome=</span>opengwasid, <span class="at">outcome=</span>code)</span>
+<span id="cb620-8"><a href="#cb620-8" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">match</span>(allres<span class="sc">$</span>id.outcome, traits<span class="sc">$</span>id.outcome)</span>
+<span id="cb620-9"><a href="#cb620-9" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(traits<span class="sc">$</span>id.outcome[m] <span class="sc">==</span> allres<span class="sc">$</span>id.outcome)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb616"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb616-1"><a href="#cb616-1" aria-hidden="true" tabindex="-1"></a>allres<span class="sc">$</span>id.outcome <span class="ot">&lt;-</span> traits<span class="sc">$</span>outcome[m]</span>
-<span id="cb616-2"><a href="#cb616-2" aria-hidden="true" tabindex="-1"></a>allres</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb622"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb622-1"><a href="#cb622-1" aria-hidden="true" tabindex="-1"></a>allres<span class="sc">$</span>id.outcome <span class="ot">&lt;-</span> traits<span class="sc">$</span>outcome[m]</span>
+<span id="cb622-2"><a href="#cb622-2" aria-hidden="true" tabindex="-1"></a>allres</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    id.exposure
 1            F9
@@ -4194,229 +4269,229 @@ Joining with `by = join_by(id.exposure, id.outcome)`</code></pre>
 2    1.285816e-01            NA
 3    5.624152e-02            NA
 4    7.378588e-01            NA
-5   1.561529e-120  7.501862e-04
+5   1.561529e-120  8.898289e-04
 6    3.406087e-02            NA
 7    4.031943e-03            NA
-8    2.203724e-01  3.973436e-01
-9    1.983898e-07  2.641915e-01
-10   6.021128e-01  8.630557e-01
-11   4.312500e-01  7.954393e-01
+8    2.203724e-01  3.975996e-01
+9    1.983898e-07  2.275510e-01
+10   6.021128e-01  8.491445e-01
+11   4.312500e-01  7.941547e-01
 12   1.597353e-01            NA
 13   8.037621e-01            NA
-14   9.560953e-01  9.991763e-01
-15   1.468299e-07  2.719603e-09
+14   9.560953e-01  9.990457e-01
+15   1.468299e-07  1.005218e-08
 16   2.582812e-01            NA
 17   3.646406e-01            NA
-18   5.250182e-01  6.704820e-01
+18   5.250182e-01  6.658626e-01
 19   9.603524e-01            NA
 20   5.644057e-01            NA
-21   8.956417e-01  8.128102e-01
-22  8.499817e-104  9.578311e-19
-23   9.148072e-01  9.946682e-01
+21   8.956417e-01  8.121915e-01
+22  8.499817e-104  3.349839e-19
+23   9.148072e-01  9.946654e-01
 24   9.024674e-02            NA
 25   2.500723e-07            NA
-26   2.654757e-01  4.989849e-01
+26   2.654757e-01  4.601856e-01
 27   3.061609e-15            NA
-28   6.930839e-01  8.700133e-01
-29   3.226154e-01  9.845344e-01
-30   4.804091e-01  7.112102e-01
-31   7.944482e-01  9.533385e-01
-32   7.617762e-01  9.843956e-01
-33   1.258859e-93  2.907352e-28
-34   3.999065e-01  9.923256e-01
-35   3.061945e-01  8.922723e-01
-36   3.414803e-01  9.983202e-01
+28   6.930839e-01  8.700704e-01
+29   3.226154e-01  9.852111e-01
+30   4.804091e-01  7.181011e-01
+31   7.944482e-01  9.494044e-01
+32   7.617762e-01  9.843889e-01
+33   1.258859e-93  3.713447e-25
+34   3.999065e-01  9.927456e-01
+35   3.061945e-01  8.924877e-01
+36   3.414803e-01  9.981498e-01
 37   2.896766e-01            NA
-38   9.857665e-01  9.680318e-01
-39   4.043493e-01  9.820350e-01
+38   9.857665e-01  9.680521e-01
+39   4.043493e-01  9.829104e-01
 40   3.448424e-01            NA
 41   6.073590e-01            NA
-42   8.166903e-02  9.899851e-01
+42   8.166903e-02  9.909248e-01
 43   5.960846e-01            NA
 44   2.275215e-01            NA
-45   2.681650e-02  6.306855e-01
-46   3.314384e-01  9.926363e-01
-47   2.175846e-01  9.427168e-01
-48   7.659831e-01  9.624424e-01
+45   2.681650e-02  6.289441e-01
+46   3.314384e-01  9.929279e-01
+47   2.175846e-01  9.407327e-01
+48   7.659831e-01  9.625283e-01
 49   7.981118e-01            NA
-50   4.096193e-01  9.232483e-01
-51   2.707607e-01  9.943657e-01
-52   4.230164e-01  8.242881e-01
+50   4.096193e-01  9.268625e-01
+51   2.707607e-01  9.943756e-01
+52   4.230164e-01  8.204827e-01
 53   9.145623e-01            NA
-54   6.757446e-02  1.338194e-01
+54   6.757446e-02  1.338055e-01
 55   3.376854e-01            NA
-56   9.078778e-63  2.064805e-01
-57   7.950865e-01  9.677407e-01
-58   4.692202e-01  9.981063e-01
-59   1.125245e-81  2.836152e-01
-60   6.713994e-01  9.995800e-01
-61   1.198510e-11  9.714317e-01
-62   4.245707e-01  6.487831e-01
-63   2.640161e-01  6.898824e-01
-64  5.730564e-161  4.702734e-06
-65   1.425679e-25  7.001807e-01
-66   3.125807e-01  9.984390e-01
-67   7.967488e-01  9.796205e-01
-68   5.004712e-01  6.452500e-01
-69  4.498018e-155  6.643483e-03
+56   9.078778e-63  2.117536e-01
+57   7.950865e-01  9.678465e-01
+58   4.692202e-01  9.981349e-01
+59   1.125245e-81  2.750289e-01
+60   6.713994e-01  9.995930e-01
+61   1.198510e-11  9.723195e-01
+62   4.245707e-01  6.290374e-01
+63   2.640161e-01  6.898847e-01
+64  5.730564e-161  2.913434e-05
+65   1.425679e-25  6.842144e-01
+66   3.125807e-01  9.984103e-01
+67   7.967488e-01  9.798814e-01
+68   5.004712e-01  6.356558e-01
+69  4.498018e-155  5.179109e-03
 70   5.184403e-01            NA
 71   3.138349e-01            NA
-72   5.916775e-01  5.689616e-01
-73   1.959620e-01  8.053364e-01
+72   5.916775e-01  6.166986e-01
+73   1.959620e-01  8.057931e-01
 74   6.630699e-01            NA
-75   1.380384e-01  9.739505e-01
+75   1.380384e-01  9.729736e-01
 76   3.881678e-01            NA
-77   4.433242e-01  7.896845e-01
+77   4.433242e-01  7.896430e-01
 78   7.320808e-01            NA
-79   1.003343e-52  8.748905e-02
-80   4.273608e-01  9.914581e-01
-81   3.980320e-03  4.970950e-01
-82   3.229389e-01  7.302063e-01
-83   6.005624e-01  9.582370e-01
-84   5.647469e-01  9.991175e-01
-85   6.448010e-01  9.869938e-01
-86   3.433260e-01  9.900640e-01
-87   3.962455e-01  7.624937e-01
-88   1.961397e-01  6.557164e-01
-89   3.031671e-01  9.694645e-01
-90   3.237209e-01  9.946552e-01
-91   3.447591e-02  9.137551e-01
-92   5.619184e-01  9.982319e-01
-93   2.481463e-01  9.917692e-01
-94   5.541755e-02  9.023866e-01
+79   1.003343e-52  5.163092e-02
+80   4.273608e-01  9.907883e-01
+81   3.980320e-03  4.961843e-01
+82   3.229389e-01  7.345650e-01
+83   6.005624e-01  9.541458e-01
+84   5.647469e-01  9.987493e-01
+85   6.448010e-01  9.869867e-01
+86   3.433260e-01  9.898911e-01
+87   3.962455e-01  7.649411e-01
+88   1.961397e-01  6.547953e-01
+89   3.031671e-01  9.704627e-01
+90   3.237209e-01  9.946947e-01
+91   3.447591e-02  9.137932e-01
+92   5.619184e-01  9.984046e-01
+93   2.481463e-01  9.917940e-01
+94   5.541755e-02  9.042630e-01
 95   3.977697e-01            NA
-96   7.254970e-01  9.796391e-01
+96   7.254970e-01  9.798020e-01
 97   4.132213e-01            NA
-98   3.438232e-04  8.513559e-01
-99   5.989496e-01  9.999786e-01
+98   3.438232e-04  8.472454e-01
+99   5.989496e-01  9.999764e-01
 100  2.152747e-01            NA
-101  4.929829e-01  9.997997e-01
-102  3.932827e-01  9.978694e-01
-103  4.893615e-01  9.994173e-01
-104  5.702658e-01  9.986546e-01
-105  2.256333e-01  9.773325e-01
+101  4.929829e-01  9.998265e-01
+102  3.932827e-01  9.979148e-01
+103  4.893615e-01  9.994037e-01
+104  5.702658e-01  9.985583e-01
+105  2.256333e-01  9.772972e-01
 106  2.087431e-01            NA
-107  4.122982e-02  6.135117e-01
+107  4.122982e-02  6.510146e-01
 108  3.254104e-01            NA
-109  1.177714e-01  1.341744e-01
-110  3.358432e-01  9.918191e-01
-111  6.749180e-05  6.154186e-04
-112  6.054392e-03  6.985857e-01
-113  2.794581e-01  9.567520e-01
+109  1.177714e-01  1.357418e-01
+110  3.358432e-01  9.926712e-01
+111  6.749180e-05  8.628615e-04
+112  6.054392e-03  7.185703e-01
+113  2.794581e-01  9.526245e-01
 114  2.868306e-01            NA
-115  1.090186e-02  8.913565e-01
-116  6.283712e-09  1.541773e-01
+115  1.090186e-02  8.903364e-01
+116  6.283712e-09  2.353198e-01
 117  8.520106e-01            NA
 118  3.506497e-04            NA
 119  4.544143e-01            NA
-120  8.033788e-01  9.765473e-01
-121  1.597020e-01  7.283142e-01
-122  3.399190e-01  6.693171e-01
+120  8.033788e-01  9.731997e-01
+121  1.597020e-01  7.275608e-01
+122  3.399190e-01  6.656447e-01
 123  3.177473e-01            NA
-124  9.573964e-09  5.586204e-01
-125  1.641710e-03  2.489737e-02
-126  7.458523e-08  9.760986e-01
+124  9.573964e-09  5.006593e-01
+125  1.641710e-03  2.483340e-02
+126  7.458523e-08  9.772967e-01
 127  1.381683e-04            NA
-128  3.690735e-03  9.977864e-01
-129  9.098007e-01  9.944184e-01
-130  1.556872e-04  2.920593e-01
-131  2.407371e-01  5.259928e-01
-132  6.338529e-01  7.712714e-01
-133  9.216133e-10  8.298493e-01
-134  6.552055e-01  8.146972e-01
-135  1.955990e-06  8.819473e-01
-136  7.055430e-01  9.003640e-01
-137  4.009007e-01  9.971542e-01
+128  3.690735e-03  9.977939e-01
+129  9.098007e-01  9.944057e-01
+130  1.556872e-04  2.908230e-01
+131  2.407371e-01  5.134599e-01
+132  6.338529e-01  7.393725e-01
+133  9.216133e-10  8.280261e-01
+134  6.552055e-01  8.114682e-01
+135  1.955990e-06  8.621672e-01
+136  7.055430e-01  9.051408e-01
+137  4.009007e-01  9.966694e-01
 138  5.304794e-01            NA
 139  7.349324e-01            NA
-140  2.027643e-01  4.633349e-01
-141  8.144558e-55  2.057250e-21
-142  1.103953e-08  6.919609e-01
+140  2.027643e-01  4.718443e-01
+141  8.144558e-55  1.075705e-23
+142  1.103953e-08  6.760559e-01
 143  1.507925e-01            NA
-144  1.180698e-02  6.544232e-01
-145  3.139997e-27  7.714588e-01
+144  1.180698e-02  6.618392e-01
+145  3.139997e-27  8.137507e-01
 146  5.018773e-02            NA
-147  1.066478e-01  9.993477e-01
-148  6.164634e-02  9.236678e-01
+147  1.066478e-01  9.993120e-01
+148  6.164634e-02  9.305576e-01
 149  7.436968e-01            NA
 150  3.296111e-02            NA
-151  7.047170e-01  9.900419e-01
-152  4.946887e-02  8.694384e-01
-153  3.577977e-01  8.207558e-01
-154  2.968515e-01  9.794593e-01
-155  6.096430e-01  9.498598e-01
-156  5.886618e-01  2.424783e-01
-157  3.136338e-01  9.990356e-01
+151  7.047170e-01  9.898283e-01
+152  4.946887e-02  8.780567e-01
+153  3.577977e-01  8.400572e-01
+154  2.968515e-01  9.736667e-01
+155  6.096430e-01  9.426408e-01
+156  5.886618e-01  2.434236e-01
+157  3.136338e-01  9.990526e-01
 158  7.065034e-02            NA
-159  2.238144e-11  6.389900e-01
-160  9.289674e-03  4.934533e-03
-161  1.920977e-02  6.221265e-01
-162  6.158079e-01  6.831681e-01
-163  5.455319e-02  9.971386e-01
-164  2.532884e-24  1.658908e-20
+159  2.238144e-11  6.967710e-01
+160  9.289674e-03  5.556994e-03
+161  1.920977e-02  6.276647e-01
+162  6.158079e-01  7.691927e-01
+163  5.455319e-02  9.973269e-01
+164  2.532884e-24  1.916175e-21
 165  2.469707e-01            NA
-166  7.366557e-03  9.874588e-01
-167  2.181672e-01  9.773570e-01
-168  4.617235e-01  9.997663e-01
-169  9.669043e-02  6.803645e-01
+166  7.366557e-03  9.895753e-01
+167  2.181672e-01  9.813001e-01
+168  4.617235e-01  9.997732e-01
+169  9.669043e-02  6.752085e-01
 170  3.677961e-02            NA
-171  3.652151e-01  9.365658e-01
-172  1.655690e-09  4.924121e-01
-173  9.341094e-01  9.999563e-01
-174  1.260504e-01  9.679061e-01
-175  1.545172e-01  9.912544e-01
-176  8.279628e-01  8.644663e-01
-177  6.212731e-02  9.878893e-01
-178  9.097644e-01  9.993307e-01
-179  2.248469e-01  9.912060e-01
-180  3.724027e-01  2.203883e-01
-181  8.364591e-03  8.983996e-01
-182  1.825525e-01  9.645393e-01
-183  2.583695e-09  6.576716e-01
-184  7.203565e-01  9.997570e-01
+171  3.652151e-01  9.291136e-01
+172  1.655690e-09  4.768755e-01
+173  9.341094e-01  9.999564e-01
+174  1.260504e-01  9.679614e-01
+175  1.545172e-01  9.912695e-01
+176  8.279628e-01  8.647300e-01
+177  6.212731e-02  9.876994e-01
+178  9.097644e-01  9.993445e-01
+179  2.248469e-01  9.915441e-01
+180  3.724027e-01  2.319639e-01
+181  8.364591e-03  8.983127e-01
+182  1.825525e-01  9.636002e-01
+183  2.583695e-09  6.401481e-01
+184  7.203565e-01  9.997460e-01
 185  1.513309e-01            NA
-186  4.378885e-01  8.774969e-01
-187  3.205239e-02  6.118327e-01
-188  1.200108e-01  9.995777e-01
+186  4.378885e-01  8.702302e-01
+187  3.205239e-02  6.086896e-01
+188  1.200108e-01  9.995958e-01
 189  8.296143e-01            NA
-190  3.172330e-01  9.714573e-01
-191  1.096814e-01  8.579783e-01
-192  8.057008e-08  6.874496e-01
-193  6.787220e-01  9.984031e-01
-194  2.201633e-01  6.476536e-01
-195  1.445695e-02  2.602901e-01
-196  1.100064e-41  7.918825e-29
+190  3.172330e-01  9.743906e-01
+191  1.096814e-01  8.343986e-01
+192  8.057008e-08  7.299175e-01
+193  6.787220e-01  9.981832e-01
+194  2.201633e-01  6.511840e-01
+195  1.445695e-02  2.429537e-01
+196  1.100064e-41  1.032236e-30
 197  9.958508e-01            NA
-198  1.353480e-01  1.902427e-01
-199  5.728204e-07  2.985910e-02
-200  9.988027e-02  6.177579e-01
-201  2.285072e-01  6.670088e-01
-202  2.749042e-01  2.015813e-01
-203  2.425409e-03  5.919430e-01
-204  1.937076e-01  9.882409e-01
+198  1.353480e-01  1.892536e-01
+199  5.728204e-07  6.012429e-02
+200  9.988027e-02  6.827882e-01
+201  2.285072e-01  6.652882e-01
+202  2.749042e-01  2.065982e-01
+203  2.425409e-03  5.969957e-01
+204  1.937076e-01  9.881024e-01
 205  5.678519e-01            NA
-206  7.475101e-02  6.021391e-01
-207  1.924860e-01  8.835712e-01
-208  1.918655e-03  9.469991e-01
-209  1.822955e-01  6.498899e-01
-210  3.735481e-01  3.680949e-01
-211  7.993186e-37  3.957125e-08
-212  3.230307e-01  9.950241e-01
+206  7.475101e-02  5.961777e-01
+207  1.924860e-01  9.107949e-01
+208  1.918655e-03  9.469018e-01
+209  1.822955e-01  6.468695e-01
+210  3.735481e-01  3.247071e-01
+211  7.993186e-37  3.417315e-07
+212  3.230307e-01  9.950176e-01
 213  5.056287e-01            NA
-214  4.196328e-02  3.913295e-01
-215  2.373117e-56  2.418305e-08
-216  1.748089e-01  9.371581e-01
-217  1.828490e-01  6.493017e-01
-218  2.723374e-01  5.826247e-01
-219  1.177621e-03  4.430315e-02
-220  8.513360e-03  5.163089e-01
+214  4.196328e-02  4.087484e-01
+215  2.373117e-56  3.842344e-08
+216  1.748089e-01  9.332141e-01
+217  1.828490e-01  6.650036e-01
+218  2.723374e-01  6.481132e-01
+219  1.177621e-03  6.261308e-02
+220  8.513360e-03  5.271890e-01
 221  2.846158e-01            NA
-222  8.744521e-01  9.965903e-01
-223  7.514557e-02  9.170493e-01
-224  2.490760e-01  9.419823e-01
-225  1.553264e-01  8.097639e-01
-226  7.233786e-03  5.944750e-01
-227  2.825730e-01  4.904906e-01
+222  8.744521e-01  9.965740e-01
+223  7.514557e-02  9.376718e-01
+224  2.490760e-01  9.324727e-01
+225  1.553264e-01  8.350672e-01
+226  7.233786e-03  5.984077e-01
+227  2.825730e-01  5.045329e-01
 228            NA            NA
 229            NA            NA
 230            NA            NA
@@ -4570,25 +4645,25 @@ Joining with `by = join_by(id.exposure, id.outcome)`</code></pre>
 378            NA            NA
 379            NA            NA</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb618"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb618-1"><a href="#cb618-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(allres, <span class="st">"forward_mr.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb624"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb624-1"><a href="#cb624-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(allres, <span class="st">"forward_mr.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="are-trans-instruments-more-pleiotropic" class="level2">
 <h2 class="anchored" data-anchor-id="are-trans-instruments-more-pleiotropic">Are trans instruments more pleiotropic?</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb619"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb619-1"><a href="#cb619-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>fdr.outcome <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(dat<span class="sc">$</span>pval.outcome, <span class="st">"fdr"</span>)</span>
-<span id="cb619-2"><a href="#cb619-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="all_cis_mr_cache/html/unnamed-chunk-27_3bec117b76d25f3311f56b6bab8e0b8a">
+<div class="sourceCode cell-code" id="cb625"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb625-1"><a href="#cb625-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>fdr.outcome <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(dat<span class="sc">$</span>pval.outcome, <span class="st">"fdr"</span>)</span>
+<span id="cb625-2"><a href="#cb625-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dat<span class="sc">$</span>fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  FALSE   TRUE 
 197775  14483 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb621"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb621-1"><a href="#cb621-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
-<span id="cb621-2"><a href="#cb621-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(SNP, cistrans.exposure) <span class="sc">%&gt;%</span></span>
-<span id="cb621-3"><a href="#cb621-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">duplicated</span>(id.outcome)) <span class="sc">%&gt;%</span></span>
-<span id="cb621-4"><a href="#cb621-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">sum</span>(fdr.outcome <span class="sc">&lt;</span> <span class="fl">0.05</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb621-5"><a href="#cb621-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(cistrans.exposure) <span class="sc">%&gt;%</span></span>
-<span id="cb621-6"><a href="#cb621-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">m=</span><span class="fu">mean</span>(n), <span class="at">sd=</span><span class="fu">sd</span>(n), <span class="at">med=</span><span class="fu">median</span>(n), <span class="at">min=</span><span class="fu">min</span>(n), <span class="at">max=</span><span class="fu">max</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb627"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb627-1"><a href="#cb627-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb627-2"><a href="#cb627-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(SNP, cistrans.exposure) <span class="sc">%&gt;%</span></span>
+<span id="cb627-3"><a href="#cb627-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">duplicated</span>(id.outcome)) <span class="sc">%&gt;%</span></span>
+<span id="cb627-4"><a href="#cb627-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">sum</span>(fdr.outcome <span class="sc">&lt;</span> <span class="fl">0.05</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb627-5"><a href="#cb627-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(cistrans.exposure) <span class="sc">%&gt;%</span></span>
+<span id="cb627-6"><a href="#cb627-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">m=</span><span class="fu">mean</span>(n), <span class="at">sd=</span><span class="fu">sd</span>(n), <span class="at">med=</span><span class="fu">median</span>(n), <span class="at">min=</span><span class="fu">min</span>(n), <span class="at">max=</span><span class="fu">max</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'SNP'. You can override using the `.groups`
 argument.</code></pre>
