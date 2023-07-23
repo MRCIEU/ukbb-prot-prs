@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Associations and drug trials</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="drugs_files/libs/clipboard/clipboard.min.js"></script>
+<script src="drugs_files/libs/quarto-html/quarto.js"></script>
+<script src="drugs_files/libs/quarto-html/popper.min.js"></script>
+<script src="drugs_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="drugs_files/libs/quarto-html/anchor.min.js"></script>
+<link href="drugs_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="drugs_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="drugs_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="drugs_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="drugs_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Associations and drug trials</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Prediction of trials</p>
+<ul>
+<li>All MR</li>
+<li>Cis</li>
+<li>Trans</li>
+<li>Cis + coloc</li>
+<li>PRS</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>here() starts at /Users/gh13047/repo/ukbb-prot-prs</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Type 'citation("pROC")' for a citation.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'pROC'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    cov, smooth, var</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>trials <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"pharmaprojects_mappedtoPRS.csv"</span>))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(trials)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   17229 obs. of  19 variables:
+ $ X                     : int  3 4 5 6 7 8 9 10 11 12 ...
+ $ Unnamed..0            : int  3 4 5 6 7 8 9 10 11 12 ...
+ $ UniProt               : chr  "P00519" "P00519" "P00519" "P00519" ...
+ $ Entrez                : int  25 25 25 25 25 25 25 25 25 25 ...
+ $ Generic.Drug.Name     : chr  "AEG-41174" "AEG-41174" "AP-23464" "asciminib" ...
+ $ Global.Status         : chr  "Discontinued" "Discontinued" "Discontinued" "Launched" ...
+ $ Current.Status        : chr  "Discontinued" "Discontinued" "Discontinued" "Phase I Clinical Trial" ...
+ $ Development.Status    : chr  "Ceased" "Ceased" "Ceased" "Active" ...
+ $ Highest.Status.Reached: chr  "Phase I Clinical Trial" "Phase I Clinical Trial" "Preclinical" "Phase I Clinical Trial" ...
+ $ Drug.Disease          : chr  "Cancer, leukaemia, acute lymphocytic" "Cancer, leukaemia, acute myelogenous" "Cancer, unspecified" "Cancer, leukaemia, acute lymphocytic" ...
+ $ Company               : chr  "Pharmascience" "Pharmascience" "Takeda" "Novartis" ...
+ $ Drug.Disease.Group    : chr  "Anticancer" "Anticancer" "Anticancer" "Anticancer" ...
+ $ Target                : chr  "ABL proto-oncogene 1, non-receptor tyrosine kinase" "ABL proto-oncogene 1, non-receptor tyrosine kinase" "ABL proto-oncogene 1, non-receptor tyrosine kinase" "ABL proto-oncogene 1, non-receptor tyrosine kinase" ...
+ $ Target.Entrez.Gene.ID : int  25 25 25 25 25 25 25 25 25 25 ...
+ $ vectology_query       : chr  "acute lymphocytic leukaemia Cancer" "acute myelogenous leukaemia Cancer" "unspecified Cancer" "acute lymphocytic leukaemia Cancer" ...
+ $ vectology_bestmap     : chr  "Squamous cell carcinoma" "Amyotrophic lateral sclerosis" "Ovarian cancer" "Squamous cell carcinoma" ...
+ $ vectology_score       : num  0.878 0.883 0.899 0.878 0.89 ...
+ $ opengwasid            : chr  "ukb-a-60" "ebi-a-GCST005647" "ieu-a-1120" "ukb-a-60" ...
+ $ code                  : chr  "Squamous cell carcinoma" "ALS" "Ovarian cancer" "Squamous cell carcinoma" ...</code></pre>
+</div>
+</div>
+<p>Get protein to UniProt</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"media-2.xlsx"</span>), <span class="at">sheet=</span><span class="st">"ST6"</span>, <span class="at">skip=</span><span class="dv">2</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [10,248 × 29] (S3: tbl_df/tbl/data.frame)
+ $ Variant ID (CHROM:GENPOS (hg37):A0:A1:imp:v1): chr [1:10248] "3:56849749:T:C:imp:v1" "12:54729872:T:C:imp:v1" "17:41140545:C:T:imp:v1" "3:52004097:C:CG:imp:v1" ...
+ $ CHROM                                        : num [1:10248] 3 12 17 3 3 8 10 3 3 4 ...
+ $ GENPOS (hg38)                                : num [1:10248] 56815721 54336088 42988528 51970081 56815721 ...
+ $ Region ID                                    : num [1:10248] 507 663 811 285 507 ...
+ $ Region Start                                 : num [1:10248] 55815721 53232988 41852620 50970081 55815721 ...
+ $ Region End                                   : num [1:10248] 57815721 56798095 44141596 52970081 57815721 ...
+ $ MHC                                          : num [1:10248] 0 0 0 0 0 0 0 0 0 0 ...
+ $ UKBPPP ProteinID                             : chr [1:10248] "AARSD1:Q9BTE6:OID21311:v1" "AARSD1:Q9BTE6:OID21311:v1" "AARSD1:Q9BTE6:OID21311:v1" "ABHD14B:Q96IU4:OID20921:v1" ...
+ $ Assay Target                                 : chr [1:10248] "AARSD1" "AARSD1" "AARSD1" "ABHD14B" ...
+ $ Target UniProt                               : chr [1:10248] "Q9BTE6" "Q9BTE6" "Q9BTE6" "Q96IU4" ...
+ $ rsID                                         : chr [1:10248] "rs1354034" "rs4759076" "rs323500" "rs373373105" ...
+ $ A1FREQ (discovery)                           : num [1:10248] 0.6047 0.4568 0.2903 0.0121 0.6042 ...
+ $ BETA (discovery, wrt. A1)                    : num [1:10248] 0.0662 0.0497 0.133 -1.4445 0.0572 ...
+ $ SE (discovery)                               : num [1:10248] 0.00722 0.00719 0.00786 0.03517 0.00755 ...
+ $ log10(p) (discovery)                         : num [1:10248] 19.3 11.3 63.6 368.1 13.4 ...
+ $ A1FREQ (replication)                         : num [1:10248] 0.56014 0.45631 0.29874 0.00901 0.55903 ...
+ $ BETA (replication)                           : num [1:10248] 0.0285 0.041 0.0994 -1.3593 0.022 ...
+ $ SE (replication)                             : num [1:10248] 0.0103 0.0103 0.0109 0.0563 0.0107 ...
+ $ log10(p) (replication)                       : num [1:10248] 2.26 4.15 19.02 128.24 1.4 ...
+ $ cis/trans                                    : chr [1:10248] "trans" "trans" "cis" "cis" ...
+ $ cis gene                                     : chr [1:10248] "-" "-" "AARSD1" "ABHD14B" ...
+ $ Bioinfomatic annotated gene                  : chr [1:10248] "ARHGEF3" "COPZ1" "RUNDC1" "ABHD14B" ...
+ $ Ensembl gene ID                              : chr [1:10248] "ENSG00000163947" "ENSG00000111481" "ENSG00000198863" "ENSG00000114779" ...
+ $ Annotated gene consequence                   : chr [1:10248] "intron_variant" "intron_variant" "intron_variant" "frameshift_variant" ...
+ $ Biotype                                      : chr [1:10248] "protein_coding" "protein_coding" "protein_coding" "protein_coding" ...
+ $ CADD_phred                                   : num [1:10248] 14.61 4.02 1.01 NA 14.61 ...
+ $ SIFT                                         : chr [1:10248] NA NA NA NA ...
+ $ PolyPhen                                     : chr [1:10248] NA NA NA NA ...
+ $ PHAST Phylop                                 : num [1:10248] 304 NA NA 372 304 NA NA 304 NA NA ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(a<span class="sc">$</span><span class="st">`</span><span class="at">Assay Target</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1377</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"all.rdata"</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(trials)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   17229 obs. of  19 variables:
+ $ X                     : int  3 4 5 6 7 8 9 10 11 12 ...
+ $ Unnamed..0            : int  3 4 5 6 7 8 9 10 11 12 ...
+ $ UniProt               : chr  "P00519" "P00519" "P00519" "P00519" ...
+ $ Entrez                : int  25 25 25 25 25 25 25 25 25 25 ...
+ $ Generic.Drug.Name     : chr  "AEG-41174" "AEG-41174" "AP-23464" "asciminib" ...
+ $ Global.Status         : chr  "Discontinued" "Discontinued" "Discontinued" "Launched" ...
+ $ Current.Status        : chr  "Discontinued" "Discontinued" "Discontinued" "Phase I Clinical Trial" ...
+ $ Development.Status    : chr  "Ceased" "Ceased" "Ceased" "Active" ...
+ $ Highest.Status.Reached: chr  "Phase I Clinical Trial" "Phase I Clinical Trial" "Preclinical" "Phase I Clinical Trial" ...
+ $ Drug.Disease          : chr  "Cancer, leukaemia, acute lymphocytic" "Cancer, leukaemia, acute myelogenous" "Cancer, unspecified" "Cancer, leukaemia, acute lymphocytic" ...
+ $ Company               : chr  "Pharmascience" "Pharmascience" "Takeda" "Novartis" ...
+ $ Drug.Disease.Group    : chr  "Anticancer" "Anticancer" "Anticancer" "Anticancer" ...
+ $ Target                : chr  "ABL proto-oncogene 1, non-receptor tyrosine kinase" "ABL proto-oncogene 1, non-receptor tyrosine kinase" "ABL proto-oncogene 1, non-receptor tyrosine kinase" "ABL proto-oncogene 1, non-receptor tyrosine kinase" ...
+ $ Target.Entrez.Gene.ID : int  25 25 25 25 25 25 25 25 25 25 ...
+ $ vectology_query       : chr  "acute lymphocytic leukaemia Cancer" "acute myelogenous leukaemia Cancer" "unspecified Cancer" "acute lymphocytic leukaemia Cancer" ...
+ $ vectology_bestmap     : chr  "Squamous cell carcinoma" "Amyotrophic lateral sclerosis" "Ovarian cancer" "Squamous cell carcinoma" ...
+ $ vectology_score       : num  0.878 0.883 0.899 0.878 0.89 ...
+ $ opengwasid            : chr  "ukb-a-60" "ebi-a-GCST005647" "ieu-a-1120" "ukb-a-60" ...
+ $ code                  : chr  "Squamous cell carcinoma" "ALS" "Ovarian cancer" "Squamous cell carcinoma" ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(trials<span class="sc">$</span>opengwasid))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 27</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(res<span class="sc">$</span>id.outcome))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 35</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>uniprot <span class="ot">&lt;-</span> a <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">prot=</span><span class="st">`</span><span class="at">Assay Target</span><span class="st">`</span>, <span class="at">uniprot=</span><span class="st">`</span><span class="at">Target UniProt</span><span class="st">`</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">duplicated</span>(uniprot))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>res_cis <span class="ot">&lt;-</span> <span class="fu">left_join</span>(res_cis, uniprot, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id.exposure"</span><span class="ot">=</span><span class="st">"prot"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in left_join(res_cis, uniprot, by = c(id.exposure = "prot")): Detected an unexpected many-to-many relationship between `x` and `y`.
+ℹ Row 11479 of `x` matches multiple rows in `y`.
+ℹ Row 4 of `y` matches multiple rows in `x`.
+ℹ If a many-to-many relationship is expected, set `relationship =
+  "many-to-many"` to silence this warning.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>res_cis<span class="sc">$</span>code <span class="ot">&lt;-</span> <span class="fu">paste</span>(res_cis<span class="sc">$</span>uniprot, res_cis<span class="sc">$</span>id.outcome)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>trials<span class="sc">$</span>code <span class="ot">&lt;-</span> <span class="fu">paste</span>(trials<span class="sc">$</span>UniProt, trials<span class="sc">$</span>opengwasid)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(trials<span class="sc">$</span>code <span class="sc">%in%</span> res_cis<span class="sc">$</span>code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+FALSE  TRUE 
+ 7751  9478 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(trials<span class="sc">$</span>Highest.Status.Reached)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                Launched           Not Applicable   Phase I Clinical Trial 
+                    3436                       24                     2195 
+ Phase II Clinical Trial Phase III Clinical Trial         Pre-registration 
+                    4789                     1792                      211 
+             Preclinical               Registered 
+                    4445                      337 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(trials<span class="sc">$</span>Global.Status)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Discontinued     Launched   Registered    Suspended    Withdrawn 
+        5614        11242          235           37          101 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(trials<span class="sc">$</span>Current.Status)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+            Discontinued                 Launched  No Development Reported 
+                    6893                     3236                     3940 
+          Not Applicable   Phase I Clinical Trial  Phase II Clinical Trial 
+                      11                      376                     1117 
+Phase III Clinical Trial         Pre-registration              Preclinical 
+                     629                       72                      567 
+              Registered                Suspended                Withdrawn 
+                     289                       36                       63 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>res_cis<span class="sc">$</span>sig1 <span class="ot">&lt;-</span> res_cis<span class="sc">$</span>pval <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>res_cis<span class="sc">$</span>sig2 <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(res_cis<span class="sc">$</span>pval, <span class="st">"fdr"</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(res_cis<span class="sc">$</span>sig1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+FALSE  TRUE 
+21056  2232 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>tempcis <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(trials, res_cis <span class="sc">%&gt;%</span> <span class="fu">select</span>(code, sig1, sig2, pval), <span class="at">by=</span><span class="st">"code"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(code) <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># filter(Development.Status != "Active") %&gt;%</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">launched=</span><span class="fu">any</span>(Highest.Status.Reached <span class="sc">%in%</span> <span class="st">"Launched"</span>), <span class="at">sig1=</span>sig1[<span class="dv">1</span>], <span class="at">sig2=</span>sig2[<span class="dv">1</span>], <span class="at">pval=</span>pval[<span class="dv">1</span>], <span class="at">sig=</span>sig1)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">roc</span>(tempcis<span class="sc">$</span>launched, tempcis<span class="sc">$</span>pval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = FALSE, case = TRUE</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting direction: controls &gt; cases</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+roc.default(response = tempcis$launched, predictor = tempcis$pval)
+
+Data: tempcis$pval in 685 controls (tempcis$launched FALSE) &gt; 246 cases (tempcis$launched TRUE).
+Area under the curve: 0.5197</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">roc</span>(tempcis<span class="sc">$</span>launched, tempcis<span class="sc">$</span>pval) <span class="sc">%&gt;%</span> plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = FALSE, case = TRUE
+Setting direction: controls &gt; cases</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="drugs_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>tempcis <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(launched, sig1) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'launched'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   launched [2]
+  launched sig1      n
+  &lt;lgl&gt;    &lt;lgl&gt; &lt;int&gt;
+1 FALSE    FALSE   637
+2 FALSE    TRUE     48
+3 TRUE     FALSE   217
+4 TRUE     TRUE     29</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(sig1 <span class="sc">~</span> launched, tempcis))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = sig1 ~ launched, data = tempcis)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.11789 -0.07007 -0.07007 -0.07007  0.92993 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   0.07007    0.01050   6.671 4.36e-11 ***
+launchedTRUE  0.04781    0.02044   2.340   0.0195 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2749 on 929 degrees of freedom
+Multiple R-squared:  0.005858,  Adjusted R-squared:  0.004788 
+F-statistic: 5.474 on 1 and 929 DF,  p-value: 0.01951</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(sig2 <span class="sc">~</span> launched, tempcis))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = sig2 ~ launched, data = tempcis)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.02033 -0.02033 -0.00584 -0.00584  0.99416 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)  0.005839   0.003734   1.564   0.1182  
+launchedTRUE 0.014486   0.007265   1.994   0.0465 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.09774 on 929 degrees of freedom
+Multiple R-squared:  0.004261,  Adjusted R-squared:  0.003189 
+F-statistic: 3.976 on 1 and 929 DF,  p-value: 0.04645</code></pre>
+</div>
+</div>
+<p>Try with trans</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>res_trans <span class="ot">&lt;-</span> <span class="fu">left_join</span>(res_trans, uniprot, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id.exposure"</span><span class="ot">=</span><span class="st">"prot"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in left_join(res_trans, uniprot, by = c(id.exposure = "prot")): Detected an unexpected many-to-many relationship between `x` and `y`.
+ℹ Row 11304 of `x` matches multiple rows in `y`.
+ℹ Row 2 of `y` matches multiple rows in `x`.
+ℹ If a many-to-many relationship is expected, set `relationship =
+  "many-to-many"` to silence this warning.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>res_trans<span class="sc">$</span>code <span class="ot">&lt;-</span> <span class="fu">paste</span>(res_trans<span class="sc">$</span>uniprot, res_trans<span class="sc">$</span>id.outcome)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>res_trans<span class="sc">$</span>sig1 <span class="ot">&lt;-</span> res_trans<span class="sc">$</span>pval <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>res_trans<span class="sc">$</span>sig2 <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(res_trans<span class="sc">$</span>pval, <span class="st">"fdr"</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>temptrans <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(trials, res_trans <span class="sc">%&gt;%</span> <span class="fu">select</span>(code, sig1, sig2, pval), <span class="at">by=</span><span class="st">"code"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(code) <span class="sc">%&gt;%</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Development.Status <span class="sc">!=</span> <span class="st">"Active"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">launched=</span><span class="fu">any</span>(Highest.Status.Reached <span class="sc">%in%</span> <span class="st">"Launched"</span>), <span class="at">sig1=</span>sig1[<span class="dv">1</span>], <span class="at">sig2=</span>sig2[<span class="dv">1</span>], <span class="at">pval=</span>pval[<span class="dv">1</span>], <span class="at">sig=</span>sig1) <span class="sc">%&gt;%</span></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pval))</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(temptrans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1113    6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">roc</span>(temptrans<span class="sc">$</span>launched, temptrans<span class="sc">$</span>pval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = FALSE, case = TRUE</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting direction: controls &gt; cases</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+roc.default(response = temptrans$launched, predictor = temptrans$pval)
+
+Data: temptrans$pval in 922 controls (temptrans$launched FALSE) &gt; 191 cases (temptrans$launched TRUE).
+Area under the curve: 0.5062</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">roc</span>(temptrans<span class="sc">$</span>launched, temptrans<span class="sc">$</span>pval) <span class="sc">%&gt;%</span> plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = FALSE, case = TRUE
+Setting direction: controls &gt; cases</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="drugs_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>temptrans <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(launched, sig1) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'launched'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   launched [2]
+  launched sig1      n
+  &lt;lgl&gt;    &lt;lgl&gt; &lt;int&gt;
+1 FALSE    FALSE   843
+2 FALSE    TRUE     79
+3 TRUE     FALSE   173
+4 TRUE     TRUE     18</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(sig1 <span class="sc">~</span> launched, temptrans))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = sig1 ~ launched, data = temptrans)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.09424 -0.08568 -0.08568 -0.08568  0.91432 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.085683   0.009297   9.216   &lt;2e-16 ***
+launchedTRUE 0.008558   0.022442   0.381    0.703    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2823 on 1111 degrees of freedom
+Multiple R-squared:  0.0001309, Adjusted R-squared:  -0.0007691 
+F-statistic: 0.1454 on 1 and 1111 DF,  p-value: 0.703</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(sig2 <span class="sc">~</span> launched, temptrans))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = sig2 ~ launched, data = temptrans)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.02278 -0.02278 -0.02278 -0.02278  0.98429 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   0.022777   0.004787   4.758 2.21e-06 ***
+launchedTRUE -0.007070   0.011556  -0.612    0.541    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1454 on 1111 degrees of freedom
+Multiple R-squared:  0.0003368, Adjusted R-squared:  -0.000563 
+F-statistic: 0.3743 on 1 and 1111 DF,  p-value: 0.5408</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'data.table'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:dplyr':
+
+    between, first, last</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>organise_prs <span class="ot">&lt;-</span> <span class="cf">function</span>(fn) {</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>    sf <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"PRScs_Olink_Associaton_Biogen_"</span>, <span class="st">""</span>, <span class="fu">basename</span>(fn)) <span class="sc">%&gt;%</span> <span class="fu">gsub</span>(<span class="st">"PRScs_Olink_Associaton_Bristol_"</span>, <span class="st">""</span>, .) <span class="sc">%&gt;%</span> <span class="fu">gsub</span>(<span class="st">".csv"</span>, <span class="st">""</span>, .) <span class="sc">%&gt;%</span> <span class="fu">gsub</span>(<span class="st">"_merged"</span>, <span class="st">""</span>, .)</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(sf)</span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fread</span>(fn) <span class="sc">%&gt;%</span> tidyr<span class="sc">::</span><span class="fu">separate</span>(UKBPPP_ProteinID, <span class="at">sep=</span><span class="st">":"</span>, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"prot"</span>, <span class="st">"uniprot"</span>, <span class="st">"v1"</span>, <span class="st">"v2"</span>)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">opengwasid=</span>sf)</span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>prs_all <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"Bristol_and_Biogen_PRS_Associations"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grep</span>(<span class="st">"PRScs"</span>, ., <span class="at">value=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"Bristol_and_Biogen_PRS_Associations"</span>, .) <span class="sc">%&gt;%</span></span>
+<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lapply</span>(., organise_prs) <span class="sc">%&gt;%</span> </span>
+<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_rows</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "AD"
+[1] "ALS"
+[1] "Epilepsy"
+[1] "MDD"
+[1] "MS"
+[1] "PD"
+[1] "Schizophrenia"
+[1] "Stroke"
+[1] "ebi-a-GCST003116"
+[1] "ebi-a-GCST003156"
+[1] "ebi-a-GCST006464"
+[1] "ieu-a-1102"
+[1] "ieu-a-1120"
+[1] "ieu-a-1121"
+[1] "ieu-a-1126"
+[1] "ieu-a-1127"
+[1] "ieu-a-1128"
+[1] "ieu-a-1228"
+[1] "ieu-a-1238"
+[1] "ieu-a-1240"
+[1] "ieu-a-26"
+[1] "ieu-a-299"
+[1] "ieu-a-300"
+[1] "ieu-a-301"
+[1] "ieu-a-302"
+[1] "ieu-a-822"
+[1] "ieu-a-984"
+[1] "ieu-a-985"
+[1] "ieu-a-987"
+[1] "ieu-a-989"
+[1] "ieu-b-38"
+[1] "ieu-b-39"
+[1] "ieu-b-85"
+[1] "ieu-b-89"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(traits)) {</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>    prs_all<span class="sc">$</span>opengwasid[prs_all<span class="sc">$</span>opengwasid <span class="sc">%in%</span> traits<span class="sc">$</span>code[i]] <span class="ot">&lt;-</span> traits<span class="sc">$</span>opengwasid[i]</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>prs_all <span class="ot">&lt;-</span> <span class="fu">subset</span>(prs_all, opengwasid <span class="sc">%in%</span> traits<span class="sc">$</span>opengwasid)</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(prs_all<span class="sc">$</span>opengwasid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ebi-a-GCST003116 ebi-a-GCST005647 ebi-a-GCST005838 ebi-a-GCST006464 
+            1469             1469             1469             1469 
+      ieu-a-1024       ieu-a-1120       ieu-a-1121       ieu-a-1126 
+            1469             1469             1469             1469 
+      ieu-a-1127       ieu-a-1128       ieu-a-1228        ieu-a-299 
+            1469             1469             1469             1469 
+       ieu-a-300        ieu-a-301        ieu-a-302        ieu-a-805 
+            1469             1469             1469             1469 
+       ieu-a-822        ieu-a-984        ieu-a-985        ieu-a-987 
+            1469             1469             1469             1469 
+       ieu-a-989          ieu-b-2         ieu-b-38         ieu-b-39 
+            1469             1469             1469             1469 
+        ieu-b-42          ieu-b-7         ieu-b-85         ieu-b-89 
+            1469             1469             1469             1469 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>prs_all<span class="sc">$</span>code <span class="ot">&lt;-</span> <span class="fu">paste</span>(prs_all<span class="sc">$</span>uniprot, prs_all<span class="sc">$</span>opengwasid)</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>prs_all<span class="sc">$</span>sig1 <span class="ot">&lt;-</span> prs_all<span class="sc">$</span>P_value <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>prs_all<span class="sc">$</span>sig2 <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(prs_all<span class="sc">$</span>P_value, <span class="st">"fdr"</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>tempprs <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(trials, prs_all <span class="sc">%&gt;%</span> <span class="fu">select</span>(code, sig1, sig2, P_value), <span class="at">by=</span><span class="st">"code"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(code) <span class="sc">%&gt;%</span></span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Development.Status <span class="sc">!=</span> <span class="st">"Active"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">launched=</span><span class="fu">any</span>(Highest.Status.Reached <span class="sc">%in%</span> <span class="st">"Launched"</span>), <span class="at">sig1=</span>sig1[<span class="dv">1</span>], <span class="at">sig2=</span>sig2[<span class="dv">1</span>], <span class="at">pval=</span>P_value[<span class="dv">1</span>], <span class="at">sig=</span>sig1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in inner_join(trials, prs_all %&gt;% select(code, sig1, sig2, P_value), : Detected an unexpected many-to-many relationship between `x` and `y`.
+ℹ Row 2019 of `x` matches multiple rows in `y`.
+ℹ Row 1886 of `y` matches multiple rows in `x`.
+ℹ If a many-to-many relationship is expected, set `relationship =
+  "many-to-many"` to silence this warning.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">roc</span>(tempprs<span class="sc">$</span>launched, tempprs<span class="sc">$</span>pval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = FALSE, case = TRUE</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting direction: controls &gt; cases</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+roc.default(response = tempprs$launched, predictor = tempprs$pval)
+
+Data: tempprs$pval in 881 controls (tempprs$launched FALSE) &gt; 182 cases (tempprs$launched TRUE).
+Area under the curve: 0.511</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">roc</span>(tempprs<span class="sc">$</span>launched, tempprs<span class="sc">$</span>pval) <span class="sc">%&gt;%</span> plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = FALSE, case = TRUE
+Setting direction: controls &gt; cases</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="drugs_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>tempprs <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(launched, sig1) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'launched'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   launched [2]
+  launched sig1      n
+  &lt;lgl&gt;    &lt;lgl&gt; &lt;int&gt;
+1 FALSE    FALSE   652
+2 FALSE    TRUE    229
+3 TRUE     FALSE   129
+4 TRUE     TRUE     53</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(sig1 <span class="sc">~</span> launched, tempprs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = sig1 ~ launched, data = tempprs)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.2912 -0.2599 -0.2599  0.7088  0.7401 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   0.25993    0.01488   17.46   &lt;2e-16 ***
+launchedTRUE  0.03128    0.03597    0.87    0.385    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4417 on 1061 degrees of freedom
+Multiple R-squared:  0.0007122, Adjusted R-squared:  -0.0002296 
+F-statistic: 0.7562 on 1 and 1061 DF,  p-value: 0.3847</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(sig2 <span class="sc">~</span> launched, tempprs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = sig2 ~ launched, data = tempprs)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.1593 -0.1396 -0.1396 -0.1396  0.8604 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   0.13961    0.01180  11.829   &lt;2e-16 ***
+launchedTRUE  0.01973    0.02852   0.692    0.489    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.3503 on 1061 degrees of freedom
+Multiple R-squared:  0.0004506, Adjusted R-squared:  -0.0004915 
+F-statistic: 0.4783 on 1 and 1061 DF,  p-value: 0.4893</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>gi <span class="ot">&lt;-</span> ieugwasr<span class="sc">::</span><span class="fu">gwasinfo</span>(traits<span class="sc">$</span>opengwasid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>API: public: http://gwas-api.mrcieu.ac.uk/</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"all.rdata"</span>))</span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>coloc_res <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"cis_coloc_res.rds"</span>))</span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>coloc_res <span class="ot">&lt;-</span> coloc_res <span class="sc">%&gt;%</span></span>
+<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(id.outcome)) <span class="sc">%&gt;%</span></span>
+<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., gi <span class="sc">%&gt;%</span> <span class="fu">select</span>(trait, <span class="at">id.outcome =</span> id), <span class="at">by=</span><span class="fu">c</span>(<span class="st">"outcome"</span><span class="ot">=</span><span class="st">"trait"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(outcome)) <span class="sc">%&gt;%</span></span>
+<span id="cb89-7"><a href="#cb89-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">outcome=</span>code, <span class="at">id.outcome=</span>opengwasid), <span class="at">by=</span><span class="st">"id.outcome"</span>)</span>
+<span id="cb89-8"><a href="#cb89-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-9"><a href="#cb89-9" aria-hidden="true" tabindex="-1"></a>coloc_res <span class="ot">&lt;-</span> <span class="fu">left_join</span>(coloc_res, uniprot, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id.exposure"</span><span class="ot">=</span><span class="st">"prot"</span>))</span>
+<span id="cb89-10"><a href="#cb89-10" aria-hidden="true" tabindex="-1"></a>coloc_res<span class="sc">$</span>code <span class="ot">&lt;-</span> <span class="fu">paste</span>(coloc_res<span class="sc">$</span>uniprot, coloc_res<span class="sc">$</span>id.outcome)</span>
+<span id="cb89-11"><a href="#cb89-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(coloc_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 13
+  nsnps PP.H0.abf PP.H1.abf PP.H2.abf PP.H3.abf PP.H4.abf snp         exposure
+  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;   
+1  2764 3.77e- 27  0.0871   3.98e- 28  0.00911    0.904   17:73452472 ACOX1   
+2  1681 0          0.248    0          0.0200     0.732   1:154533617 ADAM15  
+3  2624 0          0.00136  0          0.000378   0.998   4:80682779  FGF5    
+4  3055 1.35e-199  0.00110  1.28e-198  0.0103     0.989   15:90925430 FURIN   
+5  2384 0          0.000838 0          0.997      0.00220 22:24143502 GGT5    
+6  2130 0          0.000311 0          0.0623     0.937   1:153927052 IL6R    
+# ℹ 5 more variables: id.exposure &lt;chr&gt;, id.outcome &lt;chr&gt;, outcome &lt;chr&gt;,
+#   uniprot &lt;chr&gt;, code &lt;chr&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>tempcis<span class="sc">$</span>sigcoloc <span class="ot">&lt;-</span> tempcis<span class="sc">$</span>code <span class="sc">%in%</span> <span class="fu">subset</span>(coloc_res, PP.H4.abf <span class="sc">&gt;</span> <span class="fl">0.8</span>)<span class="sc">$</span>code</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>tempcoloc <span class="ot">&lt;-</span> tempcis</span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>tempcoloc<span class="sc">$</span>sig <span class="ot">&lt;-</span> tempcoloc<span class="sc">$</span>sigcoloc</span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> <span class="fu">roc</span>(tempcis<span class="sc">$</span>launched, tempcis<span class="sc">$</span>pval) <span class="sc">%&gt;%</span> auc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = FALSE, case = TRUE</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting direction: controls &gt; cases</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">roc</span>(tempcis<span class="sc">$</span>launched, tempcis<span class="sc">$</span>pval) <span class="sc">%&gt;%</span> plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = FALSE, case = TRUE
+Setting direction: controls &gt; cases</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="drugs_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>tempcis <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(launched, sigcoloc) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'launched'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   launched [2]
+  launched sigcoloc     n
+  &lt;lgl&gt;    &lt;lgl&gt;    &lt;int&gt;
+1 FALSE    FALSE      681
+2 FALSE    TRUE         4
+3 TRUE     FALSE      243
+4 TRUE     TRUE         3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(sig1 <span class="sc">~</span> launched, tempcis))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = sig1 ~ launched, data = tempcis)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.11789 -0.07007 -0.07007 -0.07007  0.92993 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   0.07007    0.01050   6.671 4.36e-11 ***
+launchedTRUE  0.04781    0.02044   2.340   0.0195 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2749 on 929 degrees of freedom
+Multiple R-squared:  0.005858,  Adjusted R-squared:  0.004788 
+F-statistic: 5.474 on 1 and 929 DF,  p-value: 0.01951</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(sig2 <span class="sc">~</span> launched, tempcis))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = sig2 ~ launched, data = tempcis)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.02033 -0.02033 -0.00584 -0.00584  0.99416 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)  0.005839   0.003734   1.564   0.1182  
+launchedTRUE 0.014486   0.007265   1.994   0.0465 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.09774 on 929 degrees of freedom
+Multiple R-squared:  0.004261,  Adjusted R-squared:  0.003189 
+F-statistic: 3.976 on 1 and 929 DF,  p-value: 0.04645</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(sigcoloc <span class="sc">~</span> launched, tempcis))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = sigcoloc ~ launched, data = tempcis)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.01220 -0.01220 -0.00584 -0.00584  0.99416 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)  0.005839   0.003302   1.768   0.0773 .
+launchedTRUE 0.006356   0.006424   0.989   0.3228  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.08643 on 929 degrees of freedom
+Multiple R-squared:  0.001052,  Adjusted R-squared:  -2.289e-05 
+F-statistic: 0.9787 on 1 and 929 DF,  p-value: 0.3228</code></pre>
+</div>
+</div>
+<p>summarise</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>    tempcis,</span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a>    tempcoloc,</span>
+<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a>    temptrans,</span>
+<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a>    tempprs</span>
+<span id="cb105-6"><a href="#cb105-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">lapply</span>(., <span class="cf">function</span>(x) {</span>
+<span id="cb105-7"><a href="#cb105-7" aria-hidden="true" tabindex="-1"></a>    mod <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">lm</span>(sig <span class="sc">~</span> launched, x))</span>
+<span id="cb105-8"><a href="#cb105-8" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(launched, sig) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>())</span>
+<span id="cb105-9"><a href="#cb105-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(y)</span>
+<span id="cb105-10"><a href="#cb105-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(</span>
+<span id="cb105-11"><a href="#cb105-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">auc=</span><span class="fu">roc</span>(x<span class="sc">$</span>launched, x<span class="sc">$</span>pval) <span class="sc">%&gt;%</span> auc,</span>
+<span id="cb105-12"><a href="#cb105-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">lor=</span>mod<span class="sc">$</span>coef[<span class="dv">2</span>,<span class="dv">1</span>],</span>
+<span id="cb105-13"><a href="#cb105-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">se=</span>mod<span class="sc">$</span>coef[<span class="dv">2</span>,<span class="dv">2</span>],</span>
+<span id="cb105-14"><a href="#cb105-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">pval=</span>mod<span class="sc">$</span>coef[<span class="dv">2</span>,<span class="dv">4</span>],</span>
+<span id="cb105-15"><a href="#cb105-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">T-,MR-</span><span class="st">`</span><span class="ot">=</span> y<span class="sc">$</span>n[<span class="dv">1</span>],</span>
+<span id="cb105-16"><a href="#cb105-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">T-,MR+</span><span class="st">`</span><span class="ot">=</span>y<span class="sc">$</span>n[<span class="dv">2</span>],</span>
+<span id="cb105-17"><a href="#cb105-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">T+,MR-</span><span class="st">`</span><span class="ot">=</span>y<span class="sc">$</span>n[<span class="dv">3</span>],</span>
+<span id="cb105-18"><a href="#cb105-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">T+,MR+</span><span class="st">`</span><span class="ot">=</span>y<span class="sc">$</span>n[<span class="dv">4</span>]</span>
+<span id="cb105-19"><a href="#cb105-19" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb105-20"><a href="#cb105-20" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">%&gt;%</span> <span class="fu">do.call</span>(rbind, .) <span class="sc">%&gt;%</span></span>
+<span id="cb105-21"><a href="#cb105-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">method=</span><span class="fu">c</span>(<span class="st">"Forward MR (cis)"</span>, <span class="st">"Forward MR (cis + coloc)"</span>, <span class="st">"Forward MR (trans)"</span>, <span class="st">"Reverse PRS"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb105-22"><a href="#cb105-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(method, <span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'launched'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   launched [2]
+  launched sig       n
+  &lt;lgl&gt;    &lt;lgl&gt; &lt;int&gt;
+1 FALSE    FALSE   637
+2 FALSE    TRUE     48
+3 TRUE     FALSE   217
+4 TRUE     TRUE     29</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = FALSE, case = TRUE
+Setting direction: controls &gt; cases
+`summarise()` has grouped output by 'launched'. You can override using the `.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   launched [2]
+  launched sig       n
+  &lt;lgl&gt;    &lt;lgl&gt; &lt;int&gt;
+1 FALSE    FALSE   681
+2 FALSE    TRUE      4
+3 TRUE     FALSE   243
+4 TRUE     TRUE      3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = FALSE, case = TRUE
+Setting direction: controls &gt; cases
+`summarise()` has grouped output by 'launched'. You can override using the `.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   launched [2]
+  launched sig       n
+  &lt;lgl&gt;    &lt;lgl&gt; &lt;int&gt;
+1 FALSE    FALSE   843
+2 FALSE    TRUE     79
+3 TRUE     FALSE   173
+4 TRUE     TRUE     18</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = FALSE, case = TRUE
+Setting direction: controls &gt; cases
+`summarise()` has grouped output by 'launched'. You can override using the `.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   launched [2]
+  launched sig       n
+  &lt;lgl&gt;    &lt;lgl&gt; &lt;int&gt;
+1 FALSE    FALSE   652
+2 FALSE    TRUE    229
+3 TRUE     FALSE   129
+4 TRUE     TRUE     53</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = FALSE, case = TRUE
+Setting direction: controls &gt; cases</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>auc[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 9
+  method    auc           lor      se   pval `T-,MR-` `T-,MR+` `T+,MR-` `T+,MR+`
+  &lt;chr&gt;     &lt;auc&gt;       &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;int&gt;    &lt;int&gt;    &lt;int&gt;    &lt;int&gt;
+1 Forward … 0.5196665 0.0478  0.0204  0.0195      637       48      217       29
+2 Forward …        NA 0.00636 0.00642 0.323       681        4      243        3
+3 Forward … 0.5062322 0.00856 0.0224  0.703       843       79      173       18
+4 Reverse … 0.5110327 0.0313  0.0360  0.385       652      229      129       53</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(res, <span class="at">file=</span><span class="fu">here</span>(<span class="st">"results"</span>, <span class="st">"trial_enrichment.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
