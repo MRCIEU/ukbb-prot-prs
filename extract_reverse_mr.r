@@ -6,6 +6,8 @@ library(data.table)
 library(R.utils)
 library(furrr)
 library(glue)
+library(TwoSampleMR)
+library(tidyr)
 
 load(here("data", "all.rdata"))
 lookups <- readRDS(here("data", "reverse_mr_lookups.rds"))
@@ -124,11 +126,6 @@ saveRDS(pqtl_extract, file=here("data", "pqtl_extract.rds"))
 
 # Harmonise exposure / outcome
 
-library(dplyr)
-library(here)
-library(ieugwasr)
-library(TwoSampleMR)
-library(tidyr)
 
 load(here("data", "all.rdata"))
 pqtl_extract <- readRDS(here("data", "pqtl_extract.rds"))
@@ -137,7 +134,7 @@ lookups <- readRDS(here("data", "reverse_mr_lookups.rds"))
 head(pqtl_extract)
 head(lookups)
 
-inst <- ieugwasr::tophits(unique(prs_pairs$opengwasid))
+inst <- readRDS(here("data", "inst.rds"))
 expdat <- format_data(
     inst, "exposure", snp_col="rsid", phenotype="id", effect_allele="ea", other_allele="nea", pval="p"
 )

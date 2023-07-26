@@ -10,6 +10,7 @@ head(prs_pairs)
 
 inst <- ieugwasr::tophits(unique(prs_pairs$opengwasid))
 inst
+saveRDS(inst, file=here("data", "inst.rds"))
 
 lookups <- left_join(
     prs_pairs %>% select(prot, id=opengwasid),
