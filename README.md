@@ -34,6 +34,20 @@ Analysis of reverse MR. First extact data from pQTL summary stats
 
 ```
 Rscript extract_reverse_mr.r
+quarto render docs/reverse_mr.rmd
+```
+
+Trial enrichment analysis
+
+```
+quarto render docs/drugs.qmd
+```
+
+Enrichments
+
+```
+Rscript enrichment.r
+quarto render docs/enrichment.qmd
 ```
 
 Note that I used singularity to run it:

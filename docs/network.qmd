@@ -1,0 +1,270 @@
+---
+title: Generate networks for each disease
+author: Gibran Hemani
+---
+
+Need
+
+- coloc results
+- pathway results
+- prs results
+- reverse MR results
+
+
+```{r}
+library(dplyr)
+library(igraph)
+library(ggplot2)
+library(readxl)
+library(here)
+library(tidyr)
+```
+
+
+Traits
+
+```{r}
+load(here("data", "all.rdata"))
+```
+
+Coloc results
+
+```{r}
+traits <- read_xlsx(here("data", "Supplementary_Table5.xlsx"))
+gi <- ieugwasr::gwasinfo(traits$opengwasid)
+load(here("data", "all.rdata"))
+coloc_res <- readRDS(here("data", "cis_coloc_res.rds"))
+coloc_res <- coloc_res %>%
+    select(-c(id.outcome)) %>%
+    left_join(., gi %>% select(trait, id.outcome = id), by=c("outcome"="trait")) %>%
+    select(-c(outcome)) %>%
+    left_join(., traits %>% select(outcome=code, id.outcome=opengwasid), by="id.outcome")
+
+coloc_res <- left_join(coloc_res, res_cis, by=c("id.exposure", "id.outcome"))
+coloc_res <- subset(coloc_res, PP.H4.abf > 0.8)
+dim(coloc_res)
+```
+
+Reverse MR
+
+```{r}
+rmp <- read.csv(here("results", "resnohet.csv"))
+```
+
+Networks
+
+```{r}
+pathways <- read.csv(here("data", "olink_pathways.csv"))
+pathways <- tidyr::separate(pathways, Analyte, sep=":", into=c("prot", "v1", "v2", "v3"))
+length(unique(pathways$prot))
+```
+
+make graph
+
+```{r}
+# prot to disease
+
+l1 <- tibble(
+    from=coloc_res$exposure.x,
+    to=coloc_res$outcome.x,
+    eff=coloc_res$b,
+    s=sign(eff)
+)
+
+# disease to prot
+l3 <- tibble(
+    from=rmp$exposure,
+    to=rmp$outcome,
+    eff=rmp$b,
+    s=sign(eff)
+)
+
+o <- bind_rows(l1, l3) %>% as.matrix %>% {.[,1:2]}
+table(o[,2])
+
+
+g <- graph_from_edgelist(bind_rows(l1, l3) %>% as.matrix %>% {.[,1:2]})
+
+v <- V(g) %>% names()
+coord <- layout_as_tree(g)
+coord[v %in% traits$code, 2] <- 1
+coord[v %in% traits$code, 2] <- 1
+head(coord)
+
+plot(g, layout=coord)
+
+```
+
+
+```{r}
+plotg <- function(coloc_res, rmp, pathways, id) {
+    l1 <- coloc_res %>%
+        filter(id.outcome == id) %>%
+        dplyr::select(
+            from=exposure.x,
+            to=outcome.x,
+            eff=b
+        ) %>% mutate(s=sign(eff))
+
+    # disease to prot
+    l3 <- rmp %>%
+        filter(id.exposure == id) %>%
+        dplyr::select(
+            from=exposure,
+            to=outcome,
+            eff=b
+        ) %>% mutate(s=sign(eff))
+
+
+    pathways1 <- pathways %>% dplyr::select(from=prot, to=Pathways) %>% filter(from %in% l1$from)
+
+    pathways2 <- pathways %>% dplyr::select(from=prot, to=Pathways) %>% filter(from %in% l2$to)
+
+    temp <- left_join(l1, pathways1, by="from")
+    temp2 <- temp %>% group_by(to.x, to.y) %>% summarise(n=n()) %>% filter(n > 1)
+
+    temp3 <- left_join(temp2, temp, by=c("to.x", "to.y"))
+
+    l1 <- tibble(
+        from=temp3$from,
+        to=temp3$to.y,
+        eff=temp3$eff,
+        s=temp3$s
+    )
+
+    l2 <- tibble(
+        from=temp3$to.y,
+        to=temp3$to.x,
+        eff=1,
+        s=1
+    )
+
+    l2n <- subset(l1, is.na(to)) %>% mutate(to=l2$to[1])
+    l1 <- subset(l1, !is.na(to))
+    l2 <- subset(l2, !is.na(from))
+
+    l3$to <- paste0(l3$to, " ")
+
+    o <- bind_rows(l1, l2, l2n, l3) %>% 
+        select(from, to) %>% 
+        filter(!duplicated(paste(from, to))) %>%
+        as.matrix()
+    g <- graph_from_edgelist(o)
+    coords <- layout_as_tree(g, flip.y=TRUE)
+    v <- V(g) %>% names()
+    ind <- v %in% c(l2n$from, l1$from)
+    coords[ind, 2] <- rep_len(c(2.9, 3.1), length.out=sum(ind))
+    ind <- v %in% pathways$Pathways
+    n <- sum(ind)
+    coords[ind, 2] <- seq(0, 0.15*(n-1), by=0.15) - (0.15 * n/2) + 2
+    coords[v %in% l3$from, 2] <- 1
+    ind <- grepl(" $", v)
+    coords[ind, 2] <- rep_len(c(0, 0.2), length.out=sum(ind))
+    plot(g, layout=coords)
+}
+plotg(coloc_res, rmp, pathways, "ebi-a-GCST003374")
+```
+
+
+
+```{r}
+
+# add in pathways
+table(l1$from %in% pathways$prot)
+table(l3$to %in% pathways$prot)
+
+pathways1 <- pathways %>% dplyr::select(from=prot, to=Pathways) %>% filter(from %in% l1$from)
+
+pathways2 <- pathways %>% dplyr::select(from=prot, to=Pathways) %>% filter(from %in% l2$to)
+
+temp <- left_join(l1, pathways1, by="from")
+temp2 <- temp %>% group_by(to.x, to.y) %>% summarise(n=n()) %>% filter(n > 1)
+
+temp3 <- left_join(temp2, temp, by=c("to.x", "to.y"))
+
+l1 <- tibble(
+    from=temp3$from,
+    to=temp3$to.y,
+    eff=temp3$eff,
+    s=temp3$s
+)
+
+l2 <- tibble(
+    from=temp3$to.y,
+    to=temp3$to.x,
+    eff=1,
+    s=1
+)
+
+dim(temp3)
+head(temp3)
+dim(temp)
+head(temp)
+
+
+
+
+```
+
+
+```{r}
+g <- make_lattice( c(3,3) )
+
+g <- tribble(
+    ~from, ~to,
+    "g1", "pc1",
+    "g2", "pc2",
+    "g1", "pc2",
+    "g3", "pc3",
+    "g4", "pc4",
+    "pc1", "n1",
+    "pc2", "n1",
+    "pc3", "n2",
+    "pc4", "n2",
+    "n1", "l",
+    "n2", "l",
+    "l", "pn5",
+    "l", "pn6",
+    "n2", "pn7",
+    "g5", "l"
+) %>% as.matrix %>% graph_from_edgelist()
+coords <- layout_as_tree(g, flip.y=TRUE)
+coords[11, 1] <- 0
+coords[14,2] <- 0
+V(g)
+plot(g, layout=coords)
+```
+
+
+
+```{r}
+layout_in_layers <- function(g, flip.y) {
+    coord <- layout_as_tree(g)
+    v <- V(g) %>% names()
+
+    # organise layers
+    coord[grepl("g", v), 2] <- 4
+    coord[grepl("pc", v), 2] <- 3
+    coord[grepl("n", v), 2] <- 2
+    coord[grepl("l", v), 2] <- 1
+    coord[grepl("pn", v), 2] <- 0
+
+    # centre layers
+    for(i in unique(coord[,2])) {
+        coord[coord[,2] == i, 1] <- coord[coord[,2] == i, 1] - mean(coord[coord[,2] == i, 1])
+    }
+
+    # Put all 
+    plot(g, layout=coord, vertex.size=ns)
+
+    # Node size
+    ns <- rep(15, length(v))
+    ns[v == "l"] <- 20
+    ns <- as.matrix(ns)
+    rownames(ns) <- v
+
+    curve_multiple(g, 0.5,)
+
+}
+
+```
