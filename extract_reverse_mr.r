@@ -1,4 +1,3 @@
-library(ieugwasr)
 library(dplyr)
 library(readxl)
 library(here)
@@ -9,24 +8,6 @@ library(furrr)
 library(glue)
 
 load(here("data", "all.rdata"))
-
-head(prs_pairs)
-
-# Get instruments for all opengwasid in prs_pairs
-
-inst <- ieugwasr::tophits(unique(prs_pairs$opengwasid))
-inst
-
-lookups <- left_join(
-    prs_pairs %>% select(prot, id=opengwasid),
-    inst %>% select(chr, position, rsid, ea, nea, id),
-    by="id",
-    relationship="many-to-many"
-)
-
-lookups
-saveRDS(lookups, file=here("data", "reverse_mr_lookups.rds"))
-
 lookups <- readRDS(here("data", "reverse_mr_lookups.rds"))
 prots <- unique(lookups$prot)
 prot_dir <- "/projects/MRC-IEU/research/projects/icep2/wp1/028/working/data/ukbb_pqtl"
@@ -48,14 +29,20 @@ paths$prot[paths$prot == "FUT3"] <- "FUT3_FUT5"
 paths$prot[paths$prot == "EBI3"] <- "EBI3_IL27"
 
 table(prots %in% paths$prot)
+prots[!prots %in% paths$prot]
 
+table(file.exists(file.path(prot_dir, paths$pdirst)))
+head(paths)
 dim(paths)
 paths <- subset(paths, paths$prot %in% prots)
 dim(paths)
 
 paths$output <- here("data", "pqtl_extract", paste0(paths$prot, ".rds"))
 dim(paths)
+table(file.exists(paths$output))
+subset(paths, !file.exists(output))$prot
 paths <- subset(paths, !file.exists(output))
+paths <- subset(paths, !duplicated(prot))
 dim(paths)
 
 stopifnot(all(file.exists(file.path(prot_dir, paths$pdirst))))
@@ -84,29 +71,25 @@ lookup_txt <- function(fn, pos) {
     fread(tf2)
 }
 
-
-plan(multisession, workers = 32)
-furrr::future_map(1:nrow(paths), \(i)
-{
+extract_sumstat <- function(i, paths, lookups, prot_dir) {
     p <- paths$prot[i]
     message("Iteration ", i)
     x <- subset(lookups, prot == p)
     fnt <- file.path(prot_dir, subset(paths, prot==p)$pdirst)
-    if(!file.exists(fnt))
-    {
+    if(!file.exists(fnt)) {
         next
     }
     cmd <- paste0("tar xvf ", fnt)
     system(cmd)
     l <- list()
+    fnut <- list.files(subset(paths, prot==p)$pdirs)
     for(ch in unique(x$chr))
     {
         message(p, " ", ch)
-        fn <- file.path(subset(paths, prot==p)$pdirs,
-            paste0("discovery_chr", ch, "_", gsub("_", ":", subset(paths, prot==p)$pdirs), ".gz")
-        )
+        fn <- grep(paste0("chr", ch, "_"), fnut, value=T) %>% {file.path(subset(paths, prot==p)$pdirs, .)}
         if(!file.exists(fn))
         {
+            message("missing")
             next
         }
         # d <- fread(fn) %>% mutate(prot=p)
@@ -123,11 +106,17 @@ furrr::future_map(1:nrow(paths), \(i)
     l$prot <- p
     saveRDS(l, file=paths$output[i])
     system(paste0("rm -r ", subset(paths, prot==p)$pdirs))
+}
+
+plan(multisession, workers = 32)
+furrr::future_map(1:nrow(paths), \(i) {
+    extract_sumstat(i, paths, lookups, prot_dir)
 })
 
 fn <- list.files(here("data", "pqtl_extract"))
 
-pqtl_extract <- lapply(fn, \(x){
+
+pqtl_extract <- furrr::future_map(fn, \(x){
     readRDS(here("data", "pqtl_extract", x))
 }) %>% bind_rows()
 saveRDS(pqtl_extract, file=here("data", "pqtl_extract.rds"))
