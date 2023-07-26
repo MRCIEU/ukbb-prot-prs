@@ -391,7 +391,7 @@ attr(,"split_labels")
 </div>
 </div>
 <p>Reverse MR summary</p>
-<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-12_61b7dc584d0b3d718c2cddc3523392e9">
+<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-12_426b7b7ca8038fe90d543c3d16c47d44">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>what, <span class="sc">~</span>n,</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Number of PRS results"</span>, <span class="fu">nrow</span>(prs_pairs),</span>
@@ -400,19 +400,19 @@ attr(,"split_labels")
 <span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Reverse MR FDR &lt; 0.05 and no heterogeneity"</span>, <span class="fu">nrow</span>(resnohet),</span>
 <span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Reverse MR FDR &lt; 0.05 after outlier removal"</span>, <span class="fu">sum</span>(res_out_sum<span class="sc">$</span>fdr_orig <span class="sc">&amp;</span> res_out_sum<span class="sc">$</span>fdr_out, <span class="at">na.rm=</span>T),</span>
 <span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mean number of instruments"</span>, <span class="fu">mean</span>(res_out_sum<span class="sc">$</span>nsnp_orig),</span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mean number of outliers"</span>, <span class="fu">mean</span>(res_out_sum<span class="sc">$</span>noutliers)</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mean number of outliers"</span>, <span class="fu">mean</span>(res_out_sum<span class="sc">$</span>noutliers, <span class="at">na.rm=</span>T)</span>
 <span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 2
-  what                                             n
-  &lt;chr&gt;                                        &lt;dbl&gt;
-1 Number of PRS results                       3650  
-2 Number of reverse MR assocs                 3645  
-3 Reverse MR FDR &lt; 0.05                       1588  
-4 Reverse MR FDR &lt; 0.05 and no heterogeneity   273  
-5 Reverse MR FDR &lt; 0.05 after outlier removal 1463  
-6 Mean number of instruments                    93.7
-7 Mean number of outliers                       NA  </code></pre>
+  what                                              n
+  &lt;chr&gt;                                         &lt;dbl&gt;
+1 Number of PRS results                       3650   
+2 Number of reverse MR assocs                 3645   
+3 Reverse MR FDR &lt; 0.05                       1588   
+4 Reverse MR FDR &lt; 0.05 and no heterogeneity   273   
+5 Reverse MR FDR &lt; 0.05 after outlier removal 1463   
+6 Mean number of instruments                    93.7 
+7 Mean number of outliers                        4.24</code></pre>
 </div>
 </div>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-13_363c41871b66a0c4d6e62ef1c308ce16">

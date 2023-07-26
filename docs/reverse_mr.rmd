@@ -143,7 +143,7 @@ tribble(
     "Reverse MR FDR < 0.05 and no heterogeneity", nrow(resnohet),
     "Reverse MR FDR < 0.05 after outlier removal", sum(res_out_sum$fdr_orig & res_out_sum$fdr_out, na.rm=T),
     "Mean number of instruments", mean(res_out_sum$nsnp_orig),
-    "Mean number of outliers", mean(res_out_sum$noutliers)
+    "Mean number of outliers", mean(res_out_sum$noutliers, na.rm=T)
 )
 
 ```
