@@ -129,7 +129,7 @@ res_out_sum <- res_out %>% group_by(id.exposure, id.outcome) %>%
         fdr_out = pval[2] < thresh
     ) %>% filter(fdr_orig)
 
-sum(res_out_sum$fdr_orig & res_out_sum$fdr_out)
+sum(res_out_sum$fdr_orig & res_out_sum$fdr_out, na.rm=T)
 ```
 
 Reverse MR summary
@@ -141,7 +141,7 @@ tribble(
     "Number of reverse MR assocs", nrow(rres),
     "Reverse MR FDR < 0.05", sum(rres$fdr < 0.05),
     "Reverse MR FDR < 0.05 and no heterogeneity", nrow(resnohet),
-    "Reverse MR FDR < 0.05 after outlier removal", sum(res_out_sum$fdr_orig & res_out_sum$fdr_out),
+    "Reverse MR FDR < 0.05 after outlier removal", sum(res_out_sum$fdr_orig & res_out_sum$fdr_out, na.rm=T),
     "Mean number of instruments", mean(res_out_sum$nsnp_orig),
     "Mean number of outliers", mean(res_out_sum$noutliers)
 )
