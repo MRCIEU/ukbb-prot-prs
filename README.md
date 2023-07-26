@@ -33,6 +33,7 @@ quarto render docs/all_cis_mr.qmd
 Analysis of reverse MR. First extact data from pQTL summary stats
 
 ```
+Rscript extract_reverse_mr_setup.r
 Rscript extract_reverse_mr.r
 quarto render docs/reverse_mr.rmd
 ```
