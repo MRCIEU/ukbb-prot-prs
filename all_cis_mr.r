@@ -5,6 +5,7 @@ library(tidyr)
 library(TwoSampleMR)
 library(ggplot2)
 library(here)
+# install.packages("here")
 
 # Trait list
 traits <- read_xlsx(here("data", "Supplementary_Table5.xlsx"))
