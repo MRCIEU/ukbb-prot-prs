@@ -1,0 +1,125 @@
+---
+title: Enrichment analysis
+author: Gibran Hemani
+---
+
+Enrichment analysis per trait per method
+
+- cis MR
+- trans MR
+- PRS
+
+```{r}
+library(here)
+library(dplyr)
+library(ggplot2)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(tidyr)
+
+load(here("data", "gsea_enrichments.rdata"))
+load(here("data", "all.rdata"))
+```
+
+```{r}
+getsigenr <- function(enr) {
+    enr %>% bind_rows() %>%
+        group_by(trait) %>%
+        mutate(p.adjust=p.adjust(pvalue, "fdr")) %>%
+        filter(p.adjust < 0.05)
+}
+
+bind_rows(
+    getsigenr(enr_cis) %>% mutate(method="Forward Cis-MR"),
+    getsigenr(enr_trans) %>% mutate(method="Forward Trans-MR"),
+    getsigenr(enr_prs) %>% mutate(method="Reverse PRS"),
+) %>% left_join(., traits %>% dplyr::select(opengwasid, code), by=c("trait"="opengwasid")) %>%
+dplyr::select(method, phenotype=code, opengwasid=trait, everything()) %>%
+    write.csv(file=here("results", "gsea_enrichment_fdr.csv"))
+```
+
+Degree of agreement across experiments
+
+Rank all and find correlation
+
+```{r}
+tr <- Reduce(intersect, list(enr_prs$trait, enr_cis$trait, enr_trans$trait))
+o <- lapply(tr, \(id) {
+    inner_join(
+        enr_prs %>% filter(trait==id) %>% mutate(rank=1:n()) %>% dplyr::select(ID, prs=rank),
+        enr_cis %>% filter(trait==id) %>% mutate(rank=1:n()) %>% dplyr::select(ID, cis=rank),
+        by="ID"
+    ) %>%
+    inner_join(
+        ., 
+        enr_trans %>% filter(trait==id) %>% mutate(rank=1:n()) %>% dplyr::select(ID, trans=rank),
+    ) %>%
+    dplyr::select(-c(ID)) %>% {cor(.)} %>% {.[lower.tri(.)]} %>% tibble(id, v1 = c("cis", "prs", "trans"), v2 = c("prs", "trans", "cis"), val=.)
+}) %>% bind_rows()
+
+o %>% group_by(v1, v2) %>% summarise(val=mean(val))
+```
+
+```{r}
+o %>% ggplot(., aes(x=paste(v1, v2), y=val)) +
+geom_boxplot() 
+```
+
+Lookup replication
+
+```{r}
+comps <- expand.grid(disc=c("prs", "cis", "trans"), repl=c("prs", "cis", "trans"), tr=tr)
+
+i <- 1
+enr_all <- bind_rows(enr_prs %>% mutate(method="prs"), enr_cis %>% mutate(method="cis"), enr_trans %>% mutate(method="trans"))
+for(i in 1:nrow(comps)) {
+    message(i)
+    disc <- subset(enr_all, trait == comps$tr[i] & method == comps$disc[i]) %>% filter(pvalue < 0.05)
+    repl <- subset(enr_all, trait == comps$tr[i] & method == comps$repl[i] & ID %in% disc$ID)
+    comps$ndisc[i] <- nrow(disc)
+    comps$nrepl[i] <- nrow(repl)
+    comps$nreplsig[i] <- sum(repl$pvalue < 0.05)
+}
+
+comps %>% filter(disc != repl) %>%
+    filter(nrepl != 0) %>%
+    group_by(disc, repl) %>%
+    summarise(prop=mean(nreplsig/nrepl, na.rm=T), ndisc=mean(ndisc), nrepl=mean(nrepl))
+```
+
+
+
+Updated cis-trans pleiotropy analysis
+
+```{r}
+library(here)
+library(dplyr)
+load(here("data", "all.rdata"))
+head(dat)
+cis_snps <- subset(dat, cistrans.exposure == "cis")$SNP %>% unique()
+trans_snps <- subset(dat, cistrans.exposure == "trans")$SNP %>% unique()
+
+cisdat <- subset(dat, SNP %in% cis_snps) %>% filter(!duplicated(paste(SNP, id.exposure)))
+group_by(cisdat, SNP) %>% summarise(n=n()) %>% summarise(nm=mean(n), sd=sd(n), min=min(n), max=max(n))
+
+transdat <- subset(dat, SNP %in% trans_snps) %>% filter(!duplicated(paste(SNP, id.exposure)))
+group_by(transdat, SNP) %>% summarise(n=n()) %>% summarise(nm=mean(n), sd=sd(n), min=min(n), max=max(n))
+
+o <- bind_rows(
+    group_by(cisdat, SNP) %>% summarise(n=n()) %>% mutate(cistrans="cis"),
+    group_by(transdat, SNP) %>% summarise(n=n()) %>% mutate(cistrans="trans"),
+)
+
+t.test(subset(o, cistrans=="cis")$n, subset(o, cistrans=="trans")$n)
+
+head(o)
+
+o$n1 <- o$n > 1
+o$n5 <- o$n > 5
+
+summary(glm(as.factor(cistrans) ~ n, data=o, family="binomial"))
+
+summary(glm(as.factor(cistrans) ~ n1, data=o, family="binomial"))
+summary(glm(as.factor(cistrans) ~ n5, data=o, family="binomial"))
+```
+

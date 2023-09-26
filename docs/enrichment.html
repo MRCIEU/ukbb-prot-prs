@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Gibran Hemani">
+
+<title>Enrichment analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="enrichment_files/libs/clipboard/clipboard.min.js"></script>
+<script src="enrichment_files/libs/quarto-html/quarto.js"></script>
+<script src="enrichment_files/libs/quarto-html/popper.min.js"></script>
+<script src="enrichment_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="enrichment_files/libs/quarto-html/anchor.min.js"></script>
+<link href="enrichment_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="enrichment_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="enrichment_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="enrichment_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="enrichment_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Enrichment analysis</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Gibran Hemani </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Enrichment analysis per trait per method</p>
+<ul>
+<li>cis MR</li>
+<li>trans MR</li>
+<li>PRS</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>here() starts at /Users/gh13047/repo/ukbb-prot-prs</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(clusterProfiler)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'clusterProfiler' was built under R version 4.3.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>clusterProfiler v4.8.2  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/
+
+If you use clusterProfiler in published research, please cite:
+T Wu, E Hu, S Xu, M Chen, P Guo, Z Dai, T Feng, L Zhou, W Tang, L Zhan, X Fu, S Liu, X Bo, and G Yu. clusterProfiler 4.0: A universal enrichment tool for interpreting omics data. The Innovation. 2021, 2(3):100141</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'clusterProfiler'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:stats':
+
+    filter</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(org.Hs.eg.db)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: AnnotationDbi</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'AnnotationDbi' was built under R version 4.3.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: stats4</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: BiocGenerics</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'BiocGenerics'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:dplyr':
+
+    combine, intersect, setdiff, union</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    IQR, mad, sd, var, xtabs</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    anyDuplicated, aperm, append, as.data.frame, basename, cbind,
+    colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,
+    get, grep, grepl, intersect, is.unsorted, lapply, Map, mapply,
+    match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
+    Position, rank, rbind, Reduce, rownames, sapply, setdiff, sort,
+    table, tapply, union, unique, unsplit, which.max, which.min</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: Biobase</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: IRanges</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'IRanges' was built under R version 4.3.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: S4Vectors</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'S4Vectors'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:clusterProfiler':
+
+    rename</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:dplyr':
+
+    first, rename</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:utils':
+
+    findMatches</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    expand.grid, I, unname</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'IRanges'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:clusterProfiler':
+
+    slice</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:dplyr':
+
+    collapse, desc, slice</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'AnnotationDbi'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:clusterProfiler':
+
+    select</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    select</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'tidyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:S4Vectors':
+
+    expand</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"gsea_enrichments.rdata"</span>))</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"all.rdata"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>getsigenr <span class="ot">&lt;-</span> <span class="cf">function</span>(enr) {</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    enr <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(trait) <span class="sc">%&gt;%</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">p.adjust=</span><span class="fu">p.adjust</span>(pvalue, <span class="st">"fdr"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(p.adjust <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">getsigenr</span>(enr_cis) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">method=</span><span class="st">"Forward Cis-MR"</span>),</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">getsigenr</span>(enr_trans) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">method=</span><span class="st">"Forward Trans-MR"</span>),</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">getsigenr</span>(enr_prs) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">method=</span><span class="st">"Reverse PRS"</span>),</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(opengwasid, code), <span class="at">by=</span><span class="fu">c</span>(<span class="st">"trait"</span><span class="ot">=</span><span class="st">"opengwasid"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(method, <span class="at">phenotype=</span>code, <span class="at">opengwasid=</span>trait, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write.csv</span>(<span class="at">file=</span><span class="fu">here</span>(<span class="st">"results"</span>, <span class="st">"gsea_enrichment_fdr.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Degree of agreement across experiments</p>
+<p>Rank all and find correlation</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>tr <span class="ot">&lt;-</span> <span class="fu">Reduce</span>(intersect, <span class="fu">list</span>(enr_prs<span class="sc">$</span>trait, enr_cis<span class="sc">$</span>trait, enr_trans<span class="sc">$</span>trait))</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> <span class="fu">lapply</span>(tr, \(id) {</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">inner_join</span>(</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>        enr_prs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(trait<span class="sc">==</span>id) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">rank=</span><span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(ID, <span class="at">prs=</span>rank),</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>        enr_cis <span class="sc">%&gt;%</span> <span class="fu">filter</span>(trait<span class="sc">==</span>id) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">rank=</span><span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(ID, <span class="at">cis=</span>rank),</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">by=</span><span class="st">"ID"</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">inner_join</span>(</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>        ., </span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>        enr_trans <span class="sc">%&gt;%</span> <span class="fu">filter</span>(trait<span class="sc">==</span>id) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">rank=</span><span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(ID, <span class="at">trans=</span>rank),</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(ID)) <span class="sc">%&gt;%</span> {<span class="fu">cor</span>(.)} <span class="sc">%&gt;%</span> {.[<span class="fu">lower.tri</span>(.)]} <span class="sc">%&gt;%</span> <span class="fu">tibble</span>(id, <span class="at">v1 =</span> <span class="fu">c</span>(<span class="st">"cis"</span>, <span class="st">"prs"</span>, <span class="st">"trans"</span>), <span class="at">v2 =</span> <span class="fu">c</span>(<span class="st">"prs"</span>, <span class="st">"trans"</span>, <span class="st">"cis"</span>), <span class="at">val=</span>.)</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`
+Joining with `by = join_by(ID)`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>o <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(v1, v2) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">val=</span><span class="fu">mean</span>(val))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'v1'. You can override using the `.groups`
+argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+# Groups:   v1 [3]
+  v1    v2      val
+  &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+1 cis   prs   0.518
+2 prs   trans 0.508
+3 trans cis   0.476</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>o <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">paste</span>(v1, v2), <span class="at">y=</span>val)) <span class="sc">+</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_boxplot</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="enrichment_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Lookup replication</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>comps <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">disc=</span><span class="fu">c</span>(<span class="st">"prs"</span>, <span class="st">"cis"</span>, <span class="st">"trans"</span>), <span class="at">repl=</span><span class="fu">c</span>(<span class="st">"prs"</span>, <span class="st">"cis"</span>, <span class="st">"trans"</span>), <span class="at">tr=</span>tr)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>enr_all <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(enr_prs <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">method=</span><span class="st">"prs"</span>), enr_cis <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">method=</span><span class="st">"cis"</span>), enr_trans <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">method=</span><span class="st">"trans"</span>))</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(comps)) {</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">message</span>(i)</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>    disc <span class="ot">&lt;-</span> <span class="fu">subset</span>(enr_all, trait <span class="sc">==</span> comps<span class="sc">$</span>tr[i] <span class="sc">&amp;</span> method <span class="sc">==</span> comps<span class="sc">$</span>disc[i]) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>    repl <span class="ot">&lt;-</span> <span class="fu">subset</span>(enr_all, trait <span class="sc">==</span> comps<span class="sc">$</span>tr[i] <span class="sc">&amp;</span> method <span class="sc">==</span> comps<span class="sc">$</span>repl[i] <span class="sc">&amp;</span> ID <span class="sc">%in%</span> disc<span class="sc">$</span>ID)</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>    comps<span class="sc">$</span>ndisc[i] <span class="ot">&lt;-</span> <span class="fu">nrow</span>(disc)</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>    comps<span class="sc">$</span>nrepl[i] <span class="ot">&lt;-</span> <span class="fu">nrow</span>(repl)</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>    comps<span class="sc">$</span>nreplsig[i] <span class="ot">&lt;-</span> <span class="fu">sum</span>(repl<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>4</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>6</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>7</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>8</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>9</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>13</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>14</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>15</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>16</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>17</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>18</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>19</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>20</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>21</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>22</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>23</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>24</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>25</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>26</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>27</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>28</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>29</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>30</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>31</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>32</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>33</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>34</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>35</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>36</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>37</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>38</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>39</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>40</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>41</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>42</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>43</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>44</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>45</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>46</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>47</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>48</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>49</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>50</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>51</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>52</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>53</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>54</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>55</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>56</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>57</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>58</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>59</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>60</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>61</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>62</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>63</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>64</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>65</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>66</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>67</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>68</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>69</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>70</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>71</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>72</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>73</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>74</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>75</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>76</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>77</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>78</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>79</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>80</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>81</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>82</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>83</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>84</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>85</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>86</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>87</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>88</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>89</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>90</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>91</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>92</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>93</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>94</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>95</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>96</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>97</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>98</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>99</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>100</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>101</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>102</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>103</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>104</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>105</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>106</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>107</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>108</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>109</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>110</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>111</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>112</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>113</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>114</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>115</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>116</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>117</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>118</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>119</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>120</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>121</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>122</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>123</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>124</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>125</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>126</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>127</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>128</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>129</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>130</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>131</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>132</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>133</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>134</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>135</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>136</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>137</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>138</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>139</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>140</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>141</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>142</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>143</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>144</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>145</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>146</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>147</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>148</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>149</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>150</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>151</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>152</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>153</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>154</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>155</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>156</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>157</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>158</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>159</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>160</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>161</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>162</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>163</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>164</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>165</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>166</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>167</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>168</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>169</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>170</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>171</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>172</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>173</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>174</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>175</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>176</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>177</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>178</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>179</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>180</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>181</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>182</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>183</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>184</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>185</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>186</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>187</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>188</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>189</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>190</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>191</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>192</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>193</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>194</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>195</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>196</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>197</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>198</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>199</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>200</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>201</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>202</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>203</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>204</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>205</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>206</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>207</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>208</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>209</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>210</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>211</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>212</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>213</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>214</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>215</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>216</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb267"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb267-1"><a href="#cb267-1" aria-hidden="true" tabindex="-1"></a>comps <span class="sc">%&gt;%</span> <span class="fu">filter</span>(disc <span class="sc">!=</span> repl) <span class="sc">%&gt;%</span></span>
+<span id="cb267-2"><a href="#cb267-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(nrepl <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb267-3"><a href="#cb267-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(disc, repl) <span class="sc">%&gt;%</span></span>
+<span id="cb267-4"><a href="#cb267-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">prop=</span><span class="fu">mean</span>(nreplsig<span class="sc">/</span>nrepl, <span class="at">na.rm=</span>T), <span class="at">ndisc=</span><span class="fu">mean</span>(ndisc), <span class="at">nrepl=</span><span class="fu">mean</span>(nrepl))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'disc'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+# Groups:   disc [3]
+  disc  repl    prop ndisc nrepl
+  &lt;fct&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 prs   cis   0.0802 167.  113. 
+2 prs   trans 0.0980 160.  140. 
+3 cis   prs   0.170   54.9  41.3
+4 cis   trans 0.0860  53.1  48.4
+5 trans prs   0.113  115.   87.3
+6 trans cis   0.0446 115.   79.5</code></pre>
+</div>
+</div>
+<p>Updated cis-trans pleiotropy analysis</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb270"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb270-1"><a href="#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb270-2"><a href="#cb270-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb270-3"><a href="#cb270-3" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"all.rdata"</span>))</span>
+<span id="cb270-4"><a href="#cb270-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        SNP effect_allele.exposure other_allele.exposure effect_allele.outcome
+1 rs1354034                      C                     T                     C
+2 rs6993770                      T                     A                     T
+3 rs7080386                      A                     C                     A
+4 rs1354034                      C                     T                     C
+5  rs156265                      G                     C                     G
+6 rs4835265                      A                     C                     A
+  other_allele.outcome beta.exposure beta.outcome eaf.exposure eaf.outcome
+1                    T     0.0571599     0.004969     0.604248    0.578315
+2                    A    -0.0600897    -0.027433     0.286489    0.298472
+3                    C     0.0588089     0.008556     0.411931    0.424206
+4                    T     0.0832468     0.004969     0.604741    0.578315
+5                    C    -0.1255230     0.001360     0.144118    0.151009
+6                    C     0.0890175    -0.000020     0.155932    0.193546
+  remove palindromic ambiguous       id.outcome chr       pos se.outcome
+1  FALSE       FALSE     FALSE ebi-a-GCST003116   3  56849749  0.0095831
+2  FALSE        TRUE     FALSE ebi-a-GCST003116   8 106581528  0.0101545
+3  FALSE       FALSE     FALSE ebi-a-GCST003116  10  65048306  0.0093137
+4  FALSE       FALSE     FALSE ebi-a-GCST003116   3  56849749  0.0095831
+5  FALSE        TRUE     FALSE ebi-a-GCST003116   3  38170810  0.0131711
+6  FALSE       FALSE     FALSE ebi-a-GCST003116   4 146821410  0.0116949
+  samplesize.outcome pval.outcome
+1              42457    0.6040990
+2              42457    0.0069016
+3              42457    0.3582830
+4              42457    0.6040990
+5              42457    0.9177600
+6              42457    0.9986350
+                                         outcome    originalname.outcome
+1 Coronary artery disease || id:ebi-a-GCST003116 Coronary artery disease
+2 Coronary artery disease || id:ebi-a-GCST003116 Coronary artery disease
+3 Coronary artery disease || id:ebi-a-GCST003116 Coronary artery disease
+4 Coronary artery disease || id:ebi-a-GCST003116 Coronary artery disease
+5 Coronary artery disease || id:ebi-a-GCST003116 Coronary artery disease
+6 Coronary artery disease || id:ebi-a-GCST003116 Coronary artery disease
+               outcome.deprecated mr_keep.outcome data_source.outcome
+1 Coronary artery disease ||  ||             TRUE                 igd
+2 Coronary artery disease ||  ||             TRUE                 igd
+3 Coronary artery disease ||  ||             TRUE                 igd
+4 Coronary artery disease ||  ||             TRUE                 igd
+5 Coronary artery disease ||  ||             TRUE                 igd
+6 Coronary artery disease ||  ||             TRUE                 igd
+  proxy.outcome target_snp.outcome proxy_snp.outcome target_a1.outcome
+1            NA               &lt;NA&gt;              &lt;NA&gt;              &lt;NA&gt;
+2            NA               &lt;NA&gt;              &lt;NA&gt;              &lt;NA&gt;
+3            NA               &lt;NA&gt;              &lt;NA&gt;              &lt;NA&gt;
+4            NA               &lt;NA&gt;              &lt;NA&gt;              &lt;NA&gt;
+5            NA               &lt;NA&gt;              &lt;NA&gt;              &lt;NA&gt;
+6            NA               &lt;NA&gt;              &lt;NA&gt;              &lt;NA&gt;
+  target_a2.outcome proxy_a1.outcome proxy_a2.outcome exposure id.exposure
+1              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;  ABHD14B     ABHD14B
+2              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;  ABHD14B     ABHD14B
+3              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;  ABHD14B     ABHD14B
+4              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;     ABL1        ABL1
+5              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;    ACAA1       ACAA1
+6              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;    ACAA1       ACAA1
+  se.exposure pval.exposure chr.exposure pos.exposure imp  v cistrans.exposure
+1  0.00754896  3.678748e-14            3     56849749 imp v1             trans
+2  0.00805320  8.548698e-14            8    106581528 imp v1             trans
+3  0.00740822  2.049274e-15           10     65048306 imp v1             trans
+4  0.00746759  7.343448e-29            3     56849749 imp v1             trans
+5  0.01064850  4.508167e-32            3     38170810 imp v1               cis
+6  0.01032960  6.829674e-18            4    146821410 imp v1             trans
+  action mr_keep unit.exposure samplesize.exposure unit.outcome rsq.exposure
+1      1    TRUE            SD               35571           SD  0.001609302
+2      1    TRUE            SD               35571           SD  0.001562832
+3      1    TRUE            SD               35571           SD  0.001768553
+4      1    TRUE            SD               35571           SD  0.003481672
+5      1    TRUE            SD               35571           SD  0.003891390
+6      1    TRUE            SD               35571           SD  0.002083561
+  effective_n.outcome effective_n.exposure units.exposure units.outcome
+1               42457                35571             NA            NA
+2               42457                35571             NA            NA
+3               42457                35571             NA            NA
+4               42457                35571             NA            NA
+5               42457                35571             NA            NA
+6               42457                35571             NA            NA
+   rsq.outcome steiger_dir steiger_pval
+1 6.332779e-06        TRUE 1.661109e-07
+2 1.718803e-04        TRUE 2.345507e-04
+3 1.987740e-05        TRUE 1.661856e-07
+4 6.332779e-06        TRUE 3.599018e-15
+5 2.511336e-07        TRUE 6.705260e-18
+6 6.888713e-11        TRUE 2.105987e-10</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb272"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb272-1"><a href="#cb272-1" aria-hidden="true" tabindex="-1"></a>cis_snps <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, cistrans.exposure <span class="sc">==</span> <span class="st">"cis"</span>)<span class="sc">$</span>SNP <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
+<span id="cb272-2"><a href="#cb272-2" aria-hidden="true" tabindex="-1"></a>trans_snps <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, cistrans.exposure <span class="sc">==</span> <span class="st">"trans"</span>)<span class="sc">$</span>SNP <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
+<span id="cb272-3"><a href="#cb272-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb272-4"><a href="#cb272-4" aria-hidden="true" tabindex="-1"></a>cisdat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, SNP <span class="sc">%in%</span> cis_snps) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">paste</span>(SNP, id.exposure)))</span>
+<span id="cb272-5"><a href="#cb272-5" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(cisdat, SNP) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">nm=</span><span class="fu">mean</span>(n), <span class="at">sd=</span><span class="fu">sd</span>(n), <span class="at">min=</span><span class="fu">min</span>(n), <span class="at">max=</span><span class="fu">max</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+     nm    sd   min   max
+  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+1  1.25  4.43     1   131</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb274"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb274-1"><a href="#cb274-1" aria-hidden="true" tabindex="-1"></a>transdat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, SNP <span class="sc">%in%</span> trans_snps) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">paste</span>(SNP, id.exposure)))</span>
+<span id="cb274-2"><a href="#cb274-2" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(transdat, SNP) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">nm=</span><span class="fu">mean</span>(n), <span class="at">sd=</span><span class="fu">sd</span>(n), <span class="at">min=</span><span class="fu">min</span>(n), <span class="at">max=</span><span class="fu">max</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+     nm    sd   min   max
+  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+1  1.97  6.40     1   217</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb276"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb276-1"><a href="#cb276-1" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb276-2"><a href="#cb276-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(cisdat, SNP) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cistrans=</span><span class="st">"cis"</span>),</span>
+<span id="cb276-3"><a href="#cb276-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(transdat, SNP) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cistrans=</span><span class="st">"trans"</span>),</span>
+<span id="cb276-4"><a href="#cb276-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb276-5"><a href="#cb276-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb276-6"><a href="#cb276-6" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="fu">subset</span>(o, cistrans<span class="sc">==</span><span class="st">"cis"</span>)<span class="sc">$</span>n, <span class="fu">subset</span>(o, cistrans<span class="sc">==</span><span class="st">"trans"</span>)<span class="sc">$</span>n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  subset(o, cistrans == "cis")$n and subset(o, cistrans == "trans")$n
+t = -3.9393, df = 1875.4, p-value = 8.47e-05
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -1.0750163 -0.3603867
+sample estimates:
+mean of x mean of y 
+ 1.248588  1.966289 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb278"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb278-1"><a href="#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(o)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  SNP            n cistrans
+  &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;   
+1 rs10037254     1 cis     
+2 rs10081281     1 cis     
+3 rs1018454      1 cis     
+4 rs10188642     1 cis     
+5 rs10190555     1 cis     
+6 rs10271620     1 cis     </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb280"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb280-1"><a href="#cb280-1" aria-hidden="true" tabindex="-1"></a>o<span class="sc">$</span>n1 <span class="ot">&lt;-</span> o<span class="sc">$</span>n <span class="sc">&gt;</span> <span class="dv">1</span></span>
+<span id="cb280-2"><a href="#cb280-2" aria-hidden="true" tabindex="-1"></a>o<span class="sc">$</span>n5 <span class="ot">&lt;-</span> o<span class="sc">$</span>n <span class="sc">&gt;</span> <span class="dv">5</span></span>
+<span id="cb280-3"><a href="#cb280-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb280-4"><a href="#cb280-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(<span class="fu">as.factor</span>(cistrans) <span class="sc">~</span> n, <span class="at">data=</span>o, <span class="at">family=</span><span class="st">"binomial"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = as.factor(cistrans) ~ n, family = "binomial", data = o)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  1.17630    0.06237   18.86  &lt; 2e-16 ***
+n            0.18284    0.03923    4.66 3.16e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 4502.0  on 4592  degrees of freedom
+Residual deviance: 4459.2  on 4591  degrees of freedom
+AIC: 4463.2
+
+Number of Fisher Scoring iterations: 7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb283"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb283-1"><a href="#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(<span class="fu">as.factor</span>(cistrans) <span class="sc">~</span> n1, <span class="at">data=</span>o, <span class="at">family=</span><span class="st">"binomial"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = as.factor(cistrans) ~ n1, family = "binomial", 
+    data = o)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  1.24694    0.03924   31.78   &lt;2e-16 ***
+n1TRUE       1.54460    0.15231   10.14   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 4502.0  on 4592  degrees of freedom
+Residual deviance: 4351.5  on 4591  degrees of freedom
+AIC: 4355.5
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb285"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb285-1"><a href="#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(<span class="fu">as.factor</span>(cistrans) <span class="sc">~</span> n5, <span class="at">data=</span>o, <span class="at">family=</span><span class="st">"binomial"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = as.factor(cistrans) ~ n5, family = "binomial", 
+    data = o)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  1.39450    0.03766  37.031  &lt; 2e-16 ***
+n5TRUE       2.06496    0.45517   4.537 5.72e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 4502.0  on 4592  degrees of freedom
+Residual deviance: 4461.2  on 4591  degrees of freedom
+AIC: 4465.2
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
