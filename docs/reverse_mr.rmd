@@ -14,6 +14,9 @@ library(ggplot2)
 
 load(here("data", "all.rdata"))
 dat <- readRDS(here("data", "reverse_mr_dat.rds"))
+idinfo <- ieugwasr::gwasinfo(unique(dat$))
+keep_ids <- unique(dat$id.exposure)
+keep_ids <- keep_ids[!keep_ids %in% c("ieu-a-299", "ieu-a-300", "ieu-a-301", "ieu-a-302", "ieu-b-38", "ieu-b-39")]
 ```
 
 Perform MR

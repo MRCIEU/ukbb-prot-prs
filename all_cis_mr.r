@@ -76,6 +76,7 @@ rm(b, b1, b_lc, a, temp)
 ## Extract instruments from GWASs
 
 lookups <- inner_join(inst, prs_pairs, by=c("exposure" = "prot"))
+lookups <- subset(lookups, !duplicated(paste(exposure, SNP)))
 
 l <- list()
 for(id in traits$opengwasid)
