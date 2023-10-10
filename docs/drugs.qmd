@@ -1,0 +1,191 @@
+---
+title: Associations and drug trials
+---
+
+
+Prediction of trials
+
+- All MR
+- Cis
+- Trans
+- Cis + coloc
+- PRS
+
+
+
+
+```{r}
+library(here)
+library(dplyr)
+library(readxl)
+library(pROC)
+```
+
+```{r}
+trials <- read.csv(here("data", "pharmaprojects_mappedtoPRS.csv"))
+str(trials)
+```
+
+Get protein to UniProt
+
+```{r}
+a <- read_xlsx(here("data", "media-2.xlsx"), sheet="ST6", skip=2)
+str(a)
+length(unique(a$`Assay Target`))
+```
+
+```{r}
+load(here("data", "all.rdata"))
+str(trials)
+length(unique(trials$opengwasid))
+length(unique(res$id.outcome))
+
+uniprot <- a %>% select(prot=`Assay Target`, uniprot=`Target UniProt`) %>% filter(!duplicated(uniprot))
+
+res_cis <- left_join(res_cis, uniprot, by=c("id.exposure"="prot"))
+```
+
+```{r}
+res_cis$code <- paste(res_cis$uniprot, res_cis$id.outcome)
+trials$code <- paste(trials$UniProt, trials$opengwasid)
+table(trials$code %in% res_cis$code)
+table(trials$Highest.Status.Reached)
+table(trials$Global.Status)
+table(trials$Current.Status)
+
+res_cis$sig1 <- res_cis$pval < 0.05
+res_cis$sig2 <- p.adjust(res_cis$pval, "fdr") < 0.05
+table(res_cis$sig1)
+
+tempcis <- inner_join(trials, res_cis %>% select(code, sig1, sig2, pval), by="code") %>% 
+    group_by(code) %>%
+    # filter(Development.Status != "Active") %>%
+    summarise(launched=any(Highest.Status.Reached %in% "Launched"), sig1=sig1[1], sig2=sig2[1], pval=pval[1], sig=sig1)
+
+roc(tempcis$launched, tempcis$pval)
+roc(tempcis$launched, tempcis$pval) %>% plot
+tempcis %>% group_by(launched, sig1) %>% summarise(n=n())
+summary(lm(sig1 ~ launched, tempcis))
+summary(lm(sig2 ~ launched, tempcis))
+```
+
+Try with trans
+
+```{r}
+res_trans <- left_join(res_trans, uniprot, by=c("id.exposure"="prot"))
+res_trans$code <- paste(res_trans$uniprot, res_trans$id.outcome)
+res_trans$sig1 <- res_trans$pval < 0.05
+res_trans$sig2 <- p.adjust(res_trans$pval, "fdr") < 0.05
+
+temptrans <- inner_join(trials, res_trans %>% select(code, sig1, sig2, pval), by="code") %>% 
+    group_by(code) %>%
+    filter(Development.Status != "Active") %>%
+    summarise(launched=any(Highest.Status.Reached %in% "Launched"), sig1=sig1[1], sig2=sig2[1], pval=pval[1], sig=sig1) %>%
+    filter(!is.na(pval))
+dim(temptrans)
+
+roc(temptrans$launched, temptrans$pval)
+roc(temptrans$launched, temptrans$pval) %>% plot
+temptrans %>% group_by(launched, sig1) %>% summarise(n=n())
+summary(lm(sig1 ~ launched, temptrans))
+summary(lm(sig2 ~ launched, temptrans))
+```
+
+
+```{r}
+library(data.table)
+library(tidyr)
+
+organise_prs <- function(fn) {
+    sf <- gsub("PRScs_Olink_Associaton_Biogen_", "", basename(fn)) %>% gsub("PRScs_Olink_Associaton_Bristol_", "", .) %>% gsub(".csv", "", .) %>% gsub("_merged", "", .)
+    print(sf)
+    fread(fn) %>% tidyr::separate(UKBPPP_ProteinID, sep=":", into=c("prot", "uniprot", "v1", "v2")) %>% mutate(opengwasid=sf)
+}
+
+prs_all <- list.files(here("data", "Bristol_and_Biogen_PRS_Associations")) %>% 
+    grep("PRScs", ., value=TRUE) %>%
+    here("data", "Bristol_and_Biogen_PRS_Associations", .) %>%
+    lapply(., organise_prs) %>% 
+    bind_rows()
+
+for(i in 1:nrow(traits)) {
+    prs_all$opengwasid[prs_all$opengwasid %in% traits$code[i]] <- traits$opengwasid[i]
+}
+prs_all <- subset(prs_all, opengwasid %in% traits$opengwasid)
+table(prs_all$opengwasid)
+```
+
+```{r}
+prs_all$code <- paste(prs_all$uniprot, prs_all$opengwasid)
+prs_all$sig1 <- prs_all$P_value < 0.05
+prs_all$sig2 <- p.adjust(prs_all$P_value, "fdr") < 0.05
+
+tempprs <- inner_join(trials, prs_all %>% select(code, sig1, sig2, P_value), by="code") %>% 
+    group_by(code) %>%
+    filter(Development.Status != "Active") %>%
+    summarise(launched=any(Highest.Status.Reached %in% "Launched"), sig1=sig1[1], sig2=sig2[1], pval=P_value[1], sig=sig1)
+
+roc(tempprs$launched, tempprs$pval)
+roc(tempprs$launched, tempprs$pval) %>% plot
+tempprs %>% group_by(launched, sig1) %>% summarise(n=n())
+summary(lm(sig1 ~ launched, tempprs))
+summary(lm(sig2 ~ launched, tempprs))
+```
+
+
+```{r}
+gi <- ieugwasr::gwasinfo(traits$opengwasid)
+load(here("data", "all.rdata"))
+coloc_res <- readRDS(here("data", "cis_coloc_res.rds"))
+coloc_res <- coloc_res %>%
+    select(-c(id.outcome)) %>%
+    left_join(., gi %>% select(trait, id.outcome = id), by=c("outcome"="trait")) %>%
+    select(-c(outcome)) %>%
+    left_join(., traits %>% select(outcome=code, id.outcome=opengwasid), by="id.outcome")
+
+coloc_res <- left_join(coloc_res, uniprot, by=c("id.exposure"="prot"))
+coloc_res$code <- paste(coloc_res$uniprot, coloc_res$id.outcome)
+head(coloc_res)
+tempcis$sigcoloc <- tempcis$code %in% subset(coloc_res, PP.H4.abf > 0.8)$code
+
+tempcoloc <- tempcis
+tempcoloc$sig <- tempcoloc$sigcoloc
+
+o <- roc(tempcis$launched, tempcis$pval) %>% auc
+roc(tempcis$launched, tempcis$pval) %>% plot
+tempcis %>% group_by(launched, sigcoloc) %>% summarise(n=n())
+summary(lm(sig1 ~ launched, tempcis))
+summary(lm(sig2 ~ launched, tempcis))
+summary(lm(sigcoloc ~ launched, tempcis))
+```
+
+
+summarise
+
+```{r}
+res <- list(
+    tempcis,
+    tempcoloc,
+    temptrans,
+    tempprs
+) %>% lapply(., function(x) {
+    mod <- summary(lm(sig ~ launched, x))
+    y <- x %>% group_by(launched, sig) %>% summarise(n=n())
+    print(y)
+    tibble(
+        auc=roc(x$launched, x$pval) %>% auc,
+        lor=mod$coef[2,1],
+        se=mod$coef[2,2],
+        pval=mod$coef[2,4],
+        `T-,MR-`= y$n[1],
+        `T-,MR+`=y$n[2],
+        `T+,MR-`=y$n[3],
+        `T+,MR+`=y$n[4]
+    )
+}) %>% do.call(rbind, .) %>%
+    mutate(method=c("Forward MR (cis)", "Forward MR (cis + coloc)", "Forward MR (trans)", "Reverse PRS")) %>%
+    select(method, everything())
+res$auc[2] <- NA
+res
+write.csv(res, file=here("results", "trial_enrichment.csv"))
+```

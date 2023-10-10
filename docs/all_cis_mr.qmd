@@ -1,6 +1,8 @@
 ---
 title: "MR of protein on disease following PRS-protein assocs"
 author: "Gibran Hemani"
+execute:
+    cache: true
 ---
 
 Narrative
@@ -28,7 +30,8 @@ library(readxl)
 
 ```{r}
 traits <- read_xlsx(here("data", "Supplementary_Table5.xlsx"))
-gi <- ieugwasr::gwasinfo(traits$opengwasid)
+# gi <- ieugwasr::gwasinfo(traits$opengwasid)
+gi <- readRDS(here("data", "gi.rds"))
 load(here("data", "all.rdata"))
 coloc_res <- readRDS(here("data", "cis_coloc_res.rds"))
 coloc_res <- coloc_res %>%
@@ -61,6 +64,20 @@ coloc_res_s <- subset(coloc_res, PP.H4.abf >= 0.8)
 
 res_cis_coloc <- subset(res_cis, paste(id.exposure, id.outcome) %in% paste(coloc_res_s$id.exposure, coloc_res_s$id.outcome))
 ```
+
+```{r}
+cis_mr <- left_join(
+    res_cis,
+    coloc_res %>% dplyr::select(id.exposure, id.outcome, H4=PP.H4.abf, H3=PP.H3.abf, leadsnp=snp),
+    by=c("id.exposure", "id.outcome")
+) %>% filter(p.adjust(pval, "fdr") < 0.05) %>%
+arrange(desc(H4)) %>%
+select(exposure, outcome, id.outcome, b, se, pval, H4, H3, leadsnp)
+table(!is.na(cis_mr$H4))
+head(cis_mr)
+write.csv(cis_mr, file=here("results", "cis_mr.csv"))
+```
+
 
 Show MR results that have IVW / Wald ratio P val bonferroni corrected significant
 
@@ -139,6 +156,23 @@ inner_join(res_cis_coloc, res_trans, by=c("id.exposure", "id.outcome")) %>%
     geom_point() +
     geom_smooth(method="lm") + 
     labs(x="cis-MR estimate", y="trans-MR estimate")
+```
+
+```{r}
+inner_join(res_cis_coloc, res_trans, by=c("id.exposure", "id.outcome")) %>%
+    filter(pval.x < 0.05) %>%
+    {summary(lm(b.y ~ b.x, .))}
+```
+
+```{r}
+inner_join(res_cis, res_trans, by=c("id.exposure", "id.outcome")) %>%
+    {summary(lm(b.y ~ b.x, .))}
+```
+
+```{r}
+inner_join(res_cis, res_trans, by=c("id.exposure", "id.outcome")) %>%
+    filter(pval.x < 0.05) %>%
+    {summary(lm(b.y ~ b.x, .))}
 ```
 
 
