@@ -353,12 +353,6 @@ Joining with `by = join_by(ID)`
 Joining with `by = join_by(ID)`
 Joining with `by = join_by(ID)`
 Joining with `by = join_by(ID)`
-Joining with `by = join_by(ID)`
-Joining with `by = join_by(ID)`
-Joining with `by = join_by(ID)`
-Joining with `by = join_by(ID)`
-Joining with `by = join_by(ID)`
-Joining with `by = join_by(ID)`
 Joining with `by = join_by(ID)`</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>o <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(v1, v2) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">val=</span><span class="fu">mean</span>(val))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -371,9 +365,9 @@ argument.</code></pre>
 # Groups:   v1 [3]
   v1    v2      val
   &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
-1 cis   prs   0.518
-2 prs   trans 0.508
-3 trans cis   0.476</code></pre>
+1 cis   prs   0.523
+2 prs   trans 0.492
+3 trans cis   0.474</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -883,172 +877,10 @@ argument.</code></pre>
 <div class="cell-output cell-output-stderr">
 <pre><code>162</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>163</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>164</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>165</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>166</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>167</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>168</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>169</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>170</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>171</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>172</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>173</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>174</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>175</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>176</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>177</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>178</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>179</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>180</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>181</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>182</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>183</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>184</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>185</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>186</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>187</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>188</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>189</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>190</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>191</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>192</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>193</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>194</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>195</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>196</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>197</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>198</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>199</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>200</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>201</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>202</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>203</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>204</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>205</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>206</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>207</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>208</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>209</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>210</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>211</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>212</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>213</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>214</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>215</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>216</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb267"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb267-1"><a href="#cb267-1" aria-hidden="true" tabindex="-1"></a>comps <span class="sc">%&gt;%</span> <span class="fu">filter</span>(disc <span class="sc">!=</span> repl) <span class="sc">%&gt;%</span></span>
-<span id="cb267-2"><a href="#cb267-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(nrepl <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb267-3"><a href="#cb267-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(disc, repl) <span class="sc">%&gt;%</span></span>
-<span id="cb267-4"><a href="#cb267-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">prop=</span><span class="fu">mean</span>(nreplsig<span class="sc">/</span>nrepl, <span class="at">na.rm=</span>T), <span class="at">ndisc=</span><span class="fu">mean</span>(ndisc), <span class="at">nrepl=</span><span class="fu">mean</span>(nrepl))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb213"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb213-1"><a href="#cb213-1" aria-hidden="true" tabindex="-1"></a>comps <span class="sc">%&gt;%</span> <span class="fu">filter</span>(disc <span class="sc">!=</span> repl) <span class="sc">%&gt;%</span></span>
+<span id="cb213-2"><a href="#cb213-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(nrepl <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb213-3"><a href="#cb213-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(disc, repl) <span class="sc">%&gt;%</span></span>
+<span id="cb213-4"><a href="#cb213-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">prop=</span><span class="fu">mean</span>(nreplsig<span class="sc">/</span>nrepl, <span class="at">na.rm=</span>T), <span class="at">ndisc=</span><span class="fu">mean</span>(ndisc), <span class="at">nrepl=</span><span class="fu">mean</span>(nrepl))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'disc'. You can override using the
 `.groups` argument.</code></pre>
@@ -1058,20 +890,20 @@ argument.</code></pre>
 # Groups:   disc [3]
   disc  repl    prop ndisc nrepl
   &lt;fct&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 prs   cis   0.0802 167.  113. 
-2 prs   trans 0.0980 160.  140. 
-3 cis   prs   0.170   54.9  41.3
-4 cis   trans 0.0860  53.1  48.4
-5 trans prs   0.113  115.   87.3
-6 trans cis   0.0446 115.   79.5</code></pre>
+1 prs   cis   0.0924 144.   97.6
+2 prs   trans 0.0774 136.  115. 
+3 cis   prs   0.158   56.4  39  
+4 cis   trans 0.0677  53.9  47.9
+5 trans prs   0.0934 102.   67.2
+6 trans cis   0.0599 102.   70.3</code></pre>
 </div>
 </div>
 <p>Updated cis-trans pleiotropy analysis</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb270"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb270-1"><a href="#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb270-2"><a href="#cb270-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb270-3"><a href="#cb270-3" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"all.rdata"</span>))</span>
-<span id="cb270-4"><a href="#cb270-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb216"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb216-1"><a href="#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb216-2"><a href="#cb216-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb216-3"><a href="#cb216-3" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"all.rdata"</span>))</span>
+<span id="cb216-4"><a href="#cb216-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        SNP effect_allele.exposure other_allele.exposure effect_allele.outcome
 1 rs1354034                      C                     T                     C
@@ -1158,45 +990,45 @@ argument.</code></pre>
 5 2.511336e-07        TRUE 6.705260e-18
 6 6.888713e-11        TRUE 2.105987e-10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb272"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb272-1"><a href="#cb272-1" aria-hidden="true" tabindex="-1"></a>cis_snps <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, cistrans.exposure <span class="sc">==</span> <span class="st">"cis"</span>)<span class="sc">$</span>SNP <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
-<span id="cb272-2"><a href="#cb272-2" aria-hidden="true" tabindex="-1"></a>trans_snps <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, cistrans.exposure <span class="sc">==</span> <span class="st">"trans"</span>)<span class="sc">$</span>SNP <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
-<span id="cb272-3"><a href="#cb272-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb272-4"><a href="#cb272-4" aria-hidden="true" tabindex="-1"></a>cisdat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, SNP <span class="sc">%in%</span> cis_snps) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">paste</span>(SNP, id.exposure)))</span>
-<span id="cb272-5"><a href="#cb272-5" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(cisdat, SNP) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">nm=</span><span class="fu">mean</span>(n), <span class="at">sd=</span><span class="fu">sd</span>(n), <span class="at">min=</span><span class="fu">min</span>(n), <span class="at">max=</span><span class="fu">max</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb218"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb218-1"><a href="#cb218-1" aria-hidden="true" tabindex="-1"></a>cis_snps <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, cistrans.exposure <span class="sc">==</span> <span class="st">"cis"</span>)<span class="sc">$</span>SNP <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
+<span id="cb218-2"><a href="#cb218-2" aria-hidden="true" tabindex="-1"></a>trans_snps <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, cistrans.exposure <span class="sc">==</span> <span class="st">"trans"</span>)<span class="sc">$</span>SNP <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
+<span id="cb218-3"><a href="#cb218-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb218-4"><a href="#cb218-4" aria-hidden="true" tabindex="-1"></a>cisdat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, SNP <span class="sc">%in%</span> cis_snps) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">paste</span>(SNP, id.exposure)))</span>
+<span id="cb218-5"><a href="#cb218-5" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(cisdat, SNP) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">nm=</span><span class="fu">mean</span>(n), <span class="at">sd=</span><span class="fu">sd</span>(n), <span class="at">min=</span><span class="fu">min</span>(n), <span class="at">max=</span><span class="fu">max</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
      nm    sd   min   max
   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
-1  1.25  4.43     1   131</code></pre>
+1  1.27  4.48     1   132</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb274"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb274-1"><a href="#cb274-1" aria-hidden="true" tabindex="-1"></a>transdat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, SNP <span class="sc">%in%</span> trans_snps) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">paste</span>(SNP, id.exposure)))</span>
-<span id="cb274-2"><a href="#cb274-2" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(transdat, SNP) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">nm=</span><span class="fu">mean</span>(n), <span class="at">sd=</span><span class="fu">sd</span>(n), <span class="at">min=</span><span class="fu">min</span>(n), <span class="at">max=</span><span class="fu">max</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb220"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb220-1"><a href="#cb220-1" aria-hidden="true" tabindex="-1"></a>transdat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, SNP <span class="sc">%in%</span> trans_snps) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">paste</span>(SNP, id.exposure)))</span>
+<span id="cb220-2"><a href="#cb220-2" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(transdat, SNP) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">nm=</span><span class="fu">mean</span>(n), <span class="at">sd=</span><span class="fu">sd</span>(n), <span class="at">min=</span><span class="fu">min</span>(n), <span class="at">max=</span><span class="fu">max</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
      nm    sd   min   max
   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
-1  1.97  6.40     1   217</code></pre>
+1  1.96  6.38     1   217</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb276"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb276-1"><a href="#cb276-1" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb276-2"><a href="#cb276-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(cisdat, SNP) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cistrans=</span><span class="st">"cis"</span>),</span>
-<span id="cb276-3"><a href="#cb276-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(transdat, SNP) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cistrans=</span><span class="st">"trans"</span>),</span>
-<span id="cb276-4"><a href="#cb276-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb276-5"><a href="#cb276-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb276-6"><a href="#cb276-6" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="fu">subset</span>(o, cistrans<span class="sc">==</span><span class="st">"cis"</span>)<span class="sc">$</span>n, <span class="fu">subset</span>(o, cistrans<span class="sc">==</span><span class="st">"trans"</span>)<span class="sc">$</span>n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb222"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb222-1"><a href="#cb222-1" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb222-2"><a href="#cb222-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(cisdat, SNP) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cistrans=</span><span class="st">"cis"</span>),</span>
+<span id="cb222-3"><a href="#cb222-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(transdat, SNP) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cistrans=</span><span class="st">"trans"</span>),</span>
+<span id="cb222-4"><a href="#cb222-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb222-5"><a href="#cb222-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb222-6"><a href="#cb222-6" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="fu">subset</span>(o, cistrans<span class="sc">==</span><span class="st">"cis"</span>)<span class="sc">$</span>n, <span class="fu">subset</span>(o, cistrans<span class="sc">==</span><span class="st">"trans"</span>)<span class="sc">$</span>n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
 
 data:  subset(o, cistrans == "cis")$n and subset(o, cistrans == "trans")$n
-t = -3.9393, df = 1875.4, p-value = 8.47e-05
+t = -3.7851, df = 1869.9, p-value = 0.0001585
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -1.0750163 -0.3603867
+ -1.0448733 -0.3316331
 sample estimates:
 mean of x mean of y 
- 1.248588  1.966289 </code></pre>
+ 1.269188  1.957441 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb278"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb278-1"><a href="#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(o)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb224"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb224-1"><a href="#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(o)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
   SNP            n cistrans
@@ -1208,10 +1040,10 @@ mean of x mean of y
 5 rs10190555     1 cis     
 6 rs10271620     1 cis     </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb280"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb280-1"><a href="#cb280-1" aria-hidden="true" tabindex="-1"></a>o<span class="sc">$</span>n1 <span class="ot">&lt;-</span> o<span class="sc">$</span>n <span class="sc">&gt;</span> <span class="dv">1</span></span>
-<span id="cb280-2"><a href="#cb280-2" aria-hidden="true" tabindex="-1"></a>o<span class="sc">$</span>n5 <span class="ot">&lt;-</span> o<span class="sc">$</span>n <span class="sc">&gt;</span> <span class="dv">5</span></span>
-<span id="cb280-3"><a href="#cb280-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb280-4"><a href="#cb280-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(<span class="fu">as.factor</span>(cistrans) <span class="sc">~</span> n, <span class="at">data=</span>o, <span class="at">family=</span><span class="st">"binomial"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb226"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb226-1"><a href="#cb226-1" aria-hidden="true" tabindex="-1"></a>o<span class="sc">$</span>n1 <span class="ot">&lt;-</span> o<span class="sc">$</span>n <span class="sc">&gt;</span> <span class="dv">1</span></span>
+<span id="cb226-2"><a href="#cb226-2" aria-hidden="true" tabindex="-1"></a>o<span class="sc">$</span>n5 <span class="ot">&lt;-</span> o<span class="sc">$</span>n <span class="sc">&gt;</span> <span class="dv">5</span></span>
+<span id="cb226-3"><a href="#cb226-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb226-4"><a href="#cb226-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(<span class="fu">as.factor</span>(cistrans) <span class="sc">~</span> n, <span class="at">data=</span>o, <span class="at">family=</span><span class="st">"binomial"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
 </div>
@@ -1222,20 +1054,20 @@ glm(formula = as.factor(cistrans) ~ n, family = "binomial", data = o)
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)  1.17630    0.06237   18.86  &lt; 2e-16 ***
-n            0.18284    0.03923    4.66 3.16e-06 ***
+(Intercept)  1.21742    0.05899  20.640  &lt; 2e-16 ***
+n            0.15440    0.03546   4.354 1.34e-05 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 4502.0  on 4592  degrees of freedom
-Residual deviance: 4459.2  on 4591  degrees of freedom
-AIC: 4463.2
+    Null deviance: 4580.2  on 4681  degrees of freedom
+Residual deviance: 4543.6  on 4680  degrees of freedom
+AIC: 4547.6
 
-Number of Fisher Scoring iterations: 7</code></pre>
+Number of Fisher Scoring iterations: 6</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb283"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb283-1"><a href="#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(<span class="fu">as.factor</span>(cistrans) <span class="sc">~</span> n1, <span class="at">data=</span>o, <span class="at">family=</span><span class="st">"binomial"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb229"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb229-1"><a href="#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(<span class="fu">as.factor</span>(cistrans) <span class="sc">~</span> n1, <span class="at">data=</span>o, <span class="at">family=</span><span class="st">"binomial"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1244,20 +1076,20 @@ glm(formula = as.factor(cistrans) ~ n1, family = "binomial",
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)  1.24694    0.03924   31.78   &lt;2e-16 ***
-n1TRUE       1.54460    0.15231   10.14   &lt;2e-16 ***
+(Intercept)  1.25428    0.03891   32.24   &lt;2e-16 ***
+n1TRUE       1.52702    0.15084   10.12   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 4502.0  on 4592  degrees of freedom
-Residual deviance: 4351.5  on 4591  degrees of freedom
-AIC: 4355.5
+    Null deviance: 4580.2  on 4681  degrees of freedom
+Residual deviance: 4430.9  on 4680  degrees of freedom
+AIC: 4434.9
 
 Number of Fisher Scoring iterations: 5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb285"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb285-1"><a href="#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(<span class="fu">as.factor</span>(cistrans) <span class="sc">~</span> n5, <span class="at">data=</span>o, <span class="at">family=</span><span class="st">"binomial"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb231"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb231-1"><a href="#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(<span class="fu">as.factor</span>(cistrans) <span class="sc">~</span> n5, <span class="at">data=</span>o, <span class="at">family=</span><span class="st">"binomial"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1266,16 +1098,16 @@ glm(formula = as.factor(cistrans) ~ n5, family = "binomial",
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)  1.39450    0.03766  37.031  &lt; 2e-16 ***
-n5TRUE       2.06496    0.45517   4.537 5.72e-06 ***
+(Intercept)  1.40047    0.03736  37.485  &lt; 2e-16 ***
+n5TRUE       1.88294    0.41730   4.512 6.42e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 4502.0  on 4592  degrees of freedom
-Residual deviance: 4461.2  on 4591  degrees of freedom
-AIC: 4465.2
+    Null deviance: 4580.2  on 4681  degrees of freedom
+Residual deviance: 4542.8  on 4680  degrees of freedom
+AIC: 4546.8
 
 Number of Fisher Scoring iterations: 5</code></pre>
 </div>
