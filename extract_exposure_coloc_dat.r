@@ -4,6 +4,7 @@ library(glue)
 library(data.table)
 library(readxl)
 library(tidyr)
+library(parallel)
 
 load(here("data", "all.rdata"))
 a <- read_xlsx(here("data", "media-2.xlsx"), sheet="ST6", skip=2)
@@ -13,8 +14,6 @@ protmap <- fread(file.path(ukbpppdir, "Metadata/Protein annotation/olink_protein
 ssdir <- file.path(ukbpppdir, "UKB-PPP pGWAS summary statistics/European (discovery)/")
 protmap$path <- file.path(ssdir, paste0(gsub(":", "_", protmap$UKBPPP_ProteinID), "_", protmap$Panel, ".tar"))
 stopifnot(all(file.exists(protmap$path)))
-
-tt
 
 tt <- subset(res_cis, paste(id.exposure, id.outcome) %in% paste(prs_pairs$prot, prs_pairs$opengwasid))
 tt <- subset(tt, p.adjust(pval, "fdr") < 0.05)
@@ -56,17 +55,16 @@ extract <- function(path, chr, start, end) {
         tidyr::separate(prot, sep=":", into=c("exposure", "code1", "code2", "v", "panel")) %>%
         mutate(pval=10^-LOG10P, SNP=paste0(chr.exposure, ":", pos.exposure)) %>%
         select(SNP, chr.exposure, pos.exposure, other_allele.exposure, effect_allele.exposure, eaf.exposure=A1FREQ, beta.exposure=BETA, se.exposure=SE, pval.exposure=pval, exposure=exposure, id.exposure=exposure)
-    unlink(p2)
+    unlink(p2, recursive=TRUE)
     d
 }
 
 # dir.create(here("data", "coloc_exposure_extract"), recursive=TRUE)
 
-l <- list()
-for(i in 120:nrow(out)) {
-    l[[i]] <- extract(out$path[i], out$CHROM[i], out$start[i], out$end[i])
-}
+l <- mclapply(1:nrow(out), \(i) {
+    extract(out$path[i], out$CHROM[i], out$start[i], out$end[i])
+}, mc.cores=10)
 o <- bind_rows(l)
-
+dim(o)
 saveRDS(o, file=here("data", "exposure_coloc_extract.rds"))
 # saveRDS(e, file=here("data", "exposure_coloc_dat.rds"))
