@@ -5,6 +5,7 @@ library(data.table)
 library(readxl)
 library(tidyr)
 library(ieugwasr)
+select_api("private")
 
 
 cl <- readRDS(here("data", "coloclist.rds"))
@@ -18,11 +19,8 @@ out <- tidyr::separate(out,
 
 a <- associations(paste0(17, ":", 73951864-500000, "-", 73951864+500000), "ieu-a-2")
 dim(a)
-
 o <- readRDS(here("data", "exposure_coloc_extract.rds"))
-
 o1 <- subset(o, id.exposure=="ACOX1") %>% mutate(pos.exposure=as.numeric(pos.exposure))
-
 inner_join(o1, a, by=c("pos.exposure"="position"))
 
 l <- list()
@@ -32,4 +30,4 @@ for(i in 1:nrow(cl)) {
     l[[i]] <- associations(r, cl$id.outcome[i])
 }
 o <- bind_rows(l)
-saveRDS(here("data", "outcome_coloc_extract.rds"))
+saveRDS(o, here("data", "outcome_coloc_extract.rds"))

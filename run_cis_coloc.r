@@ -4,9 +4,11 @@ library(here)
 library(ieugwasr)
 library(purrr)
 library(TwoSampleMR)
+library(coloc)
 
 expdat <- readRDS(here("data", "exposure_coloc_extract.rds"))
 expdat$pos.exposure <- as.numeric(expdat$pos.exposure)
+outdat <- readRDS(here("data", "outcome_coloc_extract.rds"))
 
 load(here("data", "all.rdata"))
 dat$pos.exposure <- as.numeric(dat$pos.exposure)
@@ -14,15 +16,13 @@ dat$pos.exposure <- as.numeric(dat$pos.exposure)
 dat_cis <- subset(dat, cistrans.exposure == "cis") %>%
     filter(p.adjust(pval.outcome, "fdr") < 0.05)
 dim(dat_cis)
-all(unique(dat_cis$exposure) %in% expdat$id.exposure)
-
+table(unique(dat_cis$exposure) %in% expdat$id.exposure)
+subset(dat_cis, !exposure %in% expdat$id.exposure)
 dat_cis$snpid <- paste0(dat_cis$chr.exposure, ":", dat_cis$pos.exposure)
-table(unique(dat_cis$snpid) %in% expdat$SNP)
 
 length(unique(expdat$exposure))
 
-convert_to_outcome <- function(d)
-{
+convert_to_outcome <- function(d) {
     d %>% mutate(SNP=paste0(chr, ":", position)) %>% 
     dplyr::select(SNP,
         id.outcome=id, 
@@ -31,10 +31,16 @@ convert_to_outcome <- function(d)
         se.outcome=se, rsid, samplesize.outcome=n, effect_allele.outcome=ea, other_allele.outcome=nea, eaf.outcome=eaf)
 }
 
-make_coloc_dat <- function(i, dat_cis, expdat)
-{
+make_coloc_dat <- function(i, dat_cis, expdat, outdat) {
     r <- paste0(dat_cis$chr.exposure[i], ":", dat_cis$pos.exposure[i]-500000, "-", dat_cis$pos.exposure[i]+500000)
-    a <- associations(r, dat_cis$id.outcome[i]) %>% convert_to_outcome
+    # a <- associations(r, dat_cis$id.outcome[i]) %>% 
+    #     convert_to_outcome
+    a <- subset(outdat, 
+        id == dat_cis$id.outcome[i] &
+        chr == dat_cis$chr.exposure[i] &
+        position > dat_cis$pos.exposure[i]-500000 &
+        position < dat_cis$pos.exposure[i]+500000) %>% 
+        convert_to_outcome
     b <- subset(expdat, 
         id.exposure == dat_cis$id.exposure[i] & 
         pos.exposure > (dat_cis$pos.exposure[i] - 500000) &
@@ -108,7 +114,13 @@ plot_res <- function(d, m="split") {
     p1
 }
 
-o <- purrr::map(1:nrow(dat_cis), make_coloc_dat, dat_cis=dat_cis, expdat=expdat, .progress=TRUE)
+o <- purrr::map(1:nrow(dat_cis), 
+    make_coloc_dat, 
+    dat_cis=dat_cis, 
+    expdat=expdat, 
+    outdat=outdat, 
+    .progress=TRUE
+)
 length(o)
 sapply(o, nrow)
 

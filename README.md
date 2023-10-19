@@ -24,6 +24,7 @@ Perform coloc for cis MR results
 
 ```
 Rscript extract_exposure_coloc_dat.r
+Rscript extract_outcome_coloc_dat.r
 Rscript run_cis_coloc.r
 Rscript collate_results.r
 ```
