@@ -31,6 +31,7 @@ library(readxl)
 ```{r}
 traits <- read_xlsx(here("data", "Supplementary_Table5.xlsx"))
 # gi <- ieugwasr::gwasinfo(traits$opengwasid)
+# saveRDS(gi, here("data", "gi.rds"))
 gi <- readRDS(here("data", "gi.rds"))
 load(here("data", "all.rdata"))
 coloc_res <- readRDS(here("data", "cis_coloc_res.rds"))
@@ -66,7 +67,7 @@ res_cis_coloc <- subset(res_cis, paste(id.exposure, id.outcome) %in% paste(coloc
 ```
 
 ```{r}
-cis_mr <- left_join(
+cis_mr <- inner_join(
     res_cis,
     coloc_res %>% dplyr::select(id.exposure, id.outcome, H4=PP.H4.abf, H3=PP.H3.abf, leadsnp=snp),
     by=c("id.exposure", "id.outcome")
@@ -210,7 +211,7 @@ bind_rows(
     res_trans %>% mutate(what="trans"), 
     res_trans_sf %>% mutate(what="trans sf"),
     res_trans_sf_relaxed %>% mutate(what="trans sf strict")) %>%
-    filter(!is.na(pval)) %>%
+    filter(!is.na(pval), abs(b) < 5) %>%
     inner_join(., prs_pairs, by=c("id.exposure"="prot", "id.outcome"="opengwasid")) %>%
     mutate(mr_sig = p.adjust(pval.x, "fdr") < 0.05) %>%
     ggplot(., aes(beta, b)) +
