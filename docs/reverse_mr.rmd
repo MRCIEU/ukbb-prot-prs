@@ -151,6 +151,7 @@ tribble(
 
 ```
 
+Compare PRS and reverse MR
 
 ```{r}
 revmrpairs <- subset(res_out_sum, fdr_orig & fdr_out)
@@ -232,7 +233,8 @@ subset(ckd, outcome == outcome[1]) %>% select(SNP, pval.exposure)
 Plot an example
 
 ```{r}
-ckd_top <- subset(ckd, outcome %in% subset(prs_pairs, opengwasid == id.exposure[1])$prot[1:28])
+# note that prs_pairs uses different opengwasid
+ckd_top <- subset(ckd, outcome %in% subset(prs_pairs, opengwasid == "ieu-a-1102")$prot[1:28])
 
 ggplot(ckd_top, aes(x=beta.exposure, y=beta.outcome)) +
 geom_point() +
@@ -273,21 +275,11 @@ res_out_sum %>%
     select(code, id.exposure, n_prs=nprs, n_mr=fdr_orig, n_mr_out=fdr_out)
 ```
 
-Triglycerides
-
-```{r}
-trig_top <- subset(dat, id.exposure == "ieu-a-302" & id.outcome %in% unique(subset(prs_pairs, opengwasid=="ieu-a-302"))$prot[1:56])
-
-ggplot(trig_top, aes(x=beta.exposure, y=beta.outcome)) +
-geom_point() +
-facet_wrap(~id.outcome) +
-geom_smooth(method="lm")
-```
-
 T2D
 
 ```{r}
-t2d_top <- subset(dat, id.exposure == "ebi-a-GCST005047" & id.outcome %in% unique(subset(prs_pairs, opengwasid=="ebi-a-GCST005047"))$prot[1:56])
+# note that prs_pairs uses different opengwasid
+t2d_top <- subset(dat, id.exposure == "ebi-a-GCST005047" & id.outcome %in% unique(subset(prs_pairs, opengwasid=="ieu-a-26"))$prot[1:56])
 
 ggplot(t2d_top, aes(x=beta.exposure, y=beta.outcome)) +
 geom_point() +
@@ -298,7 +290,7 @@ geom_smooth(method="lm")
 MS
 
 ```{r}
-ms_top <- subset(dat, id.exposure == "ieu-a-1024" & id.outcome %in% unique(subset(prs_pairs, opengwasid=="ieu-a-1024"))$prot[1:56])
+ms_top <- subset(dat, id.exposure == "ieu-a-1024" & id.outcome %in% unique(subset(prs_pairs, opengwasid=="ieu-b-18"))$prot[1:56])
 
 ggplot(ms_top, aes(x=beta.exposure, y=beta.outcome)) +
 geom_point() +
@@ -310,7 +302,7 @@ theme(axis.text.x=element_blank(), axis.text.y=element_blank())
 
 ```{r}
 plot_rev_mr <- function(id, nplot) {
-    ms_top <- subset(dat, id.exposure == id & id.outcome %in% unique(subset(prs_pairs, opengwasid==id))$prot[1:nplot])
+    ms_top <- subset(dat, id.exposure %in% id & id.outcome %in% unique(subset(prs_pairs, opengwasid %in% id))$prot[1:nplot])
     ind <- sign(ms_top$beta.exposure) == -1
     ms_top$beta.exposure <- abs(ms_top$beta.exposure)
     ms_top$beta.outcome[ind] <- ms_top$beta.outcome[ind] * -1
@@ -323,13 +315,13 @@ plot_rev_mr <- function(id, nplot) {
     theme(axis.text.x=element_blank(), axis.text.y=element_blank())
 }
 
-plot_rev_mr("ebi-a-GCST003374", 56)
+# plot_rev_mr("ebi-a-GCST003374", 56)
 ```
 
-MS
+MS excluding chr 6
 
 ```{r}
-plot_rev_mr("ieu-a-1024", 56)
+plot_rev_mr(c("ieu-a-1024", "ieu-b-18"), 56)
 ```
 
 ```{r}
