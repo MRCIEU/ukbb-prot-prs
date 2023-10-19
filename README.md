@@ -10,7 +10,11 @@
 
 ## To run
 
-Perform MR - cis, trans, steiger filtered etc
+`data/Supplementary_table5.xlsx` lists all the phenotypes to be included in the study.
+
+Protein QTL summary stats are stored on bc4 here: `/mnt/storage/private/mrcieu/data/UKB-PPP/`.
+
+Perform MR - cis, trans, steiger filtered etc. This uses pQTLs for 1500 proteins and then extracts outcome data from OpenGWAS. Does the MR and saves along with PRS results etc in a single Rdata file called `data/all.rdata`
 
 ```
 Rscript all_cis_mr.r
