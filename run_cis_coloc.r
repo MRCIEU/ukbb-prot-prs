@@ -9,9 +9,10 @@ library(coloc)
 expdat <- readRDS(here("data", "exposure_coloc_extract.rds"))
 expdat$pos.exposure <- as.numeric(expdat$pos.exposure)
 outdat <- readRDS(here("data", "outcome_coloc_extract.rds"))
-
 load(here("data", "all.rdata"))
-dat$pos.exposure <- as.numeric(dat$pos.exposure)
+cl <- readRDS(here("data", "coloclist.rds"))
+cl$pos.exposure <- as.numeric(cl$pos.exposure)
+cl$snpid <- paste0(cl$chr.exposure, ":", cl$pos.exposure)
 
 dat_cis <- subset(dat, cistrans.exposure == "cis") %>%
     filter(p.adjust(pval.outcome, "fdr") < 0.05)
@@ -77,9 +78,10 @@ update_n <- function(x) {
 do_coloc <- function(d, p1 = 1e-4, p2 = 1e-4, p12 = 1e-5){
     if(is.null(d)) return(NULL)
     d <- update_n(d)
-    d1 <- list(beta=d$beta.exposure, varbeta=d$se.exposure^2, MAF=d$eaf.exposure, N=31000, type="quant")
+    d <- subset(d, !duplicated(SNP))
+    d1 <- list(snp=d$SNP, beta=d$beta.exposure, varbeta=d$se.exposure^2, MAF=d$eaf.exposure, N=31000, type="quant")
 
-    d2 <- list(beta=d$beta.outcome, varbeta=d$se.outcome^2, N=mean(d$samplesize.outcome), MAF=d$eaf.outcome)
+    d2 <- list(snp=d$SNP, beta=d$beta.outcome, varbeta=d$se.outcome^2, N=mean(d$samplesize.outcome), MAF=d$eaf.outcome)
     s <- mean(d$ncase.outcome / d$samplesize.outcome)
 
     if(is.na(s))
@@ -90,7 +92,7 @@ do_coloc <- function(d, p1 = 1e-4, p2 = 1e-4, p12 = 1e-5){
         d2$s <- s
     }
     res <- coloc.abf(d1, d2, p1, p2, p12)
-    as.list(res$summary) %>% as_tibble() %>% mutate(snp=d$SNP[1], exposure=d$exposure[i], id.exposure=d$id.exposure[i], outcome=d$outcome[i], id.outcome=d$id.outcome[i]) %>% return()
+    as.list(res$summary) %>% as_tibble() %>% mutate(snp=d$SNP[1], exposure=d$exposure[1], id.exposure=d$id.exposure[1], outcome=d$outcome[1], id.outcome=d$id.outcome[1]) %>% return()
 }
 
 plot_res <- function(d, m="split") {
@@ -116,7 +118,7 @@ plot_res <- function(d, m="split") {
 
 o <- purrr::map(1:nrow(dat_cis), 
     make_coloc_dat, 
-    dat_cis=dat_cis, 
+    dat_cis=cl, 
     expdat=expdat, 
     outdat=outdat, 
     .progress=TRUE
