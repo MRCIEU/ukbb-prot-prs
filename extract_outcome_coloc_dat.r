@@ -28,7 +28,8 @@ inner_join(o1, a, by=c("pos.exposure"="position"))
 l <- list()
 for(i in 1:nrow(cl)) {
     message(i)
-    r <- paste0(cl$chr.exposure[i], ":", as.numeric(cl$pos.exposure)[i]-500000, ":", as.numeric(cl$pos.exposure)[i]+500000)
+    r <- paste0(cl$chr.exposure[i], ":", as.numeric(cl$pos.exposure)[i]-500000, "-", as.numeric(cl$pos.exposure)[i]+500000)
     l[[i]] <- associations(r, cl$id.outcome[i])
 }
+o <- bind_rows(l)
 saveRDS(here("data", "outcome_coloc_extract.rds"))

@@ -11,6 +11,7 @@ library(readxl)
 
 load(here("data", "all.rdata"))
 
+download.file("https://www.biorxiv.org/content/biorxiv/early/2022/06/18/2022.06.17.496443/DC2/embed/media-2.xlsx?download=true", here("data", "media-2.xlsx"))
 a <- read_xlsx(here("data", "media-2.xlsx"), sheet="ST6", skip=2)
 
 ## Coloc list
@@ -28,6 +29,31 @@ dim(temp2)
 head(temp2)
 out <- temp2 %>% select(rsID, `Assay Target`, CHROM, `GENPOS (hg38)`, `Variant ID (CHROM:GENPOS (hg37):A0:A1:imp:v1)`) %>% mutate(start=`GENPOS (hg38)` - 500000, end = `GENPOS (hg38)` + 500000)
 saveRDS(out, file=here("data", "regions_for_coloc_hg38.rds"))
+
+
+
+tt <- subset(res_cis, paste(id.exposure, id.outcome) %in% paste(prs_pairs$prot, prs_pairs$opengwasid))
+tt <- subset(tt, p.adjust(pval, "fdr") < 0.05)
+dim(tt)
+
+tt2 <- subset(res_cis, p.adjust(pval, "fdr") < 0.05)
+dim(tt2)
+
+tt3 <- bind_rows(tt, tt2)
+tt3 <- subset(tt3, !duplicated(paste(id.exposure, id.outcome)))
+dim(tt3)
+
+head(tt3)
+
+tt4 <- subset(dat, paste(id.exposure, id.outcome) %in% paste(tt3$id.exposure, tt3$id.outcome) & cistrans.exposure == "cis")
+
+tt5 <- subset(a, paste(rsID, `Assay Target`) %in% paste(tt4$SNP, tt4$exposure))
+out <- tt5 %>% select(rsID, `Assay Target`, CHROM, `GENPOS (hg38)`, `Variant ID (CHROM:GENPOS (hg37):A0:A1:imp:v1)`) %>% mutate(start=`GENPOS (hg38)` - 500000, end = `GENPOS (hg38)` + 500000)
+saveRDS(out, file=here("data", "regions_for_coloc_hg38.rds"))
+
+
+
+
 
 # opengwas lookups
 

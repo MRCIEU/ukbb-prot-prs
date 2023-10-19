@@ -20,7 +20,7 @@ a <- read_xlsx(here("data", "media-2.xlsx"), sheet="ST6", skip=2)
 ```
 
 ```{r}
-b <- read_xlsx(here("data", "supplementary_tables.xlsx", sheet=1, skip=1)
+b <- read_xlsx(here("data", "supplementary_tables.xlsx"), sheet=1, skip=1)
 b
 ```
 

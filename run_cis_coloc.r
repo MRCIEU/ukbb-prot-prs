@@ -5,7 +5,7 @@ library(ieugwasr)
 library(purrr)
 library(TwoSampleMR)
 
-expdat <- readRDS(here("data", "exposure_coloc_dat.rds"))
+expdat <- readRDS(here("data", "exposure_coloc_extract.rds"))
 expdat$pos.exposure <- as.numeric(expdat$pos.exposure)
 
 load(here("data", "all.rdata"))
