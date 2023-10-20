@@ -16,11 +16,10 @@ out <- tidyr::separate(out,
     into=c("chr","pos","other_allele", "effect_allele", "imp", "v"))
 
 
-
-a <- associations(paste0(17, ":", 73951864-500000, "-", 73951864+500000), "ieu-a-2")
-dim(a)
+cl$pos <- as.numeric(cl$pos)
+a <- associations(paste0(cl$chr[1], ":", cl$pos[1]-500000, "-", cl$pos[1]+500000), cl$id.outcome[1])
 o <- readRDS(here("data", "exposure_coloc_extract.rds"))
-o1 <- subset(o, id.exposure=="ACOX1") %>% mutate(pos.exposure=as.numeric(pos.exposure))
+o1 <- subset(o, id.exposure==cl$exposure[1]) %>% mutate(pos.exposure=as.numeric(pos.exposure))
 inner_join(o1, a, by=c("pos.exposure"="position"))
 
 l <- list()

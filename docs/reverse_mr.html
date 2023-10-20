@@ -130,7 +130,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-1_7ab53698ccbe0bc757f4c10917fff0e7">
+<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-1_59195d8cf855c388a6dcd678784fe712">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
@@ -161,14 +161,20 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"all.rdata"</span>))</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"reverse_mr_dat.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"reverse_mr_dat.rds"</span>))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>idinfo <span class="ot">&lt;-</span> ieugwasr<span class="sc">::</span><span class="fu">gwasinfo</span>(<span class="fu">unique</span>(dat<span class="sc">$</span>id.exposure))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>API: public: http://gwas-api.mrcieu.ac.uk/</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>keep_ids <span class="ot">&lt;-</span> <span class="fu">unique</span>(dat<span class="sc">$</span>id.exposure)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>keep_ids <span class="ot">&lt;-</span> keep_ids[<span class="sc">!</span>keep_ids <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ieu-a-299"</span>, <span class="st">"ieu-a-300"</span>, <span class="st">"ieu-a-301"</span>, <span class="st">"ieu-a-302"</span>, <span class="st">"ieu-b-38"</span>, <span class="st">"ieu-b-39"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Perform MR</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-2_b3fe4c1c64e2e651ac7cbffacabe8bf0">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>rres <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">mr</span>(dat, <span class="at">method=</span><span class="fu">c</span>(<span class="st">"mr_ivw"</span>, <span class="st">"mr_wald_ratio"</span>)))</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>rres<span class="sc">$</span>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(rres<span class="sc">$</span>pval, <span class="st">"fdr"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(rres, <span class="at">file=</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"reverse_mr.rds"</span>))</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(rres<span class="sc">$</span>fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>rres <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">mr</span>(dat, <span class="at">method=</span><span class="fu">c</span>(<span class="st">"mr_ivw"</span>, <span class="st">"mr_wald_ratio"</span>)))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>rres<span class="sc">$</span>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(rres<span class="sc">$</span>pval, <span class="st">"fdr"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(rres, <span class="at">file=</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"reverse_mr.rds"</span>))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(rres<span class="sc">$</span>fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 FALSE  TRUE 
@@ -177,15 +183,15 @@ FALSE  TRUE
 </div>
 <p>Compare against PRS</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-3_78c39beaf5e3139f007e5e27233c8f52">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(prs_pairs, rres, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"prot"</span><span class="ot">=</span><span class="st">"outcome"</span>, <span class="st">"opengwasid"</span><span class="ot">=</span><span class="st">"id.exposure"</span>))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(prs_pairs, rres, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"prot"</span><span class="ot">=</span><span class="st">"outcome"</span>, <span class="st">"opengwasid"</span><span class="ot">=</span><span class="st">"id.exposure"</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3645   13</code></pre>
+<pre><code>[1] 869  13</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(temp, <span class="fu">aes</span>(<span class="at">x=</span>beta, <span class="at">y=</span>b)) <span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">"PRS estimate"</span>, <span class="at">y=</span><span class="st">"MR estimate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(temp, <span class="fu">aes</span>(<span class="at">x=</span>beta, <span class="at">y=</span>b)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">"PRS estimate"</span>, <span class="at">y=</span><span class="st">"MR estimate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
@@ -196,7 +202,7 @@ FALSE  TRUE
 <p>Good agreement between PRS and IVW results</p>
 <p>Heterogeneity</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-4_f920639ad2587bdb1620164d49c45e49">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>het <span class="ot">&lt;-</span> <span class="fu">mr_heterogeneity</span>(dat, <span class="at">method=</span><span class="fu">c</span>(<span class="st">"mr_ivw"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>het <span class="ot">&lt;-</span> <span class="fu">mr_heterogeneity</span>(dat, <span class="at">method=</span><span class="fu">c</span>(<span class="st">"mr_ivw"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Not enough SNPs available for Heterogeneity analysis of 'ieu-b-89' on 'BTN3A2'</code></pre>
 </div>
@@ -209,8 +215,8 @@ FALSE  TRUE
 <div class="cell-output cell-output-stderr">
 <pre><code>Not enough SNPs available for Heterogeneity analysis of 'ieu-b-89' on 'NPTX1'</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>het<span class="sc">$</span>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(het<span class="sc">$</span>Q_pval, <span class="st">"fdr"</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(het<span class="sc">$</span>fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>het<span class="sc">$</span>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(het<span class="sc">$</span>Q_pval, <span class="st">"fdr"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(het<span class="sc">$</span>fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 FALSE  TRUE 
@@ -219,8 +225,8 @@ FALSE  TRUE
 </div>
 <p>Some SNPs have no heterogeneity</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-5_d945c3409070571289263a1cb824b410">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>nohet <span class="ot">&lt;-</span> <span class="fu">subset</span>(het, fdr <span class="sc">&gt;</span> <span class="fl">0.05</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nohet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>nohet <span class="ot">&lt;-</span> <span class="fu">subset</span>(het, fdr <span class="sc">&gt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nohet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        id.exposure id.outcome outcome exposure                    method
 1  ebi-a-GCST003116      ACAA1   ACAA1      CAD Inverse variance weighted
@@ -240,8 +246,8 @@ FALSE  TRUE
 </div>
 <p>Select SNPs that have no heterogeneity and a significant IVW assoc</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-6_2989252f9d42d4dc6e9b9c383d734940">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>resnohet <span class="ot">&lt;-</span> <span class="fu">subset</span>(rres, (<span class="fu">paste</span>(exposure, outcome) <span class="sc">%in%</span> <span class="fu">paste</span>(nohet<span class="sc">$</span>exposure, nohet<span class="sc">$</span>outcome) <span class="sc">|</span> nsnp <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">&amp;</span> fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(resnohet<span class="sc">$</span>exposure) <span class="sc">%&gt;%</span> as.data.frame</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>resnohet <span class="ot">&lt;-</span> <span class="fu">subset</span>(rres, (<span class="fu">paste</span>(exposure, outcome) <span class="sc">%in%</span> <span class="fu">paste</span>(nohet<span class="sc">$</span>exposure, nohet<span class="sc">$</span>outcome) <span class="sc">|</span> nsnp <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">&amp;</span> fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(resnohet<span class="sc">$</span>exposure) <span class="sc">%&gt;%</span> as.data.frame</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                Var1 Freq
 1                                CAD    2
@@ -259,15 +265,15 @@ FALSE  TRUE
 13                               T2D   33
 14                     Triglycerides   28</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(resnohet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(resnohet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 273  10</code></pre>
 </div>
 </div>
 <p>These assocs seem to be most consistent with being reverse causal</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-7_65d8b74e00d9863d05663722b919262d">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>resnohet <span class="ot">&lt;-</span> <span class="fu">left_join</span>(resnohet, nohet <span class="sc">%&gt;%</span> <span class="fu">select</span>(id.exposure, id.outcome, Q_pval), <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id.exposure"</span>, <span class="st">"id.outcome"</span>))</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(resnohet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>resnohet <span class="ot">&lt;-</span> <span class="fu">left_join</span>(resnohet, nohet <span class="sc">%&gt;%</span> <span class="fu">select</span>(id.exposure, id.outcome, Q_pval), <span class="at">by=</span><span class="fu">c</span>(<span class="st">"id.exposure"</span>, <span class="st">"id.outcome"</span>))</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(resnohet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       id.exposure id.outcome outcome exposure                    method nsnp
 1 ebi-a-GCST003116      ACAA1   ACAA1      CAD Inverse variance weighted   42
@@ -284,7 +290,7 @@ FALSE  TRUE
 5  0.08376711 0.02870854 3.524574e-03 1.209122e-02 0.66486713
 6  0.09477291 0.02830538 8.132962e-04 4.011454e-03 0.73217235</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(resnohet, <span class="at">file=</span><span class="fu">here</span>(<span class="st">"results"</span>, <span class="st">"resnohet.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(resnohet, <span class="at">file=</span><span class="fu">here</span>(<span class="st">"results"</span>, <span class="st">"resnohet.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Analyse the ones with large heterogeneity</p>
 <ol type="1">
@@ -292,25 +298,25 @@ FALSE  TRUE
 <li>Re-estimate with outliers removed</li>
 </ol>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-8_8309d54e4c39718c0fffe75da4d5b9b3">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>est_qj <span class="ot">&lt;-</span> <span class="cf">function</span>(d) {</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">nrow</span>(d) <span class="sc">&lt;</span> <span class="dv">2</span>) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    r <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">mr</span>(d, <span class="at">method=</span><span class="st">"mr_ivw"</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"All"</span>))</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    bhat <span class="ot">&lt;-</span> r<span class="sc">$</span>b</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    ss <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">mr_singlesnp</span>(d)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"All"</span>, SNP)) <span class="sc">%&gt;%</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">w =</span> <span class="dv">1</span><span class="sc">/</span>(se<span class="sc">^</span><span class="dv">2</span>), <span class="at">qj =</span> w <span class="sc">*</span> (bhat <span class="sc">-</span> b)<span class="sc">^</span><span class="dv">2</span>, <span class="at">qj_pval =</span> <span class="fu">pchisq</span>(qj, <span class="at">df=</span><span class="dv">1</span>, <span class="at">low=</span>F), <span class="at">qj_fdr =</span> <span class="fu">p.adjust</span>(qj_pval, <span class="st">"fdr"</span>))</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    d_noout <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span>SNP <span class="sc">%in%</span> <span class="fu">subset</span>(ss, <span class="fu">p.adjust</span>(qj_pval, <span class="st">"fdr"</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span>)<span class="sc">$</span>SNP)</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    r2 <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">mr</span>(d_noout, <span class="at">method=</span><span class="st">"mr_ivw"</span>)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"Outliers removed"</span>)</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">qj=</span>ss, <span class="at">r=</span><span class="fu">bind_rows</span>(r, r2)))</span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>qj <span class="ot">&lt;-</span> <span class="fu">group_by</span>(dat, <span class="fu">paste</span>(id.exposure, id.outcome)) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="fu">group_map</span>(<span class="sc">~</span> <span class="fu">est_qj</span>(.))</span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>qjs <span class="ot">&lt;-</span> <span class="fu">lapply</span>(qj, \(x) x<span class="sc">$</span>qj) <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>()</span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>res_out <span class="ot">&lt;-</span> <span class="fu">lapply</span>(qj, \(x) x<span class="sc">$</span>r) <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">names</span>(.)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res_out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>est_qj <span class="ot">&lt;-</span> <span class="cf">function</span>(d) {</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">nrow</span>(d) <span class="sc">&lt;</span> <span class="dv">2</span>) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    r <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">mr</span>(d, <span class="at">method=</span><span class="st">"mr_ivw"</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"All"</span>))</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    bhat <span class="ot">&lt;-</span> r<span class="sc">$</span>b</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    ss <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">mr_singlesnp</span>(d)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"All"</span>, SNP)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">w =</span> <span class="dv">1</span><span class="sc">/</span>(se<span class="sc">^</span><span class="dv">2</span>), <span class="at">qj =</span> w <span class="sc">*</span> (bhat <span class="sc">-</span> b)<span class="sc">^</span><span class="dv">2</span>, <span class="at">qj_pval =</span> <span class="fu">pchisq</span>(qj, <span class="at">df=</span><span class="dv">1</span>, <span class="at">low=</span>F), <span class="at">qj_fdr =</span> <span class="fu">p.adjust</span>(qj_pval, <span class="st">"fdr"</span>))</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    d_noout <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span>SNP <span class="sc">%in%</span> <span class="fu">subset</span>(ss, <span class="fu">p.adjust</span>(qj_pval, <span class="st">"fdr"</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span>)<span class="sc">$</span>SNP)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    r2 <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">mr</span>(d_noout, <span class="at">method=</span><span class="st">"mr_ivw"</span>)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">what=</span><span class="st">"Outliers removed"</span>)</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">qj=</span>ss, <span class="at">r=</span><span class="fu">bind_rows</span>(r, r2)))</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>qj <span class="ot">&lt;-</span> <span class="fu">group_by</span>(dat, <span class="fu">paste</span>(id.exposure, id.outcome)) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="fu">group_map</span>(<span class="sc">~</span> <span class="fu">est_qj</span>(.))</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>qjs <span class="ot">&lt;-</span> <span class="fu">lapply</span>(qj, \(x) x<span class="sc">$</span>qj) <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>()</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>res_out <span class="ot">&lt;-</span> <span class="fu">lapply</span>(qj, \(x) x<span class="sc">$</span>r) <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">names</span>(.)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res_out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       id.exposure id.outcome outcome exposure                    method nsnp
 1 ebi-a-GCST003116      ACAA1   ACAA1      CAD Inverse variance weighted   42
@@ -327,14 +333,14 @@ FALSE  TRUE
 5 -0.0110960509 0.01851338 0.5489375253              All
 6 -0.0110960509 0.01851338 0.5489375253 Outliers removed</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(qjs, <span class="at">file=</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"reverse_mr_qj.rds"</span>))</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(res_out, <span class="at">file=</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"reverse_mr_outliers.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(qjs, <span class="at">file=</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"reverse_mr_qj.rds"</span>))</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(res_out, <span class="at">file=</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"reverse_mr_outliers.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Example where there is no heterogeneity</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-9_73c92173bf77698798350adfbf99cbf4">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>dr <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, id.exposure<span class="sc">==</span>resnohet<span class="sc">$</span>id.exposure[<span class="dv">1</span>] <span class="sc">&amp;</span> id.outcome<span class="sc">==</span>resnohet<span class="sc">$</span>id.outcome[<span class="dv">1</span>])</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>drr <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">mr</span>(dr))</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mr_scatter_plot</span>(drr, dr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>dr <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, id.exposure<span class="sc">==</span>resnohet<span class="sc">$</span>id.exposure[<span class="dv">1</span>] <span class="sc">&amp;</span> id.outcome<span class="sc">==</span>resnohet<span class="sc">$</span>id.outcome[<span class="dv">1</span>])</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>drr <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">mr</span>(dr))</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mr_scatter_plot</span>(drr, dr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`ebi-a-GCST003116.ACAA1`</code></pre>
 </div>
@@ -352,10 +358,10 @@ attr(,"split_labels")
 </div>
 <p>Example where PRS result is driven by heterogeneity</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-10_49bf75aaa557c6edcb502920df2f3a93">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">arrange</span>(het, fdr)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>dr2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, id.exposure<span class="sc">==</span>temp<span class="sc">$</span>id.exposure[<span class="dv">1</span>] <span class="sc">&amp;</span> id.outcome<span class="sc">==</span>temp<span class="sc">$</span>id.outcome[<span class="dv">1</span>])</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>drr2 <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">mr</span>(dr2))</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mr_scatter_plot</span>(drr2, dr2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">arrange</span>(het, fdr)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>dr2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, id.exposure<span class="sc">==</span>temp<span class="sc">$</span>id.exposure[<span class="dv">1</span>] <span class="sc">&amp;</span> id.outcome<span class="sc">==</span>temp<span class="sc">$</span>id.outcome[<span class="dv">1</span>])</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>drr2 <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">mr</span>(dr2))</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mr_scatter_plot</span>(drr2, dr2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`ebi-a-GCST003116.GRN`</code></pre>
 </div>
@@ -373,40 +379,40 @@ attr(,"split_labels")
 </div>
 <p>Outlier analysis. How many have outliers but after removing them the original assoc still remains</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-11_71f562df7747e4ebc457e5747ab68a6b">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>thresh <span class="ot">&lt;-</span> <span class="fu">subset</span>(rres, fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(pval)) <span class="sc">%&gt;%</span> {<span class="fu">max</span>(.<span class="sc">$</span>pval)}</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>res_out_sum <span class="ot">&lt;-</span> res_out <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(id.exposure, id.outcome) <span class="sc">%&gt;%</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">nsnp_orig =</span> nsnp[<span class="dv">1</span>],</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">noutliers =</span> nsnp[<span class="dv">1</span>] <span class="sc">-</span> nsnp[<span class="dv">2</span>],</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">fdr_orig =</span> pval[<span class="dv">1</span>] <span class="sc">&lt;</span> thresh,</span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">fdr_out =</span> pval[<span class="dv">2</span>] <span class="sc">&lt;</span> thresh</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(fdr_orig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>thresh <span class="ot">&lt;-</span> <span class="fu">subset</span>(rres, fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(pval)) <span class="sc">%&gt;%</span> {<span class="fu">max</span>(.<span class="sc">$</span>pval)}</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>res_out_sum <span class="ot">&lt;-</span> res_out <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(id.exposure, id.outcome) <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">nsnp_orig =</span> nsnp[<span class="dv">1</span>],</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">noutliers =</span> nsnp[<span class="dv">1</span>] <span class="sc">-</span> nsnp[<span class="dv">2</span>],</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">fdr_orig =</span> pval[<span class="dv">1</span>] <span class="sc">&lt;</span> thresh,</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">fdr_out =</span> pval[<span class="dv">2</span>] <span class="sc">&lt;</span> thresh</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(fdr_orig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'id.exposure'. You can override using the
 `.groups` argument.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res_out_sum<span class="sc">$</span>fdr_orig <span class="sc">&amp;</span> res_out_sum<span class="sc">$</span>fdr_out, <span class="at">na.rm=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res_out_sum<span class="sc">$</span>fdr_orig <span class="sc">&amp;</span> res_out_sum<span class="sc">$</span>fdr_out, <span class="at">na.rm=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1463</code></pre>
 </div>
 </div>
 <p>Reverse MR summary</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-12_426b7b7ca8038fe90d543c3d16c47d44">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>what, <span class="sc">~</span>n,</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Number of PRS results"</span>, <span class="fu">nrow</span>(prs_pairs),</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Number of reverse MR assocs"</span>, <span class="fu">nrow</span>(rres),</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Reverse MR FDR &lt; 0.05"</span>, <span class="fu">sum</span>(rres<span class="sc">$</span>fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>),</span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Reverse MR FDR &lt; 0.05 and no heterogeneity"</span>, <span class="fu">nrow</span>(resnohet),</span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Reverse MR FDR &lt; 0.05 after outlier removal"</span>, <span class="fu">sum</span>(res_out_sum<span class="sc">$</span>fdr_orig <span class="sc">&amp;</span> res_out_sum<span class="sc">$</span>fdr_out, <span class="at">na.rm=</span>T),</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mean number of instruments"</span>, <span class="fu">mean</span>(res_out_sum<span class="sc">$</span>nsnp_orig),</span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mean number of outliers"</span>, <span class="fu">mean</span>(res_out_sum<span class="sc">$</span>noutliers, <span class="at">na.rm=</span>T)</span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>what, <span class="sc">~</span>n,</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Number of PRS results"</span>, <span class="fu">nrow</span>(prs_pairs),</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Number of reverse MR assocs"</span>, <span class="fu">nrow</span>(rres),</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Reverse MR FDR &lt; 0.05"</span>, <span class="fu">sum</span>(rres<span class="sc">$</span>fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>),</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Reverse MR FDR &lt; 0.05 and no heterogeneity"</span>, <span class="fu">nrow</span>(resnohet),</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Reverse MR FDR &lt; 0.05 after outlier removal"</span>, <span class="fu">sum</span>(res_out_sum<span class="sc">$</span>fdr_orig <span class="sc">&amp;</span> res_out_sum<span class="sc">$</span>fdr_out, <span class="at">na.rm=</span>T),</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mean number of instruments"</span>, <span class="fu">mean</span>(res_out_sum<span class="sc">$</span>nsnp_orig),</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mean number of outliers"</span>, <span class="fu">mean</span>(res_out_sum<span class="sc">$</span>noutliers, <span class="at">na.rm=</span>T)</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 2
   what                                              n
   &lt;chr&gt;                                         &lt;dbl&gt;
-1 Number of PRS results                       3650   
+1 Number of PRS results                       2576   
 2 Number of reverse MR assocs                 3645   
 3 Reverse MR FDR &lt; 0.05                       1588   
 4 Reverse MR FDR &lt; 0.05 and no heterogeneity   273   
@@ -415,14 +421,15 @@ attr(,"split_labels")
 7 Mean number of outliers                        4.24</code></pre>
 </div>
 </div>
+<p>Compare PRS and reverse MR</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-13_363c41871b66a0c4d6e62ef1c308ce16">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>revmrpairs <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_out_sum, fdr_orig <span class="sc">&amp;</span> fdr_out)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(revmrpairs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>revmrpairs <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_out_sum, fdr_orig <span class="sc">&amp;</span> fdr_out)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(revmrpairs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1463    6</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>rmp <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_out, what<span class="sc">==</span><span class="st">"Outliers removed"</span> <span class="sc">&amp;</span> <span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> <span class="fu">paste</span>(revmrpairs<span class="sc">$</span>id.exposure, revmrpairs<span class="sc">$</span>id.outcome))</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rmp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>rmp <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_out, what<span class="sc">==</span><span class="st">"Outliers removed"</span> <span class="sc">&amp;</span> <span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> <span class="fu">paste</span>(revmrpairs<span class="sc">$</span>id.exposure, revmrpairs<span class="sc">$</span>id.outcome))</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rmp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         id.exposure id.outcome outcome exposure                    method nsnp
 2   ebi-a-GCST003116      ACAA1   ACAA1      CAD Inverse variance weighted   41
@@ -439,9 +446,9 @@ attr(,"split_labels")
 160  0.04983681 0.01569445 1.496086e-03 Outliers removed
 194 -0.04767240 0.01477194 1.249960e-03 Outliers removed</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(prs_pairs, rres, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"prot"</span><span class="ot">=</span><span class="st">"outcome"</span>, <span class="st">"opengwasid"</span><span class="ot">=</span><span class="st">"id.exposure"</span>))</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>temp<span class="sc">$</span>repl <span class="ot">&lt;-</span> <span class="fu">paste</span>(temp<span class="sc">$</span>prot, temp<span class="sc">$</span>opengwasid) <span class="sc">%in%</span> <span class="fu">paste</span>(rmp<span class="sc">$</span>id.outcome, rmp<span class="sc">$</span>id.exposure)</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(prs_pairs, rres, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"prot"</span><span class="ot">=</span><span class="st">"outcome"</span>, <span class="st">"opengwasid"</span><span class="ot">=</span><span class="st">"id.exposure"</span>))</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>temp<span class="sc">$</span>repl <span class="ot">&lt;-</span> <span class="fu">paste</span>(temp<span class="sc">$</span>prot, temp<span class="sc">$</span>opengwasid) <span class="sc">%in%</span> <span class="fu">paste</span>(rmp<span class="sc">$</span>id.outcome, rmp<span class="sc">$</span>id.exposure)</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 14
   prot   opengwasid    beta       pval.x  se.x id.outcome exposure method   nsnp
@@ -454,73 +461,73 @@ attr(,"split_labels")
 6 BTN3A2 ieu-b-2     0.0297 0.00000346      NA BTN3A2     AD       Invers…    21
 # ℹ 5 more variables: b &lt;dbl&gt;, se.y &lt;dbl&gt;, pval.y &lt;dbl&gt;, fdr &lt;dbl&gt;, repl &lt;lgl&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(temp<span class="sc">$</span>repl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(temp<span class="sc">$</span>repl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 FALSE  TRUE 
- 2182  1463 </code></pre>
+  841    28 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(temp, <span class="fu">aes</span>(<span class="at">x=</span>beta, <span class="at">y=</span>b)) <span class="sc">+</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>repl)) <span class="sc">+</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>, <span class="fu">aes</span>(<span class="at">colour=</span>repl)) <span class="sc">+</span></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">"PRS estimate"</span>, <span class="at">y=</span><span class="st">"MR estimate"</span>, <span class="at">colour=</span><span class="st">"MR FDR &lt; 0.05"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(temp, <span class="fu">aes</span>(<span class="at">x=</span>beta, <span class="at">y=</span>b)) <span class="sc">+</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>repl)) <span class="sc">+</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>, <span class="fu">aes</span>(<span class="at">colour=</span>repl)) <span class="sc">+</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">"PRS estimate"</span>, <span class="at">y=</span><span class="st">"MR estimate"</span>, <span class="at">colour=</span><span class="st">"MR FDR &lt; 0.05"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="reverse_mr_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">here</span>(<span class="st">"images"</span>, <span class="st">"mr_prs_comparison.pdf"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">here</span>(<span class="st">"images"</span>, <span class="st">"mr_prs_comparison.pdf"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Saving 7 x 5 in image
 `geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 </div>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-14_f2ae4e245d1f74126a7fb9b41f7a79fe">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(rmp) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(rmp, <span class="at">file=</span><span class="fu">here</span>(<span class="st">"results"</span>, <span class="st">"resnohet.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(rmp) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(rmp, <span class="at">file=</span><span class="fu">here</span>(<span class="st">"results"</span>, <span class="st">"resnohet.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Other Summary</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-15_f80bfd0ad62af2694073cd35d0fd678a">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>cis_prs <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_cis, <span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> <span class="fu">paste</span>(prs_pairs<span class="sc">$</span>prot, prs_pairs<span class="sc">$</span>opengwasid))</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>cis_prs<span class="sc">$</span>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(cis_prs<span class="sc">$</span>pval, <span class="st">"fdr"</span>)</span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">subset</span>(cis_prs, fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">code =</span> <span class="fu">paste</span>(id.exposure, id.outcome))</span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>res_cis<span class="sc">$</span>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(res_cis<span class="sc">$</span>pval, <span class="st">"fdr"</span>)</span>
-<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_cis, fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">code =</span> <span class="fu">paste</span>(id.exposure, id.outcome))</span>
-<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(a<span class="sc">$</span>code <span class="sc">%in%</span> b<span class="sc">$</span>code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>cis_prs <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_cis, <span class="fu">paste</span>(id.exposure, id.outcome) <span class="sc">%in%</span> <span class="fu">paste</span>(prs_pairs<span class="sc">$</span>prot, prs_pairs<span class="sc">$</span>opengwasid))</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>cis_prs<span class="sc">$</span>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(cis_prs<span class="sc">$</span>pval, <span class="st">"fdr"</span>)</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">subset</span>(cis_prs, fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">code =</span> <span class="fu">paste</span>(id.exposure, id.outcome))</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>res_cis<span class="sc">$</span>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(res_cis<span class="sc">$</span>pval, <span class="st">"fdr"</span>)</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">subset</span>(res_cis, fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">code =</span> <span class="fu">paste</span>(id.exposure, id.outcome))</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(a<span class="sc">$</span>code <span class="sc">%in%</span> b<span class="sc">$</span>code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 77</code></pre>
+<pre><code>[1] 22</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>colocres <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"cis_coloc_res.rds"</span>))</span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>res_cis<span class="sc">$</span>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(res_cis<span class="sc">$</span>pval, <span class="st">"fdr"</span>)</span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(</span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>what, <span class="sc">~</span>n,</span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Forward MR tests"</span>, <span class="fu">nrow</span>(res),</span>
-<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Forward MR tests using cis-only instruments"</span>, <span class="fu">nrow</span>(res_cis),</span>
-<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Forward MR tests using trans-only instruments"</span>, <span class="fu">nrow</span>(res_trans),</span>
-<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cis MR with FDR &lt; 0.05"</span>, <span class="fu">sum</span>(res_cis<span class="sc">$</span>fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>),</span>
-<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Total tested - reverse MR filter"</span>, <span class="fu">nrow</span>(cis_prs),</span>
-<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Total discovered - reverse MR filter"</span>, <span class="fu">sum</span>(cis_prs<span class="sc">$</span>fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>),</span>
-<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Discovery overlap"</span>, <span class="fu">sum</span>(a<span class="sc">$</span>code <span class="sc">%in%</span> b<span class="sc">$</span>code),</span>
-<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cis Colocalisation with H4 &gt; 0.8"</span>, <span class="fu">sum</span>(colocres<span class="sc">$</span>PP.H4.abf <span class="sc">&gt;</span> <span class="fl">0.8</span>),</span>
-<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>colocres <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"cis_coloc_res.rds"</span>))</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>res_cis<span class="sc">$</span>fdr <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(res_cis<span class="sc">$</span>pval, <span class="st">"fdr"</span>)</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>what, <span class="sc">~</span>n,</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Forward MR tests"</span>, <span class="fu">nrow</span>(res),</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Forward MR tests using cis-only instruments"</span>, <span class="fu">nrow</span>(res_cis),</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Forward MR tests using trans-only instruments"</span>, <span class="fu">nrow</span>(res_trans),</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cis MR with FDR &lt; 0.05"</span>, <span class="fu">sum</span>(res_cis<span class="sc">$</span>fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>),</span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Total tested - reverse MR filter"</span>, <span class="fu">nrow</span>(cis_prs),</span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Total discovered - reverse MR filter"</span>, <span class="fu">sum</span>(cis_prs<span class="sc">$</span>fdr <span class="sc">&lt;</span> <span class="fl">0.05</span>),</span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Discovery overlap"</span>, <span class="fu">sum</span>(a<span class="sc">$</span>code <span class="sc">%in%</span> b<span class="sc">$</span>code),</span>
+<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cis Colocalisation with H4 &gt; 0.8"</span>, <span class="fu">sum</span>(colocres<span class="sc">$</span>PP.H4.abf <span class="sc">&gt;</span> <span class="fl">0.8</span>),</span>
+<span id="cb64-13"><a href="#cb64-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 2
   what                                              n
   &lt;chr&gt;                                         &lt;int&gt;
-1 Forward MR tests                              36769
-2 Forward MR tests using cis-only instruments   23254
-3 Forward MR tests using trans-only instruments 35143
-4 Cis MR with FDR &lt; 0.05                          308
-5 Total tested - reverse MR filter               1996
-6 Total discovered - reverse MR filter             97
-7 Discovery overlap                                77
-8 Cis Colocalisation with H4 &gt; 0.8                 93</code></pre>
+1 Forward MR tests                              22434
+2 Forward MR tests using cis-only instruments   15246
+3 Forward MR tests using trans-only instruments 21468
+4 Cis MR with FDR &lt; 0.05                           94
+5 Total tested - reverse MR filter                980
+6 Total discovered - reverse MR filter             30
+7 Discovery overlap                                22
+8 Cis Colocalisation with H4 &gt; 0.8                 45</code></pre>
 </div>
 </div>
 <p>How many prs_pairs per trait</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-16_5fd8b1571cd3590269465118715704ed">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(prs_pairs<span class="sc">$</span>opengwasid) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(Freq) <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(code, opengwasid), <span class="at">by=</span><span class="fu">c</span>(<span class="st">"Var1"</span><span class="ot">=</span><span class="st">"opengwasid"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(prs_pairs<span class="sc">$</span>opengwasid) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(Freq) <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(code, opengwasid), <span class="at">by=</span><span class="fu">c</span>(<span class="st">"Var1"</span><span class="ot">=</span><span class="st">"opengwasid"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               Var1 Freq                              code
 1  ebi-a-GCST005647    3                               ALS
@@ -534,28 +541,22 @@ FALSE  TRUE
 9         ieu-a-984   43               Lung adenocarcinoma
 10         ieu-b-42   63                     Schizophrenia
 11 ebi-a-GCST005838   76                            Stroke
-12       ieu-a-1024   89                                MS
+12         ieu-b-18   89                                MS
 13 ebi-a-GCST006464   97                Endometrial cancer
-14         ieu-b-39  166          Diastolic Blood Pressure
-15 ebi-a-GCST003116  173                               CAD
-16        ieu-a-985  177        Lung cancer (ever smokers)
-17         ieu-b-38  179           Systolic Blood Pressure
-18        ieu-a-300  195                              LDLc
-19        ieu-a-989  196         Squamous cell lung cancer
-20 ebi-a-GCST005047  235                               T2D
-21        ieu-a-301  291                 Total Cholesterol
-22 ebi-a-GCST003374  414                               CKD
-23        ieu-a-299  553                              HDLc
-24        ieu-a-302  654                     Triglycerides</code></pre>
+14 ebi-a-GCST003116  173                               CAD
+15        ieu-a-985  177        Lung cancer (ever smokers)
+16        ieu-a-989  196         Squamous cell lung cancer
+17         ieu-a-26  235                               T2D
+18       ieu-a-1102  414                               CKD</code></pre>
 </div>
 </div>
 <p>Examine CKD - it has a lot of assocs</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-17_64ab5539cb0d70bed2cec9159414fb1b">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>ckd <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, exposure <span class="sc">==</span> <span class="st">"CKD"</span>)</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>ckd <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(id.outcome) <span class="sc">%&gt;%</span></span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(pval.outcome) <span class="sc">%&gt;%</span></span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>    {<span class="fu">table</span>(.<span class="sc">$</span>SNP)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>ckd <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, exposure <span class="sc">==</span> <span class="st">"CKD"</span>)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>ckd <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(id.outcome) <span class="sc">%&gt;%</span></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(pval.outcome) <span class="sc">%&gt;%</span></span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>    {<span class="fu">table</span>(.<span class="sc">$</span>SNP)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 rs13333226  rs2453533  rs3812035  rs7805747 
@@ -564,9 +565,9 @@ rs13333226  rs2453533  rs3812035  rs7805747
 </div>
 <p>Most of the time the best SNP is a single SNP. Heterogeneity?</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-18_e8f6374d4715aa8f1557727d1a15a48d">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>qjs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(exposure <span class="sc">==</span> <span class="st">"CKD"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(SNP) <span class="sc">%&gt;%</span></span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="fu">mean</span>(qj))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>qjs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(exposure <span class="sc">==</span> <span class="st">"CKD"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(SNP) <span class="sc">%&gt;%</span></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="fu">mean</span>(qj))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   SNP        `mean(qj)`
@@ -579,7 +580,7 @@ rs13333226  rs2453533  rs3812035  rs7805747
 </div>
 <p>Only 4 exposure SNPs..</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-19_99c7769754f8fa01c9a4b97c462d1684">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(ckd, outcome <span class="sc">==</span> outcome[<span class="dv">1</span>]) <span class="sc">%&gt;%</span> <span class="fu">select</span>(SNP, pval.exposure)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(ckd, outcome <span class="sc">==</span> outcome[<span class="dv">1</span>]) <span class="sc">%&gt;%</span> <span class="fu">select</span>(SNP, pval.exposure)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             SNP pval.exposure
 16149 rs13333226   3.80014e-26
@@ -589,13 +590,14 @@ rs13333226  rs2453533  rs3812035  rs7805747
 </div>
 </div>
 <p>Plot an example</p>
-<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-20_1ec9421f8b117c41be2e138959f49b23">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>ckd_top <span class="ot">&lt;-</span> <span class="fu">subset</span>(ckd, outcome <span class="sc">%in%</span> <span class="fu">subset</span>(prs_pairs, opengwasid <span class="sc">==</span> id.exposure[<span class="dv">1</span>])<span class="sc">$</span>prot[<span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>])</span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ckd_top, <span class="fu">aes</span>(<span class="at">x=</span>beta.exposure, <span class="at">y=</span>beta.outcome)) <span class="sc">+</span></span>
-<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="fu">facet_wrap</span>(<span class="sc">~</span>id.outcome) <span class="sc">+</span></span>
-<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-20_558a21fecc2036ce35024834f0d22ef4">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note that prs_pairs uses different opengwasid</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>ckd_top <span class="ot">&lt;-</span> <span class="fu">subset</span>(ckd, outcome <span class="sc">%in%</span> <span class="fu">subset</span>(prs_pairs, opengwasid <span class="sc">==</span> <span class="st">"ieu-a-1102"</span>)<span class="sc">$</span>prot[<span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>])</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ckd_top, <span class="fu">aes</span>(<span class="at">x=</span>beta.exposure, <span class="at">y=</span>beta.outcome)) <span class="sc">+</span></span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a><span class="fu">facet_wrap</span>(<span class="sc">~</span>id.outcome) <span class="sc">+</span></span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
@@ -606,14 +608,14 @@ rs13333226  rs2453533  rs3812035  rs7805747
 <p>The pattern of association is identical across all these proteins. I don’t know what to make of this. The 4 SNPs for CKD have a consistent effect on loads of blood protein levels?</p>
 <p>Look at lung cancer too?</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-21_2f7bf48c228e8b9fd7ff06d221e9562b">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>sclc <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, id.exposure <span class="sc">==</span> <span class="st">"ieu-a-989"</span> <span class="sc">&amp;</span> id.outcome <span class="sc">%in%</span> <span class="fu">subset</span>(res_out_sum, id.exposure<span class="sc">==</span><span class="st">"ieu-a-989"</span>)<span class="sc">$</span>id.outcome)</span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>sclc_top <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, id.exposure <span class="sc">==</span> <span class="st">"ieu-a-989"</span> <span class="sc">&amp;</span> id.outcome <span class="sc">%in%</span> <span class="fu">subset</span>(prs_pairs, opengwasid<span class="sc">==</span><span class="st">"ieu-a-989"</span>)<span class="sc">$</span>prot[<span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>])</span>
-<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sclc, <span class="fu">aes</span>(<span class="at">x=</span>beta.exposure, <span class="at">y=</span>beta.outcome)) <span class="sc">+</span></span>
-<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a><span class="fu">facet_wrap</span>(<span class="sc">~</span>id.outcome) <span class="sc">+</span></span>
-<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>sclc <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, id.exposure <span class="sc">==</span> <span class="st">"ieu-a-989"</span> <span class="sc">&amp;</span> id.outcome <span class="sc">%in%</span> <span class="fu">subset</span>(res_out_sum, id.exposure<span class="sc">==</span><span class="st">"ieu-a-989"</span>)<span class="sc">$</span>id.outcome)</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>sclc_top <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, id.exposure <span class="sc">==</span> <span class="st">"ieu-a-989"</span> <span class="sc">&amp;</span> id.outcome <span class="sc">%in%</span> <span class="fu">subset</span>(prs_pairs, opengwasid<span class="sc">==</span><span class="st">"ieu-a-989"</span>)<span class="sc">$</span>prot[<span class="dv">1</span><span class="sc">:</span><span class="dv">28</span>])</span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sclc, <span class="fu">aes</span>(<span class="at">x=</span>beta.exposure, <span class="at">y=</span>beta.outcome)) <span class="sc">+</span></span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a><span class="fu">facet_wrap</span>(<span class="sc">~</span>id.outcome) <span class="sc">+</span></span>
+<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
@@ -623,9 +625,9 @@ rs13333226  rs2453533  rs3812035  rs7805747
 </div>
 <p>Plot MR against PRS</p>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-22_c41f572ea4d7f4ecc5e9dbabc65741a6">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>qjs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(id.exposure<span class="sc">==</span><span class="st">"ieu-a-989"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(SNP) <span class="sc">%&gt;%</span></span>
-<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="fu">mean</span>(qj))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>qjs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(id.exposure<span class="sc">==</span><span class="st">"ieu-a-989"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(SNP) <span class="sc">%&gt;%</span></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="fu">mean</span>(qj))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 2
   SNP        `mean(qj)`
@@ -642,13 +644,13 @@ rs13333226  rs2453533  rs3812035  rs7805747
 </div>
 </div>
 <div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-23_ff392d3b4f622d159989f9edc4b329bc">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>res_out_sum <span class="sc">%&gt;%</span></span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(id.exposure) <span class="sc">%&gt;%</span></span>
-<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">fdr_out=</span><span class="fu">sum</span>(fdr_out), <span class="at">fdr_orig=</span><span class="fu">sum</span>(fdr_orig)) <span class="sc">%&gt;%</span></span>
-<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">id.exposure=</span>opengwasid, code)) <span class="sc">%&gt;%</span> </span>
-<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., prs_pairs <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(<span class="at">id.exposure=</span>opengwasid) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">nprs=</span><span class="fu">n</span>())) <span class="sc">%&gt;%</span></span>
-<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(nprs)) <span class="sc">%&gt;%</span></span>
-<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(code, id.exposure, <span class="at">n_prs=</span>nprs, <span class="at">n_mr=</span>fdr_orig, <span class="at">n_mr_out=</span>fdr_out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>res_out_sum <span class="sc">%&gt;%</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(id.exposure) <span class="sc">%&gt;%</span></span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">fdr_out=</span><span class="fu">sum</span>(fdr_out), <span class="at">fdr_orig=</span><span class="fu">sum</span>(fdr_orig)) <span class="sc">%&gt;%</span></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="at">id.exposure=</span>opengwasid, code)) <span class="sc">%&gt;%</span> </span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(., prs_pairs <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(<span class="at">id.exposure=</span>opengwasid) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">nprs=</span><span class="fu">n</span>())) <span class="sc">%&gt;%</span></span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(nprs)) <span class="sc">%&gt;%</span></span>
+<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(code, id.exposure, <span class="at">n_prs=</span>nprs, <span class="at">n_mr=</span>fdr_orig, <span class="at">n_mr_out=</span>fdr_out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Joining with `by = join_by(id.exposure)`
 Joining with `by = join_by(id.exposure)`</code></pre>
@@ -657,33 +659,34 @@ Joining with `by = join_by(id.exposure)`</code></pre>
 <pre><code># A tibble: 17 × 5
    code                       id.exposure      n_prs  n_mr n_mr_out
    &lt;chr&gt;                      &lt;chr&gt;            &lt;int&gt; &lt;int&gt;    &lt;int&gt;
- 1 Triglycerides              ieu-a-302          654   482      469
- 2 HDLc                       ieu-a-299          553   294      286
- 3 CKD                        ebi-a-GCST003374   414   309      308
- 4 Total Cholesterol          ieu-a-301          291   115      103
- 5 T2D                        ebi-a-GCST005047   235    65       58
- 6 Squamous cell lung cancer  ieu-a-989          196     5        4
- 7 LDLc                       ieu-a-300          195    63       59
- 8 Systolic Blood Pressure    ieu-b-38           179   100       88
- 9 Lung cancer (ever smokers) ieu-a-985          177     4        4
-10 CAD                        ebi-a-GCST003116   173    18       13
-11 Diastolic Blood Pressure   ieu-b-39           166    61       35
-12 MS                         ieu-a-1024          89    53       NA
-13 Stroke                     ebi-a-GCST005838    76     1        1
-14 Schizophrenia              ieu-b-42            63    10        4
-15 Lung adenocarcinoma        ieu-a-984           43     1        1
-16 Prostate cancer            ieu-b-85            11     2        0
-17 Ovarian cancer             ieu-a-1120           6     1        1</code></pre>
+ 1 Squamous cell lung cancer  ieu-a-989          196     5        4
+ 2 Lung cancer (ever smokers) ieu-a-985          177     4        4
+ 3 CAD                        ebi-a-GCST003116   173    18       13
+ 4 Stroke                     ebi-a-GCST005838    76     1        1
+ 5 Schizophrenia              ieu-b-42            63    10        4
+ 6 Lung adenocarcinoma        ieu-a-984           43     1        1
+ 7 Prostate cancer            ieu-b-85            11     2        0
+ 8 Ovarian cancer             ieu-a-1120           6     1        1
+ 9 &lt;NA&gt;                       ebi-a-GCST003374    NA   309      308
+10 &lt;NA&gt;                       ebi-a-GCST005047    NA    65       58
+11 &lt;NA&gt;                       ieu-a-1024          NA    53       NA
+12 &lt;NA&gt;                       ieu-a-299           NA   294      286
+13 &lt;NA&gt;                       ieu-a-300           NA    63       59
+14 &lt;NA&gt;                       ieu-a-301           NA   115      103
+15 &lt;NA&gt;                       ieu-a-302           NA   482      469
+16 &lt;NA&gt;                       ieu-b-38            NA   100       88
+17 &lt;NA&gt;                       ieu-b-39            NA    61       35</code></pre>
 </div>
 </div>
-<p>Triglycerides</p>
-<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-24_232ca8ee0d7f584cadfdab93124b03b7">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>trig_top <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, id.exposure <span class="sc">==</span> <span class="st">"ieu-a-302"</span> <span class="sc">&amp;</span> id.outcome <span class="sc">%in%</span> <span class="fu">unique</span>(<span class="fu">subset</span>(prs_pairs, opengwasid<span class="sc">==</span><span class="st">"ieu-a-302"</span>))<span class="sc">$</span>prot[<span class="dv">1</span><span class="sc">:</span><span class="dv">56</span>])</span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(trig_top, <span class="fu">aes</span>(<span class="at">x=</span>beta.exposure, <span class="at">y=</span>beta.outcome)) <span class="sc">+</span></span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a><span class="fu">facet_wrap</span>(<span class="sc">~</span>id.outcome) <span class="sc">+</span></span>
-<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>T2D</p>
+<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-24_b71b4ad28c676fdc1dd4fa6cb2f8b2a5">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note that prs_pairs uses different opengwasid</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>t2d_top <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, id.exposure <span class="sc">==</span> <span class="st">"ebi-a-GCST005047"</span> <span class="sc">&amp;</span> id.outcome <span class="sc">%in%</span> <span class="fu">unique</span>(<span class="fu">subset</span>(prs_pairs, opengwasid<span class="sc">==</span><span class="st">"ieu-a-26"</span>))<span class="sc">$</span>prot[<span class="dv">1</span><span class="sc">:</span><span class="dv">56</span>])</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(t2d_top, <span class="fu">aes</span>(<span class="at">x=</span>beta.exposure, <span class="at">y=</span>beta.outcome)) <span class="sc">+</span></span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="fu">facet_wrap</span>(<span class="sc">~</span>id.outcome) <span class="sc">+</span></span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
@@ -691,24 +694,9 @@ Joining with `by = join_by(id.exposure)`</code></pre>
 <p><img src="reverse_mr_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>T2D</p>
-<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-25_259018ef7882be331ee56229042540bb">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>t2d_top <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, id.exposure <span class="sc">==</span> <span class="st">"ebi-a-GCST005047"</span> <span class="sc">&amp;</span> id.outcome <span class="sc">%in%</span> <span class="fu">unique</span>(<span class="fu">subset</span>(prs_pairs, opengwasid<span class="sc">==</span><span class="st">"ebi-a-GCST005047"</span>))<span class="sc">$</span>prot[<span class="dv">1</span><span class="sc">:</span><span class="dv">56</span>])</span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(t2d_top, <span class="fu">aes</span>(<span class="at">x=</span>beta.exposure, <span class="at">y=</span>beta.outcome)) <span class="sc">+</span></span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a><span class="fu">facet_wrap</span>(<span class="sc">~</span>id.outcome) <span class="sc">+</span></span>
-<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="reverse_mr_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
 <p>MS</p>
-<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-26_148fdc7b8ff93578136811f8e4ce021d">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>ms_top <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, id.exposure <span class="sc">==</span> <span class="st">"ieu-a-1024"</span> <span class="sc">&amp;</span> id.outcome <span class="sc">%in%</span> <span class="fu">unique</span>(<span class="fu">subset</span>(prs_pairs, opengwasid<span class="sc">==</span><span class="st">"ieu-a-1024"</span>))<span class="sc">$</span>prot[<span class="dv">1</span><span class="sc">:</span><span class="dv">56</span>])</span>
+<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-25_5396510576041160c46851f6048e21dd">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>ms_top <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, id.exposure <span class="sc">==</span> <span class="st">"ieu-a-1024"</span> <span class="sc">&amp;</span> id.outcome <span class="sc">%in%</span> <span class="fu">unique</span>(<span class="fu">subset</span>(prs_pairs, opengwasid<span class="sc">==</span><span class="st">"ieu-b-18"</span>))<span class="sc">$</span>prot[<span class="dv">1</span><span class="sc">:</span><span class="dv">56</span>])</span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ms_top, <span class="fu">aes</span>(<span class="at">x=</span>beta.exposure, <span class="at">y=</span>beta.outcome)) <span class="sc">+</span></span>
 <span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -719,12 +707,12 @@ Joining with `by = join_by(id.exposure)`</code></pre>
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="reverse_mr_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+<p><img src="reverse_mr_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-27_546168d1948241006dfb0babab3b0ab8">
+<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-26_cd5d6b1c1bc1d2bbc86f59ea113e605c">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>plot_rev_mr <span class="ot">&lt;-</span> <span class="cf">function</span>(id, nplot) {</span>
-<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>    ms_top <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, id.exposure <span class="sc">==</span> id <span class="sc">&amp;</span> id.outcome <span class="sc">%in%</span> <span class="fu">unique</span>(<span class="fu">subset</span>(prs_pairs, opengwasid<span class="sc">==</span>id))<span class="sc">$</span>prot[<span class="dv">1</span><span class="sc">:</span>nplot])</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>    ms_top <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, id.exposure <span class="sc">%in%</span> id <span class="sc">&amp;</span> id.outcome <span class="sc">%in%</span> <span class="fu">unique</span>(<span class="fu">subset</span>(prs_pairs, opengwasid <span class="sc">%in%</span> id))<span class="sc">$</span>prot[<span class="dv">1</span><span class="sc">:</span>nplot])</span>
 <span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>    ind <span class="ot">&lt;-</span> <span class="fu">sign</span>(ms_top<span class="sc">$</span>beta.exposure) <span class="sc">==</span> <span class="sc">-</span><span class="dv">1</span></span>
 <span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>    ms_top<span class="sc">$</span>beta.exposure <span class="ot">&lt;-</span> <span class="fu">abs</span>(ms_top<span class="sc">$</span>beta.exposure)</span>
 <span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>    ms_top<span class="sc">$</span>beta.outcome[ind] <span class="ot">&lt;-</span> ms_top<span class="sc">$</span>beta.outcome[ind] <span class="sc">*</span> <span class="sc">-</span><span class="dv">1</span></span>
@@ -737,7 +725,11 @@ Joining with `by = join_by(id.exposure)`</code></pre>
 <span id="cb87-12"><a href="#cb87-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_blank</span>(), <span class="at">axis.text.y=</span><span class="fu">element_blank</span>())</span>
 <span id="cb87-13"><a href="#cb87-13" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb87-14"><a href="#cb87-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb87-15"><a href="#cb87-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_rev_mr</span>(<span class="st">"ebi-a-GCST003374"</span>, <span class="dv">56</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb87-15"><a href="#cb87-15" aria-hidden="true" tabindex="-1"></a><span class="co"># plot_rev_mr("ebi-a-GCST003374", 56)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>MS excluding chr 6</p>
+<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-27_e215ee5e354a00da79c51f23ab56cff5">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_rev_mr</span>(<span class="fu">c</span>(<span class="st">"ieu-a-1024"</span>, <span class="st">"ieu-b-18"</span>), <span class="dv">56</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
@@ -745,18 +737,8 @@ Joining with `by = join_by(id.exposure)`</code></pre>
 <p><img src="reverse_mr_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>MS</p>
-<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-28_e73d94168e17b98036b97c7687fb7e4f">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_rev_mr</span>(<span class="st">"ieu-a-1024"</span>, <span class="dv">56</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="reverse_mr_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-29_3ce3279a987d9e956ed0ad988de9a8da">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(dat, exposure <span class="sc">==</span> <span class="st">"MS"</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(outcome <span class="sc">==</span> outcome[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="reverse_mr_cache/html/unnamed-chunk-28_2520e9c97348dc32453e59bc1e45b160">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(dat, exposure <span class="sc">==</span> <span class="st">"MS"</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(outcome <span class="sc">==</span> outcome[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          SNP effect_allele.exposure other_allele.exposure
 1   rs1077667                      T                     C
