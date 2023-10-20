@@ -50,9 +50,10 @@ dim(paths)
 stopifnot(all(file.exists(file.path(prot_dir, paths$pdirst))))
 
 a <- subset(lookups, !duplicated(rsid))
-a <- paste0("chr", a$chr, ":", a$position)
+a <- paste0("chr", a$chr, ":", a$position, "-", a$position)
 write.table(a, file="lookups_b37.txt", row=F, qu=F)
 
+# manual step requires file to be uploaded here to do liftover from 37 to 38 https://genome.ucsc.edu/cgi-bin/hgLiftOver
 hg38 <- read.table(here("data", "hglft_genome_30ad4_c311e0.bed"), he=F)
 hg38 <- tidyr::separate(hg38, V4, sep=":", into=c("chr", "pos1"))
 hg38 <- tidyr::separate(hg38, pos1, sep="-", into=c("pos1", "pos2"))
@@ -81,7 +82,7 @@ extract_sumstat <- function(i, paths, lookups, prot_dir) {
     if(!file.exists(fnt)) {
         next
     }
-    cmd <- paste0("tar xvf ", fnt)
+    cmd <- paste0("tar xvf '", fnt, "'")
     system(cmd)
     l <- list()
     fnut <- list.files(subset(paths, prot==p)$pdirs)
