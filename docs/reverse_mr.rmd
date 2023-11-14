@@ -17,6 +17,13 @@ dat <- readRDS(here("data", "reverse_mr_dat.rds"))
 idinfo <- ieugwasr::gwasinfo(unique(dat$id.exposure))
 keep_ids <- unique(dat$id.exposure)
 keep_ids <- keep_ids[!keep_ids %in% c("ieu-a-299", "ieu-a-300", "ieu-a-301", "ieu-a-302", "ieu-b-38", "ieu-b-39")]
+table(dat$id.exposure %in% keep_ids)
+dat <- subset(dat, id.exposure %in% keep_ids)
+
+dat$id.exposure[dat$id.exposure == "ebi-a-GCST003374"] <- "ieu-a-1102"
+dat$id.exposure[dat$id.exposure == "ebi-a-GCST005047"] <- "ieu-a-26"
+dat$id.exposure[dat$id.exposure == "ieu-a-1024"] <- "ieu-b-18"
+table(unique(dat$id.exposure) %in% prs_pairs$opengwasid)
 ```
 
 Perform MR
@@ -69,7 +76,15 @@ These assocs seem to be most consistent with being reverse causal
 ```{r}
 resnohet <- left_join(resnohet, nohet %>% select(id.exposure, id.outcome, Q_pval), by=c("id.exposure", "id.outcome"))
 head(resnohet)
+dim(resnohet)
 write.csv(resnohet, file=here("results", "resnohet.csv"))
+```
+
+```{r}
+resnohetall <- subset(rres, (paste(exposure, outcome) %in% paste(nohet$exposure, nohet$outcome) | nsnp == 1))
+table(resnohetall$exposure) %>% as.data.frame
+dim(resnohetall)
+write.csv(resnohetall, file=here("results", "resnohetall.csv"))
 ```
 
 Analyse the ones with large heterogeneity
@@ -98,8 +113,15 @@ group_map(~ est_qj(.))
 qjs <- lapply(qj, \(x) x$qj) %>% bind_rows()
 res_out <- lapply(qj, \(x) x$r) %>% bind_rows() %>% select(names(.)[1:10])
 head(res_out)
+dim(res_out)
 saveRDS(qjs, file=here("data", "reverse_mr_qj.rds"))
 saveRDS(res_out, file=here("data", "reverse_mr_outliers.rds"))
+```
+
+Results table
+
+```{r}
+res_out %>% select(exposure, id=id.exposure, outcome, nsnp, b, se, pval, what) %>% write.csv(., file=here("results", "reverse_mr_results.csv"))
 ```
 
 
@@ -161,9 +183,10 @@ head(rmp)
 
 temp <- inner_join(prs_pairs, rres, by=c("prot"="outcome", "opengwasid"="id.exposure"))
 temp$repl <- paste(temp$prot, temp$opengwasid) %in% paste(rmp$id.outcome, rmp$id.exposure)
+
 head(temp)
 table(temp$repl)
-ggplot(temp, aes(x=beta, y=b)) +
+ggplot(temp %>% filter(b < 1), aes(x=beta, y=b)) +
 geom_point(aes(colour=repl)) +
 geom_smooth(method="lm", aes(colour=repl)) +
 labs(x="PRS estimate", y="MR estimate", colour="MR FDR < 0.05")
@@ -279,7 +302,7 @@ T2D
 
 ```{r}
 # note that prs_pairs uses different opengwasid
-t2d_top <- subset(dat, id.exposure == "ebi-a-GCST005047" & id.outcome %in% unique(subset(prs_pairs, opengwasid=="ieu-a-26"))$prot[1:56])
+t2d_top <- subset(dat, id.exposure == "ieu-a-26" & id.outcome %in% unique(subset(prs_pairs, opengwasid=="ieu-a-26"))$prot[1:56])
 
 ggplot(t2d_top, aes(x=beta.exposure, y=beta.outcome)) +
 geom_point() +
@@ -290,7 +313,7 @@ geom_smooth(method="lm")
 MS
 
 ```{r}
-ms_top <- subset(dat, id.exposure == "ieu-a-1024" & id.outcome %in% unique(subset(prs_pairs, opengwasid=="ieu-b-18"))$prot[1:56])
+ms_top <- subset(dat, id.exposure == "ieu-b-18" & id.outcome %in% unique(subset(prs_pairs, opengwasid=="ieu-b-18"))$prot[1:56])
 
 ggplot(ms_top, aes(x=beta.exposure, y=beta.outcome)) +
 geom_point() +
