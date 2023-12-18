@@ -1,0 +1,119 @@
+---
+title: Fitler PRS results using reverse MR
+author: Gibran Hemani
+---
+
+
+
+```{r}
+library(tidyr)
+library(dplyr)
+library(data.table)
+library(ggplot2)
+library(here)
+```
+
+
+Organise trait names in PRS file
+
+```{r}
+prs <- fread(here("data", "Full_PRS_Results_All_Disease_All_Pvalue.tsv.gz")) %>%
+    separate(UKBPPP_ProteinID, sep=":", into=c("prot", "v1", "v2", "v3"))
+library(readxl)
+traits <- read_xlsx(here("data", "Supplementary_Table5.xlsx"))
+names(traits)[2] <- "Code"
+traits %>% select(Code, opengwasid) %>% as.data.frame
+table(traits$Disease %in% prs$Disease_Name)
+subset(traits, !Code %in% prs$Disease_Name)$Code
+prs$Disease_Name[prs$Disease_Name == "Alzheimer's disease"] <- "Alzheimer’s disease"
+prs$Disease_Name[prs$Disease_Name == "ER+ breast cancer"] <- "ER+ Breast cancer"
+prs$Disease_Name[prs$Disease_Name == "High-grade serous ovarian cancer"] <- "High grade serous ovarian cancer"
+prs$Disease_Name[prs$Disease_Name == "Lung cancer (in ever smokers)"] <- "Lung cancer in ever smokers"
+
+head(prs)
+prs <- left_join(prs, subset(traits, select=c(Code, opengwasid)), by=c("Disease_Name" = "Code"))
+head(prs)
+saveRDS(prs, file=here("data", "full_prs.rds"))
+```
+
+```{r}
+revmr <- readRDS(here("data", "reverse_mr_outliers.rds"))
+table(unique(revmr$id.exposure) %in% prs$opengwasid)
+```
+
+
+Heterogeneity analysis
+
+1. For any PRS that doesn't have revMR, keep it
+2. All others check if there is heterogeneity with All revmr or Outliers removed revmr
+
+```{r}
+fixed_effects_meta_analysis <- function(beta_vec, se_vec) {
+    w <- 1 / se_vec^2
+    beta <- sum(beta_vec * w, na.rm=T) / sum(w, na.rm=T)
+    se <- sqrt(1 / sum(w, na.rm=T))
+    pval <- pnorm(abs(beta / se), lower.tail = FALSE)
+    Qj <- w * (beta-beta_vec)^2
+    Q <- sum(Qj, na.rm=T)
+    Qdf <- sum(!is.na(beta_vec))-1
+    if(Qdf == 0) Q <- 0
+    Qjpval <- pchisq(Qj, 1, lower.tail=FALSE)
+    Qpval <- pchisq(Q, Qdf, lower.tail=FALSE)
+    return(list(beta=beta, se=se, Q=Q, Qdf=Qdf, Qpval=Qpval, Qj=Qj, Qjpval=Qjpval))
+}
+```
+
+```{r}
+temp <- bind_rows(
+    revmr %>% select(id.exposure, outcome, exposure, nsnp, b, se, pval, what),
+    prs %>% 
+        filter(P_value < 2.3e-6) %>%
+        select(id.exposure=opengwasid, outcome=prot, exposure=Disease_Code, b=Estimate, se=Std_Error, pval=P_value) %>%
+        mutate(what="PRS")
+) %>% as_tibble()
+temp2 <- temp %>% 
+    mutate(code = paste(id.exposure, outcome)) %>% 
+    select(code, what, b) %>%
+    filter(!duplicated(paste(code, what))) %>%
+    pivot_wider(names_from=what, values_from=b)
+
+het <- temp %>% 
+    filter(what != "All") %>%
+    group_by(id.exposure, outcome) %>%
+    do({
+        x <- .
+        a <- fixed_effects_meta_analysis(x$b, x$se)
+        tibble(b=a$beta, se=a$se, Q=a$Q, Qdf=a$Qdf, Qpval=a$Qpval, pval_or = x$pval[x$what=="Outliers removed"][1])
+    }) %>%
+    ungroup() %>%
+    mutate(Qfdr=p.adjust(Qpval, "fdr"))
+
+table(het$Qfdr < 0.05)
+```
+
+```{r}
+idmapping <- subset(temp, what=="All" & !duplicated(id.exposure)) %>% select(id.exposure, trait=exposure)
+temp <- left_join(temp, idmapping, by="id.exposure")
+temp
+```
+
+```{r}
+
+plot_het <- function(het, temp, codes) {
+    ggplot(
+        temp %>% filter(paste(id.exposure, outcome) %in% codes),
+        aes(x=b, y=what)
+    ) +
+    geom_point() +
+    geom_vline(linetype="dotted", xintercept=0) +
+    geom_errorbarh(aes(xmin=b-se*1.96, xmax=b+se*1.96), height=0) +
+    facet_wrap(~ trait + outcome)
+}
+ind <- which(het$Qfdr < 0.05 & het$pval_or > 0.05)
+codes <- paste(het$id.exposure[ind], het$outcome[ind])
+plot_het(het, temp, codes)
+```
+
+```{r}
+saveRDS(codes, file=here("data", "prs_unreliable.rds"))
+```
