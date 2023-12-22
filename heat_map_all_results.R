@@ -18,7 +18,7 @@ length(unique(a2$Disease))
 rmr<-load_and_format_rmr_results(protein_info=b)
 fmr<-load_and_format_fmr_results(protein_info=b)
 
-head(rmr)
+
 
 join_and_format_all_results<-funcion(a=NULL){
   d<-merge(a,rmr[,c("z","pval","ppid","fdr")],by="ppid",all.x=TRUE)
@@ -43,7 +43,7 @@ join_and_format_all_results<-funcion(a=NULL){
   d$fmr_p_sig<-NA
   Pos<-which(d$fdr_fmr<0.05)
   d$fmr_p_sig[Pos]<-TRUE
-
+  
   write.table(d,"~/ukbb-prot-prs/data/prs_rmr_fmr.txt",sep="\t",col.names=TRUE,row.names=FALSE,quote=FALSE)
 
   d$Fill<-NA
