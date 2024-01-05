@@ -25,6 +25,9 @@ dat$id.exposure[dat$id.exposure == "ebi-a-GCST003374"] <- "ieu-a-1102"
 dat$id.exposure[dat$id.exposure == "ebi-a-GCST005047"] <- "ieu-a-26"
 dat$id.exposure[dat$id.exposure == "ieu-a-1024"] <- "ieu-b-18"
 dat$id.exposure[dat$id.exposure == "ieu-a-1187"] <- "ieu-a-805"
+dat$exposure[dat$id.exposure == "ieu-a-805"] <- "Multiple sclerosis"
+prs_pairs$opengwasid[prs_pairs$opengwasid == "ieu-a-1187"] <- "ieu-a-805"
+prs_pairs$opengwasid[prs_pairs$opengwasid == "ieu-a-1024"] <- "ieu-b-18"
 table(unique(dat$id.exposure) %in% prs_pairs$opengwasid)
 ```
 
@@ -187,12 +190,21 @@ temp$repl <- paste(temp$prot, temp$opengwasid) %in% paste(rmp$id.outcome, rmp$id
 
 head(temp)
 table(temp$repl)
-ggplot(temp %>% filter(b < 1), aes(x=Estimate, y=b)) +
-geom_point(aes(colour=repl)) +
-geom_smooth(method="lm", aes(colour=repl)) +
+temp %>% filter(b < 1 & P_value < 0.05/nrow(temp)) %>%
+    arrange(repl) %>%
+ggplot(., aes(x=Estimate, y=b)) +
+geom_point() +
+geom_smooth(method="lm") +
+geom_abline(slope=1, intercept=0, linetype="dotted") +
 labs(x="PRS estimate", y="MR estimate", colour="MR FDR < 0.05")
 ggsave(here("images", "mr_prs_comparison.pdf"))
 ```
+
+
+```{r}
+subset(temp, Estimate < 0 & b > 0 & repl)
+```
+
 
 ```{r}
 rownames(rmp) <- NULL
@@ -292,7 +304,7 @@ qjs %>% filter(id.exposure=="ieu-a-989") %>%
 ```{r}
 res_out_sum %>%
     group_by(id.exposure) %>%
-    summarise(fdr_out=sum(fdr_out), fdr_orig=sum(fdr_orig)) %>%
+    summarise(fdr_out=sum(fdr_out, na.rm=T), fdr_orig=sum(fdr_orig, na.rm=T)) %>%
     left_join(., traits %>% select(id.exposure=opengwasid, code)) %>% 
     left_join(., prs_pairs %>% group_by(id.exposure=opengwasid) %>% summarise(nprs=n())) %>%
     arrange(desc(nprs)) %>%
