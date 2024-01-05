@@ -4,16 +4,18 @@ library(ggplot2)
 library(clusterProfiler)
 library(org.Hs.eg.db)
 library(tidyr)
+library(parallel)
 
 # load mr results
 load(here("data", "all.rdata"))
+options(mc.cores=30)
 
 # PRS universe
 a <- read.csv(here("data", "Bristol_and_Biogen_PRS_Associations", "PRScs_Olink_Associaton_Biogen_AD.csv"))
 a <- a %>% tidyr::separate(UKBPPP_ProteinID, sep=":", into=c("symbol", "uniprot", "v1", "v2"))
 prs_universe <- unique(a$symbol)
 
-enr_cis <- lapply(unique(res_cis$id.outcome), \(id) {
+enr_cis <- mclapply(unique(res_cis$id.outcome), \(id) {
     message(id)
     x <- subset(res_cis, id.outcome==id)
     f <- subset(x, pval < 0.05)$id.exposure
@@ -32,7 +34,7 @@ enr_cis <- lapply(unique(res_cis$id.outcome), \(id) {
     return(ego)
 }) %>% bind_rows()
 
-enr_trans <- lapply(unique(res_trans$id.outcome), \(id) {
+enr_trans <- mclapply(unique(res_trans$id.outcome), \(id) {
     message(id)
     x <- subset(res_trans, id.outcome==id)
     f <- subset(x, pval < 0.05)$id.exposure
@@ -51,7 +53,7 @@ enr_trans <- lapply(unique(res_trans$id.outcome), \(id) {
     return(ego)
 }) %>% bind_rows()
 
-enr_prs <- lapply(unique(prs_pairs$opengwasid), \(id) {
+enr_prs <- mclapply(unique(prs_pairs$opengwasid), \(id) {
     message(id)
     f <- subset(prs_pairs, opengwasid==id)$prot
     if(length(f) == 0) return(NULL)

@@ -9,7 +9,9 @@ load(here("data", "all.rdata"))
 traits <- read_xlsx(here("data", "Supplementary_Table5.xlsx"))
 prs <- fread(here("data", "Full_PRS_Results_All_Disease_All_Pvalue.tsv"))
 
-
+# update MS to have an ID that has some instruments
+traits$opengwasid[traits$Disease == "Multiple sclerosis"] <- "ieu-a-1024"
+traits$opengwasid[traits$Disease == "Major depressive disorder"] <- "ieu-a-1187"
 # Get instruments for all opengwasid in prs_pairs
 
 inst <- ieugwasr::tophits(unique(traits$opengwasid))
@@ -28,6 +30,7 @@ prs$fdr <- p.adjust(prs$P_value, "fdr")
 prs$sig <- prs$fdr < 0.05
 table(prs$sig)
 head(prs)
+saveRDS(prs, file=here("data", "prs_pairs.rds"))
 
 lookups <- inner_join(
     prs %>% filter(sig) %>% select(prot, id=opengwasid),

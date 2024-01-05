@@ -13,6 +13,7 @@ library(tidyr)
 library(ggplot2)
 
 load(here("data", "all.rdata"))
+prs_pairs <- readRDS(here("data", "prs_pairs.rds"))
 dat <- readRDS(here("data", "reverse_mr_dat.rds"))
 idinfo <- ieugwasr::gwasinfo(unique(dat$id.exposure))
 keep_ids <- unique(dat$id.exposure)
@@ -23,6 +24,7 @@ dat <- subset(dat, id.exposure %in% keep_ids)
 dat$id.exposure[dat$id.exposure == "ebi-a-GCST003374"] <- "ieu-a-1102"
 dat$id.exposure[dat$id.exposure == "ebi-a-GCST005047"] <- "ieu-a-26"
 dat$id.exposure[dat$id.exposure == "ieu-a-1024"] <- "ieu-b-18"
+dat$id.exposure[dat$id.exposure == "ieu-a-1187"] <- "ieu-a-805"
 table(unique(dat$id.exposure) %in% prs_pairs$opengwasid)
 ```
 
@@ -40,7 +42,7 @@ Compare against PRS
 ```{r}
 temp <- inner_join(prs_pairs, rres, by=c("prot"="outcome", "opengwasid"="id.exposure"))
 dim(temp)
-ggplot(temp, aes(x=beta, y=b)) +
+ggplot(temp, aes(x=Estimate, y=b)) +
 geom_point() +
 geom_smooth(method="lm") +
 labs(x="PRS estimate", y="MR estimate")
@@ -106,9 +108,8 @@ est_qj <- function(d) {
     r2 <- suppressMessages(mr(d_noout, method="mr_ivw")) %>% mutate(what="Outliers removed")
     return(list(qj=ss, r=bind_rows(r, r2)))
 }
-
 qj <- group_by(dat, paste(id.exposure, id.outcome)) %>% 
-group_map(~ est_qj(.))
+    group_map(~ est_qj(.))
 
 qjs <- lapply(qj, \(x) x$qj) %>% bind_rows()
 res_out <- lapply(qj, \(x) x$r) %>% bind_rows() %>% select(names(.)[1:10])
@@ -164,7 +165,7 @@ tribble(
     ~what, ~n,
     "Number of PRS results", nrow(prs_pairs),
     "Number of reverse MR assocs", nrow(rres),
-    "Reverse MR FDR < 0.05", sum(rres$fdr < 0.05),
+    "Reverse MR FDR < 0.05", sum(rres$fdr < 0.05, na.rm=T),
     "Reverse MR FDR < 0.05 and no heterogeneity", nrow(resnohet),
     "Reverse MR FDR < 0.05 after outlier removal", sum(res_out_sum$fdr_orig & res_out_sum$fdr_out, na.rm=T),
     "Mean number of instruments", mean(res_out_sum$nsnp_orig),
@@ -186,7 +187,7 @@ temp$repl <- paste(temp$prot, temp$opengwasid) %in% paste(rmp$id.outcome, rmp$id
 
 head(temp)
 table(temp$repl)
-ggplot(temp %>% filter(b < 1), aes(x=beta, y=b)) +
+ggplot(temp %>% filter(b < 1), aes(x=Estimate, y=b)) +
 geom_point(aes(colour=repl)) +
 geom_smooth(method="lm", aes(colour=repl)) +
 labs(x="PRS estimate", y="MR estimate", colour="MR FDR < 0.05")
