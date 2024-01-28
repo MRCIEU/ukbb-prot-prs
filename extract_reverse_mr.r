@@ -21,7 +21,6 @@ paths <- tibble(pdirst=grep(".tar", alldir, value=TRUE)) %>%
     mutate(pdirs = gsub(".tar", "", pdirst)) %>%
     tidyr::separate(pdirs, sep="_", into=c("prot", "c1", "c2", "v1", "type"), remove=FALSE)
 
-
 paths$prot[paths$prot == "MICB"] <- "MICB_MICA"
 paths$prot[paths$prot == "IL12A"] <- "IL12A_IL12B"
 paths$prot[paths$prot == "DEFA1"] <- "DEFA1_DEFA1B"
@@ -39,6 +38,7 @@ dim(paths)
 paths <- subset(paths, paths$prot %in% prots)
 dim(paths)
 
+dir.create(here("data", "pqtl_extract"), recursive=TRUE)
 paths$output <- here("data", "pqtl_extract", paste0(paths$prot, ".rds"))
 dim(paths)
 table(file.exists(paths$output))
@@ -122,13 +122,15 @@ fn <- list.files(here("data", "pqtl_extract"))
 pqtl_extract <- furrr::future_map(fn, \(x){
     readRDS(here("data", "pqtl_extract", x))
 }) %>% bind_rows()
+dim(pqtl_extract)
+table(prots %in% pqtl_extract$prot)
 saveRDS(pqtl_extract, file=here("data", "pqtl_extract.rds"))
 
 
 # Harmonise exposure / outcome
 
 
-load(here("data", "all.rdata"))
+prs_pairs <- readRDS(here("data", "prs_pairs.rds"))
 pqtl_extract <- readRDS(here("data", "pqtl_extract.rds"))
 lookups <- readRDS(here("data", "reverse_mr_lookups.rds"))
 
@@ -154,16 +156,15 @@ outdat <- format_data(
     pqtl_extract, "outcome", snp_col="rsid", effect_allele="ea", other_allele="nea", beta="BETA", se="SE", eaf="A1FREQ", phenotype="prot"
 )
 
-prs_pairs
-dat <- lapply(1:nrow(prs_pairs), \(i)
+dat <- furrr::future_map(1:nrow(prs_pairs), \(i)
 {
     harmonise_data(
         subset(expdat, exposure == prs_pairs$opengwasid[i]),
         subset(outdat, outcome == prs_pairs$prot[i]),
         action=1
     )
-})
-dat <- bind_rows(dat)
+}) %>% bind_rows()
+
 dat$id.outcome <- dat$outcome
 dat$id.exposure <- dat$exposure
 dat$exposure <- traits$code[match(dat$id.exposure, traits$opengwasid)]
