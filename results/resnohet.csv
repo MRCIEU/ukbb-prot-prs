@@ -1,424 +1,485 @@
-"","id.exposure","id.outcome","outcome","exposure","method","nsnp","b","se","pval","what"
-"1","ebi-a-GCST003116","ACAA1","ACAA1","CAD","Inverse variance weighted",41,0.0623114924785917,0.0162183376073165,0.000122016231388121,"Outliers removed"
-"2","ebi-a-GCST003116","CNTN4","CNTN4","CAD","Inverse variance weighted",42,-0.0700190981896361,0.0176909539433528,7.5610318229948e-05,"Outliers removed"
-"3","ebi-a-GCST003116","CXCL13","CXCL13","CAD","Inverse variance weighted",37,0.045773649218236,0.0181604862275505,0.011718560382889,"Outliers removed"
-"4","ebi-a-GCST003116","ERBB4","ERBB4","CAD","Inverse variance weighted",41,-0.0603402530875203,0.0162560985458892,0.000205747226447307,"Outliers removed"
-"5","ebi-a-GCST003116","HMOX2","HMOX2","CAD","Inverse variance weighted",41,0.0498368110977618,0.0156944505197261,0.00149608631578814,"Outliers removed"
-"6","ebi-a-GCST003116","ITGAV","ITGAV","CAD","Inverse variance weighted",40,-0.0476724037130706,0.0147719369296309,0.00124995958121018,"Outliers removed"
-"7","ebi-a-GCST003116","LGALS4","LGALS4","CAD","Inverse variance weighted",42,0.0594721005077882,0.0176512717800714,0.000753644629337404,"Outliers removed"
-"8","ebi-a-GCST003116","MVK","MVK","CAD","Inverse variance weighted",40,0.0434834489909066,0.0171588624159815,0.011271451103082,"Outliers removed"
-"9","ebi-a-GCST003116","NTRK3","NTRK3","CAD","Inverse variance weighted",41,-0.0476754501324246,0.0178665391413593,0.00762086742218065,"Outliers removed"
-"10","ebi-a-GCST003116","PCOLCE","PCOLCE","CAD","Inverse variance weighted",42,0.0886441150083357,0.0322157978292745,0.00593098243520688,"Outliers removed"
-"11","ebi-a-GCST003116","PCSK9","PCSK9","CAD","Inverse variance weighted",41,0.0619674274626518,0.0210647026340165,0.0032634635431891,"Outliers removed"
-"12","ebi-a-GCST003116","RGMA","RGMA","CAD","Inverse variance weighted",40,-0.0513357055246531,0.0178857997883174,0.00410220735409067,"Outliers removed"
-"13","ebi-a-GCST003116","TNXB","TNXB","CAD","Inverse variance weighted",41,-0.0501994357469548,0.0147624714891893,0.000672685449592458,"Outliers removed"
-"14","ebi-a-GCST005838","PLAT","PLAT","Stroke","Inverse variance weighted",17,-0.089413419574397,0.0364337124050773,0.0141222111182642,"Outliers removed"
-"15","ieu-a-1102","ACP6","ACP6","CKD","Inverse variance weighted",4,0.108142185349452,0.019722030207334,4.17419045174364e-08,"Outliers removed"
-"16","ieu-a-1102","ACTA2","ACTA2","CKD","Inverse variance weighted",4,0.150815806648786,0.0274486693541998,3.91892301747725e-08,"Outliers removed"
-"17","ieu-a-1102","ACVRL1","ACVRL1","CKD","Inverse variance weighted",4,0.163681575971604,0.0494147315606447,0.000924977215952541,"Outliers removed"
-"18","ieu-a-1102","ADAM22","ADAM22","CKD","Inverse variance weighted",3,0.291694614181619,0.0309363015829348,4.14498840566379e-21,"Outliers removed"
-"19","ieu-a-1102","ADAM23","ADAM23","CKD","Inverse variance weighted",3,0.220804926240576,0.0278092532438547,2.0221317314522e-15,"Outliers removed"
-"20","ieu-a-1102","ADAM8","ADAM8","CKD","Inverse variance weighted",4,0.0837671146615323,0.0287085373573283,0.00352457438332937,"Outliers removed"
-"21","ieu-a-1102","ADGRE2","ADGRE2","CKD","Inverse variance weighted",4,0.0947729121012784,0.0283053808582194,0.000813296221839084,"Outliers removed"
-"22","ieu-a-1102","ADGRE5","ADGRE5","CKD","Inverse variance weighted",4,0.0841851697309581,0.0286181806649554,0.00326450322090475,"Outliers removed"
-"23","ieu-a-1102","ADM","ADM","CKD","Inverse variance weighted",4,0.142624934487501,0.0484356001628644,0.00323340794407633,"Outliers removed"
-"24","ieu-a-1102","AGRN","AGRN","CKD","Inverse variance weighted",3,0.24380841584041,0.0316757678611984,1.39296843926356e-14,"Outliers removed"
-"25","ieu-a-1102","AMBP","AMBP","CKD","Inverse variance weighted",3,0.297779200009258,0.0314480875598148,2.82771296542356e-21,"Outliers removed"
-"26","ieu-a-1102","AMY2B","AMY2B","CKD","Inverse variance weighted",4,0.109613622075195,0.0373636565981404,0.0033495174579308,"Outliers removed"
-"27","ieu-a-1102","ANG","ANG","CKD","Inverse variance weighted",4,0.105309687455057,0.0390058589510502,0.00693722463896773,"Outliers removed"
-"28","ieu-a-1102","ANGPTL7","ANGPTL7","CKD","Inverse variance weighted",4,0.105523893009849,0.0375068461539459,0.00490119645105763,"Outliers removed"
-"29","ieu-a-1102","ASGR1","ASGR1","CKD","Inverse variance weighted",4,0.14181397170034,0.0473975560342635,0.00277146991643537,"Outliers removed"
-"30","ieu-a-1102","AXL","AXL","CKD","Inverse variance weighted",4,0.137920128158139,0.0293099846457422,2.53160002629449e-06,"Outliers removed"
-"31","ieu-a-1102","B4GALT1","B4GALT1","CKD","Inverse variance weighted",3,0.26283038432185,0.0320161149419312,2.22453249579095e-16,"Outliers removed"
-"32","ieu-a-1102","BAMBI","BAMBI","CKD","Inverse variance weighted",4,0.154839135582934,0.0471967062180922,0.0010354280875514,"Outliers removed"
-"33","ieu-a-1102","BCAM","BCAM","CKD","Inverse variance weighted",4,0.0997872390575912,0.0319350041285868,0.00177987775112309,"Outliers removed"
-"34","ieu-a-1102","BTN2A1","BTN2A1","CKD","Inverse variance weighted",3,0.317084260079132,0.0315851653005883,1.0268419913051e-23,"Outliers removed"
-"35","ieu-a-1102","CA12","CA12","CKD","Inverse variance weighted",2,0.196470327160214,0.0356546885942855,3.58091559906689e-08,"Outliers removed"
-"36","ieu-a-1102","CA14","CA14","CKD","Inverse variance weighted",4,0.176802321787807,0.0282201349779567,3.7255622274857e-10,"Outliers removed"
-"37","ieu-a-1102","CALB2","CALB2","CKD","Inverse variance weighted",4,0.106459935981755,0.0301976390293196,0.000422781445852935,"Outliers removed"
-"38","ieu-a-1102","CALCA","CALCA","CKD","Inverse variance weighted",4,0.0798232226570411,0.0268605497333656,0.00296093903378179,"Outliers removed"
-"39","ieu-a-1102","CANT1","CANT1","CKD","Inverse variance weighted",3,0.204089032357868,0.0332296053331665,8.16001732617394e-10,"Outliers removed"
-"40","ieu-a-1102","CCDC80","CCDC80","CKD","Inverse variance weighted",4,0.155594458636713,0.0275059436037184,1.54259282767778e-08,"Outliers removed"
-"41","ieu-a-1102","CCL14","CCL14","CKD","Inverse variance weighted",4,0.147762903618548,0.0455158652880464,0.00116872708660181,"Outliers removed"
-"42","ieu-a-1102","CCL15","CCL15","CKD","Inverse variance weighted",3,0.177220738878564,0.0274461892660937,1.06781041559131e-10,"Outliers removed"
-"43","ieu-a-1102","CCL16","CCL16","CKD","Inverse variance weighted",4,0.087657378947928,0.0301698588368615,0.00366711352846752,"Outliers removed"
-"44","ieu-a-1102","CCL23","CCL23","CKD","Inverse variance weighted",4,0.223944276011988,0.0411338030604399,5.20129686677193e-08,"Outliers removed"
-"45","ieu-a-1102","CCL25","CCL25","CKD","Inverse variance weighted",4,0.117563074337867,0.0329516910899334,0.000360073194189175,"Outliers removed"
-"46","ieu-a-1102","CCL27","CCL27","CKD","Inverse variance weighted",4,0.118612853981785,0.0285252465922483,3.20805806223012e-05,"Outliers removed"
-"47","ieu-a-1102","CCL3","CCL3","CKD","Inverse variance weighted",4,0.132970998142927,0.0280291076618727,2.09505197441775e-06,"Outliers removed"
-"48","ieu-a-1102","CCN3","CCN3","CKD","Inverse variance weighted",4,0.168308677373122,0.0322601871312846,1.8162289971985e-07,"Outliers removed"
-"49","ieu-a-1102","CCN4","CCN4","CKD","Inverse variance weighted",4,0.0800193613779176,0.0288876927936931,0.00560535978144217,"Outliers removed"
-"50","ieu-a-1102","CCN5","CCN5","CKD","Inverse variance weighted",4,0.0910027676434041,0.0270105754305396,0.000753994978349175,"Outliers removed"
-"51","ieu-a-1102","CD160","CD160","CKD","Inverse variance weighted",4,0.20538236894386,0.0354622694118772,6.97296896948341e-09,"Outliers removed"
-"52","ieu-a-1102","CD200","CD200","CKD","Inverse variance weighted",4,0.204660962012738,0.0469358370664108,1.29800404950517e-05,"Outliers removed"
-"53","ieu-a-1102","CD207","CD207","CKD","Inverse variance weighted",4,0.092282191729883,0.0272832557340206,0.000718620733913573,"Outliers removed"
-"54","ieu-a-1102","CD27","CD27","CKD","Inverse variance weighted",3,0.194673095243637,0.0320773911796372,1.28823904145201e-09,"Outliers removed"
-"55","ieu-a-1102","CD274","CD274","CKD","Inverse variance weighted",4,0.102827903879134,0.0324045822527498,0.00150741648203521,"Outliers removed"
-"56","ieu-a-1102","CD28","CD28","CKD","Inverse variance weighted",4,0.135640689455531,0.0339318830297072,6.40310309988721e-05,"Outliers removed"
-"57","ieu-a-1102","CD300C","CD300C","CKD","Inverse variance weighted",4,0.158711416472582,0.043240525147989,0.00024214067942614,"Outliers removed"
-"58","ieu-a-1102","CD300E","CD300E","CKD","Inverse variance weighted",4,0.200883593074539,0.049627480278886,5.16947158426156e-05,"Outliers removed"
-"59","ieu-a-1102","CD300LF","CD300LF","CKD","Inverse variance weighted",2,0.149677739688499,0.0620382266342384,0.0158361704299201,"Outliers removed"
-"60","ieu-a-1102","CD300LG","CD300LG","CKD","Inverse variance weighted",2,0.181118264394497,0.0440168150085559,3.87596413911648e-05,"Outliers removed"
-"61","ieu-a-1102","CD302","CD302","CKD","Inverse variance weighted",3,0.197377099204067,0.0311694994582677,2.41408821295123e-10,"Outliers removed"
-"62","ieu-a-1102","CD38","CD38","CKD","Inverse variance weighted",4,0.157488973991829,0.0334834042387843,2.55747249492705e-06,"Outliers removed"
-"63","ieu-a-1102","CD4","CD4","CKD","Inverse variance weighted",4,0.113439528805664,0.0290604169022927,9.47820000282759e-05,"Outliers removed"
-"64","ieu-a-1102","CD46","CD46","CKD","Inverse variance weighted",3,0.203795833687305,0.0332458821353797,8.79027315310305e-10,"Outliers removed"
-"65","ieu-a-1102","CD48","CD48","CKD","Inverse variance weighted",4,0.114628676338766,0.027827169094665,3.8001215004294e-05,"Outliers removed"
-"66","ieu-a-1102","CD5","CD5","CKD","Inverse variance weighted",4,0.149913922767419,0.041357155105967,0.000289117338683988,"Outliers removed"
-"67","ieu-a-1102","CD55","CD55","CKD","Inverse variance weighted",3,0.216729341569609,0.0476958587539716,5.52001765840818e-06,"Outliers removed"
-"68","ieu-a-1102","CD58","CD58","CKD","Inverse variance weighted",4,0.153828751959437,0.0471868115353173,0.00111414325332301,"Outliers removed"
-"69","ieu-a-1102","CD59","CD59","CKD","Inverse variance weighted",3,0.270035970737005,0.031011625681812,3.10452377208349e-18,"Outliers removed"
-"70","ieu-a-1102","CD74","CD74","CKD","Inverse variance weighted",4,0.196788762429234,0.0282856166314263,3.47095911422686e-12,"Outliers removed"
-"71","ieu-a-1102","CD79B","CD79B","CKD","Inverse variance weighted",4,0.17693128245665,0.0520451771963139,0.000674916197288632,"Outliers removed"
-"72","ieu-a-1102","CD83","CD83","CKD","Inverse variance weighted",4,0.120269357417694,0.0292495329673256,3.92520747820628e-05,"Outliers removed"
-"73","ieu-a-1102","CD93","CD93","CKD","Inverse variance weighted",3,0.249888201731475,0.0338405849133807,1.53285769086197e-13,"Outliers removed"
-"74","ieu-a-1102","CD99","CD99","CKD","Inverse variance weighted",3,0.162869578855279,0.044598566979023,0.000260305614549462,"Outliers removed"
-"75","ieu-a-1102","CDH1","CDH1","CKD","Inverse variance weighted",3,0.211164485129488,0.0317922006661136,3.09409501088419e-11,"Outliers removed"
-"76","ieu-a-1102","CDH3","CDH3","CKD","Inverse variance weighted",3,0.27523548451877,0.038338510266961,7.01786959810332e-13,"Outliers removed"
-"77","ieu-a-1102","CDNF","CDNF","CKD","Inverse variance weighted",4,0.192535321491612,0.0307803890317636,3.97186024540665e-10,"Outliers removed"
-"78","ieu-a-1102","CDSN","CDSN","CKD","Inverse variance weighted",2,0.124191207074905,0.0404538027793073,0.00214093630943139,"Outliers removed"
-"79","ieu-a-1102","CGREF1","CGREF1","CKD","Inverse variance weighted",4,0.132339379267277,0.0393681081549388,0.000774955208663069,"Outliers removed"
-"80","ieu-a-1102","CHGB","CHGB","CKD","Inverse variance weighted",2,0.170314345349825,0.0461499192828828,0.000223850523528997,"Outliers removed"
-"81","ieu-a-1102","CHI3L1","CHI3L1","CKD","Inverse variance weighted",4,0.0723317562572566,0.0264307831569188,0.00620686225209957,"Outliers removed"
-"82","ieu-a-1102","CHRDL1","CHRDL1","CKD","Inverse variance weighted",4,0.224951837278627,0.0470667208226344,1.75797696356884e-06,"Outliers removed"
-"83","ieu-a-1102","CHRDL2","CHRDL2","CKD","Inverse variance weighted",4,0.0791049932315613,0.0285970771689713,0.00567152100036593,"Outliers removed"
-"84","ieu-a-1102","CKAP4","CKAP4","CKD","Inverse variance weighted",3,0.28087073938302,0.0315962770003377,6.14608685075952e-19,"Outliers removed"
-"85","ieu-a-1102","CLEC14A","CLEC14A","CKD","Inverse variance weighted",2,0.25100300616439,0.0457170695827336,4.01123473729977e-08,"Outliers removed"
-"86","ieu-a-1102","CLEC1A","CLEC1A","CKD","Inverse variance weighted",3,0.260995227454295,0.030857735591813,2.71964349592061e-17,"Outliers removed"
-"87","ieu-a-1102","CLEC4C","CLEC4C","CKD","Inverse variance weighted",4,0.102595308667397,0.0238334529752772,1.67229803786549e-05,"Outliers removed"
-"88","ieu-a-1102","CLEC6A","CLEC6A","CKD","Inverse variance weighted",4,0.112425947430125,0.028054095625322,6.13726466273286e-05,"Outliers removed"
-"89","ieu-a-1102","CLEC7A","CLEC7A","CKD","Inverse variance weighted",3,0.194914033673265,0.0254602710638836,1.92389259814081e-14,"Outliers removed"
-"90","ieu-a-1102","CLMP","CLMP","CKD","Inverse variance weighted",4,0.265151571839371,0.0458246605534857,7.1987879942651e-09,"Outliers removed"
-"91","ieu-a-1102","COL18A1","COL18A1","CKD","Inverse variance weighted",3,0.2351718395966,0.0315596960549933,9.21793308415866e-14,"Outliers removed"
-"92","ieu-a-1102","COL6A3","COL6A3","CKD","Inverse variance weighted",4,0.231889664877514,0.0373021218224106,5.08277445742926e-10,"Outliers removed"
-"93","ieu-a-1102","COLEC12","COLEC12","CKD","Inverse variance weighted",4,0.247342740416985,0.0479013236070985,2.42259509433122e-07,"Outliers removed"
-"94","ieu-a-1102","CPA1","CPA1","CKD","Inverse variance weighted",4,0.0784595145906636,0.0296118928851771,0.00805883822040989,"Outliers removed"
-"95","ieu-a-1102","CPA2","CPA2","CKD","Inverse variance weighted",4,0.0895868497044141,0.0292446705249404,0.00218869194009148,"Outliers removed"
-"96","ieu-a-1102","CPB1","CPB1","CKD","Inverse variance weighted",4,0.0724933080180172,0.0296113140905967,0.0143586890131426,"Outliers removed"
-"97","ieu-a-1102","CRELD2","CRELD2","CKD","Inverse variance weighted",4,0.10982476621576,0.0285045191551691,0.000116732017234561,"Outliers removed"
-"98","ieu-a-1102","CRHBP","CRHBP","CKD","Inverse variance weighted",4,0.119578098616093,0.0290143352277026,3.76666113155634e-05,"Outliers removed"
-"99","ieu-a-1102","CRIM1","CRIM1","CKD","Inverse variance weighted",4,0.131901010746053,0.0354053753192497,0.00019496589072264,"Outliers removed"
-"100","ieu-a-1102","CSF1","CSF1","CKD","Inverse variance weighted",4,0.146925884719485,0.0581294266823089,0.0114856671420288,"Outliers removed"
-"101","ieu-a-1102","CST3","CST3","CKD","Inverse variance weighted",3,0.295349479259833,0.0305875543048222,4.64197496355545e-22,"Outliers removed"
-"102","ieu-a-1102","CST5","CST5","CKD","Inverse variance weighted",4,0.0948320688399346,0.0350796761607133,0.00686478007872294,"Outliers removed"
-"103","ieu-a-1102","CSTB","CSTB","CKD","Inverse variance weighted",4,0.0975725480554358,0.0256673335304676,0.00014386391945687,"Outliers removed"
-"104","ieu-a-1102","CTRB1","CTRB1","CKD","Inverse variance weighted",4,0.0915496460281754,0.0287642459135865,0.00145879270295708,"Outliers removed"
-"105","ieu-a-1102","CTSZ","CTSZ","CKD","Inverse variance weighted",4,0.151085697378715,0.0285469297753549,1.20630699466212e-07,"Outliers removed"
-"106","ieu-a-1102","CXADR","CXADR","CKD","Inverse variance weighted",4,0.125201140337476,0.0478643137054957,0.00890313816685485,"Outliers removed"
-"107","ieu-a-1102","CXCL10","CXCL10","CKD","Inverse variance weighted",4,0.101680720576344,0.0416589874054643,0.0146552902473176,"Outliers removed"
-"108","ieu-a-1102","CXCL16","CXCL16","CKD","Inverse variance weighted",4,0.111116350664243,0.0332849749139516,0.000842824894494899,"Outliers removed"
-"109","ieu-a-1102","CXCL9","CXCL9","CKD","Inverse variance weighted",4,0.131820916869132,0.0287814410844757,4.64827900388703e-06,"Outliers removed"
-"110","ieu-a-1102","DDAH1","DDAH1","CKD","Inverse variance weighted",4,0.116314789578346,0.0337833549518381,0.000575381273448667,"Outliers removed"
-"111","ieu-a-1102","DEFA1_DEFA1B","DEFA1_DEFA1B","CKD","Inverse variance weighted",4,0.121024390793513,0.0388102135163514,0.00181857761987525,"Outliers removed"
-"112","ieu-a-1102","DKK4","DKK4","CKD","Inverse variance weighted",4,0.119417390278473,0.0433347011919663,0.00585668759179451,"Outliers removed"
-"113","ieu-a-1102","DLK1","DLK1","CKD","Inverse variance weighted",4,0.151619421072029,0.0496939518691066,0.00228032062272912,"Outliers removed"
-"114","ieu-a-1102","DLL1","DLL1","CKD","Inverse variance weighted",2,0.208869937859348,0.0460442271468926,5.72526146338659e-06,"Outliers removed"
-"115","ieu-a-1102","DPT","DPT","CKD","Inverse variance weighted",4,0.133260363985384,0.026322402712155,4.13530177670034e-07,"Outliers removed"
-"116","ieu-a-1102","DPY30","DPY30","CKD","Inverse variance weighted",4,0.107838230908614,0.0300130771856768,0.000326840549385916,"Outliers removed"
-"117","ieu-a-1102","DRAXIN","DRAXIN","CKD","Inverse variance weighted",4,0.124276806089961,0.0387819452351733,0.00135296531921108,"Outliers removed"
-"118","ieu-a-1102","DSC2","DSC2","CKD","Inverse variance weighted",3,0.272944707850578,0.0558021248705168,1.0017420461429e-06,"Outliers removed"
-"119","ieu-a-1102","DSG2","DSG2","CKD","Inverse variance weighted",2,0.125857289763543,0.04537266069357,0.00553959576410181,"Outliers removed"
-"120","ieu-a-1102","DSG3","DSG3","CKD","Inverse variance weighted",4,0.184902568722577,0.0276677964467576,2.34175538355496e-11,"Outliers removed"
-"121","ieu-a-1102","DTX3","DTX3","CKD","Inverse variance weighted",4,0.1748069992275,0.0278564879048747,3.49026758452767e-10,"Outliers removed"
-"122","ieu-a-1102","EDA2R","EDA2R","CKD","Inverse variance weighted",4,0.155894514256788,0.0245265326268745,2.06862384838151e-10,"Outliers removed"
-"123","ieu-a-1102","EFEMP1","EFEMP1","CKD","Inverse variance weighted",4,0.185853449720282,0.0440875581519206,2.49166571095493e-05,"Outliers removed"
-"124","ieu-a-1102","EFNA1","EFNA1","CKD","Inverse variance weighted",3,0.257085701114332,0.0324534429345049,2.34327879596566e-15,"Outliers removed"
-"125","ieu-a-1102","EFNA4","EFNA4","CKD","Inverse variance weighted",3,0.310152605836553,0.0328985824299627,4.19830917765052e-21,"Outliers removed"
-"126","ieu-a-1102","EGFL7","EGFL7","CKD","Inverse variance weighted",4,0.0833211484209097,0.0293013009362248,0.00446071568647725,"Outliers removed"
-"127","ieu-a-1102","EPHA1","EPHA1","CKD","Inverse variance weighted",4,0.229036740355505,0.0340949613315522,1.84726067935638e-11,"Outliers removed"
-"128","ieu-a-1102","EPHA2","EPHA2","CKD","Inverse variance weighted",4,0.204996914333492,0.0460103909567998,8.37181021781437e-06,"Outliers removed"
-"129","ieu-a-1102","EPHB4","EPHB4","CKD","Inverse variance weighted",2,0.219934977590845,0.0532220608378709,3.58991053080137e-05,"Outliers removed"
-"130","ieu-a-1102","EPHB6","EPHB6","CKD","Inverse variance weighted",3,0.358080284736135,0.0330366367910986,2.25200590974551e-27,"Outliers removed"
-"131","ieu-a-1102","EPS8L2","EPS8L2","CKD","Inverse variance weighted",4,0.132103992073146,0.0290352844913313,5.37034786843917e-06,"Outliers removed"
-"132","ieu-a-1102","ESAM","ESAM","CKD","Inverse variance weighted",4,0.146747320359058,0.0559160080859308,0.00867956299106069,"Outliers removed"
-"133","ieu-a-1102","F3","F3","CKD","Inverse variance weighted",4,0.153741288113552,0.0471394962781513,0.00110859091227302,"Outliers removed"
-"134","ieu-a-1102","FABP1","FABP1","CKD","Inverse variance weighted",4,0.147801192035265,0.0292162239503103,4.21739690296223e-07,"Outliers removed"
-"135","ieu-a-1102","FABP2","FABP2","CKD","Inverse variance weighted",4,0.1376220443364,0.0524556146837845,0.00870083652641926,"Outliers removed"
-"136","ieu-a-1102","FABP4","FABP4","CKD","Inverse variance weighted",4,0.108351966408874,0.0308361341876136,0.000441747537435519,"Outliers removed"
-"137","ieu-a-1102","FAM3B","FAM3B","CKD","Inverse variance weighted",4,0.121577837312777,0.0274917385356573,9.76372823457474e-06,"Outliers removed"
-"138","ieu-a-1102","FAM3C","FAM3C","CKD","Inverse variance weighted",3,0.294869001952087,0.0323647619957994,8.17737203298054e-20,"Outliers removed"
-"139","ieu-a-1102","FAS","FAS","CKD","Inverse variance weighted",4,0.148411759949329,0.0286244499078066,2.1625846826559e-07,"Outliers removed"
-"140","ieu-a-1102","FCRL6","FCRL6","CKD","Inverse variance weighted",4,0.0746997546832393,0.0254319657938839,0.0033114908435894,"Outliers removed"
-"141","ieu-a-1102","FGFR2","FGFR2","CKD","Inverse variance weighted",4,0.103677404269937,0.0438571646748408,0.0180798507723293,"Outliers removed"
-"142","ieu-a-1102","FLRT2","FLRT2","CKD","Inverse variance weighted",4,0.128748153244891,0.0360456902842471,0.000354530235267927,"Outliers removed"
-"143","ieu-a-1102","FOLR1","FOLR1","CKD","Inverse variance weighted",3,0.262647180273695,0.0376082994112017,2.87391375187318e-12,"Outliers removed"
-"144","ieu-a-1102","FOLR2","FOLR2","CKD","Inverse variance weighted",4,0.134829032399789,0.0399128347251496,0.000729919552976401,"Outliers removed"
-"145","ieu-a-1102","FOLR3","FOLR3","CKD","Inverse variance weighted",4,0.0859042019934953,0.0232271210235812,0.000216925356825313,"Outliers removed"
-"146","ieu-a-1102","FSTL3","FSTL3","CKD","Inverse variance weighted",3,0.322642175604902,0.0319709135756311,6.00941613300624e-24,"Outliers removed"
-"147","ieu-a-1102","GDF15","GDF15","CKD","Inverse variance weighted",4,0.109412767380902,0.039222471527709,0.00527825014570552,"Outliers removed"
-"148","ieu-a-1102","GFRA1","GFRA1","CKD","Inverse variance weighted",3,0.290392365227962,0.0312819648302453,1.64679291761972e-20,"Outliers removed"
-"149","ieu-a-1102","GFRA3","GFRA3","CKD","Inverse variance weighted",3,0.224697901931377,0.0318845501007927,1.82508587445542e-12,"Outliers removed"
-"150","ieu-a-1102","GPC1","GPC1","CKD","Inverse variance weighted",4,0.178559376567646,0.0466773385897805,0.000130561224094759,"Outliers removed"
-"151","ieu-a-1102","GPR37","GPR37","CKD","Inverse variance weighted",4,0.145220325372065,0.0431829683883084,0.000771262208213092,"Outliers removed"
-"152","ieu-a-1102","GRN","GRN","CKD","Inverse variance weighted",4,0.113288122870384,0.0272157523127624,3.14652766346469e-05,"Outliers removed"
-"153","ieu-a-1102","GUCA2A","GUCA2A","CKD","Inverse variance weighted",3,0.243315145331473,0.0431967546134631,1.77391202149232e-08,"Outliers removed"
-"154","ieu-a-1102","HAVCR2","HAVCR2","CKD","Inverse variance weighted",4,0.224799908705754,0.0310174266768822,4.24422449647894e-13,"Outliers removed"
-"155","ieu-a-1102","HNMT","HNMT","CKD","Inverse variance weighted",4,0.153199108951918,0.0406184157352249,0.000162161040996571,"Outliers removed"
-"156","ieu-a-1102","HSPB6","HSPB6","CKD","Inverse variance weighted",4,0.184139183893405,0.0297321339841437,5.8928020667247e-10,"Outliers removed"
-"157","ieu-a-1102","HSPG2","HSPG2","CKD","Inverse variance weighted",3,0.298856356904473,0.0323683754916463,2.63220935527397e-20,"Outliers removed"
-"158","ieu-a-1102","IFNGR1","IFNGR1","CKD","Inverse variance weighted",2,0.244097132505611,0.0705299196281398,0.000538368968068785,"Outliers removed"
-"159","ieu-a-1102","IFNLR1","IFNLR1","CKD","Inverse variance weighted",4,0.0695751320945539,0.029622379671791,0.0188372872835524,"Outliers removed"
-"160","ieu-a-1102","IGF1R","IGF1R","CKD","Inverse variance weighted",4,0.149652932713548,0.0309040125493988,1.28210373635431e-06,"Outliers removed"
-"161","ieu-a-1102","IGFBP4","IGFBP4","CKD","Inverse variance weighted",3,0.313866604974451,0.0316348917719204,3.35564010035001e-23,"Outliers removed"
-"162","ieu-a-1102","IGFBP6","IGFBP6","CKD","Inverse variance weighted",3,0.338070329929866,0.0290364934895421,2.49254178111668e-31,"Outliers removed"
-"163","ieu-a-1102","IGFBP7","IGFBP7","CKD","Inverse variance weighted",4,0.0701548524577111,0.0283654739040586,0.0133891182649442,"Outliers removed"
-"164","ieu-a-1102","IGFBPL1","IGFBPL1","CKD","Inverse variance weighted",4,0.125072283141787,0.0405524224414384,0.00204091847591118,"Outliers removed"
-"165","ieu-a-1102","IGSF8","IGSF8","CKD","Inverse variance weighted",4,0.135853449833323,0.0418683561683214,0.0011754292264655,"Outliers removed"
-"166","ieu-a-1102","IL10RB","IL10RB","CKD","Inverse variance weighted",4,0.212898584637542,0.0449628849836893,2.19071332233556e-06,"Outliers removed"
-"167","ieu-a-1102","IL12A_IL12B","IL12A_IL12B","CKD","Inverse variance weighted",4,0.135277882568643,0.0275496687519645,9.09246375930506e-07,"Outliers removed"
-"168","ieu-a-1102","IL12B","IL12B","CKD","Inverse variance weighted",4,0.121780826113574,0.0278547469416865,1.23116107603495e-05,"Outliers removed"
-"169","ieu-a-1102","IL15RA","IL15RA","CKD","Inverse variance weighted",4,0.145243010701729,0.0459283950203633,0.00156485533360126,"Outliers removed"
-"170","ieu-a-1102","IL16","IL16","CKD","Inverse variance weighted",4,0.145309779157277,0.03450989355521,2.54614257436262e-05,"Outliers removed"
-"171","ieu-a-1102","IL18BP","IL18BP","CKD","Inverse variance weighted",4,0.196357533295304,0.0465214606472386,2.4344260109345e-05,"Outliers removed"
-"172","ieu-a-1102","IL2RA","IL2RA","CKD","Inverse variance weighted",2,0.127381414982133,0.0487477123698187,0.0089731681332252,"Outliers removed"
-"173","ieu-a-1102","IL3RA","IL3RA","CKD","Inverse variance weighted",4,0.0917209181077475,0.0278251046785869,0.000979544874370855,"Outliers removed"
-"174","ieu-a-1102","IL4R","IL4R","CKD","Inverse variance weighted",4,0.118225249970122,0.0351578179572534,0.000771837514472046,"Outliers removed"
-"175","ieu-a-1102","JAM2","JAM2","CKD","Inverse variance weighted",3,0.303570974283608,0.0317148241907423,1.04963624873814e-21,"Outliers removed"
-"176","ieu-a-1102","KIRREL2","KIRREL2","CKD","Inverse variance weighted",4,0.14988198938813,0.0627246947481236,0.0168703490641788,"Outliers removed"
-"177","ieu-a-1102","KLK11","KLK11","CKD","Inverse variance weighted",3,0.2568521120415,0.0460945755161545,2.51419665300922e-08,"Outliers removed"
-"178","ieu-a-1102","KLK6","KLK6","CKD","Inverse variance weighted",2,0.17266385825831,0.0472998347542711,0.000261820564899547,"Outliers removed"
-"179","ieu-a-1102","KLK8","KLK8","CKD","Inverse variance weighted",4,0.148675108944059,0.0307389338239752,1.32010112360648e-06,"Outliers removed"
-"180","ieu-a-1102","KLRB1","KLRB1","CKD","Inverse variance weighted",3,0.194246071776288,0.0323937219878409,2.01726049702097e-09,"Outliers removed"
-"181","ieu-a-1102","KRT19","KRT19","CKD","Inverse variance weighted",4,0.13689258319906,0.0425068627947335,0.00127975263735542,"Outliers removed"
-"182","ieu-a-1102","LAIR1","LAIR1","CKD","Inverse variance weighted",4,0.208398810571192,0.046165747078622,6.35731397055569e-06,"Outliers removed"
-"183","ieu-a-1102","LAMA4","LAMA4","CKD","Inverse variance weighted",4,0.128982931177417,0.0370932181852676,0.000506557811355226,"Outliers removed"
-"184","ieu-a-1102","LAYN","LAYN","CKD","Inverse variance weighted",3,0.317311606443234,0.0307240004843707,5.2751765700331e-25,"Outliers removed"
-"185","ieu-a-1102","LEFTY2","LEFTY2","CKD","Inverse variance weighted",2,0.123218919937191,0.0379368608916057,0.00116219316281608,"Outliers removed"
-"186","ieu-a-1102","LEP","LEP","CKD","Inverse variance weighted",4,0.0649925922576207,0.0258414419976579,0.0119014542615013,"Outliers removed"
-"187","ieu-a-1102","LGALS1","LGALS1","CKD","Inverse variance weighted",4,0.154810272651023,0.0293189633103042,1.29036162078498e-07,"Outliers removed"
-"188","ieu-a-1102","LGALS3","LGALS3","CKD","Inverse variance weighted",4,0.122240888518121,0.0253680973155161,1.44506966284014e-06,"Outliers removed"
-"189","ieu-a-1102","LGALS4","LGALS4","CKD","Inverse variance weighted",4,0.164313129295632,0.0375903139289524,1.23590402927121e-05,"Outliers removed"
-"190","ieu-a-1102","LGALS7_LGALS7B","LGALS7_LGALS7B","CKD","Inverse variance weighted",4,0.184257134037007,0.0322249874991537,1.07890367303772e-08,"Outliers removed"
-"191","ieu-a-1102","LGALS9","LGALS9","CKD","Inverse variance weighted",4,0.180687696461751,0.0368121072464955,9.18332472317e-07,"Outliers removed"
-"192","ieu-a-1102","LILRB4","LILRB4","CKD","Inverse variance weighted",4,0.171479307870404,0.0280042124482712,9.16339993195635e-10,"Outliers removed"
-"193","ieu-a-1102","LRP11","LRP11","CKD","Inverse variance weighted",3,0.272920018637619,0.0298440803488013,5.97056314307123e-20,"Outliers removed"
-"194","ieu-a-1102","LRRC25","LRRC25","CKD","Inverse variance weighted",4,0.0807925075220512,0.0278285002335564,0.00369336522298718,"Outliers removed"
-"195","ieu-a-1102","LTBR","LTBR","CKD","Inverse variance weighted",3,0.298755516321786,0.0352968708709026,2.5818397387415e-17,"Outliers removed"
-"196","ieu-a-1102","LY6D","LY6D","CKD","Inverse variance weighted",3,0.290466782769618,0.0429717147519254,1.38480393834814e-11,"Outliers removed"
-"197","ieu-a-1102","MAD1L1","MAD1L1","CKD","Inverse variance weighted",4,0.144952597984645,0.0295745817504241,9.52258415698322e-07,"Outliers removed"
-"198","ieu-a-1102","MB","MB","CKD","Inverse variance weighted",4,0.14742513913357,0.026014881044853,1.45358184594964e-08,"Outliers removed"
-"199","ieu-a-1102","MEPE","MEPE","CKD","Inverse variance weighted",4,0.144556698034379,0.0295386155989619,9.88967840054716e-07,"Outliers removed"
-"200","ieu-a-1102","MFAP5","MFAP5","CKD","Inverse variance weighted",3,0.212311166627303,0.0320791114462775,3.63201165061634e-11,"Outliers removed"
-"201","ieu-a-1102","MIA","MIA","CKD","Inverse variance weighted",3,0.228131530613106,0.0285051652864064,1.21261641158775e-15,"Outliers removed"
-"202","ieu-a-1102","MLN","MLN","CKD","Inverse variance weighted",4,0.122721032340913,0.0264659057618525,3.53591091609039e-06,"Outliers removed"
-"203","ieu-a-1102","MMP10","MMP10","CKD","Inverse variance weighted",4,0.114304327364777,0.0284029203767557,5.71240524095041e-05,"Outliers removed"
-"204","ieu-a-1102","MMP3","MMP3","CKD","Inverse variance weighted",4,0.109589553767165,0.022300095329642,8.90962457033126e-07,"Outliers removed"
-"205","ieu-a-1102","MMP7","MMP7","CKD","Inverse variance weighted",2,0.20590189348074,0.0608315070926378,0.000712326580697483,"Outliers removed"
-"206","ieu-a-1102","MOG","MOG","CKD","Inverse variance weighted",3,0.231058085230033,0.043657789439634,1.20667040519705e-07,"Outliers removed"
-"207","ieu-a-1102","MSTN","MSTN","CKD","Inverse variance weighted",4,0.123957529053234,0.041591864031346,0.00287936903110574,"Outliers removed"
-"208","ieu-a-1102","MUC13","MUC13","CKD","Inverse variance weighted",4,0.0865556484528807,0.0374348613605478,0.0207684859577403,"Outliers removed"
-"209","ieu-a-1102","MYOC","MYOC","CKD","Inverse variance weighted",4,0.104403946182987,0.02787900996777,0.000180469722192673,"Outliers removed"
-"210","ieu-a-1102","NBL1","NBL1","CKD","Inverse variance weighted",3,0.307414630766813,0.0326804160797259,5.11993699811862e-21,"Outliers removed"
-"211","ieu-a-1102","NCR1","NCR1","CKD","Inverse variance weighted",3,0.273238972011521,0.0340947805399827,1.10946644748083e-15,"Outliers removed"
-"212","ieu-a-1102","NCS1","NCS1","CKD","Inverse variance weighted",4,0.154259598347367,0.030555460885663,4.45265468749095e-07,"Outliers removed"
-"213","ieu-a-1102","NECTIN2","NECTIN2","CKD","Inverse variance weighted",3,0.31359141326701,0.0329199780714539,1.63666087145868e-21,"Outliers removed"
-"214","ieu-a-1102","NECTIN4","NECTIN4","CKD","Inverse variance weighted",2,0.292033692432648,0.0466944661409919,3.99714309846356e-10,"Outliers removed"
-"215","ieu-a-1102","NOS1","NOS1","CKD","Inverse variance weighted",4,0.136845574418362,0.0287858474839264,1.99511437197474e-06,"Outliers removed"
-"216","ieu-a-1102","NPDC1","NPDC1","CKD","Inverse variance weighted",3,0.333726218162377,0.033908004349861,7.41413226562495e-23,"Outliers removed"
-"217","ieu-a-1102","NPPC","NPPC","CKD","Inverse variance weighted",4,0.188434789513185,0.0479465067646118,8.49088957182541e-05,"Outliers removed"
-"218","ieu-a-1102","NPTXR","NPTXR","CKD","Inverse variance weighted",4,0.116408226049259,0.0415693997648222,0.00510496703955458,"Outliers removed"
-"219","ieu-a-1102","NUCB2","NUCB2","CKD","Inverse variance weighted",4,0.10931998957003,0.0286875009862947,0.000138563502105743,"Outliers removed"
-"220","ieu-a-1102","NXPH1","NXPH1","CKD","Inverse variance weighted",4,0.146288302943227,0.0305696681938549,1.70641220473789e-06,"Outliers removed"
-"221","ieu-a-1102","OGN","OGN","CKD","Inverse variance weighted",4,0.223848568430655,0.041548471373678,7.13854025523877e-08,"Outliers removed"
-"222","ieu-a-1102","OPTC","OPTC","CKD","Inverse variance weighted",3,0.17773458107768,0.0317155277243583,2.09431592931882e-08,"Outliers removed"
-"223","ieu-a-1102","OSCAR","OSCAR","CKD","Inverse variance weighted",4,0.122983485427465,0.0258744226228038,2.00330121099382e-06,"Outliers removed"
-"224","ieu-a-1102","PAM","PAM","CKD","Inverse variance weighted",4,0.149768172098624,0.0427332556066638,0.000457084663754765,"Outliers removed"
-"225","ieu-a-1102","PDCD1","PDCD1","CKD","Inverse variance weighted",4,0.149544966463773,0.0291908358813516,3.0069517464786e-07,"Outliers removed"
-"226","ieu-a-1102","PDCD1LG2","PDCD1LG2","CKD","Inverse variance weighted",4,0.0975353022884274,0.0246874601447158,7.78892779174937e-05,"Outliers removed"
-"227","ieu-a-1102","PGF","PGF","CKD","Inverse variance weighted",4,0.159070086611307,0.0313474395845574,3.88678911490282e-07,"Outliers removed"
-"228","ieu-a-1102","PHOSPHO1","PHOSPHO1","CKD","Inverse variance weighted",4,0.182823118872947,0.0313721258945709,5.6241774829556e-09,"Outliers removed"
-"229","ieu-a-1102","PI3","PI3","CKD","Inverse variance weighted",4,0.112676903639538,0.041276171121275,0.00633671165722751,"Outliers removed"
-"230","ieu-a-1102","PIK3IP1","PIK3IP1","CKD","Inverse variance weighted",3,0.326259785958003,0.0311000465516493,9.53673420865498e-26,"Outliers removed"
-"231","ieu-a-1102","PILRA","PILRA","CKD","Inverse variance weighted",4,0.140130380683525,0.0427302052658917,0.00104019913508542,"Outliers removed"
-"232","ieu-a-1102","PILRB","PILRB","CKD","Inverse variance weighted",4,0.127803273534,0.0352713508021901,0.000290721816714648,"Outliers removed"
-"233","ieu-a-1102","PLA2G1B","PLA2G1B","CKD","Inverse variance weighted",4,0.138882518163764,0.0331846659564835,2.84988687799704e-05,"Outliers removed"
-"234","ieu-a-1102","POLR2F","POLR2F","CKD","Inverse variance weighted",4,0.173144259696928,0.0297453229008038,5.85350027175714e-09,"Outliers removed"
-"235","ieu-a-1102","PRELP","PRELP","CKD","Inverse variance weighted",4,0.15971224632536,0.0346001862898802,3.91327494825787e-06,"Outliers removed"
-"236","ieu-a-1102","PRSS2","PRSS2","CKD","Inverse variance weighted",4,0.127504689189732,0.0298994207081653,2.00392072940911e-05,"Outliers removed"
-"237","ieu-a-1102","PRSS27","PRSS27","CKD","Inverse variance weighted",4,0.121581900033745,0.0390506968790874,0.00184921736420137,"Outliers removed"
-"238","ieu-a-1102","PRSS8","PRSS8","CKD","Inverse variance weighted",4,0.0826821166389127,0.0280225379441111,0.00317200734707034,"Outliers removed"
-"239","ieu-a-1102","PTGDS","PTGDS","CKD","Inverse variance weighted",3,0.28167576882937,0.0315276650324911,4.0998150454137e-19,"Outliers removed"
-"240","ieu-a-1102","PTPRN2","PTPRN2","CKD","Inverse variance weighted",3,0.257236166020094,0.0341693111029751,5.1412767468464e-14,"Outliers removed"
-"241","ieu-a-1102","PTPRS","PTPRS","CKD","Inverse variance weighted",4,0.138905263543531,0.0392189513269077,0.000397422734873204,"Outliers removed"
-"242","ieu-a-1102","QPCT","QPCT","CKD","Inverse variance weighted",4,0.133187545843569,0.0510697000866709,0.00910845830454776,"Outliers removed"
-"243","ieu-a-1102","RARRES2","RARRES2","CKD","Inverse variance weighted",4,0.108183201541772,0.0426983949830362,0.0112878300118401,"Outliers removed"
-"244","ieu-a-1102","RBP2","RBP2","CKD","Inverse variance weighted",4,0.1559743395473,0.0351478233791792,9.09391181139661e-06,"Outliers removed"
-"245","ieu-a-1102","RBP5","RBP5","CKD","Inverse variance weighted",4,0.101207013853436,0.0285341445409971,0.000389831065092354,"Outliers removed"
-"246","ieu-a-1102","REG1A","REG1A","CKD","Inverse variance weighted",3,0.238407262493003,0.048533379469444,9.00450110306911e-07,"Outliers removed"
-"247","ieu-a-1102","REG1B","REG1B","CKD","Inverse variance weighted",3,0.196502160191531,0.0396055419412788,6.99575656627596e-07,"Outliers removed"
-"248","ieu-a-1102","REG3A","REG3A","CKD","Inverse variance weighted",3,0.240782005264335,0.031431835892581,1.85282806644795e-14,"Outliers removed"
-"249","ieu-a-1102","REG4","REG4","CKD","Inverse variance weighted",3,0.232760552641493,0.0318390598597799,2.66081377970691e-13,"Outliers removed"
-"250","ieu-a-1102","RELT","RELT","CKD","Inverse variance weighted",3,0.254241645956993,0.029041521314325,2.05157582057229e-18,"Outliers removed"
-"251","ieu-a-1102","RGMA","RGMA","CKD","Inverse variance weighted",3,0.259484516904282,0.0314057140513175,1.42850637627965e-16,"Outliers removed"
-"252","ieu-a-1102","RGMB","RGMB","CKD","Inverse variance weighted",2,0.279010121564522,0.0466167395386993,2.16135177718394e-09,"Outliers removed"
-"253","ieu-a-1102","RNASET2","RNASET2","CKD","Inverse variance weighted",3,0.192325359494398,0.0388212144414635,7.26544644980937e-07,"Outliers removed"
-"254","ieu-a-1102","ROR1","ROR1","CKD","Inverse variance weighted",3,0.27829518339138,0.0464442873397375,2.0724810349603e-09,"Outliers removed"
-"255","ieu-a-1102","RSPO3","RSPO3","CKD","Inverse variance weighted",3,0.203463591290488,0.0348923146380979,5.50346571961897e-09,"Outliers removed"
-"256","ieu-a-1102","RTBDN","RTBDN","CKD","Inverse variance weighted",4,0.190132094642483,0.0367505386991678,2.29642609409142e-07,"Outliers removed"
-"257","ieu-a-1102","RTN4R","RTN4R","CKD","Inverse variance weighted",4,0.183104443312586,0.0283582157773112,1.06912288889591e-10,"Outliers removed"
-"258","ieu-a-1102","SCARA5","SCARA5","CKD","Inverse variance weighted",4,0.13660180944803,0.027192209714045,5.07212763843049e-07,"Outliers removed"
-"259","ieu-a-1102","SCARB2","SCARB2","CKD","Inverse variance weighted",3,0.241754065662782,0.0308248742021347,4.40524944371863e-15,"Outliers removed"
-"260","ieu-a-1102","SCARF2","SCARF2","CKD","Inverse variance weighted",4,0.155512692362848,0.0485040329007332,0.00134509509292207,"Outliers removed"
-"261","ieu-a-1102","SCG2","SCG2","CKD","Inverse variance weighted",2,0.180642659585795,0.0477044221122802,0.00015265705229484,"Outliers removed"
-"262","ieu-a-1102","SCGB1A1","SCGB1A1","CKD","Inverse variance weighted",3,0.204803615795708,0.0445223607567527,4.22456488709821e-06,"Outliers removed"
-"263","ieu-a-1102","SEMA3F","SEMA3F","CKD","Inverse variance weighted",4,0.155177085994267,0.0538683417218067,0.00396826910533092,"Outliers removed"
-"264","ieu-a-1102","SERPINB8","SERPINB8","CKD","Inverse variance weighted",4,0.113793782144813,0.038601891473414,0.00319960213078115,"Outliers removed"
-"265","ieu-a-1102","SIGLEC1","SIGLEC1","CKD","Inverse variance weighted",4,0.0652146133018163,0.0277913021486217,0.0189464163364222,"Outliers removed"
-"266","ieu-a-1102","SIGLEC10","SIGLEC10","CKD","Inverse variance weighted",4,0.130299254699444,0.030961566488003,2.57163312472528e-05,"Outliers removed"
-"267","ieu-a-1102","SIGLEC5","SIGLEC5","CKD","Inverse variance weighted",4,0.110282829694655,0.0325633688566808,0.000707349864548354,"Outliers removed"
-"268","ieu-a-1102","SIGLEC6","SIGLEC6","CKD","Inverse variance weighted",4,0.0839497449984411,0.0338909260140028,0.0132470859378467,"Outliers removed"
-"269","ieu-a-1102","SIRPA","SIRPA","CKD","Inverse variance weighted",4,0.0762139576302732,0.0228778683155593,0.000864289714439935,"Outliers removed"
-"270","ieu-a-1102","SIRPB1","SIRPB1","CKD","Inverse variance weighted",3,0.208828704028013,0.0295747943189472,1.652650982755e-12,"Outliers removed"
-"271","ieu-a-1102","SLC39A5","SLC39A5","CKD","Inverse variance weighted",4,0.132753305466759,0.0510547459846721,0.00931654278020078,"Outliers removed"
-"272","ieu-a-1102","SLITRK2","SLITRK2","CKD","Inverse variance weighted",4,0.127960337317164,0.0432246219801521,0.00307282159179434,"Outliers removed"
-"273","ieu-a-1102","SLITRK6","SLITRK6","CKD","Inverse variance weighted",3,0.205793912545161,0.0482000300514172,1.95840883004393e-05,"Outliers removed"
-"274","ieu-a-1102","SMOC1","SMOC1","CKD","Inverse variance weighted",4,0.116018803294798,0.0274050650245868,2.30102332786767e-05,"Outliers removed"
-"275","ieu-a-1102","SMOC2","SMOC2","CKD","Inverse variance weighted",3,0.215356682668863,0.0292494086268784,1.80131928022085e-13,"Outliers removed"
-"276","ieu-a-1102","SNCG","SNCG","CKD","Inverse variance weighted",4,0.123191242670397,0.0231711012073226,1.05729995465386e-07,"Outliers removed"
-"277","ieu-a-1102","SORCS2","SORCS2","CKD","Inverse variance weighted",2,0.203772059266868,0.0861169048165654,0.0179704707210874,"Outliers removed"
-"278","ieu-a-1102","SOST","SOST","CKD","Inverse variance weighted",3,0.0770201394962071,0.0298180162419075,0.00979433850853356,"Outliers removed"
-"279","ieu-a-1102","SPINK1","SPINK1","CKD","Inverse variance weighted",3,0.239381007924454,0.0483197071649757,7.26631504532521e-07,"Outliers removed"
-"280","ieu-a-1102","SPINK4","SPINK4","CKD","Inverse variance weighted",3,0.163411820752408,0.026793252749922,1.06739745752404e-09,"Outliers removed"
-"281","ieu-a-1102","SPINK5","SPINK5","CKD","Inverse variance weighted",4,0.179116990936655,0.0438740600662368,4.45488262376818e-05,"Outliers removed"
-"282","ieu-a-1102","SPOCK1","SPOCK1","CKD","Inverse variance weighted",4,-0.162828733179,0.0445368047178182,0.000256132577600018,"Outliers removed"
-"283","ieu-a-1102","SPON1","SPON1","CKD","Inverse variance weighted",4,0.145642787253788,0.0559492364563947,0.00923785975673443,"Outliers removed"
-"284","ieu-a-1102","SPON2","SPON2","CKD","Inverse variance weighted",4,0.182105112772477,0.0493552417304909,0.000224535158280559,"Outliers removed"
-"285","ieu-a-1102","TAFA5","TAFA5","CKD","Inverse variance weighted",3,0.30604419162858,0.0353433806613473,4.75229345160394e-18,"Outliers removed"
-"286","ieu-a-1102","TFF1","TFF1","CKD","Inverse variance weighted",4,0.147245575450613,0.0357501813855162,3.80955529305876e-05,"Outliers removed"
-"287","ieu-a-1102","TFF2","TFF2","CKD","Inverse variance weighted",4,0.14014825764472,0.0326760035837009,1.79457657129991e-05,"Outliers removed"
-"288","ieu-a-1102","TFF3","TFF3","CKD","Inverse variance weighted",4,0.194210544370871,0.0451055823747208,1.66467884185804e-05,"Outliers removed"
-"289","ieu-a-1102","TGFA","TGFA","CKD","Inverse variance weighted",4,0.0801969983655052,0.0300059653971676,0.00752430984351401,"Outliers removed"
-"290","ieu-a-1102","TGFBR2","TGFBR2","CKD","Inverse variance weighted",3,0.334128930125597,0.0316509313901266,4.73071589037363e-26,"Outliers removed"
-"291","ieu-a-1102","TGFBR3","TGFBR3","CKD","Inverse variance weighted",2,0.141645891534238,0.0469842355028634,0.00257188129747587,"Outliers removed"
-"292","ieu-a-1102","THBD","THBD","CKD","Inverse variance weighted",3,0.296354237235527,0.0315808228100202,6.35201753005326e-21,"Outliers removed"
-"293","ieu-a-1102","THY1","THY1","CKD","Inverse variance weighted",3,0.229729245573987,0.0320596045936096,7.73947179937241e-13,"Outliers removed"
-"294","ieu-a-1102","TIMP1","TIMP1","CKD","Inverse variance weighted",4,0.121457850653993,0.0417062134261002,0.0035886477287386,"Outliers removed"
-"295","ieu-a-1102","TINAGL1","TINAGL1","CKD","Inverse variance weighted",4,0.117860003223281,0.0512347116354883,0.0214259305608494,"Outliers removed"
-"296","ieu-a-1102","TNF","TNF","CKD","Inverse variance weighted",16,0.127576246912756,0.0150093249135829,1.89919039351051e-17,"Outliers removed"
-"297","ieu-a-1102","TNFRSF10A","TNFRSF10A","CKD","Inverse variance weighted",4,0.093678376348826,0.0383561195932967,0.0145927218104232,"Outliers removed"
-"298","ieu-a-1102","TNFRSF10B","TNFRSF10B","CKD","Inverse variance weighted",4,0.150998225106573,0.0269444897534127,2.09402174396146e-08,"Outliers removed"
-"299","ieu-a-1102","TNFRSF11A","TNFRSF11A","CKD","Inverse variance weighted",3,0.237873973850694,0.0357368234011784,2.80862578280248e-11,"Outliers removed"
-"300","ieu-a-1102","TNFRSF12A","TNFRSF12A","CKD","Inverse variance weighted",4,0.22623905535933,0.028233061896665,1.11701029667223e-15,"Outliers removed"
-"301","ieu-a-1102","TNFRSF13B","TNFRSF13B","CKD","Inverse variance weighted",4,0.178956401545087,0.0295481561276493,1.39173838190822e-09,"Outliers removed"
-"302","ieu-a-1102","TNFRSF14","TNFRSF14","CKD","Inverse variance weighted",4,0.197585023268198,0.0455283800731974,1.4259877684881e-05,"Outliers removed"
-"303","ieu-a-1102","TNFRSF19","TNFRSF19","CKD","Inverse variance weighted",3,0.298356785750997,0.0307714142862462,3.13835224198377e-22,"Outliers removed"
-"304","ieu-a-1102","TNFRSF1A","TNFRSF1A","CKD","Inverse variance weighted",3,0.327357622357555,0.0320936952716101,1.98149736604044e-24,"Outliers removed"
-"305","ieu-a-1102","TNFRSF1B","TNFRSF1B","CKD","Inverse variance weighted",3,0.288071153870576,0.0323690106041488,5.60497599203081e-19,"Outliers removed"
-"306","ieu-a-1102","TNFRSF21","TNFRSF21","CKD","Inverse variance weighted",3,0.265554761746264,0.0338292038948209,4.16477674782813e-15,"Outliers removed"
-"307","ieu-a-1102","TNFRSF4","TNFRSF4","CKD","Inverse variance weighted",3,0.241766327619737,0.0323051574375091,7.21869607656685e-14,"Outliers removed"
-"308","ieu-a-1102","TNFRSF6B","TNFRSF6B","CKD","Inverse variance weighted",4,0.138305039936558,0.0286739965428328,1.41159068644474e-06,"Outliers removed"
-"309","ieu-a-1102","TNFRSF8","TNFRSF8","CKD","Inverse variance weighted",4,0.126584627883524,0.0295617958856554,1.85192315711741e-05,"Outliers removed"
-"310","ieu-a-1102","TNFRSF9","TNFRSF9","CKD","Inverse variance weighted",4,0.186529531916524,0.029703222704966,3.39065082032002e-10,"Outliers removed"
-"311","ieu-a-1102","TPSAB1","TPSAB1","CKD","Inverse variance weighted",4,0.0832328955085697,0.0241562567531421,0.000569784613511146,"Outliers removed"
-"312","ieu-a-1102","TREML2","TREML2","CKD","Inverse variance weighted",4,0.123483095375032,0.045421893148915,0.00655626023084056,"Outliers removed"
-"313","ieu-a-1102","ULBP2","ULBP2","CKD","Inverse variance weighted",4,0.179310269900574,0.0492618738207341,0.00027270147212953,"Outliers removed"
-"314","ieu-a-1102","VASN","VASN","CKD","Inverse variance weighted",4,0.162702432805308,0.04795767717729,0.00069226242205297,"Outliers removed"
-"315","ieu-a-1102","VMO1","VMO1","CKD","Inverse variance weighted",4,0.104694644509827,0.0307726058469324,0.00066845024996449,"Outliers removed"
-"316","ieu-a-1102","VSIG4","VSIG4","CKD","Inverse variance weighted",3,0.252454386697358,0.0320170954378934,3.14567838669709e-15,"Outliers removed"
-"317","ieu-a-1102","VWC2","VWC2","CKD","Inverse variance weighted",3,0.241886983248602,0.0305186729768768,2.26557576727531e-15,"Outliers removed"
-"318","ieu-a-1102","WFDC2","WFDC2","CKD","Inverse variance weighted",2,0.197942700239755,0.0448326218802485,1.00940496171053e-05,"Outliers removed"
-"319","ieu-a-1102","WNT9A","WNT9A","CKD","Inverse variance weighted",4,0.1405286210227,0.0388396140207158,0.000296684797262036,"Outliers removed"
-"320","ieu-a-1102","XCL1","XCL1","CKD","Inverse variance weighted",4,0.0810710255065334,0.0341111436362308,0.0174695791632017,"Outliers removed"
-"321","ieu-a-1102","XG","XG","CKD","Inverse variance weighted",3,0.163510431289701,0.0249720666269357,5.84169349964691e-11,"Outliers removed"
-"322","ieu-a-1102","ZBTB17","ZBTB17","CKD","Inverse variance weighted",4,0.129242543860385,0.0410876545371176,0.00165784895982032,"Outliers removed"
-"323","ieu-a-1120","SCGB1A1","SCGB1A1","Ovarian cancer","Inverse variance weighted",7,-0.140938573399654,0.02915389259816,1.33617023569904e-06,"Outliers removed"
-"324","ieu-a-26","ACE2","ACE2","T2D","Inverse variance weighted",6,0.0458028382602091,0.0226399292683297,0.0430628505918535,"Outliers removed"
-"325","ieu-a-26","ADA2","ADA2","T2D","Inverse variance weighted",6,0.0333353767371406,0.0200064478703244,0.0956672834412515,"Outliers removed"
-"326","ieu-a-26","ADAMTS15","ADAMTS15","T2D","Inverse variance weighted",6,-0.0502716996889943,0.0241968810559303,0.0377452271980779,"Outliers removed"
-"327","ieu-a-26","ADGRE2","ADGRE2","T2D","Inverse variance weighted",6,0.0370616479800888,0.0309843011686435,0.231640847661432,"Outliers removed"
-"328","ieu-a-26","ADGRE5","ADGRE5","T2D","Inverse variance weighted",6,0.0471223444332549,0.0283206506434288,0.0961351404749999,"Outliers removed"
-"329","ieu-a-26","ADGRG1","ADGRG1","T2D","Inverse variance weighted",6,0.0550381887914772,0.0238536374682335,0.0210364876353472,"Outliers removed"
-"330","ieu-a-26","ADGRG2","ADGRG2","T2D","Inverse variance weighted",6,-0.0499904048828696,0.0289356090844327,0.0840522336972058,"Outliers removed"
-"331","ieu-a-26","AREG","AREG","T2D","Inverse variance weighted",6,0.0413194480849373,0.0282340469580528,0.143341069597571,"Outliers removed"
-"332","ieu-a-26","ART3","ART3","T2D","Inverse variance weighted",6,-0.0313455223287996,0.0174413039348326,0.0723037753989415,"Outliers removed"
-"333","ieu-a-26","ASAH2","ASAH2","T2D","Inverse variance weighted",5,0.0298187235793809,0.0244935973149635,0.223448675161701,"Outliers removed"
-"334","ieu-a-26","C2","C2","T2D","Inverse variance weighted",6,0.0398868798657178,0.0172791580799882,0.0209779559171066,"Outliers removed"
-"335","ieu-a-26","CA14","CA14","T2D","Inverse variance weighted",5,-0.0237713432859533,0.0256246676262686,0.353576590470949,"Outliers removed"
-"336","ieu-a-26","CDH1","CDH1","T2D","Inverse variance weighted",6,0.0386117889431916,0.0173216844412488,0.0258071668411472,"Outliers removed"
-"337","ieu-a-26","CDH2","CDH2","T2D","Inverse variance weighted",6,0.0382804880531338,0.0183193644294383,0.0366520576584269,"Outliers removed"
-"338","ieu-a-26","CDHR2","CDHR2","T2D","Inverse variance weighted",6,0.0370895338126201,0.0275836213688051,0.178747455953346,"Outliers removed"
-"339","ieu-a-26","CES2","CES2","T2D","Inverse variance weighted",6,0.0239563230686948,0.0246902530774392,0.33190968215979,"Outliers removed"
-"340","ieu-a-26","CPM","CPM","T2D","Inverse variance weighted",5,0.0442156683273417,0.022497690977933,0.0493746092325812,"Outliers removed"
-"341","ieu-a-26","CTSB","CTSB","T2D","Inverse variance weighted",5,-0.0477900286434874,0.0181071015992009,0.00830780306699517,"Outliers removed"
-"342","ieu-a-26","CTSD","CTSD","T2D","Inverse variance weighted",6,0.0415250311636215,0.0173879470313969,0.0169334143873635,"Outliers removed"
-"343","ieu-a-26","CTSO","CTSO","T2D","Inverse variance weighted",5,0.0336305157744583,0.0250173908298584,0.178856082155095,"Outliers removed"
-"344","ieu-a-26","ENPP7","ENPP7","T2D","Inverse variance weighted",6,0.0429886521417425,0.0183108699327905,0.018889111835232,"Outliers removed"
-"345","ieu-a-26","FGF21","FGF21","T2D","Inverse variance weighted",6,0.0366412876785247,0.0191438496262442,0.055620426107048,"Outliers removed"
-"346","ieu-a-26","FGFBP1","FGFBP1","T2D","Inverse variance weighted",6,-0.0605046911410963,0.0252437497803351,0.0165381050855124,"Outliers removed"
-"347","ieu-a-26","GDF15","GDF15","T2D","Inverse variance weighted",6,0.047761774336733,0.0147312318757007,0.00118605826313193,"Outliers removed"
-"348","ieu-a-26","GGT1","GGT1","T2D","Inverse variance weighted",6,0.0376927745477532,0.0260194634692995,0.147438799616504,"Outliers removed"
-"349","ieu-a-26","GSTA1","GSTA1","T2D","Inverse variance weighted",6,0.0379412627390867,0.0227909735234021,0.0959627344349859,"Outliers removed"
-"350","ieu-a-26","GSTA3","GSTA3","T2D","Inverse variance weighted",5,0.0249420327214325,0.0246948675467225,0.312491089784982,"Outliers removed"
-"351","ieu-a-26","HAO1","HAO1","T2D","Inverse variance weighted",6,0.0450777343579603,0.024652862544629,0.0674746965423361,"Outliers removed"
-"352","ieu-a-26","HSD11B1","HSD11B1","T2D","Inverse variance weighted",5,-0.0400204457982022,0.0203746782868236,0.0495040427200317,"Outliers removed"
-"353","ieu-a-26","IFNGR2","IFNGR2","T2D","Inverse variance weighted",6,0.0351597602033334,0.0164757787316935,0.0328405531099962,"Outliers removed"
-"354","ieu-a-26","IGSF3","IGSF3","T2D","Inverse variance weighted",6,0.0525570663916222,0.0245038614094345,0.0319649750332301,"Outliers removed"
-"355","ieu-a-26","IL18R1","IL18R1","T2D","Inverse variance weighted",6,0.0662174224160482,0.0145893075056065,5.6584945012911e-06,"Outliers removed"
-"356","ieu-a-26","INHBC","INHBC","T2D","Inverse variance weighted",6,0.059520722124718,0.0264123931534307,0.0242267008779052,"Outliers removed"
-"357","ieu-a-26","KLRB1","KLRB1","T2D","Inverse variance weighted",6,0.0803726553854884,0.0266060207149653,0.00252070650467172,"Outliers removed"
-"358","ieu-a-26","LGALS4","LGALS4","T2D","Inverse variance weighted",6,0.0412608062828152,0.0164757447007833,0.0122681346013702,"Outliers removed"
-"359","ieu-a-26","LPL","LPL","T2D","Inverse variance weighted",4,-0.0272000240371387,0.0212723150867162,0.201017380515576,"Outliers removed"
-"360","ieu-a-26","MATN3","MATN3","T2D","Inverse variance weighted",6,-0.0766059488324259,0.0176181847986436,1.37310640966087e-05,"Outliers removed"
-"361","ieu-a-26","MET","MET","T2D","Inverse variance weighted",6,-0.0527884252361935,0.0258545801751092,0.0411769651742169,"Outliers removed"
-"362","ieu-a-26","MUC13","MUC13","T2D","Inverse variance weighted",6,0.0488601365850477,0.0180442523236617,0.00677318414090341,"Outliers removed"
-"363","ieu-a-26","NADK","NADK","T2D","Inverse variance weighted",6,0.0558972159128249,0.0196026143286077,0.00435109646849649,"Outliers removed"
-"364","ieu-a-26","NCAM2","NCAM2","T2D","Inverse variance weighted",6,-0.0399882879345025,0.0176878856269877,0.0237733394866749,"Outliers removed"
-"365","ieu-a-26","NFASC","NFASC","T2D","Inverse variance weighted",4,0.0505821071976384,0.0176093572509303,0.00407294550009394,"Outliers removed"
-"366","ieu-a-26","NMNAT1","NMNAT1","T2D","Inverse variance weighted",6,0.0545149911219264,0.0174941199538733,0.0018320456472437,"Outliers removed"
-"367","ieu-a-26","NPY","NPY","T2D","Inverse variance weighted",6,0.0529744450360909,0.0234317917928236,0.0237720408000395,"Outliers removed"
-"368","ieu-a-26","NRCAM","NRCAM","T2D","Inverse variance weighted",6,0.0323864890870748,0.0176997891613306,0.0672847960287017,"Outliers removed"
-"369","ieu-a-26","OMD","OMD","T2D","Inverse variance weighted",6,-0.0791771642324445,0.0208319509256759,0.000144255248406307,"Outliers removed"
-"370","ieu-a-26","PLA2G15","PLA2G15","T2D","Inverse variance weighted",6,0.0453899383680581,0.0174477268344174,0.00928220746102929,"Outliers removed"
-"371","ieu-a-26","PLXNB2","PLXNB2","T2D","Inverse variance weighted",6,0.0599521467601282,0.0156006994250716,0.000121582064622466,"Outliers removed"
-"372","ieu-a-26","PRCP","PRCP","T2D","Inverse variance weighted",6,0.0991290874568946,0.0287132290221266,0.00055565669508864,"Outliers removed"
-"373","ieu-a-26","RET","RET","T2D","Inverse variance weighted",6,0.0403891017327748,0.0175185622248414,0.0211384062613326,"Outliers removed"
-"374","ieu-a-26","RSPO1","RSPO1","T2D","Inverse variance weighted",6,-0.0321733026130717,0.0198544192470154,0.105133387693621,"Outliers removed"
-"375","ieu-a-26","SELE","SELE","T2D","Inverse variance weighted",6,0.0283295842141599,0.0225413495702061,0.208832235106659,"Outliers removed"
-"376","ieu-a-26","SELPLG","SELPLG","T2D","Inverse variance weighted",6,0.0380863936112,0.0208528168028901,0.0677841925380078,"Outliers removed"
-"377","ieu-a-26","SIGLEC1","SIGLEC1","T2D","Inverse variance weighted",6,0.0381009629445354,0.0167353550403895,0.0228056458192735,"Outliers removed"
-"378","ieu-a-26","SIGLEC7","SIGLEC7","T2D","Inverse variance weighted",6,0.0258872453173698,0.0172183554938758,0.132718420472683,"Outliers removed"
-"379","ieu-a-26","SPP1","SPP1","T2D","Inverse variance weighted",6,-0.0730705970124571,0.0180584493570696,5.20250110400161e-05,"Outliers removed"
-"380","ieu-a-26","UMOD","UMOD","T2D","Inverse variance weighted",6,-0.0109357196600808,0.0138423982182499,0.429518272835923,"Outliers removed"
-"381","ieu-a-26","WIF1","WIF1","T2D","Inverse variance weighted",5,-0.0592475079359282,0.0208462690983506,0.00448152295189357,"Outliers removed"
-"382","ieu-a-984","CD4","CD4","Lung adenocarcinoma","Inverse variance weighted",11,0.0598634446399722,0.0213417488603125,0.00503177567900938,"Outliers removed"
-"383","ieu-a-985","CD300C","CD300C","Lung cancer (ever smokers)","Inverse variance weighted",10,0.0563023136632075,0.0240198305468865,0.0190785315920186,"Outliers removed"
-"384","ieu-a-985","IFNGR1","IFNGR1","Lung cancer (ever smokers)","Inverse variance weighted",10,0.0571682746332858,0.0247652937021205,0.0209767404744276,"Outliers removed"
-"385","ieu-a-985","ODAM","ODAM","Lung cancer (ever smokers)","Inverse variance weighted",10,-0.0698702926885655,0.0218117638946517,0.00135847892042217,"Outliers removed"
-"386","ieu-a-985","SFTPA1","SFTPA1","Lung cancer (ever smokers)","Inverse variance weighted",2,0.0096827696096244,0.0644992363359226,0.8806681766188,"Outliers removed"
-"387","ieu-a-989","KLB","KLB","Squamous cell lung cancer","Inverse variance weighted",2,-0.0648929439669035,0.0477420477676411,0.174070264844821,"Outliers removed"
-"388","ieu-a-989","MMP12","MMP12","Squamous cell lung cancer","Inverse variance weighted",9,0.047114222007513,0.0176246223031815,0.00751304049635111,"Outliers removed"
-"389","ieu-a-989","ODAM","ODAM","Squamous cell lung cancer","Inverse variance weighted",8,-0.0454580057565955,0.017351742521904,0.00879826766937895,"Outliers removed"
-"390","ieu-a-989","TNR","TNR","Squamous cell lung cancer","Inverse variance weighted",6,-0.0595587078612064,0.0250211281340252,0.0172968287695907,"Outliers removed"
-"391","ieu-b-18","ALCAM","ALCAM",NA,"Inverse variance weighted",25,0.036677712326384,0.0120165060781178,0.00227111959031684,"Outliers removed"
-"392","ieu-b-18","ATP6V1D","ATP6V1D",NA,"Inverse variance weighted",26,0.0497497035655419,0.0109837530374303,5.9154160291471e-06,"Outliers removed"
-"393","ieu-b-18","BGN","BGN",NA,"Inverse variance weighted",24,-0.0394388299359725,0.00981134245250759,5.82678421382385e-05,"Outliers removed"
-"394","ieu-b-18","C2","C2",NA,"Inverse variance weighted",20,-0.0354414888262435,0.013042760449601,0.00658108842844579,"Outliers removed"
-"395","ieu-b-18","CCL19","CCL19",NA,"Inverse variance weighted",17,0.0905410782977811,0.0185738078569892,1.08993633981269e-06,"Outliers removed"
-"396","ieu-b-18","CCL21","CCL21",NA,"Inverse variance weighted",25,0.0452347312302877,0.012956863370081,0.000480893681144899,"Outliers removed"
-"397","ieu-b-18","CCL28","CCL28",NA,"Inverse variance weighted",24,0.0555368947908282,0.0115800519754664,1.61937441540335e-06,"Outliers removed"
-"398","ieu-b-18","CD22","CD22",NA,"Inverse variance weighted",15,0.093203823010895,0.0155081077794994,1.85516298036058e-09,"Outliers removed"
-"399","ieu-b-18","CD4","CD4",NA,"Inverse variance weighted",25,0.0369843513519502,0.0116153604358994,0.00145209928274899,"Outliers removed"
-"400","ieu-b-18","CD79B","CD79B",NA,"Inverse variance weighted",26,0.0281657376568121,0.00988748116689028,0.00439084387871384,"Outliers removed"
-"401","ieu-b-18","CD8A","CD8A",NA,"Inverse variance weighted",16,-0.0522136360377727,0.0151739911602352,0.000579578067585283,"Outliers removed"
-"402","ieu-b-18","CDCP1","CDCP1",NA,"Inverse variance weighted",26,0.0367383319365727,0.0105674940876454,0.000507925579822001,"Outliers removed"
-"403","ieu-b-18","CTSL","CTSL",NA,"Inverse variance weighted",24,0.0599442141054996,0.0120183309900981,6.10922340640044e-07,"Outliers removed"
-"404","ieu-b-18","FAP","FAP",NA,"Inverse variance weighted",21,-0.0470240517778168,0.0134608765999916,0.000476934723834671,"Outliers removed"
-"405","ieu-b-18","HYOU1","HYOU1",NA,"Inverse variance weighted",26,-0.0333812587029007,0.0130906434287612,0.010772013483737,"Outliers removed"
-"406","ieu-b-18","IGF1R","IGF1R",NA,"Inverse variance weighted",22,0.0299349547523851,0.012385212399193,0.0156493768078362,"Outliers removed"
-"407","ieu-b-18","IL2RA","IL2RA",NA,"Inverse variance weighted",22,0.0410888817376135,0.0105721064525569,0.000101684479799429,"Outliers removed"
-"408","ieu-b-18","IL5RA","IL5RA",NA,"Inverse variance weighted",20,0.0410645382888315,0.014034821087573,0.00343456972951467,"Outliers removed"
-"409","ieu-b-18","ITGA6","ITGA6",NA,"Inverse variance weighted",26,0.0301570603941795,0.011652913863081,0.00965513521185277,"Outliers removed"
-"410","ieu-b-18","KIR2DL3","KIR2DL3",NA,"Inverse variance weighted",3,0.199086200499157,0.0293657855171882,1.20568125769876e-11,"Outliers removed"
-"411","ieu-b-18","LAIR1","LAIR1",NA,"Inverse variance weighted",26,0.0257557106538493,0.00823048116627422,0.00175218532919492,"Outliers removed"
-"412","ieu-b-18","LTA","LTA",NA,"Inverse variance weighted",14,0.0469210717907101,0.0142366744999097,0.000981457825543516,"Outliers removed"
-"413","ieu-b-18","MERTK","MERTK",NA,"Inverse variance weighted",26,0.0264853240729492,0.00895898186192567,0.00311366933042183,"Outliers removed"
-"414","ieu-b-18","MICB_MICA","MICB_MICA",NA,"Inverse variance weighted",20,0.0178699638717788,0.00749689571010452,0.017141968915123,"Outliers removed"
-"415","ieu-b-18","MSR1","MSR1",NA,"Inverse variance weighted",26,0.0395096014015885,0.0110682773019097,0.000357492354749805,"Outliers removed"
-"416","ieu-b-18","NRP2","NRP2",NA,"Inverse variance weighted",25,0.0471994437708724,0.0120518797681828,8.98977141310999e-05,"Outliers removed"
-"417","ieu-b-18","TNF","TNF",NA,"Inverse variance weighted",104,0.0477997780244661,0.0052966701929556,1.80524714301277e-19,"Outliers removed"
-"418","ieu-b-18","TNFRSF4","TNFRSF4",NA,"Inverse variance weighted",22,0.0602230750137205,0.0130484961412746,3.92477082063677e-06,"Outliers removed"
-"419","ieu-b-18","TNXB","TNXB",NA,"Inverse variance weighted",18,-0.0504139729141073,0.0136561517738603,0.000222788520297299,"Outliers removed"
-"420","ieu-b-42","B4GAT1","B4GAT1","Schizophrenia","Inverse variance weighted",78,0.0326869300306051,0.0138874834093562,0.0185877484523145,"Outliers removed"
-"421","ieu-b-42","C1QA","C1QA","Schizophrenia","Inverse variance weighted",79,-0.0306250656142686,0.011965464484793,0.0104836485335209,"Outliers removed"
-"422","ieu-b-42","IL15RA","IL15RA","Schizophrenia","Inverse variance weighted",79,-0.0341604913082569,0.0138667648246004,0.0137595751702113,"Outliers removed"
-"423","ieu-b-42","SPINT1","SPINT1","Schizophrenia","Inverse variance weighted",77,0.0430343745134396,0.0127927349839812,0.000768299418757743,"Outliers removed"
+"","id.exposure","id.outcome","outcome","exposure","method","nsnp","b","se","pval","fdr","Q_pval"
+"1","ebi-a-GCST003116","ACAA1","ACAA1","CAD","Inverse variance weighted",42,0.0697654497522901,0.0178763806682951,9.51409977649417e-05,0.0018109040761022,0.0846879874990233
+"2","ebi-a-GCST003116","TNXB","TNXB","CAD","Inverse variance weighted",42,-0.0581421477849469,0.0167919073296235,0.000535161940008379,0.00784578144424816,0.0507234414495172
+"3","ebi-a-GCST003116","TSPAN1","TSPAN1","CAD","Wald ratio",1,-0.353133699588579,0.1165201645685,0.00244015021651419,0.026604744593645,NA
+"4","ebi-a-GCST005838","ADAMTS16","ADAMTS16","Stroke","Wald ratio",1,-0.313195161290323,0.112422903225806,0.00533849094175264,0.0482699301738182,NA
+"5","ebi-a-GCST005838","ADGRE2","ADGRE2","Stroke","Wald ratio",1,1.56136451612903,0.113255,3.08273799766595e-43,7.21232244037264e-41,NA
+"6","ebi-a-GCST005838","ADGRE5","ADGRE5","Stroke","Wald ratio",1,1.64411290322581,0.114520967741935,9.70938702107199e-47,2.59610514872949e-44,NA
+"7","ebi-a-GCST005838","ALDH1A1","ALDH1A1","Stroke","Inverse variance weighted",2,0.269731314052644,0.0881993817801482,0.00222671206618132,0.0247583925774418,0.694207141314313
+"8","ebi-a-GCST005838","APBB1IP","APBB1IP","Stroke","Wald ratio",1,0.433272580645161,0.118438548387097,0.000253987102771402,0.00424445708946853,NA
+"9","ebi-a-GCST005838","AXL","AXL","Stroke","Wald ratio",1,0.837924193548387,0.117089838709677,8.29136942895455e-13,5.81950491794747e-11,NA
+"10","ebi-a-GCST005838","BAG3","BAG3","Stroke","Wald ratio",1,-0.392345161290323,0.12146,0.00123685592726277,0.0154152848584862,NA
+"11","ebi-a-GCST005838","CA12","CA12","Stroke","Wald ratio",1,-0.520811290322581,0.117403225806452,9.16075084445577e-06,0.000243780170576394,NA
+"12","ebi-a-GCST005838","CANT1","CANT1","Stroke","Wald ratio",1,0.710522580645161,0.12021,3.40702836454958e-09,1.64917795404706e-07,NA
+"13","ebi-a-GCST005838","CCL14","CCL14","Stroke","Wald ratio",1,0.402093548387097,0.112842580645161,0.000366202187833377,0.00571173690190114,NA
+"14","ebi-a-GCST005838","CCL5","CCL5","Stroke","Wald ratio",1,0.74475,0.117980322580645,2.74575290292362e-10,1.57320434182818e-08,NA
+"15","ebi-a-GCST005838","CCL8","CCL8","Stroke","Wald ratio",1,0.455988709677419,0.0986422580645161,3.78867266479481e-06,0.000111379041951952,NA
+"16","ebi-a-GCST005838","CD300LF","CD300LF","Stroke","Wald ratio",1,1.02990322580645,0.0832654838709677,3.85013496223003e-35,6.55106297361262e-33,NA
+"17","ebi-a-GCST005838","CD46","CD46","Stroke","Wald ratio",1,0.371083870967742,0.120078709677419,0.00199928434861937,0.0225490280357967,NA
+"18","ebi-a-GCST005838","CD99L2","CD99L2","Stroke","Wald ratio",1,0.415285483870968,0.120090967741935,0.000544017778705424,0.00791362649593512,NA
+"19","ebi-a-GCST005838","CDH2","CDH2","Stroke","Wald ratio",1,0.317845161290323,0.110823064516129,0.00413021199657483,0.0397789714592927,NA
+"20","ebi-a-GCST005838","CDSN","CDSN","Stroke","Wald ratio",1,-0.283775806451613,0.101243870967742,0.00506463617931458,0.046391406438583,NA
+"21","ebi-a-GCST005838","CLEC10A","CLEC10A","Stroke","Wald ratio",1,0.947020967741935,0.109906129032258,6.89506568331243e-18,6.79224452838584e-16,NA
+"22","ebi-a-GCST005838","CLEC7A","CLEC7A","Stroke","Wald ratio",1,1.18663709677419,0.119827096774194,4.04330634188502e-23,5.27980583946148e-21,NA
+"23","ebi-a-GCST005838","CLMP","CLMP","Stroke","Wald ratio",1,-0.359753225806452,0.107820483870968,0.000848116120557862,0.0111265701330196,NA
+"24","ebi-a-GCST005838","COMP","COMP","Stroke","Wald ratio",1,-0.77821935483871,0.114289516129032,9.81478463113728e-12,6.4835312592748e-10,NA
+"25","ebi-a-GCST005838","CPVL","CPVL","Stroke","Wald ratio",1,0.796990322580645,0.0952066129032258,5.70510690873353e-17,5.33902921542312e-15,NA
+"26","ebi-a-GCST005838","CSF1","CSF1","Stroke","Wald ratio",1,0.547138709677419,0.118467903225806,3.86607329949857e-06,0.000112476692107174,NA
+"27","ebi-a-GCST005838","CSF2RA","CSF2RA","Stroke","Wald ratio",1,0.794472580645161,0.122841612903226,9.96673301641902e-11,6.21813398746586e-09,NA
+"28","ebi-a-GCST005838","CXCL16","CXCL16","Stroke","Wald ratio",1,-1.42592258064516,0.114142419354839,8.20490977801991e-36,1.58864028977868e-33,NA
+"29","ebi-a-GCST005838","DCTPP1","DCTPP1","Stroke","Wald ratio",1,0.696203225806452,0.117109193548387,2.76614414730447e-09,1.37450437054111e-07,NA
+"30","ebi-a-GCST005838","DSC2","DSC2","Stroke","Wald ratio",1,0.955796774193548,0.116347258064516,2.12102734602816e-16,1.92089815289486e-14,NA
+"31","ebi-a-GCST005838","FAP","FAP","Stroke","Wald ratio",1,-0.724425806451613,0.116321290322581,4.7302843785182e-10,2.55389872936343e-08,NA
+"32","ebi-a-GCST005838","FCGR2B","FCGR2B","Stroke","Wald ratio",1,-0.395566129032258,0.115876451612903,0.000640897682242724,0.00901914908720024,NA
+"33","ebi-a-GCST005838","FRZB","FRZB","Stroke","Wald ratio",1,0.881812903225807,0.107619193548387,2.53051647903614e-16,2.25537302060126e-14,NA
+"34","ebi-a-GCST005838","GFER","GFER","Stroke","Wald ratio",1,0.444895161290323,0.119965967741935,0.000208481260111272,0.0035798846346324,NA
+"35","ebi-a-GCST005838","HS6ST1","HS6ST1","Stroke","Wald ratio",1,0.862087096774194,0.116669838709677,1.47806989812249e-13,1.09202137867866e-11,NA
+"36","ebi-a-GCST005838","IGFBPL1","IGFBPL1","Stroke","Wald ratio",1,-0.336204838709677,0.105969516129032,0.00151051298031923,0.0179313538784196,NA
+"37","ebi-a-GCST005838","IL5RA","IL5RA","Stroke","Wald ratio",1,0.36696935483871,0.107481612903226,0.000639572961146186,0.00901914908720024,NA
+"38","ebi-a-GCST005838","ITGAV","ITGAV","Stroke","Wald ratio",1,-0.389568088033012,0.135816093535076,0.00412618837828197,0.0397789714592927,NA
+"39","ebi-a-GCST005838","JAM2","JAM2","Stroke","Wald ratio",1,-0.862640322580645,0.114597580645161,5.16967081109739e-14,3.97639748004272e-12,NA
+"40","ebi-a-GCST005838","KDR","KDR","Stroke","Wald ratio",1,-0.606214516129032,0.105468548387097,9.03999595058849e-09,4.12679489939466e-07,NA
+"41","ebi-a-GCST005838","LAIR1","LAIR1","Stroke","Wald ratio",1,0.785546774193548,0.104792903225806,6.57030711450206e-14,4.98544249296339e-12,NA
+"42","ebi-a-GCST005838","LILRB4","LILRB4","Stroke","Wald ratio",1,0.873633870967742,0.102638225806452,1.71285154436911e-17,1.65821748648837e-15,NA
+"43","ebi-a-GCST005838","LRP11","LRP11","Stroke","Wald ratio",1,-0.546729032258065,0.107932419354839,4.07382047170099e-07,1.45697464640771e-05,NA
+"44","ebi-a-GCST005838","LRPAP1","LRPAP1","Stroke","Wald ratio",1,0.381625806451613,0.101350161290323,0.000166270128818543,0.00293403267820117,NA
+"45","ebi-a-GCST005838","MASP1","MASP1","Stroke","Wald ratio",1,0.405709677419355,0.114897741935484,0.000413913418782004,0.00633276252441677,NA
+"46","ebi-a-GCST005838","MATN3","MATN3","Stroke","Inverse variance weighted",17,-0.131452906441904,0.03490825145961,0.000166103990386164,0.00293403267820117,0.264685579876513
+"47","ebi-a-GCST005838","MFAP5","MFAP5","Stroke","Wald ratio",1,-0.407988709677419,0.117470483870968,0.000514451441597696,0.00760169695939754,NA
+"48","ebi-a-GCST005838","MICB_MICA","MICB_MICA","Stroke","Wald ratio",1,0.417987096774194,0.0595896774193548,2.30902813235416e-12,1.60064110656403e-10,NA
+"49","ebi-a-GCST005838","MMP12","MMP12","Stroke","Wald ratio",1,0.356466299862448,0.123519944979367,0.00390295236518566,0.0382462086047426,NA
+"50","ebi-a-GCST005838","MSTN","MSTN","Stroke","Wald ratio",1,-0.663920967741936,0.111290483870968,2.43650115084601e-09,1.22151374660717e-07,NA
+"51","ebi-a-GCST005838","NRP2","NRP2","Stroke","Wald ratio",1,0.391991935483871,0.114472096774194,0.000616283621867786,0.00873846600198893,NA
+"52","ebi-a-GCST005838","NTRK2","NTRK2","Stroke","Wald ratio",1,-0.759443548387097,0.11772935483871,1.11292274774311e-10,6.79245785714953e-09,NA
+"53","ebi-a-GCST005838","NUCB2","NUCB2","Stroke","Wald ratio",1,0.834241935483871,0.114585161290323,3.32484746034973e-13,2.39346390895689e-11,NA
+"54","ebi-a-GCST005838","PECAM1","PECAM1","Stroke","Wald ratio",1,0.878883870967742,0.114261451612903,1.45003490552594e-14,1.16313514207545e-12,NA
+"55","ebi-a-GCST005838","POLR2F","POLR2F","Stroke","Wald ratio",1,0.866772580645161,0.11874,2.88298114170364e-13,2.10232975463194e-11,NA
+"56","ebi-a-GCST005838","PRTG","PRTG","Stroke","Wald ratio",1,-0.492240322580645,0.111618225806452,1.03353741489337e-05,0.000271182831057302,NA
+"57","ebi-a-GCST005838","PTPRM","PTPRM","Stroke","Wald ratio",1,0.660838709677419,0.10329,1.5753220200074e-10,9.41003525781017e-09,NA
+"58","ebi-a-GCST005838","ROBO1","ROBO1","Stroke","Wald ratio",1,0.941812903225806,0.116814032258065,7.4750960098029e-16,6.35949455985504e-14,NA
+"59","ebi-a-GCST005838","RTBDN","RTBDN","Stroke","Wald ratio",1,-0.410825309491059,0.14125447042641,0.00363276697853275,0.0361666428802507,NA
+"60","ebi-a-GCST005838","SETMAR","SETMAR","Stroke","Wald ratio",1,0.448377419354839,0.114882258064516,9.50351676008876e-05,0.0018109040761022,NA
+"61","ebi-a-GCST005838","SLAMF1","SLAMF1","Stroke","Wald ratio",1,0.838635483870968,0.121915483870968,6.03475250752155e-12,4.03394468211113e-10,NA
+"62","ebi-a-GCST005838","SLITRK2","SLITRK2","Stroke","Wald ratio",1,0.725448387096774,0.117041612903226,5.71092477070687e-10,2.99690117640365e-08,NA
+"63","ebi-a-GCST005838","SMAD5","SMAD5","Stroke","Wald ratio",1,-0.467382258064516,0.11744064516129,6.89930895029534e-05,0.00138851683712933,NA
+"64","ebi-a-GCST005838","SPON1","SPON1","Stroke","Wald ratio",1,-0.512490322580645,0.110344516129032,3.40972618710583e-06,0.000101838364577656,NA
+"65","ebi-a-GCST005838","STC1","STC1","Stroke","Wald ratio",1,0.458248387096774,0.117241935483871,9.28438002687728e-05,0.00179147057906928,NA
+"66","ebi-a-GCST005838","STC2","STC2","Stroke","Wald ratio",1,0.920941935483871,0.116111451612903,2.16455180135463e-15,1.78734681832445e-13,NA
+"67","ebi-a-GCST005838","SUMF2","SUMF2","Stroke","Wald ratio",1,0.546391935483871,0.114082419354839,1.67239849842899e-06,5.366010039245e-05,NA
+"68","ebi-a-GCST005838","TBC1D17","TBC1D17","Stroke","Wald ratio",1,0.553627419354839,0.114587258064516,1.3551367241412e-06,4.44976181640516e-05,NA
+"69","ebi-a-GCST005838","TGFBR2","TGFBR2","Stroke","Wald ratio",1,-0.33636935483871,0.114202419354839,0.00322559766755888,0.0328111067089549,NA
+"70","ebi-a-GCST005838","THBS4","THBS4","Stroke","Wald ratio",1,-0.684704838709677,0.116727741935484,4.46897301445774e-09,2.12654944713392e-07,NA
+"71","ebi-a-GCST005838","TIMP1","TIMP1","Stroke","Wald ratio",1,0.791724193548387,0.118812096774194,2.6707908379949e-11,1.6849989388024e-09,NA
+"72","ebi-a-GCST005838","TNFSF13B","TNFSF13B","Stroke","Wald ratio",1,0.526264516129032,0.112275967741935,2.76912847467689e-06,8.31478951086135e-05,NA
+"73","ebi-a-GCST005838","TNR","TNR","Stroke","Wald ratio",1,-1.01734032258064,0.112770967741935,1.85876472924243e-19,1.93277110272153e-17,NA
+"74","ebi-a-GCST005838","VASN","VASN","Stroke","Wald ratio",1,-0.574108064516129,0.114627419354839,5.48642423134862e-07,1.90162173203843e-05,NA
+"75","ebi-a-GCST005838","WFIKKN1","WFIKKN1","Stroke","Wald ratio",1,1.09464193548387,0.11253,2.30052571606708e-22,2.69113581160764e-20,NA
+"76","ebi-a-GCST005838","WFIKKN2","WFIKKN2","Stroke","Wald ratio",1,-0.359290233837689,0.127417331499312,0.00480549497650268,0.0446735998229512,NA
+"77","ebi-a-GCST005838","XG","XG","Stroke","Wald ratio",1,-0.32723064516129,0.0902916129032258,0.000289909641957821,0.00471792774812933,NA
+"78","ebi-a-GCST006464","ACVRL1","ACVRL1","Endometrial cancer","Wald ratio",1,-0.21490601878404,0.0730580401631909,0.00326543220069532,0.0329773413793242,NA
+"79","ebi-a-GCST006464","ADA2","ADA2","Endometrial cancer","Wald ratio",1,-1.31555398276164,0.0730084158033248,1.37695466465866e-72,9.66450055257294e-70,NA
+"80","ebi-a-GCST006464","ADAM8","ADAM8","Endometrial cancer","Wald ratio",1,-1.07732654862577,0.072434074851432,4.92034648443475e-50,1.53487475056117e-47,NA
+"81","ebi-a-GCST006464","ADGRG2","ADGRG2","Endometrial cancer","Wald ratio",1,0.23432154958165,0.0696624323257961,0.000769129869762959,0.0102869349802438,NA
+"82","ebi-a-GCST006464","AGXT","AGXT","Endometrial cancer","Wald ratio",1,-0.232432163093306,0.073530285096015,0.00157206976693515,0.0185056011348866,NA
+"83","ebi-a-GCST006464","BST1","BST1","Endometrial cancer","Wald ratio",1,-0.228831346325153,0.0481965409380631,2.05560910873611e-06,6.41235841419627e-05,NA
+"84","ebi-a-GCST006464","BST2","BST2","Endometrial cancer","Wald ratio",1,-0.307161567967069,0.0740891692800807,3.38575651811708e-05,0.000754405668620135,NA
+"85","ebi-a-GCST006464","CA4","CA4","Endometrial cancer","Wald ratio",1,-0.267297343469719,0.0735856040545542,0.00028072352329829,0.00460895492198801,NA
+"86","ebi-a-GCST006464","CCL21","CCL21","Endometrial cancer","Wald ratio",1,-0.804269525355201,0.0744116259299483,3.14150848070472e-27,4.52296669721975e-25,NA
+"87","ebi-a-GCST006464","CCL22","CCL22","Endometrial cancer","Wald ratio",1,-0.580094530337974,0.0752564603188162,1.27569033789931e-14,1.03811612279777e-12,NA
+"88","ebi-a-GCST006464","CCN3","CCN3","Endometrial cancer","Wald ratio",1,0.31144166900552,0.0688217671966711,6.02994264235341e-06,0.000166788807570514,NA
+"89","ebi-a-GCST006464","CD27","CD27","Endometrial cancer","Wald ratio",1,-0.753026272437736,0.0744088803198737,4.49896188585391e-24,6.16138316806578e-22,NA
+"90","ebi-a-GCST006464","CD28","CD28","Endometrial cancer","Wald ratio",1,-0.93949183841983,0.0753528617392118,1.11733837135292e-35,2.09128498504888e-33,NA
+"91","ebi-a-GCST006464","CD300E","CD300E","Endometrial cancer","Wald ratio",1,-0.972833713651173,0.0697055485728929,2.87876453446542e-44,7.02794037435797e-42,NA
+"92","ebi-a-GCST006464","CD302","CD302","Endometrial cancer","Wald ratio",1,-0.273796304205461,0.0710203907308204,0.000115645079873419,0.00215015603804386,NA
+"93","ebi-a-GCST006464","CD34","CD34","Endometrial cancer","Wald ratio",1,0.334060411556781,0.0741471321594325,6.62567746727335e-06,0.000181478921847512,NA
+"94","ebi-a-GCST006464","CD4","CD4","Endometrial cancer","Wald ratio",1,-0.897494173205286,0.0748492965136853,3.97613957305845e-33,6.56647755962448e-31,NA
+"95","ebi-a-GCST006464","CD48","CD48","Endometrial cancer","Wald ratio",1,-1.40441005991531,0.066820624209366,4.52625632894148e-98,6.3537323217516e-95,NA
+"96","ebi-a-GCST006464","CD6","CD6","Endometrial cancer","Wald ratio",1,-1.06525603322392,0.0615198680480136,3.58499316650745e-67,2.01297366299393e-64,NA
+"97","ebi-a-GCST006464","CD83","CD83","Endometrial cancer","Wald ratio",1,-1.14094335094591,0.073810642391406,6.6938333619538e-54,2.21093378396298e-51,NA
+"98","ebi-a-GCST006464","CEACAM21","CEACAM21","Endometrial cancer","Wald ratio",1,-0.409924668594695,0.0491223199794994,7.1227277054015e-17,6.55641246980811e-15,NA
+"99","ebi-a-GCST006464","CLEC4A","CLEC4A","Endometrial cancer","Wald ratio",1,0.613071341118663,0.0751011808157106,3.26070034251448e-16,2.86075506612794e-14,NA
+"100","ebi-a-GCST006464","CLEC4C","CLEC4C","Endometrial cancer","Wald ratio",1,-0.429547645486827,0.0753886563594431,1.2138067926778e-08,5.40914693721098e-07,NA
+"101","ebi-a-GCST006464","CLEC4D","CLEC4D","Endometrial cancer","Wald ratio",1,-0.463487453578852,0.0753863175064166,7.83848980697443e-10,4.03790094184967e-08,NA
+"102","ebi-a-GCST006464","CLEC6A","CLEC6A","Endometrial cancer","Wald ratio",1,-0.955707208141649,0.0768457617949375,1.65201451347279e-35,2.99227790101603e-33,NA
+"103","ebi-a-GCST006464","CPE","CPE","Endometrial cancer","Wald ratio",1,0.741385902614228,0.0758759513030462,1.49925798921801e-22,1.79113481052321e-20,NA
+"104","ebi-a-GCST006464","CR2","CR2","Endometrial cancer","Wald ratio",1,-0.670988460302546,0.0730873266706529,4.28535420506595e-20,4.81245277228906e-18,NA
+"105","ebi-a-GCST006464","CST7","CST7","Endometrial cancer","Wald ratio",1,-0.692806908361705,0.0590844102226181,9.41039723510181e-32,1.50969658500276e-29,NA
+"106","ebi-a-GCST006464","CTSD","CTSD","Endometrial cancer","Wald ratio",1,-0.431716677445728,0.0733306690746684,3.92651965899089e-09,1.88439383634477e-07,NA
+"107","ebi-a-GCST006464","CXCL10","CXCL10","Endometrial cancer","Wald ratio",1,-1.04243696282647,0.0728463231196639,1.89286061686571e-46,4.83109652895498e-44,NA
+"108","ebi-a-GCST006464","CXCL11","CXCL11","Endometrial cancer","Wald ratio",1,-1.26021468636998,0.0743425789210363,1.87757660404361e-64,8.10968663977297e-62,NA
+"109","ebi-a-GCST006464","CXCL9","CXCL9","Endometrial cancer","Wald ratio",1,-1.10188450540377,0.0698875723519099,5.28761577185539e-56,1.97933083726453e-53,NA
+"110","ebi-a-GCST006464","EGFL7","EGFL7","Endometrial cancer","Wald ratio",1,-0.313433761648505,0.0736565831594447,2.08732128543285e-05,0.000494527806654239,NA
+"111","ebi-a-GCST006464","FASLG","FASLG","Endometrial cancer","Wald ratio",1,-1.66267027866925,0.068329489479229,8.74736900199854e-131,2.45582384731109e-127,NA
+"112","ebi-a-GCST006464","FCER2","FCER2","Endometrial cancer","Wald ratio",1,-0.501681940393822,0.0722502206656986,3.82032978520145e-12,2.58447611372363e-10,NA
+"113","ebi-a-GCST006464","FCRL1","FCRL1","Endometrial cancer","Wald ratio",1,-0.328785789535768,0.0719049856211383,4.81931455652595e-06,0.00013613085067679,NA
+"114","ebi-a-GCST006464","FCRL3","FCRL3","Endometrial cancer","Wald ratio",1,-0.432932881019496,0.0567992491264892,2.49468391683086e-14,1.97290847788807e-12,NA
+"115","ebi-a-GCST006464","GALNT10","GALNT10","Endometrial cancer","Wald ratio",1,-0.57540462157358,0.0711504512969448,6.10752727892139e-16,5.27596394940671e-14,NA
+"116","ebi-a-GCST006464","GCNT1","GCNT1","Endometrial cancer","Wald ratio",1,-1.30967634341684,0.0703627662733326,2.51152387996376e-77,2.01460094085664e-74,NA
+"117","ebi-a-GCST006464","GPKOW","GPKOW","Endometrial cancer","Wald ratio",1,-0.405787949415694,0.0773142442250668,1.53298098529217e-07,5.855570226133e-06,NA
+"118","ebi-a-GCST006464","GPR37","GPR37","Endometrial cancer","Wald ratio",1,-0.335065101465546,0.063935191399529,1.59969363371908e-07,6.06910794144097e-06,NA
+"119","ebi-a-GCST006464","GRN","GRN","Endometrial cancer","Wald ratio",1,-0.37745935480197,0.0684567027460168,3.51086372040852e-08,1.49344695379499e-06,NA
+"120","ebi-a-GCST006464","GRPEL1","GRPEL1","Endometrial cancer","Wald ratio",1,-0.422859542723727,0.0762008484952023,2.86854957013234e-08,1.22953479666359e-06,NA
+"121","ebi-a-GCST006464","HAO1","HAO1","Endometrial cancer","Wald ratio",1,-0.250093554121059,0.0731669493628151,0.000630548524962282,0.0089182115054489,NA
+"122","ebi-a-GCST006464","IFNL1","IFNL1","Endometrial cancer","Wald ratio",1,-0.491637075091419,0.0775582984539165,2.31357602841203e-10,1.33925045356016e-08,NA
+"123","ebi-a-GCST006464","IGFBP7","IGFBP7","Endometrial cancer","Wald ratio",1,-0.222472716771,0.0690478224261431,0.00127295062638081,0.0156746003665093,NA
+"124","ebi-a-GCST006464","IL12A_IL12B","IL12A_IL12B","Endometrial cancer","Wald ratio",1,-1.31409982631474,0.0689463365426464,5.45364532833546e-81,5.10370308643393e-78,NA
+"125","ebi-a-GCST006464","IL12B","IL12B","Endometrial cancer","Wald ratio",1,-1.31601158444073,0.0677982647744329,6.2670992915488e-84,7.0379525044093e-81,NA
+"126","ebi-a-GCST006464","IL16","IL16","Endometrial cancer","Wald ratio",1,-0.364371946779908,0.0691339532310746,1.36037119166402e-07,5.23183852136538e-06,NA
+"127","ebi-a-GCST006464","IL18","IL18","Endometrial cancer","Wald ratio",1,-0.657425146534227,0.0719273572587829,6.2379300506308e-20,6.86783867339058e-18,NA
+"128","ebi-a-GCST006464","IL18BP","IL18BP","Endometrial cancer","Wald ratio",1,-1.18403926019028,0.0730300756161352,4.07908717197897e-59,1.63600531933299e-56,NA
+"129","ebi-a-GCST006464","IL2RA","IL2RA","Endometrial cancer","Wald ratio",1,-0.843261255984413,0.0678981236297372,2.04818449366378e-35,3.59392372872566e-33,NA
+"130","ebi-a-GCST006464","ITGB2","ITGB2","Endometrial cancer","Wald ratio",1,-1.2431308903505,0.0732340642757487,1.26262792314999e-64,5.90804649040598e-62,NA
+"131","ebi-a-GCST006464","KITLG","KITLG","Endometrial cancer","Wald ratio",1,0.462074989729384,0.0740432057336474,4.35859485626941e-10,2.37606894349056e-08,NA
+"132","ebi-a-GCST006464","LAG3","LAG3","Endometrial cancer","Wald ratio",1,-1.08635655509321,0.073304128177281,1.09019422836806e-49,3.22181083804561e-47,NA
+"133","ebi-a-GCST006464","LILRA2","LILRA2","Endometrial cancer","Wald ratio",1,-0.641056226026756,0.0654075502243265,1.1153005834221e-22,1.36139408172067e-20,NA
+"134","ebi-a-GCST006464","LRRC25","LRRC25","Endometrial cancer","Wald ratio",1,-0.414725418654692,0.069990888642123,3.11500007247768e-09,1.53250025010011e-07,NA
+"135","ebi-a-GCST006464","LY9","LY9","Endometrial cancer","Wald ratio",1,-1.26300097214934,0.0708976517915614,5.46152480691326e-71,3.40738464342422e-68,NA
+"136","ebi-a-GCST006464","MET","MET","Endometrial cancer","Wald ratio",1,0.29689095250298,0.0717428929374774,3.49945246068277e-05,0.000773599431761172,NA
+"137","ebi-a-GCST006464","MMP9","MMP9","Endometrial cancer","Wald ratio",1,-0.277360512839286,0.074282480567182,0.00018856602837433,0.00326789583124031,NA
+"138","ebi-a-GCST006464","MPO","MPO","Endometrial cancer","Wald ratio",1,-0.338588634394562,0.0740525611457532,4.82458402220504e-06,0.00013613085067679,NA
+"139","ebi-a-GCST006464","MSR1","MSR1","Endometrial cancer","Wald ratio",1,-0.260836007760924,0.0676910842922631,0.00011652272428509,0.0021560864367502,NA
+"140","ebi-a-GCST006464","NCR1","NCR1","Endometrial cancer","Wald ratio",1,-1.88238009819115,0.0739449739065354,5.98177489554533e-143,3.3587666038487e-139,NA
+"141","ebi-a-GCST006464","NFASC","NFASC","Endometrial cancer","Wald ratio",1,-0.191915093533783,0.0680137443206547,0.00477682834253817,0.0444807481647626,NA
+"142","ebi-a-GCST006464","NTRK3","NTRK3","Endometrial cancer","Wald ratio",1,0.799093541918347,0.0733825305982989,1.29455429065018e-27,1.96457360594615e-25,NA
+"143","ebi-a-GCST006464","OSM","OSM","Endometrial cancer","Wald ratio",1,-0.656582142552075,0.0751654484293077,2.43313659758701e-18,2.43965392775912e-16,NA
+"144","ebi-a-GCST006464","PARP1","PARP1","Endometrial cancer","Wald ratio",1,-0.399352036022404,0.0746769332145603,8.90644585076135e-08,3.54678676964716e-06,NA
+"145","ebi-a-GCST006464","PDCD1","PDCD1","Endometrial cancer","Wald ratio",1,-1.00980996310714,0.0735805195914532,7.30527593170477e-43,1.64076497426089e-40,NA
+"146","ebi-a-GCST006464","PILRB","PILRB","Endometrial cancer","Wald ratio",1,-0.566810862040212,0.0516083173681192,4.61669274692038e-28,7.20075827054387e-26,NA
+"147","ebi-a-GCST006464","PLAUR","PLAUR","Endometrial cancer","Wald ratio",1,-0.551192408286455,0.0729322505460713,4.10590293580182e-14,3.20203402562878e-12,NA
+"148","ebi-a-GCST006464","PRDX1","PRDX1","Endometrial cancer","Wald ratio",1,-0.295177488437931,0.0762175255341737,0.000107579047583612,0.00202025535846817,NA
+"149","ebi-a-GCST006464","PRTN3","PRTN3","Endometrial cancer","Wald ratio",1,-0.366018295932023,0.0715399211704841,3.11619718039984e-07,1.12886755922226e-05,NA
+"150","ebi-a-GCST006464","PTGDS","PTGDS","Endometrial cancer","Wald ratio",1,-0.223748917009359,0.0718238375900458,0.0018379161098252,0.0211495350158456,NA
+"151","ebi-a-GCST006464","PTN","PTN","Endometrial cancer","Wald ratio",1,-0.384076275081656,0.0726528084540385,1.24705044174604e-07,4.86263071555836e-06,NA
+"152","ebi-a-GCST006464","RELT","RELT","Endometrial cancer","Wald ratio",1,-0.600651014655456,0.0661236460074762,1.04892009566897e-19,1.13263198791948e-17,NA
+"153","ebi-a-GCST006464","RNASET2","RNASET2","Endometrial cancer","Wald ratio",1,-0.623091800998182,0.0698786236968521,4.80073839633055e-19,4.90111747189018e-17,NA
+"154","ebi-a-GCST006464","SIGLEC1","SIGLEC1","Endometrial cancer","Wald ratio",1,-0.693018422026708,0.0700413265160852,4.40146809458074e-23,5.61687348887974e-21,NA
+"155","ebi-a-GCST006464","SIGLEC10","SIGLEC10","Endometrial cancer","Wald ratio",1,-1.11394485187942,0.0711456719016299,2.96487993387176e-55,1.04048755179312e-52,NA
+"156","ebi-a-GCST006464","SIGLEC7","SIGLEC7","Endometrial cancer","Wald ratio",1,-0.688128185416133,0.0720333174698085,1.26096892027581e-21,1.44496744639769e-19,NA
+"157","ebi-a-GCST006464","SIRPB1","SIRPB1","Endometrial cancer","Wald ratio",1,-0.803960389998658,0.0609390189833514,9.64459142463526e-40,2.00571780923433e-37,NA
+"158","ebi-a-GCST006464","SIT1","SIT1","Endometrial cancer","Wald ratio",1,-0.953494449800079,0.076145122779615,5.65420640282789e-36,1.13387031970995e-33,NA
+"159","ebi-a-GCST006464","SMOC2","SMOC2","Endometrial cancer","Wald ratio",1,0.290791630566979,0.0666655480847844,1.28909720739324e-05,0.000329012764523321,NA
+"160","ebi-a-GCST006464","SPINK6","SPINK6","Endometrial cancer","Wald ratio",1,-0.23023872571152,0.0709369038467014,0.00117169097996421,0.0148176685867095,NA
+"161","ebi-a-GCST006464","ST6GAL1","ST6GAL1","Endometrial cancer","Wald ratio",1,-0.22159005397666,0.074095474014326,0.00278428355569803,0.0297785755528466,NA
+"162","ebi-a-GCST006464","SULT2A1","SULT2A1","Endometrial cancer","Wald ratio",1,-0.230549894853303,0.0741324889057015,0.00187105677122744,0.021353625549679,NA
+"163","ebi-a-GCST006464","TCN2","TCN2","Endometrial cancer","Wald ratio",1,-0.186285575988318,0.0616423019194865,0.0025107637358701,0.0273215860017647,NA
+"164","ebi-a-GCST006464","TGFA","TGFA","Endometrial cancer","Wald ratio",1,-0.745169760054017,0.0756012886063283,6.42021968444423e-23,8.01100745070097e-21,NA
+"165","ebi-a-GCST006464","TNFRSF10A","TNFRSF10A","Endometrial cancer","Wald ratio",1,-0.394259437780408,0.0665509442864871,3.13869151845971e-09,1.53250025010011e-07,NA
+"166","ebi-a-GCST006464","TNFRSF10B","TNFRSF10B","Endometrial cancer","Wald ratio",1,-0.506114575325304,0.0678783959129052,8.90567218954112e-14,6.66737991256979e-12,NA
+"167","ebi-a-GCST006464","TNFRSF1A","TNFRSF1A","Endometrial cancer","Wald ratio",1,-0.253481840331588,0.0730132968879018,0.000517132314520441,0.00762125445152828,NA
+"168","ebi-a-GCST006464","TNFRSF1B","TNFRSF1B","Endometrial cancer","Wald ratio",1,-0.767613597074603,0.0737239014509024,2.18570096406455e-25,3.06817772830561e-23,NA
+"169","ebi-a-GCST006464","TNFRSF4","TNFRSF4","Endometrial cancer","Wald ratio",1,-1.26207559986496,0.073761424788588,1.24487849283745e-65,6.35453885207478e-63,NA
+"170","ebi-a-GCST006464","TNFRSF6B","TNFRSF6B","Endometrial cancer","Wald ratio",1,-0.72856898802914,0.0723240470699256,7.22272775129598e-24,9.65609912464926e-22,NA
+"171","ebi-a-GCST006464","TNFRSF9","TNFRSF9","Endometrial cancer","Wald ratio",1,-0.793347081721558,0.0732713842349103,2.54978601222073e-27,3.76764433121563e-25,NA
+"172","ebi-a-GCST006464","TNFSF10","TNFSF10","Endometrial cancer","Wald ratio",1,-0.390033232050828,0.0712324128421335,4.36272582585277e-08,1.81457077867876e-06,NA
+"173","ebi-a-GCST006464","VMO1","VMO1","Endometrial cancer","Wald ratio",1,-0.199682119366923,0.0574454843866307,0.000508898914565769,0.0075394918345298,NA
+"174","ebi-a-GCST006464","VNN2","VNN2","Endometrial cancer","Wald ratio",1,-0.439582341863029,0.065183732158619,1.54357402114337e-11,1.00781024752558e-09,NA
+"175","ebi-a-GCST006464","VWC2","VWC2","Endometrial cancer","Wald ratio",1,0.25678165688416,0.0678052813335123,0.000152449451680862,0.00274360151021808,NA
+"176","ebi-a-GCST006464","VWF","VWF","Endometrial cancer","Wald ratio",1,-0.262621671202008,0.0742834974598022,0.000407162586466619,0.00626361074797278,NA
+"177","ebi-a-GCST006464","WFDC2","WFDC2","Endometrial cancer","Wald ratio",1,-0.295539502210725,0.0708100973369616,2.9970350490166e-05,0.000678562572589847,NA
+"178","ieu-a-1102","ACP6","ACP6","CKD","Inverse variance weighted",4,0.108142185349452,0.019722030207334,4.17419045174364e-08,1.74911040198064e-06,0.913430379999126
+"179","ieu-a-1102","ACTA2","ACTA2","CKD","Inverse variance weighted",4,0.150815806648786,0.0274486693541998,3.91892301747725e-08,1.65449268745374e-06,0.968277873952052
+"180","ieu-a-1102","ACVRL1","ACVRL1","CKD","Inverse variance weighted",4,0.163681575971604,0.0494147315606447,0.000924977215952541,0.0119947969228026,0.0260777084505746
+"181","ieu-a-1102","ADAM22","ADAM22","CKD","Inverse variance weighted",4,0.252129121246737,0.0491077192916651,2.83338415223369e-07,1.03983346501909e-05,0.0250469332835515
+"182","ieu-a-1102","ADAM8","ADAM8","CKD","Inverse variance weighted",4,0.0837671146615323,0.0287085373573283,0.00352457438332937,0.0352143864099545,0.664867128474476
+"183","ieu-a-1102","ADGRE2","ADGRE2","CKD","Inverse variance weighted",4,0.0947729121012784,0.0283053808582194,0.000813296221839084,0.0107450783191211,0.732172346946388
+"184","ieu-a-1102","ADGRE5","ADGRE5","CKD","Inverse variance weighted",4,0.0841851697309581,0.0286181806649554,0.00326450322090475,0.0329773413793242,0.694267572653176
+"185","ieu-a-1102","ADM","ADM","CKD","Inverse variance weighted",4,0.142624934487501,0.0484356001628644,0.00323340794407633,0.0328310770451873,0.0302535011794894
+"186","ieu-a-1102","AMY2A","AMY2A","CKD","Inverse variance weighted",4,0.107062485763374,0.0343676048456934,0.00183810740654188,0.0211495350158456,0.226954673894925
+"187","ieu-a-1102","AMY2B","AMY2B","CKD","Inverse variance weighted",4,0.109613622075195,0.0373636565981404,0.0033495174579308,0.033644974107838,0.176154827324367
+"188","ieu-a-1102","ANGPTL3","ANGPTL3","CKD","Inverse variance weighted",4,0.0783233602673251,0.027559453203847,0.00448345824282457,0.0423815118408417,0.380691248532716
+"189","ieu-a-1102","ANGPTL7","ANGPTL7","CKD","Inverse variance weighted",4,0.105523893009849,0.0375068461539459,0.00490119645105763,0.0453380857869664,0.156871898231175
+"190","ieu-a-1102","APBB1IP","APBB1IP","CKD","Inverse variance weighted",4,0.0887731426390677,0.0296920061542422,0.00279160699658715,0.0298001393266861,0.694106946372264
+"191","ieu-a-1102","ASGR1","ASGR1","CKD","Inverse variance weighted",4,0.14181397170034,0.0473975560342635,0.00277146991643537,0.0297121768927604,0.0539707102280327
+"192","ieu-a-1102","AXL","AXL","CKD","Inverse variance weighted",4,0.137920128158139,0.0293099846457422,2.53160002629449e-06,7.68374818791545e-05,0.528709714479732
+"193","ieu-a-1102","BAMBI","BAMBI","CKD","Inverse variance weighted",4,0.154839135582934,0.0471967062180922,0.0010354280875514,0.0133346988798191,0.06525842448044
+"194","ieu-a-1102","BCAM","BCAM","CKD","Inverse variance weighted",4,0.0997872390575912,0.0319350041285868,0.00177987775112309,0.0206487883730499,0.277222450443907
+"195","ieu-a-1102","BCAN","BCAN","CKD","Inverse variance weighted",4,0.115300237993644,0.0407548200211768,0.00466763313189542,0.0436085857497384,0.116920703266483
+"196","ieu-a-1102","BTN3A2","BTN3A2","CKD","Inverse variance weighted",4,0.120433117860796,0.0262550867267996,4.49575812961674e-06,0.000128794295396928,0.589640958012654
+"197","ieu-a-1102","CA14","CA14","CKD","Inverse variance weighted",4,0.176802321787807,0.0282201349779567,3.7255622274857e-10,2.07119127795369e-08,0.617874215425118
+"198","ieu-a-1102","CALB2","CALB2","CKD","Inverse variance weighted",4,0.106459935981755,0.0301976390293196,0.000422781445852935,0.00645086363713106,0.474854086605052
+"199","ieu-a-1102","CALCA","CALCA","CKD","Inverse variance weighted",4,0.0798232226570411,0.0268605497333656,0.00296093903378179,0.0312512644260992,0.312542269827186
+"200","ieu-a-1102","CCDC80","CCDC80","CKD","Inverse variance weighted",4,0.155594458636713,0.0275059436037184,1.54259282767778e-08,6.76692088078962e-07,0.947889272255893
+"201","ieu-a-1102","CCL14","CCL14","CKD","Inverse variance weighted",4,0.147762903618548,0.0455158652880464,0.00116872708660181,0.0148135498674247,0.0504750643513255
+"202","ieu-a-1102","CCL15","CCL15","CKD","Inverse variance weighted",4,0.144239857165412,0.0436099807207399,0.000941338992034437,0.0121788443324271,0.0261008824999643
+"203","ieu-a-1102","CCL16","CCL16","CKD","Inverse variance weighted",4,0.087657378947928,0.0301698588368615,0.00366711352846752,0.0363795803221645,0.189811289833972
+"204","ieu-a-1102","CCL23","CCL23","CKD","Inverse variance weighted",4,0.223944276011988,0.0411338030604399,5.20129686677193e-08,2.13177240196528e-06,0.0959785739663897
+"205","ieu-a-1102","CCL25","CCL25","CKD","Inverse variance weighted",4,0.117563074337867,0.0329516910899334,0.000360073194189175,0.00563178547457442,0.124935491129962
+"206","ieu-a-1102","CCL27","CCL27","CKD","Inverse variance weighted",4,0.118612853981785,0.0285252465922483,3.20805806223012e-05,0.00071765920396104,0.968465787361672
+"207","ieu-a-1102","CCL3","CCL3","CKD","Inverse variance weighted",4,0.132970998142927,0.0280291076618727,2.09505197441775e-06,6.46358067931631e-05,0.545700350454691
+"208","ieu-a-1102","CCN3","CCN3","CKD","Inverse variance weighted",4,0.168308677373122,0.0322601871312846,1.8162289971985e-07,6.84437974447621e-06,0.241718167207827
+"209","ieu-a-1102","CCN5","CCN5","CKD","Inverse variance weighted",4,0.0910027676434041,0.0270105754305396,0.000753994978349175,0.010152714156908,0.930113995386657
+"210","ieu-a-1102","CD160","CD160","CKD","Inverse variance weighted",4,0.20538236894386,0.0354622694118772,6.97296896948341e-09,3.23580336889664e-07,0.207739991853339
+"211","ieu-a-1102","CD200","CD200","CKD","Inverse variance weighted",4,0.204660962012738,0.0469358370664108,1.29800404950517e-05,0.00032978700171817,0.0494532937455641
+"212","ieu-a-1102","CD207","CD207","CKD","Inverse variance weighted",4,0.092282191729883,0.0272832557340206,0.000718620733913573,0.00977765083183546,0.614795584749776
+"213","ieu-a-1102","CD274","CD274","CKD","Inverse variance weighted",4,0.102827903879134,0.0324045822527498,0.00150741648203521,0.0179313538784196,0.287548576765007
+"214","ieu-a-1102","CD276","CD276","CKD","Inverse variance weighted",4,0.0913399631414735,0.0293428487875427,0.00185288532982846,0.0211893098309303,0.260470384298778
+"215","ieu-a-1102","CD28","CD28","CKD","Inverse variance weighted",4,0.135640689455531,0.0339318830297072,6.40310309988721e-05,0.00131216875568856,0.276694758259061
+"216","ieu-a-1102","CD300C","CD300C","CKD","Inverse variance weighted",4,0.158711416472582,0.043240525147989,0.00024214067942614,0.00407071830831669,0.058794048475836
+"217","ieu-a-1102","CD38","CD38","CKD","Inverse variance weighted",4,0.157488973991829,0.0334834042387843,2.55747249492705e-06,7.72054196721257e-05,0.108577416077239
+"218","ieu-a-1102","CD4","CD4","CKD","Inverse variance weighted",4,0.113439528805664,0.0290604169022927,9.47820000282759e-05,0.0018109040761022,0.653593982953727
+"219","ieu-a-1102","CD48","CD48","CKD","Inverse variance weighted",4,0.114628676338766,0.027827169094665,3.8001215004294e-05,0.000825893937085906,0.342783216927207
+"220","ieu-a-1102","CD5","CD5","CKD","Inverse variance weighted",4,0.149913922767419,0.041357155105967,0.000289117338683988,0.00471792774812933,0.112723954246625
+"221","ieu-a-1102","CD58","CD58","CKD","Inverse variance weighted",4,0.153828751959437,0.0471868115353173,0.00111414325332301,0.0141857468648723,0.0496092046219019
+"222","ieu-a-1102","CD74","CD74","CKD","Inverse variance weighted",4,0.196788762429234,0.0282856166314263,3.47095911422686e-12,2.37676041785169e-10,0.573351412946159
+"223","ieu-a-1102","CD79B","CD79B","CKD","Inverse variance weighted",4,0.17693128245665,0.0520451771963139,0.000674916197288632,0.0093894016442486,0.0226677170616604
+"224","ieu-a-1102","CD83","CD83","CKD","Inverse variance weighted",4,0.120269357417694,0.0292495329673256,3.92520747820628e-05,0.000844445976633267,0.511251388977323
+"225","ieu-a-1102","CDH15","CDH15","CKD","Inverse variance weighted",4,0.110247298789095,0.0251535861292382,1.17074688979398e-05,0.000304339990101537,0.666859235731128
+"226","ieu-a-1102","CDNF","CDNF","CKD","Inverse variance weighted",4,0.192535321491612,0.0307803890317636,3.97186024540665e-10,2.18647012529003e-08,0.339307879728971
+"227","ieu-a-1102","CEACAM21","CEACAM21","CKD","Inverse variance weighted",4,0.0564034116153763,0.0194970736944895,0.00381682414787804,0.0375350716376146,0.616340074940419
+"228","ieu-a-1102","CEACAM8","CEACAM8","CKD","Inverse variance weighted",4,0.0940290337095459,0.0294636780842519,0.00141607546852104,0.0169898798199694,0.543707238027511
+"229","ieu-a-1102","CGA","CGA","CKD","Inverse variance weighted",4,0.0703029151066586,0.0217660165626138,0.00123816446503602,0.0154152848584862,0.691286366617309
+"230","ieu-a-1102","CGREF1","CGREF1","CKD","Inverse variance weighted",4,0.132339379267277,0.0393681081549388,0.000774955208663069,0.0102869349802438,0.0808981942917218
+"231","ieu-a-1102","CHRDL1","CHRDL1","CKD","Inverse variance weighted",4,0.224951837278627,0.0470667208226344,1.75797696356884e-06,5.57685912454182e-05,0.0276748509168112
+"232","ieu-a-1102","CLEC4C","CLEC4C","CKD","Inverse variance weighted",4,0.102595308667397,0.0238334529752772,1.67229803786549e-05,0.000410041636795402,0.562984856443265
+"233","ieu-a-1102","CLEC6A","CLEC6A","CKD","Inverse variance weighted",4,0.112425947430125,0.028054095625322,6.13726466273286e-05,0.00127161406203856,0.579142169845733
+"234","ieu-a-1102","CLMP","CLMP","CKD","Inverse variance weighted",4,0.265151571839371,0.0458246605534857,7.1987879942651e-09,3.31321267113103e-07,0.0344780660923072
+"235","ieu-a-1102","COL6A3","COL6A3","CKD","Inverse variance weighted",4,0.231889664877514,0.0373021218224106,5.08277445742926e-10,2.71807415033003e-08,0.182060044732754
+"236","ieu-a-1102","COLEC12","COLEC12","CKD","Inverse variance weighted",4,0.247342740416985,0.0479013236070985,2.42259509433122e-07,8.94925753596697e-06,0.0281356129898716
+"237","ieu-a-1102","CPA2","CPA2","CKD","Inverse variance weighted",4,0.0895868497044141,0.0292446705249404,0.00218869194009148,0.0244324159912796,0.772694762513219
+"238","ieu-a-1102","CRELD2","CRELD2","CKD","Inverse variance weighted",4,0.10982476621576,0.0285045191551691,0.000116732017234561,0.0021560864367502,0.414799673834208
+"239","ieu-a-1102","CRHBP","CRHBP","CKD","Inverse variance weighted",4,0.119578098616093,0.0290143352277026,3.76666113155634e-05,0.000825893937085906,0.341974431530173
+"240","ieu-a-1102","CRIM1","CRIM1","CKD","Inverse variance weighted",4,0.131901010746053,0.0354053753192497,0.00019496589072264,0.00335807814848965,0.218297796363234
+"241","ieu-a-1102","CRTAM","CRTAM","CKD","Inverse variance weighted",4,0.0809285895335514,0.0285586413719314,0.00460025876891842,0.0433396862205989,0.979504852157445
+"242","ieu-a-1102","CSTB","CSTB","CKD","Inverse variance weighted",4,0.0975725480554358,0.0256673335304676,0.00014386391945687,0.00261288135419811,0.478595129039333
+"243","ieu-a-1102","CTRB1","CTRB1","CKD","Inverse variance weighted",4,0.0915496460281754,0.0287642459135865,0.00145879270295708,0.0173909151318556,0.423839184398182
+"244","ieu-a-1102","CTSZ","CTSZ","CKD","Inverse variance weighted",4,0.151085697378715,0.0285469297753549,1.20630699466212e-07,4.73665298952994e-06,0.419541705571785
+"245","ieu-a-1102","CXCL16","CXCL16","CKD","Inverse variance weighted",4,0.111116350664243,0.0332849749139516,0.000842824894494899,0.0110837794351212,0.253084881825475
+"246","ieu-a-1102","CXCL9","CXCL9","CKD","Inverse variance weighted",4,0.131820916869132,0.0287814410844757,4.64827900388703e-06,0.000132487749273227,0.354911492373336
+"247","ieu-a-1102","DCBLD2","DCBLD2","CKD","Inverse variance weighted",4,0.089914252809129,0.0282451885737201,0.00145582736385711,0.0173909151318556,0.901839720831116
+"248","ieu-a-1102","DCTPP1","DCTPP1","CKD","Inverse variance weighted",4,0.124165648801233,0.0401530983470684,0.00198608305292214,0.0224835813349956,0.129960812781309
+"249","ieu-a-1102","DDAH1","DDAH1","CKD","Inverse variance weighted",4,0.116314789578346,0.0337833549518381,0.000575381273448667,0.00824658154938964,0.283716693316641
+"250","ieu-a-1102","DEFA1_DEFA1B","DEFA1_DEFA1B","CKD","Inverse variance weighted",4,0.121024390793513,0.0388102135163514,0.00181857761987525,0.0210542543002052,0.156451412419032
+"251","ieu-a-1102","DPT","DPT","CKD","Inverse variance weighted",4,0.133260363985384,0.026322402712155,4.13530177670034e-07,1.46960249849193e-05,0.527724413708523
+"252","ieu-a-1102","DPY30","DPY30","CKD","Inverse variance weighted",4,0.107838230908614,0.0300130771856768,0.000326840549385916,0.00520543037465939,0.905844902338905
+"253","ieu-a-1102","DRAXIN","DRAXIN","CKD","Inverse variance weighted",4,0.124276806089961,0.0387819452351733,0.00135296531921108,0.0163726298865737,0.126296251641138
+"254","ieu-a-1102","DSG3","DSG3","CKD","Inverse variance weighted",4,0.184902568722577,0.0276677964467576,2.34175538355496e-11,1.49419959984785e-09,0.59465284613495
+"255","ieu-a-1102","DTX3","DTX3","CKD","Inverse variance weighted",4,0.1748069992275,0.0278564879048747,3.49026758452767e-10,1.95978524871229e-08,0.783265436746681
+"256","ieu-a-1102","EBI3_IL27","EBI3_IL27","CKD","Inverse variance weighted",4,0.094439266974663,0.0277819185997602,0.000675568702453506,0.0093894016442486,0.517399478159694
+"257","ieu-a-1102","EDA2R","EDA2R","CKD","Inverse variance weighted",4,0.155894514256788,0.0245265326268745,2.06862384838151e-10,1.22266556933286e-08,0.357745577242836
+"258","ieu-a-1102","EFEMP1","EFEMP1","CKD","Inverse variance weighted",4,0.185853449720282,0.0440875581519206,2.49166571095493e-05,0.000580527094066884,0.0505809204903207
+"259","ieu-a-1102","EGFL7","EGFL7","CKD","Inverse variance weighted",4,0.0833211484209097,0.0293013009362248,0.00446071568647725,0.0422893849710535,0.87310788871283
+"260","ieu-a-1102","EPHA1","EPHA1","CKD","Inverse variance weighted",4,0.229036740355505,0.0340949613315522,1.84726067935638e-11,1.19222628903288e-09,0.210239069859476
+"261","ieu-a-1102","EPHA2","EPHA2","CKD","Inverse variance weighted",4,0.204996914333492,0.0460103909567998,8.37181021781437e-06,0.000225998626793402,0.0574499143735129
+"262","ieu-a-1102","EPS8L2","EPS8L2","CKD","Inverse variance weighted",4,0.132103992073146,0.0290352844913313,5.37034786843917e-06,0.00015077251640643,0.470458683952328
+"263","ieu-a-1102","F3","F3","CKD","Inverse variance weighted",4,0.153741288113552,0.0471394962781513,0.00110859091227302,0.0141471317554841,0.0309625951374682
+"264","ieu-a-1102","FABP1","FABP1","CKD","Inverse variance weighted",4,0.147801192035265,0.0292162239503103,4.21739690296223e-07,1.48935117044861e-05,0.578313109464218
+"265","ieu-a-1102","FABP4","FABP4","CKD","Inverse variance weighted",4,0.108351966408874,0.0308361341876136,0.000441747537435519,0.00668574777008205,0.298079341377543
+"266","ieu-a-1102","FAM3B","FAM3B","CKD","Inverse variance weighted",4,0.121577837312777,0.0274917385356573,9.76372823457474e-06,0.000257386544775292,0.623307313017223
+"267","ieu-a-1102","FAS","FAS","CKD","Inverse variance weighted",4,0.148411759949329,0.0286244499078066,2.1625846826559e-07,8.09527532874193e-06,0.353677267848163
+"268","ieu-a-1102","FCRL6","FCRL6","CKD","Inverse variance weighted",4,0.0746997546832393,0.0254319657938839,0.0033114908435894,0.0333824436027908,0.494569534422555
+"269","ieu-a-1102","FLRT2","FLRT2","CKD","Inverse variance weighted",4,0.128748153244891,0.0360456902842471,0.000354530235267927,0.00559181817704891,0.162425759824336
+"270","ieu-a-1102","FOLR2","FOLR2","CKD","Inverse variance weighted",4,0.134829032399789,0.0399128347251496,0.000729919552976401,0.00987589949388552,0.122186930403563
+"271","ieu-a-1102","FOLR3","FOLR3","CKD","Inverse variance weighted",4,0.0859042019934953,0.0232271210235812,0.000216925356825313,0.00370223671299128,0.552091170450047
+"272","ieu-a-1102","GCNT1","GCNT1","CKD","Inverse variance weighted",4,0.100148104678285,0.0278753330119296,0.000327251455432727,0.00520543037465939,0.967695107655518
+"273","ieu-a-1102","GDF15","GDF15","CKD","Inverse variance weighted",4,0.109412767380902,0.039222471527709,0.00527825014570552,0.0478022170453814,0.0525163402978728
+"274","ieu-a-1102","GFRA2","GFRA2","CKD","Inverse variance weighted",4,0.135617632792218,0.0395260091879311,0.000601142169074686,0.00854535007431484,0.137946771860988
+"275","ieu-a-1102","GPC1","GPC1","CKD","Inverse variance weighted",4,0.178559376567646,0.0466773385897805,0.000130561224094759,0.00239575579507213,0.0418748963168768
+"276","ieu-a-1102","GPR37","GPR37","CKD","Inverse variance weighted",4,0.145220325372065,0.0431829683883084,0.000771262208213092,0.0102869349802438,0.0441326158419855
+"277","ieu-a-1102","GRN","GRN","CKD","Inverse variance weighted",4,0.113288122870384,0.0272157523127624,3.14652766346469e-05,0.000706710113214169,0.977292525760501
+"278","ieu-a-1102","HAVCR2","HAVCR2","CKD","Inverse variance weighted",4,0.224799908705754,0.0310174266768822,4.24422449647894e-13,3.01662285414294e-11,0.3401092879473
+"279","ieu-a-1102","HNMT","HNMT","CKD","Inverse variance weighted",4,0.153199108951918,0.0406184157352249,0.000162161040996571,0.00289979058979537,0.0578519357109051
+"280","ieu-a-1102","HSPB6","HSPB6","CKD","Inverse variance weighted",4,0.184139183893405,0.0297321339841437,5.8928020667247e-10,3.06371144487585e-08,0.281309047223738
+"281","ieu-a-1102","IGF1R","IGF1R","CKD","Inverse variance weighted",4,0.149652932713548,0.0309040125493988,1.28210373635431e-06,4.25977069800558e-05,0.30927971269754
+"282","ieu-a-1102","IGFBP4","IGFBP4","CKD","Inverse variance weighted",4,0.274557223342614,0.0486227922677273,1.63578341259113e-08,7.1200960168211e-07,0.0342226796396972
+"283","ieu-a-1102","IGFBPL1","IGFBPL1","CKD","Inverse variance weighted",4,0.125072283141787,0.0405524224414384,0.00204091847591118,0.022965445375233,0.0711283905922252
+"284","ieu-a-1102","IGSF8","IGSF8","CKD","Inverse variance weighted",4,0.135853449833323,0.0418683561683214,0.0011754292264655,0.0148315395654018,0.119302625317048
+"285","ieu-a-1102","IL10RB","IL10RB","CKD","Inverse variance weighted",4,0.212898584637542,0.0449628849836893,2.19071332233556e-06,6.72177885514435e-05,0.042893430940293
+"286","ieu-a-1102","IL12A_IL12B","IL12A_IL12B","CKD","Inverse variance weighted",4,0.135277882568643,0.0275496687519645,9.09246375930506e-07,3.094192970212e-05,0.74003416695871
+"287","ieu-a-1102","IL12B","IL12B","CKD","Inverse variance weighted",4,0.121780826113574,0.0278547469416865,1.23116107603495e-05,0.000316876763669308,0.366197256179782
+"288","ieu-a-1102","IL15RA","IL15RA","CKD","Inverse variance weighted",4,0.145243010701729,0.0459283950203633,0.00156485533360126,0.0184593754163257,0.0611685979773069
+"289","ieu-a-1102","IL16","IL16","CKD","Inverse variance weighted",4,0.145309779157277,0.03450989355521,2.54614257436262e-05,0.000590768204753971,0.202697749828614
+"290","ieu-a-1102","IL18BP","IL18BP","CKD","Inverse variance weighted",4,0.196357533295304,0.0465214606472386,2.4344260109345e-05,0.00056955425214155,0.0513339432116624
+"291","ieu-a-1102","IL32","IL32","CKD","Inverse variance weighted",4,0.119702830531249,0.0404145862714898,0.00305774894584152,0.0319725518266296,0.12375099960956
+"292","ieu-a-1102","IL3RA","IL3RA","CKD","Inverse variance weighted",4,0.0917209181077475,0.0278251046785869,0.000979544874370855,0.0126440102749249,0.684940834226532
+"293","ieu-a-1102","IL4R","IL4R","CKD","Inverse variance weighted",4,0.118225249970122,0.0351578179572534,0.000771837514472046,0.0102869349802438,0.228324536951603
+"294","ieu-a-1102","IL6","IL6","CKD","Inverse variance weighted",16,0.0422766058722391,0.0148693288553018,0.00446618081706763,0.0422893849710535,0.853245053370051
+"295","ieu-a-1102","JUN","JUN","CKD","Inverse variance weighted",4,0.114569916102621,0.0388097770344775,0.00315631936514742,0.0325568470939728,0.192207213732974
+"296","ieu-a-1102","KAZALD1","KAZALD1","CKD","Inverse variance weighted",4,0.0860887592798777,0.0277793678364262,0.00194163262867037,0.0220693668218302,0.702511426291873
+"297","ieu-a-1102","KITLG","KITLG","CKD","Inverse variance weighted",4,0.168015021586255,0.0294494783470409,1.16209855792444e-08,5.22014672219659e-07,0.404375186161372
+"298","ieu-a-1102","KLK8","KLK8","CKD","Inverse variance weighted",4,0.148675108944059,0.0307389338239752,1.32010112360648e-06,4.36021635826493e-05,0.293810148792145
+"299","ieu-a-1102","KLRB1","KLRB1","CKD","Inverse variance weighted",4,0.153744885822259,0.0505981305569839,0.00237720647354307,0.026070340525282,0.0303907344361068
+"300","ieu-a-1102","KRT19","KRT19","CKD","Inverse variance weighted",4,0.13689258319906,0.0425068627947335,0.00127975263735542,0.0156834480056635,0.108215863338507
+"301","ieu-a-1102","KRT5","KRT5","CKD","Inverse variance weighted",4,0.119430144870987,0.0307228485836893,0.000101348930077535,0.00191607489018639,0.344903263085999
+"302","ieu-a-1102","LAIR1","LAIR1","CKD","Inverse variance weighted",4,0.208398810571192,0.046165747078622,6.35731397055569e-06,0.000174981950709168,0.0255497611100423
+"303","ieu-a-1102","LAIR2","LAIR2","CKD","Inverse variance weighted",4,0.0940711580682414,0.0229067034752295,4.01336873883718e-05,0.000860117002617205,0.49610822041494
+"304","ieu-a-1102","LAMA4","LAMA4","CKD","Inverse variance weighted",4,0.128982931177417,0.0370932181852676,0.000506557811355226,0.0075394918345298,0.196686910903838
+"305","ieu-a-1102","LGALS1","LGALS1","CKD","Inverse variance weighted",4,0.154810272651023,0.0293189633103042,1.29036162078498e-07,4.99681413841908e-06,0.584165415897242
+"306","ieu-a-1102","LGALS3","LGALS3","CKD","Inverse variance weighted",4,0.122240888518121,0.0253680973155161,1.44506966284014e-06,4.69021165135688e-05,0.707382901232311
+"307","ieu-a-1102","LGALS4","LGALS4","CKD","Inverse variance weighted",4,0.164313129295632,0.0375903139289524,1.23590402927121e-05,0.000316876763669308,0.124958144109255
+"308","ieu-a-1102","LGALS7_LGALS7B","LGALS7_LGALS7B","CKD","Inverse variance weighted",4,0.184257134037007,0.0322249874991537,1.07890367303772e-08,4.88551945492486e-07,0.269173438041006
+"309","ieu-a-1102","LGALS9","LGALS9","CKD","Inverse variance weighted",4,0.180687696461751,0.0368121072464955,9.18332472317e-07,3.10628724822889e-05,0.13724988350752
+"310","ieu-a-1102","LILRB4","LILRB4","CKD","Inverse variance weighted",4,0.171479307870404,0.0280042124482712,9.16339993195635e-10,4.67749914708499e-08,0.312581484129267
+"311","ieu-a-1102","LPCAT2","LPCAT2","CKD","Inverse variance weighted",4,0.0921447268730959,0.0302705617090511,0.00233425993398308,0.0256494511336888,0.68275910916919
+"312","ieu-a-1102","LRRC25","LRRC25","CKD","Inverse variance weighted",4,0.0807925075220512,0.0278285002335564,0.00369336522298718,0.0365753892893704,0.927839991537174
+"313","ieu-a-1102","MAD1L1","MAD1L1","CKD","Inverse variance weighted",4,0.144952597984645,0.0295745817504241,9.52258415698322e-07,3.20175509230304e-05,0.782368883046262
+"314","ieu-a-1102","MB","MB","CKD","Inverse variance weighted",4,0.14742513913357,0.026014881044853,1.45358184594964e-08,6.42666304331276e-07,0.912426593339564
+"315","ieu-a-1102","MEPE","MEPE","CKD","Inverse variance weighted",4,0.144556698034379,0.0295386155989619,9.88967840054716e-07,3.30538953684954e-05,0.353089625453408
+"316","ieu-a-1102","MFAP5","MFAP5","CKD","Inverse variance weighted",4,0.173086520330788,0.0484356865032415,0.000352196938094412,0.00558640058587605,0.0392159203412599
+"317","ieu-a-1102","MIA","MIA","CKD","Inverse variance weighted",4,0.19328264339982,0.0435477582985584,9.06274352234204e-06,0.000243153880099962,0.0358489420995404
+"318","ieu-a-1102","MLN","MLN","CKD","Inverse variance weighted",4,0.122721032340913,0.0264659057618525,3.53591091609039e-06,0.000105048358697606,0.678919473635116
+"319","ieu-a-1102","MMP10","MMP10","CKD","Inverse variance weighted",4,0.114304327364777,0.0284029203767557,5.71240524095041e-05,0.00118796871955321,0.544995338844814
+"320","ieu-a-1102","MMP3","MMP3","CKD","Inverse variance weighted",4,0.109589553767165,0.022300095329642,8.90962457033126e-07,3.05045987575671e-05,0.346019298789973
+"321","ieu-a-1102","MSTN","MSTN","CKD","Inverse variance weighted",4,0.123957529053234,0.041591864031346,0.00287936903110574,0.0305626788462358,0.0824515627741217
+"322","ieu-a-1102","MYOC","MYOC","CKD","Inverse variance weighted",4,0.104403946182987,0.02787900996777,0.000180469722192673,0.00313726777124414,0.681511841186249
+"323","ieu-a-1102","NCS1","NCS1","CKD","Inverse variance weighted",4,0.154259598347367,0.030555460885663,4.45265468749095e-07,1.56260350439136e-05,0.287560474579867
+"324","ieu-a-1102","NELL2","NELL2","CKD","Inverse variance weighted",4,0.10955219353228,0.029727781586065,0.000228542048660146,0.0038536444541343,0.359313017524116
+"325","ieu-a-1102","NOS1","NOS1","CKD","Inverse variance weighted",4,0.136845574418362,0.0287858474839264,1.99511437197474e-06,6.28409849146945e-05,0.723878651887276
+"326","ieu-a-1102","NPTXR","NPTXR","CKD","Inverse variance weighted",4,0.116408226049259,0.0415693997648222,0.00510496703955458,0.046608764109104,0.0748717607098455
+"327","ieu-a-1102","NUCB2","NUCB2","CKD","Inverse variance weighted",4,0.10931998957003,0.0286875009862947,0.000138563502105743,0.00252608462442776,0.423318579228479
+"328","ieu-a-1102","NXPH1","NXPH1","CKD","Inverse variance weighted",4,0.146288302943227,0.0305696681938549,1.70641220473789e-06,5.4440366645473e-05,0.855223493801895
+"329","ieu-a-1102","OGN","OGN","CKD","Inverse variance weighted",4,0.223848568430655,0.041548471373678,7.13854025523877e-08,2.86306453808326e-06,0.0437827294085819
+"330","ieu-a-1102","OSCAR","OSCAR","CKD","Inverse variance weighted",4,0.122983485427465,0.0258744226228038,2.00330121099382e-06,6.28409849146945e-05,0.764139324548925
+"331","ieu-a-1102","PAM","PAM","CKD","Inverse variance weighted",4,0.149768172098624,0.0427332556066638,0.000457084663754765,0.00688077851738071,0.0563032139115122
+"332","ieu-a-1102","PDCD1","PDCD1","CKD","Inverse variance weighted",4,0.149544966463773,0.0291908358813516,3.0069517464786e-07,1.09636584782321e-05,0.523158208523629
+"333","ieu-a-1102","PDCD1LG2","PDCD1LG2","CKD","Inverse variance weighted",4,0.0975353022884274,0.0246874601447158,7.78892779174937e-05,0.00153995878699552,0.87021761783902
+"334","ieu-a-1102","PGF","PGF","CKD","Inverse variance weighted",4,0.159070086611307,0.0313474395845574,3.88678911490282e-07,1.39899492821663e-05,0.248012453133224
+"335","ieu-a-1102","PHOSPHO1","PHOSPHO1","CKD","Inverse variance weighted",4,0.182823118872947,0.0313721258945709,5.6241774829556e-09,2.65376105603325e-07,0.325126024004957
+"336","ieu-a-1102","PILRA","PILRA","CKD","Inverse variance weighted",4,0.140130380683525,0.0427302052658917,0.00104019913508542,0.0133349729303758,0.0252983110160283
+"337","ieu-a-1102","PILRB","PILRB","CKD","Inverse variance weighted",4,0.127803273534,0.0352713508021901,0.000290721816714648,0.00471792774812933,0.0528760223043798
+"338","ieu-a-1102","PLA2G1B","PLA2G1B","CKD","Inverse variance weighted",4,0.138882518163764,0.0331846659564835,2.84988687799704e-05,0.000650492472355828,0.280285029982066
+"339","ieu-a-1102","POLR2F","POLR2F","CKD","Inverse variance weighted",4,0.173144259696928,0.0297453229008038,5.85350027175714e-09,2.73895033549303e-07,0.596127879403594
+"340","ieu-a-1102","PRELP","PRELP","CKD","Inverse variance weighted",4,0.15971224632536,0.0346001862898802,3.91327494825787e-06,0.000113263086775608,0.176768532507812
+"341","ieu-a-1102","PRSS2","PRSS2","CKD","Inverse variance weighted",4,0.127504689189732,0.0298994207081653,2.00392072940911e-05,0.000476780292187803,0.4345746068226
+"342","ieu-a-1102","PRSS27","PRSS27","CKD","Inverse variance weighted",4,0.121581900033745,0.0390506968790874,0.00184921736420137,0.0211893098309303,0.10622136134632
+"343","ieu-a-1102","PRSS8","PRSS8","CKD","Inverse variance weighted",4,0.0826821166389127,0.0280225379441111,0.00317200734707034,0.0325871495228951,0.469192708780565
+"344","ieu-a-1102","PTPRS","PTPRS","CKD","Inverse variance weighted",4,0.138905263543531,0.0392189513269077,0.000397422734873204,0.00613057323162923,0.144498322945271
+"345","ieu-a-1102","RBP2","RBP2","CKD","Inverse variance weighted",4,0.1559743395473,0.0351478233791792,9.09391181139661e-06,0.000243153880099962,0.25386662350178
+"346","ieu-a-1102","RBP5","RBP5","CKD","Inverse variance weighted",4,0.101207013853436,0.0285341445409971,0.000389831065092354,0.00606343886563315,0.714449627415376
+"347","ieu-a-1102","ROBO1","ROBO1","CKD","Inverse variance weighted",4,0.0987580511227779,0.029208228341249,0.00072177281647484,0.00978926175001504,0.825090969372746
+"348","ieu-a-1102","RTBDN","RTBDN","CKD","Inverse variance weighted",4,0.190132094642483,0.0367505386991678,2.29642609409142e-07,8.53935928365784e-06,0.200898881541191
+"349","ieu-a-1102","RTN4R","RTN4R","CKD","Inverse variance weighted",4,0.183104443312586,0.0283582157773112,1.06912288889591e-10,6.59684068258303e-09,0.831284722530067
+"350","ieu-a-1102","SCARA5","SCARA5","CKD","Inverse variance weighted",4,0.13660180944803,0.027192209714045,5.07212763843049e-07,1.7689438937756e-05,0.897219891177803
+"351","ieu-a-1102","SERPINB8","SERPINB8","CKD","Inverse variance weighted",4,0.113793782144813,0.038601891473414,0.00319960213078115,0.0326650290260658,0.0565231831666723
+"352","ieu-a-1102","SIGLEC10","SIGLEC10","CKD","Inverse variance weighted",4,0.130299254699444,0.030961566488003,2.57163312472528e-05,0.000594227160301747,0.30593769175513
+"353","ieu-a-1102","SIGLEC5","SIGLEC5","CKD","Inverse variance weighted",4,0.110282829694655,0.0325633688566808,0.000707349864548354,0.00966367272369588,0.116882669365635
+"354","ieu-a-1102","SIRPA","SIRPA","CKD","Inverse variance weighted",4,0.0762139576302732,0.0228778683155593,0.000864289714439935,0.0113082895194716,0.0767598268860141
+"355","ieu-a-1102","SLAMF8","SLAMF8","CKD","Inverse variance weighted",4,0.0995179435107733,0.0281835593008845,0.00041389204078181,0.00633276252441677,0.848103493340931
+"356","ieu-a-1102","SLITRK2","SLITRK2","CKD","Inverse variance weighted",4,0.127960337317164,0.0432246219801521,0.00307282159179434,0.0320132059044243,0.0882462396434592
+"357","ieu-a-1102","SMOC1","SMOC1","CKD","Inverse variance weighted",4,0.116018803294798,0.0274050650245868,2.30102332786767e-05,0.00054059606635887,0.64333287837148
+"358","ieu-a-1102","SNCG","SNCG","CKD","Inverse variance weighted",4,0.123191242670397,0.0231711012073226,1.05729995465386e-07,4.18080228547988e-06,0.674382306434014
+"359","ieu-a-1102","SPINK4","SPINK4","CKD","Inverse variance weighted",4,0.130217511701625,0.0429094582915954,0.00240771732407968,0.0263022038418432,0.0244037554723937
+"360","ieu-a-1102","SPINK5","SPINK5","CKD","Inverse variance weighted",4,0.179116990936655,0.0438740600662368,4.45488262376818e-05,0.000943930789904088,0.0653675772746391
+"361","ieu-a-1102","SPOCK1","SPOCK1","CKD","Inverse variance weighted",4,-0.162828733179,0.0445368047178182,0.000256132577600018,0.0042676095644632,0.0761096093045764
+"362","ieu-a-1102","SPON2","SPON2","CKD","Inverse variance weighted",4,0.182105112772477,0.0493552417304909,0.000224535158280559,0.00382049973862224,0.0404721098456183
+"363","ieu-a-1102","TFF1","TFF1","CKD","Inverse variance weighted",4,0.147245575450613,0.0357501813855162,3.80955529305876e-05,0.000825893937085906,0.189017885304642
+"364","ieu-a-1102","TFF2","TFF2","CKD","Inverse variance weighted",4,0.14014825764472,0.0326760035837009,1.79457657129991e-05,0.000434333941717628,0.276190555855133
+"365","ieu-a-1102","TFF3","TFF3","CKD","Inverse variance weighted",4,0.194210544370871,0.0451055823747208,1.66467884185804e-05,0.000409963670922497,0.0589761292719612
+"366","ieu-a-1102","THY1","THY1","CKD","Inverse variance weighted",4,0.191142568382589,0.0486595256324933,8.55970425214873e-05,0.00167072834151836,0.0377199704440865
+"367","ieu-a-1102","TIMP1","TIMP1","CKD","Inverse variance weighted",4,0.121457850653993,0.0417062134261002,0.0035886477287386,0.0357908650033166,0.116702184920592
+"368","ieu-a-1102","TNF","TNF","CKD","Inverse variance weighted",16,0.127576246912756,0.0150093249135829,1.89919039351051e-17,1.80744984060365e-15,0.683206739204668
+"369","ieu-a-1102","TNFRSF10B","TNFRSF10B","CKD","Inverse variance weighted",4,0.150998225106573,0.0269444897534127,2.09402174396146e-08,9.04456314795663e-07,0.717541280792917
+"370","ieu-a-1102","TNFRSF12A","TNFRSF12A","CKD","Inverse variance weighted",4,0.22623905535933,0.028233061896665,1.11701029667223e-15,9.36121315793215e-14,0.477251228021146
+"371","ieu-a-1102","TNFRSF13B","TNFRSF13B","CKD","Inverse variance weighted",4,0.178956401545087,0.0295481561276493,1.39173838190822e-09,7.04019010307624e-08,0.819554555019496
+"372","ieu-a-1102","TNFRSF14","TNFRSF14","CKD","Inverse variance weighted",4,0.197585023268198,0.0455283800731974,1.4259877684881e-05,0.000357451844645567,0.0708463306240167
+"373","ieu-a-1102","TNFRSF6B","TNFRSF6B","CKD","Inverse variance weighted",4,0.138305039936558,0.0286739965428328,1.41159068644474e-06,4.60818703743444e-05,0.471858946921434
+"374","ieu-a-1102","TNFRSF8","TNFRSF8","CKD","Inverse variance weighted",4,0.126584627883524,0.0295617958856554,1.85192315711741e-05,0.000446289636361127,0.611945150789108
+"375","ieu-a-1102","TNFRSF9","TNFRSF9","CKD","Inverse variance weighted",4,0.186529531916524,0.029703222704966,3.39065082032002e-10,1.9230812480906e-08,0.371794203442924
+"376","ieu-a-1102","TPSAB1","TPSAB1","CKD","Inverse variance weighted",4,0.0832328955085697,0.0241562567531421,0.000569784613511146,0.00822452597651693,0.352589715069386
+"377","ieu-a-1102","TREM2","TREM2","CKD","Inverse variance weighted",4,0.117820828426138,0.0269295692142817,1.21350580193947e-05,0.000314001616492633,0.84865745313205
+"378","ieu-a-1102","VASN","VASN","CKD","Inverse variance weighted",4,0.162702432805308,0.04795767717729,0.00069226242205297,0.00957402339858972,0.046264305475081
+"379","ieu-a-1102","VMO1","VMO1","CKD","Inverse variance weighted",4,0.104694644509827,0.0307726058469324,0.00066845024996449,0.00933668694913087,0.142621616597656
+"380","ieu-a-1102","VWC2","VWC2","CKD","Inverse variance weighted",4,0.203867800540348,0.0477292837222601,1.94305526665903e-05,0.00046625022744831,0.0287273602942565
+"381","ieu-a-1102","WFDC12","WFDC12","CKD","Inverse variance weighted",4,0.0989756800959451,0.0238973951837801,3.44751236751222e-05,0.000765129721090163,0.44933960817893
+"382","ieu-a-1102","WNT9A","WNT9A","CKD","Inverse variance weighted",4,0.1405286210227,0.0388396140207158,0.000296684797262036,0.00477330984706686,0.112706287197158
+"383","ieu-a-1102","ZBTB17","ZBTB17","CKD","Inverse variance weighted",4,0.129242543860385,0.0410876545371176,0.00165784895982032,0.0193933789778981,0.135657117319001
+"384","ieu-a-1120","APLP1","APLP1","Ovarian cancer","Inverse variance weighted",12,-0.0693639041932447,0.020013095799104,0.000528409171809799,0.00776706151757074,0.624761325044636
+"385","ieu-a-1120","C2","C2","Ovarian cancer","Inverse variance weighted",6,0.11864143723596,0.0273975414648424,1.48860348833718e-05,0.000371489270533924,0.423145032964412
+"386","ieu-a-1120","CCL22","CCL22","Ovarian cancer","Inverse variance weighted",6,0.0925195374799824,0.0287769847370933,0.00130420339457682,0.0159197870881496,0.562695023259209
+"387","ieu-a-1120","CD22","CD22","Ovarian cancer","Inverse variance weighted",6,0.0922900510014308,0.027233180554126,0.00070178056516005,0.009634469128053,0.924341145812519
+"388","ieu-a-1120","IL12A_IL12B","IL12A_IL12B","Ovarian cancer","Inverse variance weighted",8,0.0658487162813766,0.0235428001901865,0.00515828957387415,0.0469429432047056,0.295413535320117
+"389","ieu-a-1120","RARRES2","RARRES2","Ovarian cancer","Inverse variance weighted",12,0.0783100558717302,0.0267263871352624,0.00338890929850285,0.0339798673412384,0.0423955847287768
+"390","ieu-a-1121","C2","C2","High grade serous ovarian cancer","Inverse variance weighted",5,0.0814813146285257,0.0225064584020886,0.000294201844331248,0.00474696366643665,0.380060347799041
+"391","ieu-a-1121","CCL22","CCL22","High grade serous ovarian cancer","Inverse variance weighted",5,0.0714107046759593,0.0246848053419437,0.00381701262779661,0.0375350716376146,0.334001618346339
+"392","ieu-a-1121","CCL4","CCL4","High grade serous ovarian cancer","Inverse variance weighted",7,0.0491537937185635,0.0171175494196728,0.00408472110437488,0.0395443258639051,0.39661847402608
+"393","ieu-a-1121","CD22","CD22","High grade serous ovarian cancer","Inverse variance weighted",5,0.0717192704607333,0.0218683237026783,0.00103955775762996,0.0133349729303758,0.765880310651344
+"394","ieu-a-1121","CRH","CRH","High grade serous ovarian cancer","Inverse variance weighted",7,0.0495485396440049,0.0176359254334672,0.00496149606730945,0.0456386200374843,0.587676526738561
+"395","ieu-a-1121","GP1BA","GP1BA","High grade serous ovarian cancer","Inverse variance weighted",7,0.0722885068585663,0.0195984676531857,0.000225599976874325,0.00382702075573817,0.316090296055674
+"396","ieu-a-1121","IL6","IL6","High grade serous ovarian cancer","Inverse variance weighted",28,0.0289842775810885,0.00896675024433526,0.00122747709208837,0.0153502981560717,0.991886366370364
+"397","ieu-a-1228","APLP1","APLP1","High grade and low grade serous ovarian cancer","Inverse variance weighted",6,-0.070841029362181,0.0232658565890017,0.00232796852330832,0.0256304769772083,0.825442181563845
+"398","ieu-a-1228","C2","C2","High grade and low grade serous ovarian cancer","Inverse variance weighted",6,0.0942265368559332,0.0233075265566197,5.28276106616027e-05,0.00110681729054067,0.352462669249611
+"399","ieu-a-1228","CCL22","CCL22","High grade and low grade serous ovarian cancer","Inverse variance weighted",6,0.0723389532455894,0.023237949345372,0.0018521716431884,0.0211893098309303,0.472652346720466
+"400","ieu-a-1228","CD22","CD22","High grade and low grade serous ovarian cancer","Inverse variance weighted",6,0.0732876677162556,0.0220030810094497,0.000865995457412789,0.0113082895194716,0.877358802782263
+"401","ieu-a-1228","GGH","GGH","High grade and low grade serous ovarian cancer","Inverse variance weighted",6,0.0962015050587628,0.0223219401068667,1.63454973223849e-05,0.000404317037291591,0.406335844574612
+"402","ieu-a-1228","GP1BA","GP1BA","High grade and low grade serous ovarian cancer","Inverse variance weighted",6,0.0771284307462894,0.0232568856736758,0.000911951051180494,0.0118807544138712,0.884369612540305
+"403","ieu-a-1228","IL6","IL6","High grade and low grade serous ovarian cancer","Inverse variance weighted",24,0.0515709702532706,0.0115439840679084,7.91960093384149e-06,0.000214823957698164,0.715606880588961
+"404","ieu-a-1228","RARRES2","RARRES2","High grade and low grade serous ovarian cancer","Inverse variance weighted",6,0.100977079589515,0.0353051457018998,0.00423475955921168,0.0407160529537219,0.0367328769823552
+"405","ieu-a-26","ACAN","ACAN","T2D","Inverse variance weighted",6,-0.0671418690493065,0.0240565523294198,0.0052545259730754,0.0476642380271702,0.0759875486402279
+"406","ieu-a-26","COL9A1","COL9A1","T2D","Inverse variance weighted",6,-0.073323254785606,0.0175039751580966,2.80249681469411e-05,0.000642286514877855,0.677283819519203
+"407","ieu-a-26","DPP6","DPP6","T2D","Inverse variance weighted",6,0.0499310197222273,0.0173252297006593,0.00395180890554697,0.0385902730515587,0.808828762204453
+"408","ieu-a-26","GDF15","GDF15","T2D","Inverse variance weighted",6,0.047761774336733,0.0147312318757007,0.00118605826313193,0.0148986960793865,0.999164063562704
+"409","ieu-a-26","IL18R1","IL18R1","T2D","Inverse variance weighted",6,0.0662174224160482,0.0145893075056065,5.6584945012911e-06,0.000158071873754973,0.716466419384447
+"410","ieu-a-26","KLRB1","KLRB1","T2D","Inverse variance weighted",6,0.0803726553854884,0.0266060207149653,0.00252070650467172,0.027376725384394,0.0444204613869355
+"411","ieu-a-26","MATN3","MATN3","T2D","Inverse variance weighted",6,-0.0766059488324259,0.0176181847986436,1.37310640966087e-05,0.000345739573553622,0.31753785214095
+"412","ieu-a-26","NADK","NADK","T2D","Inverse variance weighted",6,0.0558972159128249,0.0196026143286077,0.00435109646849649,0.0416026828295802,0.273775195306824
+"413","ieu-a-26","NMNAT1","NMNAT1","T2D","Inverse variance weighted",6,0.0545149911219264,0.0174941199538733,0.0018320456472437,0.0211495350158456,0.444486276485515
+"414","ieu-a-26","OMD","OMD","T2D","Inverse variance weighted",6,-0.0791771642324445,0.0208319509256759,0.000144255248406307,0.00261288135419811,0.201920512570523
+"415","ieu-a-26","PLXNB2","PLXNB2","T2D","Inverse variance weighted",6,0.0599521467601282,0.0156006994250716,0.000121582064622466,0.00223830587821359,0.373576473103192
+"416","ieu-a-26","ROR1","ROR1","T2D","Inverse variance weighted",6,-0.050644104043844,0.0172138650719774,0.00326044078549656,0.0329773413793242,0.61904194816076
+"417","ieu-a-26","SPP1","SPP1","T2D","Inverse variance weighted",6,-0.0730705970124571,0.0180584493570696,5.20250110400161e-05,0.00109408403366925,0.37029563368977
+"418","ieu-a-26","TLR3","TLR3","T2D","Inverse variance weighted",6,0.0405218061037138,0.0114396765235327,0.000396780307925522,0.00613057323162923,0.154872942449975
+"419","ieu-a-26","TNF","TNF","T2D","Inverse variance weighted",24,0.0324154999363062,0.010994540148558,0.00319498875316121,0.0326650290260658,0.0650972485866947
+"420","ieu-a-805","TNFSF11","TNFSF11","MDD","Wald ratio",1,-0.734007800378631,0.262199834882496,0.00511942956629678,0.0466649302187604,NA
+"421","ieu-a-984","ANGPT2","ANGPT2","Lung adenocarcinoma","Inverse variance weighted",2,0.0883145312717444,0.0289892826338978,0.0023155750265562,0.0255441135051337,0.56617209979639
+"422","ieu-a-984","CD4","CD4","Lung adenocarcinoma","Inverse variance weighted",11,0.0598634446399722,0.0213417488603125,0.00503177567900938,0.0461657196693426,0.0894711180248368
+"423","ieu-a-984","GAL","GAL","Lung adenocarcinoma","Inverse variance weighted",2,-0.0948567962336098,0.0274192834116312,0.000541195014655673,0.00789301300595222,0.844005119809952
+"424","ieu-a-984","ICAM4","ICAM4","Lung adenocarcinoma","Wald ratio",1,-0.16599112156499,0.0539262228553445,0.00208314429740935,0.0233937104599071,NA
+"425","ieu-a-984","IL1RL1","IL1RL1","Lung adenocarcinoma","Wald ratio",1,0.164301568633947,0.0468690265193553,0.000455670284820392,0.00687792647652286,NA
+"426","ieu-a-984","SIGLEC6","SIGLEC6","Lung adenocarcinoma","Inverse variance weighted",2,0.0819548785689148,0.0269912083893315,0.00239457603309781,0.0262096382570063,0.350254534169358
+"427","ieu-a-984","SLAMF1","SLAMF1","Lung adenocarcinoma","Inverse variance weighted",11,0.0496542900574551,0.0175434660451415,0.00464959406472265,0.0435563108601947,0.606967148975573
+"428","ieu-a-984","TFF2","TFF2","Lung adenocarcinoma","Wald ratio",1,0.110435492259748,0.0320772037836535,0.000575718605050889,0.00824658154938964,NA
+"429","ieu-a-985","ODAM","ODAM","Lung cancer (ever smokers)","Inverse variance weighted",10,-0.0698702926885655,0.0218117638946517,0.00135847892042217,0.0164039981466032,0.186600003499366
+"430","ieu-a-989","AGR2","AGR2","Squamous cell lung cancer","Inverse variance weighted",2,-0.11266431842617,0.0391704485424041,0.00402420559395212,0.0390932775260227,0.531952205323613
+"431","ieu-a-989","COL18A1","COL18A1","Squamous cell lung cancer","Wald ratio",1,-0.141037986017839,0.0498243620208699,0.00464457835667658,0.0435563108601947,NA
+"432","ieu-a-989","FLT4","FLT4","Squamous cell lung cancer","Wald ratio",1,0.132134862416916,0.0443690463890898,0.00290054020328832,0.0307293080027621,NA
+"433","ieu-a-989","HAVCR1","HAVCR1","Squamous cell lung cancer","Wald ratio",1,0.120222474773565,0.042480903674622,0.00465428076867619,0.0435563108601947,NA
+"434","ieu-a-989","MAEA","MAEA","Squamous cell lung cancer","Inverse variance weighted",9,-0.0498345012401089,0.017606256499911,0.00464753754092498,0.0435563108601947,0.351247937649808
+"435","ieu-b-18","ATP6V1D","ATP6V1D","Multiple sclerosis","Inverse variance weighted",26,-0.0497497035655419,0.0109837530374303,5.9154160291471e-06,0.000164430995067629,0.140277189529028
+"436","ieu-b-18","CD79B","CD79B","Multiple sclerosis","Inverse variance weighted",26,-0.0281657376568121,0.00988748116689028,0.00439084387871384,0.0417874379304716,0.247302406980659
+"437","ieu-b-18","DPP10","DPP10","Multiple sclerosis","Inverse variance weighted",26,-0.0332301822602432,0.00967759632057175,0.000595352897152588,0.00850612345422846,0.289650186729973
+"438","ieu-b-18","ICAM4","ICAM4","Multiple sclerosis","Inverse variance weighted",26,-0.0315950723771906,0.00870390553989316,0.000283434432399859,0.00463989602893646,0.276362494031501
+"439","ieu-b-18","IL1R1","IL1R1","Multiple sclerosis","Inverse variance weighted",26,-0.036220498674701,0.0112250732481666,0.0012520505254191,0.0154851623353045,0.0466317997603845
+"440","ieu-b-18","LAIR1","LAIR1","Multiple sclerosis","Inverse variance weighted",26,-0.0257557106538493,0.00823048116627422,0.00175218532919492,0.020369607916003,0.84294417546831
+"441","ieu-b-18","LDLR","LDLR","Multiple sclerosis","Inverse variance weighted",26,0.0317521835138992,0.00903221669667322,0.000439031872273763,0.00666260530491129,0.549588605399837
+"442","ieu-b-18","MERTK","MERTK","Multiple sclerosis","Inverse variance weighted",26,-0.0264853240729492,0.00895898186192567,0.00311366933042183,0.0322569248898867,0.423255274768266
+"443","ieu-b-18","TNF","TNF","Multiple sclerosis","Inverse variance weighted",104,-0.0477997780244661,0.0052966701929556,1.80524714301277e-19,1.91254013358806e-17,0.0324340978919389
+"444","ieu-b-42","VTCN1","VTCN1","Schizophrenia","Inverse variance weighted",79,-0.0452508478452625,0.0120675376798631,0.000176975950863187,0.00309570082273145,0.485771446416325
+"445","ieu-b-85","AGRP","AGRP","Prostate cancer","Wald ratio",1,0.505768533772652,0.0814911037891269,5.42030052278019e-10,2.87122522975573e-08,NA
+"446","ieu-b-85","BID","BID","Prostate cancer","Wald ratio",1,0.290739703459638,0.084005766062603,0.000538274028228979,0.00787085590756697,NA
+"447","ieu-b-85","CCL23","CCL23","Prostate cancer","Wald ratio",1,0.318242174629325,0.078907413509061,5.50438061001953e-05,0.00114896271841114,NA
+"448","ieu-b-85","CCL27","CCL27","Prostate cancer","Wald ratio",1,0.301966227347611,0.0797028830313015,0.000151468896818438,0.00273471979304029,NA
+"449","ieu-b-85","CCN1","CCN1","Prostate cancer","Wald ratio",1,0.445099670510708,0.0813888797364086,4.53087474629027e-08,1.87065159561911e-06,NA
+"450","ieu-b-85","CD4","CD4","Prostate cancer","Wald ratio",1,0.310166392092257,0.0812892092257002,0.000135857260771862,0.00248481602356353,NA
+"451","ieu-b-85","CTSO","CTSO","Prostate cancer","Wald ratio",1,-0.323333607907743,0.0816990939044481,7.57016562678111e-05,0.00150199575951858,NA
+"452","ieu-b-85","CXCL13","CXCL13","Prostate cancer","Wald ratio",1,0.316551070840198,0.0841029654036244,0.00016731627888137,0.00293587783099653,NA
+"453","ieu-b-85","CXCL6","CXCL6","Prostate cancer","Wald ratio",1,0.239166392092257,0.0780153212520593,0.0021720929457198,0.0243268045885362,NA
+"454","ieu-b-85","CXCL9","CXCL9","Prostate cancer","Wald ratio",1,-0.385949752883031,0.0774141680395387,6.17959237065429e-07,2.12873688105668e-05,NA
+"455","ieu-b-85","DPY30","DPY30","Prostate cancer","Wald ratio",1,0.276662273476112,0.083501647446458,0.000922167715365841,0.0119860456522667,NA
+"456","ieu-b-85","EFEMP1","EFEMP1","Prostate cancer","Wald ratio",1,-0.238679571663921,0.076171334431631,0.00172760456728296,0.0201255179362943,NA
+"457","ieu-b-85","EGLN1","EGLN1","Prostate cancer","Wald ratio",1,0.232482701812191,0.0816088138385503,0.00438920419477079,0.0417874379304716,NA
+"458","ieu-b-85","GGH","GGH","Prostate cancer","Wald ratio",1,-0.289037891268534,0.0788067545304778,0.000244762041346938,0.00410250406615838,NA
+"459","ieu-b-85","GPKOW","GPKOW","Prostate cancer","Wald ratio",1,0.257441515650741,0.0855296540362438,0.00261275276097232,0.0282670650344116,NA
+"460","ieu-b-85","GPR37","GPR37","Prostate cancer","Wald ratio",1,0.251316309719934,0.0703548599670511,0.000354097170518819,0.00559181817704891,NA
+"461","ieu-b-85","IL16","IL16","Prostate cancer","Wald ratio",1,0.229995057660626,0.0764771828665568,0.00263520256411553,0.0284548518354186,NA
+"462","ieu-b-85","LGALS4","LGALS4","Prostate cancer","Wald ratio",1,0.220265238879736,0.0758095551894563,0.00366657942732967,0.0363795803221645,NA
+"463","ieu-b-85","MVK","MVK","Prostate cancer","Wald ratio",1,0.32645881383855,0.0834151565074135,9.09064756724192e-05,0.0017601374513815,NA
+"464","ieu-b-85","NCS1","NCS1","Prostate cancer","Wald ratio",1,0.286266886326194,0.0759795716639209,0.000164770218445664,0.00292779992586203,NA
+"465","ieu-b-85","NPY","NPY","Prostate cancer","Wald ratio",1,0.347584843492587,0.080985255354201,1.77109094220741e-05,0.000430505438982449,NA
+"466","ieu-b-85","PAMR1","PAMR1","Prostate cancer","Wald ratio",1,0.227037067545305,0.0768346787479407,0.00312793167759705,0.0323450025224815,NA
+"467","ieu-b-85","PARP1","PARP1","Prostate cancer","Wald ratio",1,0.267191927512356,0.0825197693574959,0.00120407043140231,0.0150911952507232,NA
+"468","ieu-b-85","PCSK9","PCSK9","Prostate cancer","Wald ratio",1,0.235765238879736,0.0798736408566722,0.00316001454429478,0.0325568470939728,NA
+"469","ieu-b-85","PLA2G7","PLA2G7","Prostate cancer","Wald ratio",1,0.32902471169687,0.0798726523887974,3.79915806464552e-05,0.000825893937085906,NA
+"470","ieu-b-85","PROC","PROC","Prostate cancer","Wald ratio",1,0.227710873146623,0.0771820428336079,0.00317456291879316,0.0325871495228951,NA
+"471","ieu-b-85","PTN","PTN","Prostate cancer","Wald ratio",1,-0.225666392092257,0.0802607084019769,0.00492854854321842,0.0454759411409613,NA
+"472","ieu-b-85","RTBDN","RTBDN","Prostate cancer","Wald ratio",1,0.264424217462932,0.0822823723228995,0.00131073346826572,0.0159302346846581,NA
+"473","ieu-b-85","VEGFA","VEGFA","Prostate cancer","Wald ratio",1,0.265634266886326,0.0823097199341021,0.00124985021825757,0.0154851623353045,NA
+"474","ieu-b-89","ACP5","ACP5","Oral cavity and pharyngeal cancer","Wald ratio",1,0.0806481818181818,0.0238451515151515,0.000719175386206242,0.00977765083183546,NA
+"475","ieu-b-89","BTN2A1","BTN2A1","Oral cavity and pharyngeal cancer","Wald ratio",1,0.0969775757575757,0.0257374848484848,0.000164593153358163,0.00292779992586203,NA
+"476","ieu-b-89","C2","C2","Oral cavity and pharyngeal cancer","Wald ratio",1,0.379460606060606,0.0260177272727273,3.51491461381481e-48,9.86812277828508e-46,NA
+"477","ieu-b-89","CDH5","CDH5","Oral cavity and pharyngeal cancer","Wald ratio",1,0.152230303030303,0.0236223636363636,1.16112316380186e-10,7.01043716639511e-09,NA
+"478","ieu-b-89","CDSN","CDSN","Oral cavity and pharyngeal cancer","Wald ratio",1,0.346733333333333,0.025632,1.07824488685629e-41,2.32859424603773e-39,NA
+"479","ieu-b-89","CGREF1","CGREF1","Oral cavity and pharyngeal cancer","Wald ratio",1,0.109722727272727,0.0228526060606061,1.57621336885434e-06,5.08645865868801e-05,NA
+"480","ieu-b-89","ESM1","ESM1","Oral cavity and pharyngeal cancer","Wald ratio",1,0.0785133333333333,0.0256707878787879,0.0022247038971901,0.0247583925774418,NA
+"481","ieu-b-89","KIR2DL3","KIR2DL3","Oral cavity and pharyngeal cancer","Wald ratio",1,-0.573069696969697,0.0257546363636364,1.09992759799611e-109,2.05869782091605e-106,NA
+"482","ieu-b-89","MICB_MICA","MICB_MICA","Oral cavity and pharyngeal cancer","Wald ratio",1,-0.169061515151515,0.0266246363636364,2.15574026211418e-10,1.26088349705949e-08,NA
+"483","ieu-b-89","NPTX1","NPTX1","Oral cavity and pharyngeal cancer","Wald ratio",1,0.0719057575757576,0.0232686060606061,0.00199989598607779,0.0225490280357967,NA
+"484","ieu-b-89","PCSK9","PCSK9","Oral cavity and pharyngeal cancer","Wald ratio",1,0.0698936363636364,0.0249468181818182,0.00508332628174344,0.0464867704755528,NA

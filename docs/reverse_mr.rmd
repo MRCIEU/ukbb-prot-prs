@@ -20,15 +20,23 @@ keep_ids <- unique(dat$id.exposure)
 keep_ids <- keep_ids[!keep_ids %in% c("ieu-a-299", "ieu-a-300", "ieu-a-301", "ieu-a-302", "ieu-b-38", "ieu-b-39")]
 table(dat$id.exposure %in% keep_ids)
 dat <- subset(dat, id.exposure %in% keep_ids)
+dat$exposure[dat$id.exposure == "ieu-b-18"]
+dat$exposure[dat$id.exposure == "ieu-a-805"]
+subset(dat, is.na(exposure))$id.exposure %>% unique
 
-dat$id.exposure[dat$id.exposure == "ebi-a-GCST003374"] <- "ieu-a-1102"
-dat$id.exposure[dat$id.exposure == "ebi-a-GCST005047"] <- "ieu-a-26"
+# dat$id.exposure[dat$id.exposure == "ebi-a-GCST003374"] <- "ieu-a-1102"
+# dat$id.exposure[dat$id.exposure == "ebi-a-GCST005047"] <- "ieu-a-26"
 dat$id.exposure[dat$id.exposure == "ieu-a-1024"] <- "ieu-b-18"
 dat$id.exposure[dat$id.exposure == "ieu-a-1187"] <- "ieu-a-805"
-dat$exposure[dat$id.exposure == "ieu-a-805"] <- "Multiple sclerosis"
+dat$exposure[dat$id.exposure == "ieu-a-805"] <- "MDD"
+dat$exposure[dat$id.exposure == "ieu-b-18"] <- "Multiple sclerosis"
+# MS might be on the wrong effect allele
+dat$beta.exposure[dat$id.exposure == "ieu-b-18"] <- dat$beta.exposure[dat$id.exposure == "ieu-b-18"] * -1
+
 prs_pairs$opengwasid[prs_pairs$opengwasid == "ieu-a-1187"] <- "ieu-a-805"
 prs_pairs$opengwasid[prs_pairs$opengwasid == "ieu-a-1024"] <- "ieu-b-18"
 table(unique(dat$id.exposure) %in% prs_pairs$opengwasid)
+table(is.na(dat$exposure))
 ```
 
 Perform MR
@@ -48,10 +56,12 @@ dim(temp)
 ggplot(temp, aes(x=Estimate, y=b)) +
 geom_point() +
 geom_smooth(method="lm") +
-labs(x="PRS estimate", y="MR estimate")
+labs(x="PRS estimate", y="MR estimate") + facet_wrap(~ Disease_Name, scale="free")
 ```
 
 Good agreement between PRS and IVW results
+
+PRS analysis significance threshold = 2.3e-6
 
 Heterogeneity
 
@@ -105,9 +115,11 @@ est_qj <- function(d) {
     bhat <- r$b
     ss <- suppressMessages(mr_singlesnp(d)) %>% filter(!grepl("All", SNP)) %>%
     mutate(w = 1/(se^2), qj = w * (bhat - b)^2, qj_pval = pchisq(qj, df=1, low=F), qj_fdr = p.adjust(qj_pval, "fdr"))
-
+    
+    # remove MHC and outliers
+    d[! (d$chr.outcome == 6 & d$pos.outcome > 27000000 & d$pos.outcome < 35000000), ]
     d_noout <- d %>% filter(!SNP %in% subset(ss, p.adjust(qj_pval, "fdr") < 0.05)$SNP)
-
+    
     r2 <- suppressMessages(mr(d_noout, method="mr_ivw")) %>% mutate(what="Outliers removed")
     return(list(qj=ss, r=bind_rows(r, r2)))
 }
@@ -155,9 +167,11 @@ res_out_sum <- res_out %>% group_by(id.exposure, id.outcome) %>%
         nsnp_orig = nsnp[1],
         noutliers = nsnp[1] - nsnp[2],
         fdr_orig = pval[1] < thresh,
-        fdr_out = pval[2] < thresh
+        fdr_out = pval[2] < thresh,
+        sign_orig = sign(b[1]),
+        sign_out = sign(b[2]),
     ) %>% filter(fdr_orig)
-
+head(res_out_sum)
 sum(res_out_sum$fdr_orig & res_out_sum$fdr_out, na.rm=T)
 ```
 
@@ -185,7 +199,7 @@ dim(revmrpairs)
 rmp <- subset(res_out, what=="Outliers removed" & paste(id.exposure, id.outcome) %in% paste(revmrpairs$id.exposure, revmrpairs$id.outcome))
 head(rmp)
 
-temp <- inner_join(prs_pairs, rres, by=c("prot"="outcome", "opengwasid"="id.exposure"))
+temp <- left_join(prs_pairs, rres, by=c("prot"="outcome", "opengwasid"="id.exposure"))
 temp$repl <- paste(temp$prot, temp$opengwasid) %in% paste(rmp$id.outcome, rmp$id.exposure)
 
 head(temp)
@@ -199,6 +213,283 @@ geom_abline(slope=1, intercept=0, linetype="dotted") +
 labs(x="PRS estimate", y="MR estimate", colour="MR FDR < 0.05")
 ggsave(here("images", "mr_prs_comparison.pdf"))
 ```
+
+
+1. sig in PRS, sig in revMR
+    - Sensitive to outlier removal?
+        - YES: remove from PRS
+        - NO: keep in PRS
+2. sig in PRS, not sig in revMR
+    - Power is lower - mostly this
+    - Pleiotropy is different
+3. data unavailable - occasions possible
+
+Overall
+
+1. reverse MR vs PRS heterogeneity - Are they significantly different estimates
+2. reverse MR outliers vs PRS heterogeneity - Are they significantly different estimates
+3. drop =
+    - revMR out vs PRS heterogeneity sig - fdr 
+    - revMR out estimate overlaps the null
+
+
+
+```{r}
+qstat <- function(beta, se) {
+    w <- 1/se^2
+    bhat <- sum(beta * w) / sum(w)
+    qj <- w * (beta - bhat)^2
+    Q <- sum(qj)
+    Qdf <- length(beta) - 1
+    Qpval <- pchisq(Q, df=Qdf, lower.tail=FALSE)
+    return(Qpval)
+}
+
+qstat(c(0.1, 0.1), c(0.1, 0.1))
+qstat(c(0.1, -0.1), c(0.01, 0.01))
+
+temp <- group_by(temp, prot, opengwasid) %>% mutate(Qpval = qstat(c(Estimate, b), c(Std_Error, se)))
+temp
+
+ggplot(temp %>% filter(P_value < 2.3e-6), aes(x=Estimate, y=b)) +
+geom_point(aes(colour=Disease_Name)) +
+geom_smooth(method="lm") +
+facet_grid(. ~ I(Qpval < 0.05 & pval > 0.05))
+
+```
+
+
+```{r}
+temp2 <- left_join(prs_pairs, res_out %>% filter(what == "Outliers removed"), by=c("prot"="outcome", "opengwasid"="id.exposure"))
+temp2 <- group_by(temp2, prot, opengwasid) %>% mutate(Qpval = qstat(c(Estimate, b), c(Std_Error, se)), Qfdr = p.adjust(Qpval, "fdr"))
+
+ggplot(temp2 %>% filter(P_value < 2.3e-6), aes(x=Estimate, y=b)) +
+geom_point(aes(colour=Disease_Name)) +
+geom_smooth(method="lm") +
+facet_grid(. ~ I(Qpval < 0.05 & pval > 0.05))
+
+ind <- temp2$P_value < 2.3e-6
+table(temp$Qpval[ind] < 0.05, temp$pval[ind] > 0.05)
+table(temp2$Qpval[ind] < 0.05, temp2$pval[ind] > 0.05)
+
+```
+
+
+```{r}
+temp2 %>% filter(P_value < 2.3e-6) %>%
+group_by(Disease_Name) %>% summarise(n(), Qpval = sum(Qfdr < 0.05), revmr_notsig = sum(pval > 0.05), remove = sum(Qfdr < 0.05 & pval > 0.05))
+```
+
+Remove due to PRS vs RevMRout heterogeneity
+
+```{r}
+temp2 <- temp2 %>% filter(P_value < 2.3e-6) %>% mutate(remove = Qpval < 0.05 & pval > 0.05, code=paste(opengwasid, prot))
+table(is.na(temp2$remove))
+prs_remove1 <- temp2$code[temp2$remove]
+```
+
+need to remove pairs where outliers change significance
+
+```{r}
+prs_sig <- temp2 %>% filter(P_value < 2.3e-6) %>% mutate(code = paste(opengwasid, prot)) %>% {.$code}
+res_out_summary <- res_out %>% 
+    mutate(code = paste(id.exposure, id.outcome)) %>%
+    filter(code %in% prs_sig) %>%
+    group_by(id.exposure, id.outcome) %>% 
+    summarise(
+        Qpval = qstat(b, se), 
+        Qfdr = p.adjust(Qpval, "fdr"), 
+        check = what[1] == "All",
+        sig = pval[1] < 0.05,
+        lostsig = pval[1] < 0.05 & pval[2] > 0.05, 
+        gainedsig = pval[1] > 0.05 & pval[2] < 0.05, 
+        attenuated = abs(b[1]) > abs(b[2])
+    ) %>% 
+    ungroup()
+
+res_out_summary %>%
+    group_by(id.exposure) %>%
+    summarise(
+        n=n(), 
+        check = all(check),
+        nsig = sum(sig, na.rm=T),
+        nQsig = sum(Qfdr < 0.05, na.rm=T), 
+        Qpvalsig = sum(Qpval < 0.05, na.rm=T), 
+        remove = sum(Qpval < 0.05 & attenuated, na.rm=T),
+        lostsig = sum(lostsig, na.rm=T)
+    )
+```
+
+```{r}
+prs_temp <- prs_pairs %>% select(id.exposure = opengwasid, id.outcome = prot, b = Estimate, se= Std_Error, pval = P_value) %>% mutate(what = "PRS")
+```
+
+
+```{r}
+res_out %>% bind_rows(., prs_temp) %>% filter(id.exposure == "ieu-b-18", paste(id.exposure, id.outcome) %in% prs_sig) %>%
+    left_join(., res_out_summary) %>%
+    ggplot(., aes(x=b, y=id.outcome)) +
+    geom_point(aes(colour=what), position=ggstance::position_dodgev(height=0.4)) +
+    geom_errorbarh(aes(colour=what, xmin=b-1.96*se, xmax=b+1.96*se), position=ggstance::position_dodgev(height=0.4), height=0) +
+    scale_colour_brewer(type="qual") +
+    facet_wrap(~ I(Qpval < 0.05), scale="free_y")
+```
+
+```{r}
+res_out %>% bind_rows(., prs_temp) %>% filter(id.exposure == "ieu-b-18", paste(id.exposure, id.outcome) %in% prs_sig) %>%
+    left_join(., res_out_summary) %>%
+    ggplot(., aes(x=b, y=id.outcome)) +
+    geom_point(aes(colour=what), position=ggstance::position_dodgev(height=0.4)) +
+    geom_errorbarh(aes(colour=what, xmin=b-1.96*se, xmax=b+1.96*se), position=ggstance::position_dodgev(height=0.4), height=0) +
+    scale_colour_brewer(type="qual") +
+    facet_wrap(~ lostsig)
+```
+
+```{r}
+res_out %>% bind_rows(., prs_temp) %>% filter(id.exposure == "ieu-b-18", paste(id.exposure, id.outcome) %in% prs_sig) %>%
+    left_join(., res_out_summary) %>%
+    ggplot(., aes(x=b, y=id.outcome)) +
+    geom_point(aes(colour=what), position=ggstance::position_dodgev(height=0.4)) +
+    geom_errorbarh(aes(colour=what, xmin=b-1.96*se, xmax=b+1.96*se), position=ggstance::position_dodgev(height=0.4), height=0) +
+    scale_colour_brewer(type="qual") +
+    facet_wrap(~ I(Qpval < 0.05 & attenuated))
+```
+
+
+- If it was PRS sig but not revMR sig, probably not an outlier driving it
+- If it was PRS sig and revMR
+
+
+
+```{r}
+prs_remove2 <- res_out_summary %>% mutate(code=paste(id.exposure, id.outcome)) %>% filter(lostsig) %>% {.$code}
+prs_remove <- c(prs_remove1, prs_remove2) %>% unique
+```
+
+
+```{r}
+prs_pairs_sig <- subset(prs_pairs, P_value < 2.3e-6)
+prs_pairs_sig$Disease_Name %>% unique
+
+prs_pairs$Disease_Name %>% unique
+nrow(prs_pairs_sig)
+rres_prs_sig <- subset(rres, paste(id.exposure, id.outcome) %in% paste(prs_pairs_sig$opengwasid, prs_pairs_sig$prot))
+dim(rres_prs_sig)
+```
+
+
+```{r}
+rres_prs_sig$fdr <- p.adjust(rres_prs_sig$pval, "fdr")
+table(rres_prs_sig$fdr < 0.05)
+table(rres_prs_sig$pval < 0.05)
+```
+
+
+```{r}
+prs_pairs_sig$code <- paste(prs_pairs_sig$opengwasid, prs_pairs_sig$prot)
+rres_prs_sig$code <- paste(rres_prs_sig$id.exposure, rres_prs_sig$id.outcome)
+
+tem <- inner_join(prs_pairs_sig, rres_prs_sig, by="code") %>% 
+    mutate(prs_sign = sign(Estimate))
+tem$Estimate <- abs(tem$Estimate)
+tem$b[tem$prs_sign == -1] <- tem$b[tem$prs_sign == -1] * -1
+
+
+ggplot(tem, aes(x=Estimate, y=b)) + geom_point(aes(colour=exposure)) +
+geom_smooth(method="lm", aes(colour=fdr.y < 0.05)) +
+geom_abline() +
+facet_grid(. ~ I(fdr.y < 0.05)) + labs(x="PRS", y="RevMR")
+```
+
+
+```{r}
+ggplot(tem, aes(x=Estimate, y=b)) + geom_point(aes(colour=exposure)) +
+geom_smooth(method="lm", aes(colour=fdr.y < 0.05)) +
+geom_abline() +
+facet_grid(. ~ I(code %in% prs_remove)) + labs(x="PRS", y="RevMR")
+```
+
+Organise results
+
+- PRS results
+    - id.exposure
+    - exposure
+    - outcome
+    - beta
+    - se
+    - pval
+    - Qpval
+    - remove
+
+- RevMR results
+    - id.exposure
+    - exposure
+    - outcome
+    - beta
+    - se
+    - pval
+    - nsnp
+    - noutliers
+    - Qpval
+    - beta_out
+    - se_out
+    - pval_out
+
+
+```{r}
+prs_organised <- temp2 %>% select(exposure = Disease_Name, id.exposure = opengwasid, outcome = prot, prs_beta = Estimate, prs_se = Std_Error, prs_pval = P_value, prs_Qpval_revmrout = Qpval) %>% mutate(remove = paste(id.exposure, outcome) %in% prs_remove)
+```
+
+```{r}
+revmr_organised <- res_out %>% 
+    filter(what == "All", paste(id.exposure, id.outcome) %in% prs_sig) %>% 
+    select(id.exposure = id.exposure, outcome = outcome, revmr_nsnp = nsnp, revmr_beta = b, revmr_se = se, revmr_pval = pval)
+revmr_organised <- left_join(revmr_organised, res_out %>% 
+    filter(what == "Outliers removed", paste(id.exposure, id.outcome) %in% prs_sig) %>% 
+    select(id.exposure = id.exposure, outcome = outcome, revmr_nsnp_out = nsnp, revmr_beta_out = b, revmr_se_out = se, revmr_pval_out = pval), by=c("id.exposure", "outcome")) %>% filter(!duplicated(paste(exposure, outcome)))
+revmr_organised <- left_join(revmr_organised, res_out_summary %>% select(id.exposure, outcome=id.outcome, revmr_Qpval_revmrout = Qpval))
+
+head(revmr_organised)
+```
+
+```{r}
+rev_organised <- left_join(prs_organised, revmr_organised, by=c("id.exposure", "outcome"))
+rev_organised$remove <- rev_organised$remove | is.na(rev_organised$revmr_beta) | is.na(rev_organised$prs_Qpval_revmrout) | is.na(rev_organised$revmr_Qpval_revmrout)
+rev_organised
+table(is.na(rev_organised$revmr_beta))
+table(rev_organised$remove)
+write.csv(rev_organised, here("results", "revmr_organised.csv"))
+```
+
+
+
+
+Anything not available in the reverse MR, set PRS to 0? (n=9)
+
+
+Table -
+- PRS sig
+- reverse MR
+    - flag - outlier removal leads to heterogeneity with PRS
+    - flag = PRS unreliable
+- forward MR
+
+
+ieu-a-805 = MDD
+ieu-b-18 = MS - might have the wrong effect allele
+
+
+
+
+Plot rev MR against rev MR outliers
+
+```{r}
+
+inner_join(res_out %>% filter(what == "All"), res_out %>% filter(what == "Outliers removed"), by=c("id.exposure", "id.outcome")) %>% ggplot(., aes(b.x, b.y)) + geom_point(aes(colour=exposure.x)) + geom_abline(a=0, b=1)
+
+
+```
+
 
 
 ```{r}
