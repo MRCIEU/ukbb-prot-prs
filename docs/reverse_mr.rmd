@@ -479,6 +479,46 @@ ieu-a-805 = MDD
 ieu-b-18 = MS - might have the wrong effect allele
 
 
+Data for heatmap
+
+- all prs pairs in cleaned prs and forward mr
+
+```{r}
+formr <- read.csv(here("results", "cis_mr.csv")) %>% as_tibble() %>%
+    mutate(code = paste(id.outcome, exposure), what = "forward", type="sig") %>% 
+    select(code, what, type, traitid = id.outcome, prot = exposure, z = b/se) %>%
+    filter(!duplicated(code))
+revmr <- read.csv(here("results", "revmr_organised.csv")) %>% as_tibble() %>%
+    filter(!remove) %>% 
+    mutate(code = paste(id.exposure, outcome), what = "reverse", type="sig") %>% 
+    select(code, what, type, traitid = id.exposure, prot = outcome, z = prs_beta / prs_se) %>%
+    filter(!duplicated(code))
+
+table(formr$code %in% revmr$code)
+
+# missing forward
+missing_forward <- subset(revmr, !code %in% formr$code)$code
+formr2 <- res %>% 
+    mutate(code = paste(id.outcome, exposure), what="forward", type="notsig") %>% 
+    filter(code %in% missing_forward) %>% 
+    select(code, what, type, traitid = id.outcome, prot = exposure, z = b/se) %>%
+    filter(!duplicated(code))
+
+# missing reverse
+missing_reverse <- subset(formr, !code %in% revmr$code)$code
+revmr2 <- prs_pairs %>% 
+    mutate(code = paste(opengwasid, prot), what="reverse", type="notsig") %>% 
+    filter(code %in% missing_reverse) %>% 
+    select(code, what, type, traitid = opengwasid, prot = prot, z = Estimate/Std_Error) %>%
+    filter(!duplicated(code))
+
+heatmap_data <- bind_rows(formr, formr2, revmr, revmr2)
+heatmap_data <- inner_join(prs_pairs %>% as_tibble() %>% select(traitid = opengwasid, trait = Disease_Name) %>% filter(!duplicated(traitid)), heatmap_data)
+heatmap_data
+
+table(table(heatmap_data$code))
+saveRDS(heatmap_data, file=here("data", "heatmap_data.rds"))
+```
 
 
 Plot rev MR against rev MR outliers
